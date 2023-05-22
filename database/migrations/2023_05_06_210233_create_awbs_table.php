@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('awbs', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('code');
-            $table->foreignIdFor(\App\Models\Branch::class)->constrained();
-            $table->foreignIdFor(\App\Models\Department::class)->constrained();
-            $table->foreignIdFor(\App\Models\Receiver::class)->constrained();
-            $table->foreignIdFor(\App\Models\AwbServiceType::class)->constrained();
+//            $table->bigInteger('code');
+//            $table->foreignIdFor(\App\Models\Branch::class)->constrained();
+//            $table->foreignIdFor(\App\Models\Department::class)->constrained();
+//            $table->foreignIdFor(\App\Models\Receiver::class)->constrained();
+//            $table->foreignIdFor(\App\Models\AwbServiceType::class)->constrained();
             $table->timestamps();
         });
     }

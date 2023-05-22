@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('total_count');
             $table->integer('failed_count');
             $table->smallInteger('status_id');
-            $table->foreignIdFor('created_by')->constrained('companies');
+            $table->foreignIdFor(\App\Models\Company::class)->constrained();
             $table->timestamps();
         });
     }

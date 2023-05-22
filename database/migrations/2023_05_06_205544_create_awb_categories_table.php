@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->tinyInteger('has_dimension')->default(\App\Enums\ActivationStatus::ACTIVE());
-            $table->float('');
+            $table->float('fixed_wight')->default(0);
             $table->timestamps();
         });
     }

@@ -19,7 +19,7 @@ class DepartmentsFilters extends QueryFilter
 
     public function company_id($term)
     {
-        return $this->builder->whereRelation('department.company','id',$term);
+        return $this->builder->where('company_id','id',$term);
     }
 
     public function keyword($term)

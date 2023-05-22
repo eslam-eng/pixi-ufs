@@ -8,26 +8,19 @@ use Illuminate\Support\Arr;
 class ReceiverDTO extends BaseDTO
 {
 
-    /**
-     * @param int $morphable_id
-     * @param int $buyer_time_type
-     * @param int $day
-     * @param int $time_from
-     * @param int $time_to
-     * @param string $morphable_type
-     */
+
 
     public function __construct(
         protected string $name,
         protected string $phone,
         protected string $receiving_company,
         protected int    $branch_id,
-        protected ?int    $city_id,
-        protected ?int    $area_id,
+        protected int    $city_id,
+        protected int    $area_id,
         protected string $reference,
-        protected string $title,
-        protected string $notes,
-        protected ?string $address,
+        protected ?string $title,
+        protected ?string $notes,
+        protected string $address,
         protected ?string $lat,
         protected ?string $lng,
         protected ?string $postal_code,

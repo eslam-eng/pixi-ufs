@@ -15,6 +15,7 @@ return array(
     'App\\DTO\\Department\\DepartmentDTO' => $baseDir . '/app/DTO/Department/DepartmentDTO.php',
     'App\\DTO\\Interfaces\\DTOInterface' => $baseDir . '/app/DTO/Interfaces/DTOInterface.php',
     'App\\DTO\\Receiver\\ReceiverDTO' => $baseDir . '/app/DTO/Receiver/ReceiverDTO.php',
+    'App\\DataTables\\ReceiversDatatable' => $baseDir . '/app/DataTables/ReceiversDatatable.php',
     'App\\Enums\\ActivationStatus' => $baseDir . '/app/Enums/ActivationStatus.php',
     'App\\Enums\\AddressTypes' => $baseDir . '/app/Enums/AddressTypes.php',
     'App\\Enums\\AttachmentsType' => $baseDir . '/app/Enums/AttachmentsType.php',

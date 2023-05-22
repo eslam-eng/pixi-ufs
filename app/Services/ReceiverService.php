@@ -33,6 +33,11 @@ class ReceiverService extends BaseService
         return $receivers->filter(new ReceiversFilters($filters));
     }
 
+    public function datatable(array $filters = [] , array $withRelations = []): Builder
+    {
+        return $this->receiverQueryBuilder(filters: $filters , withRelations: $withRelations);
+    }
+
     /**
      * create new receiver
      * @param array $data

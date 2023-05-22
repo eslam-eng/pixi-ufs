@@ -15,6 +15,8 @@
 
     @include('layouts.components.styles')
 
+    <livewire:styles />
+
 </head>
 
 <body class="ltr main-body app sidebar-mini">
@@ -62,5 +64,7 @@
 
 @include('layouts.components.scripts')
 @include('layouts.components.toastr')
+
+<livewire:scripts />
 </body>
 </html>

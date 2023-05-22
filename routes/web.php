@@ -23,7 +23,9 @@ Route::group(['prefix' => 'authentication','middleware' => 'guest'],function (){
     Route::post('singin',[AuthController::class, 'login'])->name('singin');
 });
 
-
+Route::get('/', function () {
+    return view('livewire.index');
+})->name('home')->middleware('auth');
 //auth routes
 Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
     Route::get('/', function () {

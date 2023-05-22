@@ -11,7 +11,7 @@ const mix = require('laravel-mix');
  |
  */
 
-// mix.js('resources/assets/js/accordion.js', 'public/assets/js')
+mix.js('resources/assets/js/datatable-filter.js', 'public/assets/js')
 // mix.js('resources/assets/js/advanced-form-elements.js', 'public/assets/js')
 // mix.js('resources/assets/js/apexcharts-rtl.js', 'public/assets/js')
 // mix.js('resources/assets/js/apexchart-custom.js', 'public/assets/js')

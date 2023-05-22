@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\ReceiversDatatable;
 use App\Enums\UsersType;
 use App\Exceptions\NotFoundException;
 use App\Exports\ReceiversExport;
 use App\Http\Requests\FileUploadRequest;
+use App\Http\Requests\Receivers\ReceiverStoreRequest;
+use App\Http\Requests\Receivers\ReceiverUpdateRequest;
 use App\Http\Resources\Receiver\ReceiverEditResource;
-use App\Http\Resources\Receiver\ReceiverResource;
 use App\Imports\Receivers\ReceiversImport;
 use App\Services\BranchService;
 use App\Services\ReceiverService;
@@ -26,30 +28,43 @@ class ReceiverController extends Controller
     /**
      * get all receivers
      */
-    public function index(Request $request)
+    public function index(ReceiversDatatable $receiversDatatable , Request $request)
     {
         try {
-            $filters = array_filter($request->all());
-            $withRelations = ['branch.company:id,name', 'defaultAddress'];
-            $receivers = $this->receiverService->listing(filters: $filters, withRelations: $withRelations);
-            return ReceiverResource::collection($receivers);
+            $user = auth()->user();
+            $filters = array_filter($request->get('filters',[]));
+            if ($user->type != UsersType::SUPERADMIN())
+                $filters['company_id'] = $user->company_id ;
+
+            $withRelations = ['defaultAddress','branch:id,name','branch.company:id,name'];
+            return $receiversDatatable->with(['filters'=>$filters,'withRelations'=>$withRelations])->render('layouts.dashboard.receivers.index');
         } catch (Exception $e) {
-            return apiResponse(message: trans('lang.something_went_wrong'), code: $e->getCode());
+            $toast = [
+                'type' => 'error',
+                'title' => 'error',
+                'message' => $e->getMessage()
+            ];
+            return back()->with('toast',$toast);
         }
     }
 
-//    public function show(int $id)
-//    {
-//        try {
-//            $withRelations = ['branch.company:id,name','addresses'=>fn($query)=>$query->with(['city','area'])];
-//            $receiver = $this->receiverService->findById(id: $id, withRelations: $withRelations);
-//            return ReceiverEditResource::make($receiver);
-//
-//        }catch (Exception|NotFoundException $exception)
-//        {
-//            return apiResponse(message: $exception->getMessage(),code: 404);
-//        }
-//    }
+    public function create()
+    {
+        return view('layouts.dashboard.receivers.create');
+    }
+
+    public function show(int $id)
+    {
+        try {
+            $withRelations = ['branch.company:id,name','addresses'=>fn($query)=>$query->with(['city','area'])];
+            $receiver = $this->receiverService->findById(id: $id, withRelations: $withRelations);
+            return ReceiverEditResource::make($receiver);
+
+        }catch (Exception|NotFoundException $exception)
+        {
+            return apiResponse(message: $exception->getMessage(),code: 404);
+        }
+    }
 
 
     public function edit(int $id)
@@ -68,6 +83,7 @@ class ReceiverController extends Controller
         try {
             DB::beginTransaction();
             $receiverDto = $request->toReceiverDTO();
+            dd($receiverDto);
             $this->receiverService->store($receiverDto);
             DB::commit();
             return apiResponse(message: trans('lang.success_operation'));

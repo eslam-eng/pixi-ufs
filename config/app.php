@@ -178,6 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Livewire\LivewireServiceProvider::class,
 
 
     ],

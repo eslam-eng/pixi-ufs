@@ -1,6 +1,8 @@
 {
     "/assets/js/datatable-filter.js": "/assets/js/datatable-filter.js",
     "/assets/js/cookie.js": "/assets/js/cookie.js",
+    "/assets/js/custom.js": "/assets/js/custom.js",
+    "/assets/js/custom1.js": "/assets/js/custom1.js",
     "/assets/js/edit-datatable.js": "/assets/js/edit-datatable.js",
     "/assets/js/generate-otp.js": "/assets/js/generate-otp.js",
     "/assets/js/table-data.js": "/assets/js/table-data.js",

@@ -16,9 +16,7 @@ class AddressStoreRequest extends BaseRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
+     * @return string[]
      */
     public function rules(): array
     {
@@ -31,8 +29,8 @@ class AddressStoreRequest extends BaseRequest
             'map_url'=>'nullable|url',
             'city_id'=>'required|integer|exists:locations,id',
             'area_id'=>'required|integer|exists:locations,id',
-            'postal_code'=>'required|numeric',
-            'is_default'=>'nullable|boolean',
+            'postal_code'=>'nullable|string',
+            'is_default'=>'nullable|string',
         ];
     }
 

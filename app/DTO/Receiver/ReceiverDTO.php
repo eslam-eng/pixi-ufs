@@ -8,8 +8,6 @@ use Illuminate\Support\Arr;
 class ReceiverDTO extends BaseDTO
 {
 
-
-
     public function __construct(
         protected string $name,
         protected string $phone,

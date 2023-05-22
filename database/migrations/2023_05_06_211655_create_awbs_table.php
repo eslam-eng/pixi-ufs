@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\Department::class)->constrained();
             $table->foreignIdFor(\App\Models\Receiver::class)->constrained();
             $table->foreignIdFor(\App\Models\AwbServiceType::class)->constrained();
-            $table->foreignIdFor(\App\Models\Receiver::class)->constrained();
             $table->timestamps();
         });
     }

@@ -331,7 +331,9 @@
     @section('scripts')
 
 		<!-- CUSTOM JS -->
+		<script src="{{asset('assets/js/themecolor.js')}}"></script>
 		<script src="{{asset('assets/js/custom1.js')}}"></script>
+		<script src="{{asset('assets/js/custom.js')}}"></script>
 
 		<!-- SWITCHER JS -->
 		<script src="{{asset('assets/switcher/js/switcher.js')}}"></script>

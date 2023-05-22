@@ -101,4 +101,14 @@ class AddressService extends BaseService
         return true;
     }
 
+    public function setAddressDefault(int $id): bool
+    {
+        $address = $this->findById($id);
+//        set all default false
+        $this->getQuery()->where('addressable_id',$address->addressable_id)->where('addressable_type',$address->addressable_type)->update(['is_default'=>false]);
+        $address->update(['is_default'=>1]);
+        return true ;
+
+    }
+
 }

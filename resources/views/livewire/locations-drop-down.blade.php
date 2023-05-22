@@ -1,7 +1,7 @@
 <div>
     <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-12">
-                <div class="main-content-label mg-b-5">@lang('app.Companies')</div>
+                <div class="main-content-label mg-b-5">@lang('app.cities')</div>
                 <select class="form-select" wire:change="getAreasForSelectedCity" wire:model="city_id"
                         id="city_id" name="{{$city_field_name}}"
                         aria-label="Select location">

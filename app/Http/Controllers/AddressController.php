@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\GeneralException;
 use App\Exceptions\NotFoundException;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Address\AddressStoreRequest;
 use App\Http\Requests\Address\AddressUpdateRequest;
-use App\Http\Resources\AddressResource;
 use App\Services\AddressService;
 use Exception;
 use Illuminate\Http\Request;
@@ -34,6 +32,11 @@ class AddressController extends Controller
         }
     }
 
+    public function create(Request $request)
+    {
+        return view('layouts.dashboard.addresses.create',['addressable_id' => $request->id,'addressable_type' => $request->type]);
+    }
+
     /**
      * create new address
      * @param AddressStoreRequest $request
@@ -43,23 +46,31 @@ class AddressController extends Controller
         try {
             $addressDTO = $request->toAddressDTO();
             $this->addressService->store($addressDTO);
-            return apiResponse(message: trans('lang.success_operation'));
+            $toast = [
+                'type' => 'success',
+                'title' => 'success',
+                'message' => trans('app.receiver_address_created_successfully')
+            ];
+            return back()->with('toast',$toast);
         } catch (Exception $e) {
-            return apiResponse(message: trans('lang.something_went_wrong'), code: 422);
+            $toast = [
+                'type' => 'error',
+                'title' => 'error',
+                'message' => $e->getMessage()
+            ];
+            return back()->with('toast',$toast);
         }
     }
 
     public function edit(int $id)
     {
         try {
-
-            $address=$this->addressService->findById(id: $id,withRelations: ['city','area']);
-            return  new AddressResource($address);
-        }catch (NotFoundException $exception){
+            $address = $this->addressService->findById(id: $id, withRelations: ['city', 'area']);
+            return view('layouts.dashboard.addresses.edit',['address'=>$address]);
+        } catch (NotFoundException $exception) {
             return apiResponse(message: $exception->getMessage(), code: $exception->getCode());
 
-        }catch (\Exception $exception)
-        {
+        } catch (\Exception $exception) {
             return apiResponse(message: trans('lang.something_went_wrong'), code: $exception->getCode());
 
         }
@@ -74,7 +85,7 @@ class AddressController extends Controller
     {
         try {
             $addressDTO = $request->toAddressDTO();
-            $this->addressService->update(id: $id,addressDTO: $addressDTO);
+            $this->addressService->update(id: $id, addressDTO: $addressDTO);
             return apiResponse(message: trans('lang.success_operation'));
         } catch (NotFoundException $e) {
             return apiResponse(message: $e->getMessage(), code: 422);
@@ -96,6 +107,28 @@ class AddressController extends Controller
             return apiResponse(message: $e->getMessage(), code: 422);
         } catch (Exception $e) {
             return apiResponse(message: trans('lang.something_went_wrong'), code: 422);
+        }
+    }
+
+    public function setAddressDefault(int $id)
+    {
+        try {
+            $this->addressService->setAddressDefault(id: $id);
+            $toast = [
+                'type' => 'error',
+                'title' => 'error',
+                'message' => trans('app.address_become_default')
+            ];
+            return back()->with('toast',$toast);
+
+        }catch (Exception $exception)
+        {
+            $toast = [
+                'type' => 'error',
+                'title' => 'error',
+                'message' => $exception->getMessage()
+            ];
+            return back()->with('toast',$toast);
         }
     }
 }

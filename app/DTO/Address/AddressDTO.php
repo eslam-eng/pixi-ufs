@@ -31,7 +31,7 @@ class AddressDTO extends BaseDTO
         public int $city_id,
         public int $area_id,
         public ?string $postal_code,
-        public ?bool $is_default = true,
+        public ?string $is_default,
     )
     {
     }
@@ -48,7 +48,7 @@ class AddressDTO extends BaseDTO
             city_id: $request->city_id,
             area_id: $request->area_id,
             postal_code: $request->postal_code,
-            is_default: $request->is_default,
+            is_default: (bool) $request->get('is_default',false),
         );
     }
 

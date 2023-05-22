@@ -13,9 +13,6 @@
 		<!-- P-SCROLL BAR CSS -->
 		<link href="{{asset('assets/plugins/perfect-scrollbar/p-scrollbar.css')}}" rel="stylesheet" />
 
-        <link src="{{asset('assets/plugins/toastr/css/toastr.min.css')}}"/>
-
-
         @yield('styles')
 
 		<!-- STYLES CSS -->
@@ -28,3 +25,6 @@
 
 		<!-- ANIMATION CSS -->
 		<link href="{{asset('assets/css/animate.css')}}" rel="stylesheet">
+        <!--- Internal Sweet-Alert css-->
+        <link href="{{asset('assets/plugins/sweet-alert/sweetalert2.css')}}" rel="stylesheet">
+        <link href="{{asset('assets/plugins/toastr/toastr.min.css')}}" rel="stylesheet">

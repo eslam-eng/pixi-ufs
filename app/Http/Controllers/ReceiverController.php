@@ -36,7 +36,7 @@ class ReceiverController extends Controller
             if ($user->type != UsersType::SUPERADMIN())
                 $filters['company_id'] = $user->company_id ;
 
-            $withRelations = ['defaultAddress','branch:id,name','branch.company:id,name'];
+            $withRelations = ['defaultAddress','branch:id,name,company_id','branch.company:id,name'];
             return $receiversDatatable->with(['filters'=>$filters,'withRelations'=>$withRelations])->render('layouts.dashboard.receivers.index');
         } catch (Exception $e) {
             $toast = [
@@ -52,6 +52,31 @@ class ReceiverController extends Controller
     {
         return view('layouts.dashboard.receivers.create');
     }
+
+    public function store(ReceiverStoreRequest $request)
+    {
+        try {
+            DB::beginTransaction();
+            $receiverDto = $request->toReceiverDTO();
+            $this->receiverService->store($receiverDto);
+            DB::commit();
+            $toast = [
+                'type' => 'success',
+                'title' => 'success',
+                'message' => trans('app.receiver_created_successfully')
+            ];
+            return back()->with('toast',$toast);
+        } catch (Exception $e) {
+            $toast = [
+                'type' => 'error',
+                'title' => 'error',
+                'message' => $e->getMessage()
+            ];
+            return back()->with('toast',$toast);
+        }
+    }
+
+
 
     public function show(int $id)
     {
@@ -70,29 +95,15 @@ class ReceiverController extends Controller
     public function edit(int $id)
     {
         try {
-            $withRelations = ['branch.company:id,name', 'addresses' => fn($query) => $query->with(['city', 'area'])];
+            $withRelations = ['addresses' => fn($query) => $query->with(['city', 'area'])];
             $receiver = $this->receiverService->findById(id: $id, withRelations: $withRelations);
-            return ReceiverEditResource::make($receiver);
+            return view('layouts.dashboard.receivers.edit',['receiver'=>$receiver]);
         } catch (Exception|NotFoundException $exception) {
             return apiResponse(message: $exception->getMessage(), code: 404);
         }
     }
 
-    public function store(ReceiverStoreRequest $request)
-    {
-        try {
-            DB::beginTransaction();
-            $receiverDto = $request->toReceiverDTO();
-            dd($receiverDto);
-            $this->receiverService->store($receiverDto);
-            DB::commit();
-            return apiResponse(message: trans('lang.success_operation'));
-        } catch (Exception $e) {
-            return apiResponse(message: trans('lang.something_went_wrong'), code: 422);
-        }
-    }
-
-    public function update(ReceiverUpdateRequest $request, int $id)
+     public function update(ReceiverUpdateRequest $request, int $id)
     {
         try {
             $receiverDTO = $request->toReceiverDTO();

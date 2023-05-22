@@ -55,6 +55,7 @@ return array(
     'App\\Http\\Livewire\\Error500' => $baseDir . '/app/Http/Livewire/Error500.php',
     'App\\Http\\Livewire\\Error501' => $baseDir . '/app/Http/Livewire/Error501.php',
     'App\\Http\\Livewire\\Index' => $baseDir . '/app/Http/Livewire/Index.php',
+    'App\\Http\\Livewire\\LocationsDropDown' => $baseDir . '/app/Http/Livewire/LocationsDropDown.php',
     'App\\Http\\Livewire\\Reset' => $baseDir . '/app/Http/Livewire/Reset.php',
     'App\\Http\\Livewire\\Search' => $baseDir . '/app/Http/Livewire/Search.php',
     'App\\Http\\Livewire\\Switcherpage' => $baseDir . '/app/Http/Livewire/Switcherpage.php',

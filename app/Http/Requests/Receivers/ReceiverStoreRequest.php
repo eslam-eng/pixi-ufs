@@ -16,15 +16,13 @@ class ReceiverStoreRequest extends BaseRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
+     * @return string[]
      */
     public function rules(): array
     {
         return [
             'name' => 'required|string',
-            'phone' => 'required|integer|unique:receivers,phone',
+            'phone' => 'required|string|unique:receivers,phone',
             'receiving_company' => 'nullable|string',
             'branch_id' => 'required|numeric|exists:branches,id',
             'city_id' => 'required|integer|exists:locations,id',

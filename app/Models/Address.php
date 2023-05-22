@@ -36,4 +36,5 @@ class Address extends Model
     {
         return $this->relationLoaded('city') && isset($this->city) ? $this->city->title : null;
     }
+
 }

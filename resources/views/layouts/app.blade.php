@@ -16,7 +16,6 @@
     @include('layouts.components.styles')
 
     <livewire:styles />
-
 </head>
 
 <body class="ltr main-body app sidebar-mini">
@@ -65,6 +64,37 @@
 @include('layouts.components.scripts')
 @include('layouts.components.toastr')
 
+
+<script>
+    function destroy(url) {
+        swal({
+            title: "{{__('lang.are_you_sure')}}",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((confirmed) => {
+            if (confirmed) {
+                $.ajax({
+                    method: 'DELETE',
+                    url: url,
+                    dataType: 'json',
+                    data:{
+                        '_token': '{{ csrf_token() }}',
+                    },
+                    success: function(result) {
+                        if (result.status)
+                        {
+                            toastr.success(result.message);
+                            $('.dataTable').DataTable().ajax.reload(null, false);
+                        }
+                        else
+                            toastr.error(result.message);
+                    }
+                });
+            }
+        });
+    }
+</script>
 <livewire:scripts />
 </body>
 </html>

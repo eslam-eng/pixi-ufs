@@ -28,8 +28,9 @@ class CompanyWithBranchAndDepartments extends Component
     public function mount()
     {
         $user = auth()->user();
-        $company_for_auth_user = $user->company_id;
-        if ($user->type != UsersType::SUPERADMIN()) {
+
+        if ($user->type != UsersType::SUPERADMIN() || $this->selected_company) {
+            $company_for_auth_user = $user->company_id;
             $this->branches_options = app()->make(BranchService::class)->getBranchesForSelectDropDown(filters: ['company_id' => $company_for_auth_user]);
             $this->departments_options = app()->make(DepartmentService::class)->getDepartmentsForSelectDropDown(filters: ['company_id' => $company_for_auth_user]);
 

@@ -3,7 +3,7 @@
 @section('content')
 
     {{--    breadcrumb --}}
-    @include('layouts.components.breadcrumb',['title' => trans('receivers_page_title'),'first_list_item' => trans('app.receivers'),'last_list_item' => trans('app.add_receiver')])
+    @include('layouts.components.breadcrumb',['title' => trans('address_page_title'),'first_list_item' => trans('app.addresses'),'last_list_item' => trans('app.edit_receivers')])
     {{--    end breadcrumb --}}
 
     <!-- Row -->
@@ -11,7 +11,7 @@
         <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
             <div class="card">
                 <div class="card-body">
-                    <form action="{{route('receivers.update',$receiver->id)}}" method="post">
+                    <form action="{{route('address.edit',$address->id)}}" method="post">
                         @csrf
                         <div class="row row-sm mb-4">
                             <div class="col-lg">
@@ -19,7 +19,7 @@
                                 <input class="form-control" name="name" value="{{$receiver->name}}" placeholder="@lang('app.receiver_name')"
                                        type="text" required>
                                 @error('name')
-                                <div class="text-danger"> {{$message}}</div>
+                                <div class="text-danger">{{$message}} </div>
                                 @enderror
                             </div>
 
@@ -81,7 +81,7 @@
                 <div class="card-header">
                     <div class="breadcrumb-header justify-content-between">
                         <div class="left-content">
-                            <a class="btn ripple btn-primary" href="{{route('addresses.create',['id'=>$receiver->id ,'type'=>\App\Enums\AddressTypes::RECEIVER])}}"><i class="fe fe-plus me-2"></i>Add New User</a>
+                            <a class="btn ripple btn-primary" href="{{route('addresses.create')}}"><i class="fe fe-plus me-2"></i>Add New User</a>
                         </div>
                     </div>
                 </div>
@@ -109,10 +109,8 @@
                                             <i class="icon ion-ios-arrow-down tx-11 mg-l-3"></i>
                                         </button>
                                         <div class="dropdown-menu" style="">
-                                            @if(!$address->is_default)
-                                                <livewire:set-address-default address_id="{{$address->id}}"/>
-                                            @endif
-                                            <a href="{{route('addresses.edit')}}" class="dropdown-item">@lang('app.edit')</a>
+                                            <a href="#" class="dropdown-item">@lang('app.show')</a>
+                                            <a href="#" class="dropdown-item">@lang('app.edit')</a>
                                             <button role="button"  class="dropdown-item">@lang('app.delete')</button>
                                         </div>
                                         <!-- dropdown-menu -->

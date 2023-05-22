@@ -24,11 +24,11 @@
                         <div class="left-content">
                             <a class="btn ripple btn-primary" href="{{route('receivers.create')}}"><i class="fe fe-plus me-2"></i>Add New User</a>
                         </div>
-                        <div class="justify-content-center">
-                            <button type="button" class="btn btn-secondary">
-                                <i class="fe fe-download me-1"></i> Download User Data
-                            </button>
-                        </div>
+{{--                        <div class="justify-content-center">--}}
+{{--                            <button type="button" class="btn btn-secondary">--}}
+{{--                                <i class="fe fe-download me-1"></i> Download User Data--}}
+{{--                            </button>--}}
+{{--                        </div>--}}
                     </div>
                 </div>
                 <div class="card-body">

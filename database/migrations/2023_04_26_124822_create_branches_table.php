@@ -17,6 +17,10 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\Company::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('phone')->nullable();
             $table->boolean('status')->default(\App\Enums\ActivationStatus::ACTIVE());
+            $table->string('address');
+            $table->foreignIdFor(\App\Models\Location::class,'city_id')->constrained('locations');
+            $table->foreignIdFor(\App\Models\Location::class,'area_id')->constrained('locations');
+
             $table->timestamps();
         });
     }

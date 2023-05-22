@@ -35,8 +35,8 @@ Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
 
     Route::resource('receivers',ReceiverController::class);
     Route::group(['prefix' => 'addresses' ],function (){
-        Route::get('{id}/type/{type}',[AddressController::class,'create'])->name('address.create');
-        Route::get('{id}/set-default',[AddressController::class,'create'])->name('address.set-default');
+        Route::get('{id}/type/{type}',[AddressController::class,'create'])->name('addresses.create');
+        Route::get('{id}/set-default',[AddressController::class,'create'])->name('addresses.set-default');
         Route::get('{id}/edit',[AddressController::class,'edit'])->name('address.edit');
     });
     Route::get('emptypage', Emptypage::class)->name('emptypage');

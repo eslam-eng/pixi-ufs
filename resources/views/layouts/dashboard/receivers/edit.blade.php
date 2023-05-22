@@ -112,7 +112,7 @@
                                             @if(!$address->is_default)
                                                 <livewire:set-address-default address_id="{{$address->id}}"/>
                                             @endif
-                                            <a href="{{route('addresses.edit')}}" class="dropdown-item">@lang('app.edit')</a>
+{{--                                            <a href="{{route('addresses.edit')}}" class="dropdown-item">@lang('app.edit')</a>--}}
                                             <button role="button"  class="dropdown-item">@lang('app.delete')</button>
                                         </div>
                                         <!-- dropdown-menu -->

@@ -25,9 +25,9 @@ class AuthController extends Controller
         try {
             $this->authService->loginWithEmailOrPhone(identifier: $request->identifier, password: $request->password);
             $toast = [
-                'type' => 'error',
-                'title' => 'error',
-                'message' => 'success'
+                'type' => 'success',
+                'title' => 'success',
+                'message' => trans('app.login_successfully')
             ];
             return to_route('home')->with('toast', $toast);
         } catch (Exception|NotFoundException $e) {

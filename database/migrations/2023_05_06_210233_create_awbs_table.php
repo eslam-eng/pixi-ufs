@@ -13,11 +13,22 @@ return new class extends Migration
     {
         Schema::create('awbs', function (Blueprint $table) {
             $table->id();
-//            $table->bigInteger('code');
-//            $table->foreignIdFor(\App\Models\Branch::class)->constrained();
-//            $table->foreignIdFor(\App\Models\Department::class)->constrained();
-//            $table->foreignIdFor(\App\Models\Receiver::class)->constrained();
-//            $table->foreignIdFor(\App\Models\AwbServiceType::class)->constrained();
+            $table->bigInteger('code');
+            $table->foreignIdFor(\App\Models\User::class)->constrained();
+            $table->foreignIdFor(\App\Models\Branch::class)->constrained();
+            $table->foreignIdFor(\App\Models\Department::class)->constrained();
+            $table->foreignIdFor(\App\Models\Receiver::class);
+            $table->json('receiver_data');
+            $table->string('payment_type');
+            $table->string('service_type');
+            $table->boolean('is_return')->default(false);
+            $table->foreignIdFor(\App\Models\AwbCategory::class)->constrained();
+            $table->float('zone_price');
+            $table->float('additional_kg_price');
+            $table->float('collection');
+            $table->float('weight');
+            $table->float('pieces');
+            $table->float('actual_recipient');
             $table->timestamps();
         });
     }

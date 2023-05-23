@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AwbController;
 use App\Http\Livewire\Emptypage;
 use \App\Http\Livewire\Switcherpage;
 use App\Http\Controllers\ReceiverController;
@@ -39,7 +40,10 @@ Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
         Route::get('{id}/set-default',[AddressController::class,'create'])->name('addresses.set-default');
         Route::get('{id}/edit',[AddressController::class,'edit'])->name('address.edit');
     });
-    Route::get('emptypage', Emptypage::class)->name('emptypage');
+    Route::group(['prefix' => 'awbs' ],function (){
+        Route::get('/',[AwbController::class,'index'])->name('awb.index');
+        Route::get('/create',[AwbController::class,'create'])->name('awb.create');
+    });
 
     Route::get('switcherpage', Switcherpage::class)->name('switcherpage');
 });

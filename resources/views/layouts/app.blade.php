@@ -95,6 +95,7 @@
         });
     }
 </script>
+@yield('script_footer')
 <livewire:scripts />
 </body>
 </html>

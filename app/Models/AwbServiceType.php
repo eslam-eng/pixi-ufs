@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class AwbServiceType extends Model
 {
     use HasFactory;
+    protected $fillable = ['name'];
 }

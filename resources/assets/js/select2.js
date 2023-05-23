@@ -1,7 +1,6 @@
 
    $(document).ready(function() {
    'use strict';
-   
 
    $('.select2').select2({
 	 minimumResultsForSearch: Infinity,
@@ -68,11 +67,11 @@
 	  templateSelection: formatState,
 	   escapeMarkup: function(m) { return m; }
 	});
-	
+
 	$("select2").select2({
         width: '35%'
     });
-	
+
 	$('.select2-no-search').select2({
 		minimumResultsForSearch: Infinity,
 		placeholder: 'Choose one',
@@ -83,10 +82,10 @@
 		placeholder: 'Choose one',
 		width: '35%'
    });
-	
+
    function formatState (state) {
-		if (!state.id) { 
-			return state.text; 
+		if (!state.id) {
+			return state.text;
 		}
 		var $state = $(
 			'<span><img src="../assets/images/flags/' +  state.element.value.toLowerCase() +

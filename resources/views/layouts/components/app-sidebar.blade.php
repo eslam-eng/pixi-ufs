@@ -22,7 +22,7 @@
 										<li><a class="slide-item" href="{{url('index')}}">Dashboard-1</a></li>
 									</ul>
 								</li> --}}
-								{{-- <li class="side-item side-item-category">@lang('app.menu')</li>
+								<li class="side-item side-item-category">@lang('app.menu')</li>
 
                                 <li class="slide">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
@@ -31,7 +31,7 @@
                                         <li class="side-menu__label1"><a href="javascript:void(0);">Utilities</a></li>
                                         <li><a class="slide-item" href="{{url('extras')}}">Extras</a></li>
                                     </ul>
-                                </li> --}}
+                                </li>
 
                                 <li class="side-item side-item-category">@lang('app.companies_receivers')</li>
 

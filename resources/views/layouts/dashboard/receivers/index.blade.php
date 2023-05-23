@@ -33,7 +33,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        {!! $dataTable->table(['class' => 'table table-bordered text-nowrap border-bottom']) !!}
+                        {!! $dataTable->table(['class' => 'table-data table table-bordered text-nowrap border-bottom']) !!}
                     </div>
                 </div>
             </div>

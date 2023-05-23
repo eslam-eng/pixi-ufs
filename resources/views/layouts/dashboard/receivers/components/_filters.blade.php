@@ -12,36 +12,33 @@
 
                     <div class="collapse show" id="collapseExample" style="">
                         <div class="mt-4">
-                            <form>
+                            <form class="datatables_parameters">
                                 <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
                                     <div class="row row-sm">
                                         <div class="col-lg">
-                                            <div class="main-content-label mg-b-5"> Form Input and Textarea</div>
-                                            <input class="form-control" placeholder="Input box" type="text">
+                                            <livewire:locations-drop-down/>
+                                                @error('city_id')
+                                                <div class="text-danger"> {{$message}}</div>
+                                                @enderror
+                                                @error('area_id')
+                                                <div class="text-danger"> {{$message}}</div>
+                                                @enderror
                                         </div>
                                         <div class="col-lg mg-t-10 mg-lg-t-0">
-                                            <div class="main-content-label mg-b-5"> Form Input and Textarea</div>
-                                            <input class="form-control" placeholder="Input box (readonly)" readonly=""
-                                                   type="text">
-                                        </div>
-                                        <div class="col-lg mg-t-10 mg-lg-t-0">
-                                            <div class="main-content-label mg-b-5"> Form Input and Textarea</div>
-                                            <input class="form-control" disabled="" placeholder="Input box (disabled)"
-                                                   type="text">
+                                            <livewire:company-with-branch-and-departments company_name="company_id" branch_name="branch_id"/>
+                                                @error('branch_id')
+                                                <div class="text-danger"> {{$message}}</div>
+                                                @enderror
                                         </div>
                                     </div>
-                                    <div class="row row-sm mg-t-20">
-                                        <div class="col-lg"><textarea class="form-control" placeholder="Textarea"
-                                                                      rows="3"></textarea></div>
-                                    </div>
-
+                                    
                                 </div>
 
                                 <div class="card-footer">
                                     <div class="form-group mb-0 mt-3 justify-content-end">
                                         <div>
-                                            <button type="submit" class="btn btn-success"><i class="fa fa-search pe-2"></i>@lang('app.search')</button>
-                                            <button type="reset" class="btn btn-secondary ms-4">@lang('app.reset')</button>
+                                            <button type="submit" class="search_datatable btn btn-success"><i class="fa fa-search pe-2"></i>@lang('app.search')</button>
+                                            <button type="reset" class="reset_form_data btn btn-secondary ms-4">@lang('app.reset')</button>
                                         </div>
                                     </div>
                                 </div>
@@ -54,3 +51,4 @@
         </div>
     </div>
 </div>
+

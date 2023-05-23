@@ -38,6 +38,7 @@ Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
         Route::get('{id}/type/{type}',[AddressController::class,'create'])->name('addresses.create');
         Route::get('{id}/set-default',[AddressController::class,'create'])->name('addresses.set-default');
         Route::get('{id}/edit',[AddressController::class,'edit'])->name('address.edit');
+        Route::put('{id}',[AddressController::class,'update'])->name('address.update');
     });
     Route::get('emptypage', Emptypage::class)->name('emptypage');
 

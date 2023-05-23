@@ -71,11 +71,12 @@ class AddressService extends BaseService
      */
     public function update(int $id, AddressDTO $addressDTO): bool
     {
+        $is_default = isset($addressDTO->is_default) ? 1:0;
         $address = $this->findById(id: $id);
         if (!$address)
             throw new NotFoundException(trans('lang.not_found'));
 
-        if ($addressDTO->is_default)
+        if ($is_default)
             $this->getQuery()->where('addressable_id', $address->addressable_id)->where('addressable_type', $address->addressable_type)->update(['is_default' => false]);
         return $address->update(Arr::except($addressDTO->toArray(), ['addressable_type', 'addressable_id']));
     }

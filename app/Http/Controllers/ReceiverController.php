@@ -161,4 +161,18 @@ class ReceiverController extends Controller
             return apiResponse(message: $exception->getMessage(),code: $exception->getCode());
         }
     }
+
+    public function search(Request $request)
+    {
+        try {
+            $key_word = $request->get('keyword');
+            $filters  = ['keyword'=>$key_word] ;
+            $receivers = app()->make(ReceiverService::class)->receiverQueryBuilder(filters: $filters,withRelations: ['defaultAddress','branch:id,name'])->limit(15)->get();
+            return apiResponse(data: $receivers ,code: 200);
+        }catch (Exception $exception)
+        {
+            dd($exception);
+            return apiResponse(message: $exception->getMessage(),code: 500);
+        }
+    }
 }

@@ -34,6 +34,9 @@ Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
         return view('livewire.index');
     })->name('home');
 
+    Route::group(['prefix'=>'search'],function (){
+        Route::get('receivers',[ReceiverController::class,'search'])->name('receivers.search');
+    });
     Route::resource('receivers',ReceiverController::class);
     Route::group(['prefix' => 'addresses' ],function (){
         Route::get('{id}/type/{type}',[AddressController::class,'create'])->name('addresses.create');

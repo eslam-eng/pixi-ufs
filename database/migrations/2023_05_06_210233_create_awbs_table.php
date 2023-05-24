@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\CompanyShipmentType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -22,7 +23,7 @@ return new class extends Migration
             $table->string('payment_type');
             $table->string('service_type');
             $table->boolean('is_return')->default(false);
-            $table->foreignIdFor(\App\Models\AwbCategory::class)->constrained();
+            $table->string('shipment_type');
             $table->float('zone_price');
             $table->float('additional_kg_price');
             $table->float('collection');

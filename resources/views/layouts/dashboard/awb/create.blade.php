@@ -63,19 +63,19 @@
                                         <div class="main-content-label mg-b-5">@lang('app.collection')</div>
                                         <input class="form-control" type="number" name="collection"/>
                                     </div>
+                                </div>
 
-                                    <div class="col-lg-4 col-md-4 col-sm-12 mg-t-20 alert-info">
-                                        <div class="p-3">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-12 mt-5">
+                                        <div class="p-3 alert-info">
                                             <label class="ckbox">
                                                 <input type="checkbox"><span class="font-weight-bold text-dark">@lang('app.awb_is_reverse')</span></label>
                                         </div>
                                     </div>
-
                                     <div class="col-lg-6 col-md-6 col-sm-12 mt-3">
                                         <div class="main-content-label mg-b-5">@lang('app.notese')</div>
                                         <textarea class="form-control" placeholder="Textarea" rows="3"></textarea>
                                     </div>
-
                                 </div>
                                 <hr class="text-info">
                                 <div class="row">
@@ -85,8 +85,13 @@
                                     </div>
 
                                     <div class="col-lg-4 col-md-4 col-sm-12">
-                                        <div class="main-content-label mg-b-5">@lang('app')</div>
-                                        <input class="form-control" type="number" name="collection"/>
+                                        <div class="main-content-label mg-b-5">@lang('app.pieces')</div>
+                                        <input class="form-control" type="number" name="pieces"/>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-4 col-sm-12">
+                                        <div class="main-content-label mg-b-5">@lang('app.weight')</div>
+                                        <input class="form-control" type="number" name="weight"/>
                                     </div>
 
                                 </div>
@@ -120,6 +125,12 @@
             $("#collection").css('display', 'none');
             if ($("#payment_type").val() == {{\App\Enums\PaymentTypesEnum::COLLECTION()}})
                 $("#collection").css('display', 'block');
+
+            $('#payment_type').on('change', function() {
+                var selectedOption = $(this).val();
+                if (selectedOption == {{\App\Enums\PaymentTypesEnum::COLLECTION()}})
+                    $("#collection").css('display', 'block');
+            });
 
             $('#company_id').on('change', function() {
                 var selectedOption = $(this).val();

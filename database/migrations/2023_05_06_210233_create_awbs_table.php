@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('payment_type');
             $table->string('service_type');
             $table->boolean('is_return')->default(false);
-            $table->foreignIdFor(\App\Models\AwbCategory::class)->constrained();
+            $table->foreignIdFor(\App\Models\CompanyShipmentType::class)->constrained();
             $table->float('zone_price');
             $table->float('additional_kg_price');
             $table->float('collection');

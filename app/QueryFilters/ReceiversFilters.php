@@ -30,7 +30,7 @@ class ReceiversFilters extends QueryFilter
 
     public function reference($term)
     {
-        return $this->builder->where('reference',"LIKE","{$term}%");
+        return $this->builder->where('reference',"LIKE","%{$term}%");
     }
 
     public function city_id($term)
@@ -46,7 +46,7 @@ class ReceiversFilters extends QueryFilter
 
     public function keyword($term)
     {
-        return $this->builder->where('name', 'LIKE', "{$term}%")->orWhere('phone', 'LIKE', "{$term}%");
+        return $this->builder->where('name', 'LIKE', "%{$term}%")->orWhere('phone', 'LIKE', "%{$term}%")->where('reference',"LIKE","%{$term}%");
     }
 
 }

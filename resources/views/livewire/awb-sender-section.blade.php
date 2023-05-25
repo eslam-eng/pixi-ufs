@@ -1,3 +1,6 @@
+@section('after_styles')
+    <link href="{{asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
+@endsection
 <div>
     <div class="row">
         @if($is_supper_admin)
@@ -78,8 +81,8 @@
         </div>
     </div>
 </div>
-@section('scripts')
-    <script>
+@section('script_footer')
+     <script>
         document.addEventListener('livewire:load', function () {
             Livewire.on('branchSelected', function (branch) {
                $("#branch_phone").val(branch.phone);

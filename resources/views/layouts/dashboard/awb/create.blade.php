@@ -37,7 +37,7 @@
                             <div class="card-header pb-0"><h5
                                     class="card-title mb-3 pb-0">@lang('app.awb_receiver_info')</h5></div>
                             <div class="card-body">
-                                <livewire:awb.awb-receiver-section/>
+                                <x-awb-receivers-search-data-section/>
                             </div>
                         </div>
                     </div>

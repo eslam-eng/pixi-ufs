@@ -15,6 +15,7 @@
 
     @include('layouts.components.styles')
 
+    @yield('after_styles')
     <livewire:styles />
 </head>
 

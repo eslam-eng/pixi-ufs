@@ -30,7 +30,7 @@ class AddressUpdateRequest extends BaseRequest
             'city_id'=>'required|integer|exists:locations,id',
             'area_id'=>'required|integer|exists:locations,id',
             'postal_code'=>'required|numeric',
-            'is_default'=>'nullable|boolean',
+            'is_default'=>'nullable|string',
         ];
     }
 

@@ -86,11 +86,15 @@ class AddressController extends Controller
         try {
             $addressDTO = $request->toAddressDTO();
             $this->addressService->update(id: $id, addressDTO: $addressDTO);
-            return apiResponse(message: trans('lang.success_operation'));
+            $toast = [
+                'title'=>trans('app.success'),
+                'message'=>trans('app.success_operation'),
+            ];
+            return back()->with('toast', $toast);
         } catch (NotFoundException $e) {
             return apiResponse(message: $e->getMessage(), code: 422);
         } catch (Exception $e) {
-            return apiResponse(message: trans('lang.something_went_wrong'), code: 422);
+            return apiResponse(message: trans('app.something_went_wrong'), code: 422);
         }
     }
 

@@ -34,11 +34,15 @@ Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
         return view('livewire.index');
     })->name('home');
 
+    Route::group(['prefix'=>'search'],function (){
+        Route::get('receivers',[ReceiverController::class,'search'])->name('receivers.search');
+    });
     Route::resource('receivers',ReceiverController::class);
     Route::group(['prefix' => 'addresses' ],function (){
         Route::get('{id}/type/{type}',[AddressController::class,'create'])->name('addresses.create');
         Route::get('{id}/set-default',[AddressController::class,'create'])->name('addresses.set-default');
         Route::get('{id}/edit',[AddressController::class,'edit'])->name('address.edit');
+        Route::put('{id}',[AddressController::class,'update'])->name('address.update');
     });
     Route::group(['prefix' => 'awbs' ],function (){
         Route::get('/',[AwbController::class,'index'])->name('awb.index');

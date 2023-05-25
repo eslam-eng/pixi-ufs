@@ -3,7 +3,7 @@
 @section('content')
 
     {{--    breadcrumb --}}
-    @include('layouts.components.breadcrumb',['title' => trans('address_page_title'),'first_list_item' => trans('app.addresses'),'last_list_item' => trans('app.edit_receivers')])
+    @include('layouts.components.breadcrumb',['title' => trans('app.addresses_edit'),'first_list_item' => trans('app.addresses'),'last_list_item' => trans('app.add_address')])
     {{--    end breadcrumb --}}
 
     <!-- Row -->
@@ -11,55 +11,70 @@
         <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
             <div class="card">
                 <div class="card-body">
-                    <form action="{{route('address.edit',$address->id)}}" method="post">
+                    <form action="{{route('address.update', $address->id)}}" method="post">
                         @csrf
+                        @method('put')
                         <div class="row row-sm mb-4">
                             <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.receiver_name')</div>
-                                <input class="form-control" name="name" value="{{$receiver->name}}" placeholder="@lang('app.receiver_name')"
+                                <div class="main-content-label mg-b-5">@lang('app.address')</div>
+                                <input class="form-control" name="address" value="{{old('address') ?? $address->address }}" placeholder="@lang('app.address')"
                                        type="text" required>
-                                @error('name')
-                                <div class="text-danger">{{$message}} </div>
+                                @error('address')
+                                <div class="text-danger"> {{$message}}</div>
                                 @enderror
                             </div>
 
                             <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.receiver_phone')</div>
-                                <input class="form-control" value="{{$receiver->phone}}" name="phone" placeholder="@lang('app.receiver_phone')"
-                                       type="text" required>
-                                @error('phone')
+                                <div class="main-content-label mg-b-5">@lang('app.map_url')</div>
+                                <input class="form-control" name="map_url" value="{{old('map_url') ?? $address->map_url }}" placeholder="@lang('app.map_url')"
+                                       type="url" required>
+                                @error('map_url')
                                 <div class="text-danger"> {{$message}}</div>
                                 @enderror
                             </div>
                         </div>
 
-                        <div class="row row-sm mb-4">
-                            <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.receiving_company')</div>
-                                <input class="form-control" value="{{$receiver->receiving_company}}" name="receiving_company"
-                                       placeholder="@lang('app.receiving_company')" type="text" required>
-
-                                @error('receiving_company')
+                        <div class="mb-4">
+                            <livewire:locations-drop-down/>
+                            @error('city_id')
                                 <div class="text-danger"> {{$message}}</div>
-                                @enderror
-                            </div>
-
-                            <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.reference')</div>
-                                <input class="form-control" value="{{$receiver->reference}}" name="reference" placeholder="@lang('app.reference')"
-                                       type="text">
-
-                                @error('reference')
-                                <div class="text-danger"> {{$message}}</div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div>
-                            @livewire('company-with-branch-and-departments',['company_name' =>'company_id','branch_name' =>  'branch_id','selected_company' => $receiver->branch->company_id , 'selected_branch' => $receiver->branch_id])
-                            @error('branch_id')
+                            @enderror
+                            @error('area_id')
                             <div class="text-danger"> {{$message}}</div>
                             @enderror
+                        </div>
+
+                        <div class="row row-sm mb-4">
+                            <div class="col-lg">
+                                <div class="main-content-label mg-b-5">@lang('app.lat')</div>
+                                <input class="form-control" name="lat" value="{{old('lat') ?? $address->lat }}" placeholder="@lang('app.lat')"
+                                       type="text">
+
+                            </div>
+
+                            <div class="col-lg">
+                                <div class="main-content-label mg-b-5">@lang('app.lng')</div>
+                                <input class="form-control" name="lng" value="{{old('lng') ?? $address->lng }}" placeholder="@lang('app.lng')"
+                                       type="text">
+                            </div>
+
+                            <div class="col-lg">
+                                <div class="main-content-label mg-b-5">@lang('app.postal_code')</div>
+                                <input class="form-control" name="postal_code" value="{{old('postal_code')  ?? $address->postal_code }}" placeholder="@lang('app.receiver_name')"
+                                       type="text">
+                            </div>
+                        </div>
+
+                        <div class="row row-sm mb-4">
+                            <div class="col-lg">
+                                <div class="form-group mg-b-20">
+                                    <label class="ckbox"><input name="is_default" checked="" type="checkbox">
+                                        <span class="tx-13">@lang('app.make_address_default')</span>
+                                    </label>
+                                </div>
+                            </div>
+
+
                         </div>
 
                         <div class="card-footer mt-4">
@@ -74,52 +89,7 @@
                             </div>
                         </div>
                     </form>
-                    <hr>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <div class="breadcrumb-header justify-content-between">
-                        <div class="left-content">
-                            <a class="btn ripple btn-primary" href="{{route('addresses.create')}}"><i class="fe fe-plus me-2"></i>Add New User</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <td>@lang('app.address')</td>
-                            <td>@lang('app.city')</td>
-                            <td>@lang('app.area')</td>
-                            <td>@lang('app.is_default')</td>
-                            <td>@lang('app.actions')</td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($receiver->addresses as $address)
-                            <tr>
-                                <td>{{$address->address}}</td>
-                                <td>{{$address->city?->title}}</td>
-                                <td>{{$address->area?->title}}</td>
-                                <td>{{$address->is_default ? trans('app.yes') : trans('app.no')}}</td>
-                                <td>
-                                    <div>
-                                        <button data-bs-toggle="dropdown" class="btn btn-primary btn-block" aria-expanded="false">@lang('app.actions')
-                                            <i class="icon ion-ios-arrow-down tx-11 mg-l-3"></i>
-                                        </button>
-                                        <div class="dropdown-menu" style="">
-                                            <a href="#" class="dropdown-item">@lang('app.show')</a>
-                                            <a href="#" class="dropdown-item">@lang('app.edit')</a>
-                                            <button role="button"  class="dropdown-item">@lang('app.delete')</button>
-                                        </div>
-                                        <!-- dropdown-menu -->
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+
                 </div>
             </div>
         </div>

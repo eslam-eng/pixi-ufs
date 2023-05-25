@@ -27,22 +27,22 @@ class AwbDTO extends BaseDTO
      * @param float  $actual_recipient
      */
     public function __construct(
-        protected int    $code,
-        protected int    $user_id,
-        protected int    $branch_id,
-        protected int    $department_id,
-        protected int    $receiver_id,
-        protected object $receiver_data,
-        protected string $payment_type,
-        protected string $service_type,
-        protected bool   $is_return,
-        protected int    $company_shipment_type_id,
-        protected float  $zone_price,
-        protected float  $additional_kg_price,
-        protected float  $collection,
-        protected float  $weight,
-        protected float  $pieces,
-        protected float  $actual_recipient,
+        public int    $user_id,
+        public int    $branch_id,
+        public int    $code,
+        public int    $department_id,
+        public int    $receiver_id,
+        public object $receiver_data,
+        public string $payment_type,
+        public string $service_type,
+        public bool   $is_return,
+        public int    $company_shipment_type_id,
+        public float  $zone_price,
+        public float  $additional_kg_price,
+        public float  $collection,
+        public float  $weight,
+        public float  $pieces,
+        public float  $actual_recipient,
     )
     {
     }

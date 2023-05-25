@@ -33,11 +33,7 @@ class CompanyShipmentType extends Component
 
     public function handleGetShipmentTypeForSelectedCompany($company_id): void
     {
-        $user = getAuthUser();
         $this->company_id = $company_id ;
-        if ($user->type == UsersType::SUPERADMIN())
-            $this->shipment_types  =\App\Models\CompanyShipmentType::all();
-        else
-            $this->shipment_types = \App\Models\CompanyShipmentType::query()->where('company_id',$this->company_id)->get();
+        $this->shipment_types = \App\Models\CompanyShipmentType::query()->where('company_id',$this->company_id)->get();
     }
 }

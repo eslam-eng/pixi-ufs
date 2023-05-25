@@ -1,12 +1,10 @@
 <?php
 
-use App\Models\CompanyShipmentType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -26,7 +24,7 @@ return new class extends Migration
             $table->string('shipment_type');
             $table->float('zone_price');
             $table->float('additional_kg_price');
-            $table->float('collection');
+            $table->float('collection')->default(0);
             $table->float('weight');
             $table->float('pieces');
             $table->float('actual_recipient');

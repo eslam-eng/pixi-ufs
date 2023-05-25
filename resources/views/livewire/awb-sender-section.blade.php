@@ -38,7 +38,6 @@
          <div class="col-md-6 col-lg-6 col-sm-6">
              <div class="main-content-label mb-3">@lang('app.departments')</div>
               <div class="input-group mb-5">
-                    <span class="input-group-text" id="basic-addon3"><i class="fa fa-home"></i></span>
                     <select class="form-select" id="department_id"
                             name="{{$department_name}}"
                             aria-label="Select department">
@@ -81,15 +80,3 @@
         </div>
     </div>
 </div>
-@section('script_footer')
-     <script>
-        document.addEventListener('livewire:load', function () {
-            Livewire.on('branchSelected', function (branch) {
-               $("#branch_phone").val(branch.phone);
-               $("#branch_address").val(branch.address);
-               $("#branch_city").val(branch.city.title);
-               $("#branch_area").val(branch.area.title);
-            });
-        });
-    </script>
-@endsection

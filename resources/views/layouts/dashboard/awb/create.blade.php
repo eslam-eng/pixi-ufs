@@ -46,37 +46,32 @@
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <div class="card">
-                            <div class="card-header pb-0"><h5 class="card-title mb-3 pb-0">Card title</h5></div>
+                            <div class="card-header pb-0"><h5 class="card-title mb-3 pb-0">@lang('app.awb_info')</h5></div>
                             <div class="card-body">
 
                                 <div class="row">
 
-                                    <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="col-lg-3 col-md-3 col-sm-12">
                                         <x-service-types/>
                                     </div>
 
-                                    <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="col-lg-3 col-md-3 col-sm-12">
                                         <x-payment-types/>
                                     </div>
 
-                                    <div class="col-lg-4 col-md-4 col-sm-12" id="collection">
+                                    <div class="col-lg-3 col-md-3 col-sm-12" id="collection">
                                         <div class="main-content-label mg-b-5">@lang('app.collection')</div>
                                         <input class="form-control" type="number" name="collection"/>
                                     </div>
-                                </div>
 
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-sm-12 mt-5">
+                                    <div class="col-lg-3 col-md-3 col-sm-12 mt-3">
                                         <div class="p-3 alert-info">
                                             <label class="ckbox">
-                                                <input type="checkbox"><span class="font-weight-bold text-dark">@lang('app.awb_is_reverse')</span></label>
+                                                <input type="checkbox" name="is_reverse"><span class="font-weight-bold text-dark">@lang('app.awb_is_reverse')</span></label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12 mt-3">
-                                        <div class="main-content-label mg-b-5">@lang('app.notese')</div>
-                                        <textarea class="form-control" placeholder="Textarea" rows="3"></textarea>
-                                    </div>
                                 </div>
+
                                 <hr class="text-info">
                                 <div class="row">
 
@@ -95,6 +90,46 @@
                                     </div>
 
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="card">
+                            <div class="card-header pb-0"><h5 class="card-title mb-3 pb-0">@lang('app.awb_additional_info')</h5></div>
+                            <div class="card-body">
+
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-12">
+                                        <div class="main-content-label mg-b-5">@lang('app.custom_field1')</div>
+                                        <input class="form-control" type="text" name="custom_field1"/>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-4 col-sm-12">
+                                        <div class="main-content-label mg-b-5">@lang('app.custom_field2')</div>
+                                        <input class="form-control" type="text" name="custom_field2"/>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-4 col-sm-12">
+                                        <div class="main-content-label mg-b-5">@lang('app.custom_field3')</div>
+                                        <input class="form-control" type="text" name="custom_field3"/>
+                                    </div>
+
+{{--                                    <div class="col-lg-4 col-md-4 col-sm-12">--}}
+{{--                                        <div class="main-content-label mg-b-5">@lang('app.custom_field4')</div>--}}
+{{--                                        <input class="form-control" type="number" name="custom_field4"/>--}}
+{{--                                    </div>--}}
+
+{{--                                    <div class="col-lg-4 col-md-4 col-sm-12">--}}
+{{--                                        <div class="main-content-label mg-b-5">@lang('app.custom_field5')</div>--}}
+{{--                                        <input class="form-control" type="number" name="custom_field5"/>--}}
+{{--                                    </div>--}}
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -120,23 +155,5 @@
 
 @endsection
 @section('script_footer')
-    <script>
-        $(document).ready(function () {
-            $("#collection").css('display', 'none');
-            if ($("#payment_type").val() == {{\App\Enums\PaymentTypesEnum::COLLECTION()}})
-                $("#collection").css('display', 'block');
-
-            $('#payment_type').on('change', function() {
-                var selectedOption = $(this).val();
-                if (selectedOption == {{\App\Enums\PaymentTypesEnum::COLLECTION()}})
-                    $("#collection").css('display', 'block');
-            });
-
-            $('#company_id').on('change', function() {
-                var selectedOption = $(this).val();
-                // Emit an event with the selected value to a specific Livewire component
-                Livewire.emit('getShipmentTypeForSelectedCompany', selectedOption);
-            });
-        })
-    </script>
+    <script src="{{asset('assets/js/create-awb.js')}}"></script>
 @endsection

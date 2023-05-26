@@ -3,7 +3,10 @@
 namespace App\Services;
 
 use App\DTO\Awb\AwbDTO;
+use App\Exceptions\NotFoundException;
 use App\Models\Awb;
+use App\QueryFilters\AwbFilters;
+use Illuminate\Database\Eloquent\Builder;
 
 class AwbService extends BaseService
 {
@@ -12,6 +15,19 @@ class AwbService extends BaseService
     {
     }
 
+    //method for api with pagination
+    public function listing(array $filters = [], array $withRelations = [], $perPage = 10): \Illuminate\Contracts\Pagination\CursorPaginator
+    {
+        return $this->queryGet(filters: $filters, withRelations: $withRelations)->cursorPaginate($perPage);
+    }
+
+    public function queryGet(array $filters = [], array $withRelations = []): Builder
+    {
+        $awbs = $this->model->query()->with($withRelations);
+        return $awbs->filter(new AwbFilters($filters));
+    }
+
+    
     public function store(AwbDTO $awbDTO)
     {
         //Store main awb data
@@ -19,6 +35,44 @@ class AwbService extends BaseService
         $awbDTO->additional_kg_price = 10 ;
 
 
+    }
+
+    public function cancelAwb(int $id, array $data):bool
+    {
+        $awb = $this->find($id);
+        $data = [
+            'user_id'=>$awb->user_id,
+            'awb_status_id'=>1,
+            'comment'=>$data['comment'],
+        ];
+        $awb->history()->create($data);
+        return true;
+    }
+
+    //there is no date to update it
+    public function awbReschedule(int $id, array $data):bool
+    {
+        $awb = $this->find($id);
+        $awb->history()->create($data);
+        return true;
+    }
+
+    public function updateReceiverPhone(int $id, array $data):bool
+    {
+        $awb = $this->find($id);
+        $awb->receiver()->update([
+            'phone'=>$data['phone'],
+        ]);
+        return true;
+    }
+
+
+    public function find(int $id, array $relations = [])
+    {
+        $awb = Awb::with($relations)->find($id);
+        if(!$awb)
+            throw new NotFoundException(trans('app.not_found'));
+        return $awb;
     }
 
 }

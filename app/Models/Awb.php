@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Filterable;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Awb extends Model
 {
-    use HasFactory;
+    use HasFactory, Filterable;
 
     protected $fillable = [
         'code','user_id','branch_id',
@@ -44,5 +45,15 @@ class Awb extends Model
     public function receiver()
     {
         return $this->belongsTo(Receiver::class);
+    }
+
+    public function history()
+    {
+        return $this->hasMany(AwbHistory::class, 'awb_id');
+    }
+
+    public function latestStatus()
+    {
+        return $this->hasOne(AwbHistory::class, 'awb_id')->latestOfMany();
     }
 }

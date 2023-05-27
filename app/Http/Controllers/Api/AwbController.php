@@ -9,6 +9,7 @@ use App\Services\AwbService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Awb\AwbCancelRequest;
 use App\Http\Requests\Awb\AwbRescheduleRequest;
+use App\Http\Requests\Awb\AwbStoreAddressAndPhoneRequest;
 use App\Http\Requests\Awb\AwbUpdateReceiverPhone;
 use App\Http\Resources\Awb\AwbResource;
 use Exception;
@@ -71,6 +72,18 @@ class AwbController extends Controller
     {
         try{
             $status = $this->awbService->updateReceiverPhone(id: $id, data: $request->validated());
+            if(!$status)
+                return apiResponse(message: trans('app.something_went_wrong'), code: 422);
+            return apiResponse(message: trans('app.success_operation'));    
+        }catch(Exception $e){
+            return apiResponse( message: $e->getMessage(), code: 422);
+        }
+    }
+
+    public function AddPhoneAndAddress(AwbStoreAddressAndPhoneRequest $request, $id)
+    {
+        try{
+            $status = $this->awbService->AddPhoneAndAddress(id: $id, data: $request->validated());
             if(!$status)
                 return apiResponse(message: trans('app.something_went_wrong'), code: 422);
             return apiResponse(message: trans('app.success_operation'));    

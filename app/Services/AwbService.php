@@ -5,8 +5,10 @@ namespace App\Services;
 use App\DTO\Awb\AwbDTO;
 use App\Exceptions\NotFoundException;
 use App\Models\Awb;
+use App\Models\Receiver;
 use App\QueryFilters\AwbFilters;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Arr;
 
 class AwbService extends BaseService
 {
@@ -59,13 +61,24 @@ class AwbService extends BaseService
 
     public function updateReceiverPhone(int $id, array $data):bool
     {
-        $awb = $this->find($id);
-        $awb->receiver()->update([
+        $receiver = Receiver::find($id);
+        $receiver->update([
             'phone'=>$data['phone'],
         ]);
         return true;
     }
-
+    
+    public function AddPhoneAndAddress(int $id, array $data):bool
+    {
+        $receiver = Receiver::find($id);
+        if(!$receiver)
+            throw new NotFoundException(trans('app.not_found'));
+        $receiver->update([
+            'phone'=>$data['phone'],
+        ]);
+        $receiver->storeAddress(Arr::except($data, $data['phone']));
+        return true;
+    }
 
     public function find(int $id, array $relations = [])
     {

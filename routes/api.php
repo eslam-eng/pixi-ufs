@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AddressController;
 use App\Http\Controllers\Api\AwbController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,3 +24,5 @@ Route::post('/awbs/details/{id}', [AwbController::class, 'awbDetails']);
 Route::post('/awbs/cancel/{id}', [AwbController::class, 'cancelAwb']);
 Route::post('/awbs/reschedule/{id}', [AwbController::class, 'awbReschedule']);
 Route::post('/awbs/update-phone/{id}', [AwbController::class, 'updateReceiverPhone']);
+Route::post('/awbs/add-phone-and-address/{id}', [AwbController::class, 'AddPhoneAndAddress']);
+Route::resource('addresses', AddressController::class);

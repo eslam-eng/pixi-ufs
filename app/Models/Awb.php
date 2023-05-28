@@ -6,8 +6,6 @@ use App\Observers\AwbObserver;
 use App\Traits\EscapeUnicodeJson;
 use App\Traits\Filterable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use App\Traits\Filterable;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -65,10 +63,6 @@ class Awb extends Model
         return $this->hasOne(AwbAdditionalInfo::class, 'awb_id');
     }
 
-    public function latestStatus()
-    {
-        return $this->hasOne(AwbHistory::class, 'awb_id')->latestOfMany();
-    }
     public function latestStatus()
     {
         return $this->hasOne(AwbHistory::class, 'awb_id')->latestOfMany();

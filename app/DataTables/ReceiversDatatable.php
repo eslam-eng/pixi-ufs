@@ -23,7 +23,6 @@ class ReceiversDatatable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'receivers.action')
             ->setRowId('id')
             ->addColumn('company_id', function (Receiver $receiver) {
                 return $receiver->branch->company->name;

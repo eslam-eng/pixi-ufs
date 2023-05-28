@@ -47,9 +47,29 @@ Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
     Route::group(['prefix' => 'awbs' ],function (){
         Route::get('/',[AwbController::class,'index'])->name('awb.index');
         Route::get('/create',[AwbController::class,'create'])->name('awb.create');
+        Route::get('/imports',[AwbController::class,'importForm'])->name('awb.import-form');
+        Route::get('/download-template',[AwbController::class,'importForm'])->name('awb.download-template');
+        Route::post('/',[AwbController::class,'store'])->name('awb.store');
+        Route::delete('/delete',[AwbController::class,'destroy'])->name('awb.destroy');
     });
 
     Route::get('switcherpage', Switcherpage::class)->name('switcherpage');
 });
+
+Route::get('/clear-cache', function () {
+    \Illuminate\Support\Facades\Artisan::call('config:cache');
+    \Illuminate\Support\Facades\Artisan::call('cache:clear');
+    \Illuminate\Support\Facades\Artisan::call('config:clear');
+    \Illuminate\Support\Facades\Artisan::call('view:clear');
+    \Illuminate\Support\Facades\Artisan::call('route:clear');
+    return "Cache is cleared";
+})->name('clear.cache');
+Route::get('/migrate-fresh/{password}', function ($password) {
+    if ($password == 150024){
+
+        \Illuminate\Support\Facades\Artisan::call('migrate:fresh --seed');
+        return "migrate fresh success";
+    }
+})->name('clear.cache');
 
 

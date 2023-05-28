@@ -5,16 +5,16 @@
     <div class="row">
         @if($is_supper_admin)
             <div class="col-lg-12 col-md-12 col-sm-12 mt-2 mb-4">
-                <div class="main-content-label mg-b-5">@lang('app.Companies')</div>
+                <div class="main-content-label mg-b-5">@lang('app.companies')</div>
                 <select class="form-select"
                         wire:change="getBranchesAndDepartmentsForSelectedCompany"
-                        wire:model="selected_company" , id="company_id"
-                        name="{{$company_name}}">
+                        wire:model="selected_company" id="company_id"
+                        name="{{$company_name_field}}">
                     <option value="0">@lang('app.select_company')</option>
                     @foreach($companies_options as $company)
                         <option value="{{$company->id}}"
                                 wire:key="company-{{$company->id}}"
-                                @if(!is_null($selected_company) && ($company->id == $selected_company)) selected @endif
+                                @if(!is_null($selected_company) && ($company->id == $selected_company)) selected @else @selected(old("company_id") == $company->id) @endif
                         >{{$company->name}}</option>
                     @endforeach
                 </select>
@@ -26,7 +26,7 @@
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="main-content-label mb-3">@lang('app.branches')</div>
                 <select class="form-select" id="branch_id" wire:model="selected_branch"
-                        name="{{$branch_name}}"
+                        name="{{$branch_name_field}}"
                         aria-label="Select branch">
                     <option @if(is_null($selected_branch)) selected @endif value="">@lang('app.select_branch')</option>
                     @foreach($branches_options as $branch)
@@ -39,7 +39,7 @@
              <div class="main-content-label mb-3">@lang('app.departments')</div>
               <div class="input-group mb-5">
                     <select class="form-select" id="department_id"
-                            name="{{$department_name}}"
+                            name="{{$department_name_field}}"
                             aria-label="Select department">
                         <option @if(is_null($selected_department)) selected
                                 @endif value="">@lang('app.select_department')</option>

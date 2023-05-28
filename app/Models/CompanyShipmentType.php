@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class CompanyShipmentType extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['company_id','name','fixed_weight', 'has_dimension'];
 }

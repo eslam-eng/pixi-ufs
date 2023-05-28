@@ -30,7 +30,7 @@
                                     <ul class="slide-menu">
                                         <li class="side-menu__label1"><a href="javascript:void(0);">Utilities</a></li>
                                         <li><a class="slide-item" href="{{route('awb.create')}}">@lang('app.new_shipment')</a></li>
-                                        <li><a class="slide-item" href="{{route('awb.create')}}">@lang('app.prepare_shipment')</a></li>
+                                        <li><a class="slide-item" href="{{route('awb.index')}}">@lang('app.prepare_shipment')</a></li>
                                     </ul>
                                 </li>
 

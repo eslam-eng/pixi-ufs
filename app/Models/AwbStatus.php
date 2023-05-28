@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class AwbStatus extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name', 'is_final', 'stepper', 'type', 'sms'];
 }

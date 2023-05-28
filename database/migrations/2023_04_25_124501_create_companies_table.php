@@ -22,6 +22,7 @@ return new class extends Migration
             $table->boolean('status')->default(\App\Enums\ActivationStatus::ACTIVE->value);
             $table->boolean('store_receivers')->default(false);
             $table->string('address');
+            $table->integer('num_custom_fields')->default(1);
             $table->foreignIdFor(\App\Models\Location::class,'city_id')->constrained('locations');
             $table->foreignIdFor(\App\Models\Location::class,'area_id')->constrained('locations');
             $table->timestamps();

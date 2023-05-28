@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Awb extends Model
 {
-    use HasFactory,Filterable,EscapeUnicodeJson,SoftDeletes;
+    use HasFactory, Filterable, EscapeUnicodeJson, SoftDeletes;
 
     protected $fillable = [
         'code', 'user_id', 'branch_id',
@@ -23,8 +23,9 @@ class Awb extends Model
     ];
 
     protected $casts = [
-      'receiver_data' =>'array'
+        'receiver_data' => 'array'
     ];
+
     protected function code(): Attribute
     {
         return Attribute::make(
@@ -54,12 +55,17 @@ class Awb extends Model
 
     public function history()
     {
-        return $this->hasMany(AwbHistory::class,'awb_id');
+        return $this->hasMany(AwbHistory::class, 'awb_id');
     }
 
     public function additionalInfo(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-       return $this->hasOne(AwbAdditionalInfo::class,'awb_id');
+        return $this->hasOne(AwbAdditionalInfo::class, 'awb_id');
+    }
+
+    public function latestStatus()
+    {
+        return $this->hasOne(AwbHistory::class, 'awb_id')->latestOfMany();
     }
 
     protected static function boot()

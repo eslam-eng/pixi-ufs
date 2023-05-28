@@ -55,6 +55,10 @@ class AwbService extends BaseService
     public function awbReschedule(int $id, array $data):bool
     {
         $awb = $this->find($id);
+        $data = [
+            'user_id'=>$awb->user_id,
+            'awb_status_id'=>$data['status_id'],
+        ];
         $awb->history()->create($data);
         return true;
     }

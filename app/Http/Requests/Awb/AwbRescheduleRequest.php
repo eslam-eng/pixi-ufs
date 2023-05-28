@@ -22,7 +22,7 @@ class AwbRescheduleRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'date'=>'required|date',
+            'status_id'=>'required|integer|exists:awb_statuses,id',
         ];
     }
 

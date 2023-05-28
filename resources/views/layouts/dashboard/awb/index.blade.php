@@ -19,15 +19,13 @@
         <div class="col-lg-12">
             <div class="card custom-card">
                 <div class="card-header">
-                    <div class="breadcrumb-header justify-content-between">
-                        <div class="left-content">
-                            <a class="btn ripple btn-primary" href="{{route('receivers.create')}}"><i class="fe fe-plus me-2"></i>@lang('app.new')</a>
+                    <div class="form-group mb-0 mt-3 justify-content-end">
+                        <div>
+                            <a class="btn ripple btn-primary" href="{{route('awb.create')}}"><i class="fe fe-plus me-2"></i>@lang('app.new')</a>
+                            <button type="button" class="btn btn-success"><i class="fa fa-upload pe-2"></i>@lang('app.import')</button>
+                            <button type="submit" class="btn btn-info"><i class="fa fa-download pe-2"></i>@lang('app.export_pdf')</button>
+                            <button class="btn btn-danger delete-selected-btn"><i class="fa fa-trash pe-2"></i>@lang('app.delete_selected')</button>
                         </div>
-{{--                        <div class="justify-content-center">--}}
-{{--                            <button type="button" class="btn btn-secondary">--}}
-{{--                                <i class="fe fe-download me-1"></i> Download User Data--}}
-{{--                            </button>--}}
-{{--                        </div>--}}
                     </div>
                 </div>
                 <div class="card-body">

@@ -20,7 +20,7 @@
             @endif
         </div>
         <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
-            <form action="" method="post">
+            <form action="{{route('awb.store')}}" method="post">
                 @csrf
                 <div class="row">
                     <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
@@ -28,7 +28,7 @@
                             <div class="card-header pb-0"><h5
                                     class="card-title mb-3 pb-0">@lang('app.awb_sender_info')</h5></div>
                             <div class="card-body">
-                                <livewire:awb.awb-sender-section need_departments_select="true"/>
+                                <livewire:awb.awb-sender-section  company_name_field="company_id" branch_name_field="branch_id" department_name_field="department_id" need_departments_select="true"/>
                             </div>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                                     <div class="col-lg-3 col-md-3 col-sm-12 mt-3">
                                         <div class="p-3 alert-info">
                                             <label class="ckbox">
-                                                <input type="checkbox" name="is_reverse"><span class="font-weight-bold text-dark">@lang('app.awb_is_reverse')</span></label>
+                                                <input type="checkbox" name="is_return"><span class="font-weight-bold text-dark">@lang('app.awb_is_reverse')</span></label>
                                         </div>
                                     </div>
                                 </div>

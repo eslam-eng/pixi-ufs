@@ -4,6 +4,7 @@ namespace App\Http\Requests\Awb;
 
 use App\DTO\Address\AddressDTO;
 use App\Http\Requests\BaseRequest;
+use Carbon\Carbon;
 
 class AwbStoreRequest extends BaseRequest
 {
@@ -21,6 +22,7 @@ class AwbStoreRequest extends BaseRequest
     public function rules(): array
     {
         return [
+            'user_id'=>'required|integer|exists:users,id',
             'company_id'=>'required|integer|exists:companies,id',
             'branch_id'=>'required|integer|exists:branches,id',
             'department_id'=>'required|integer|exists:departments,id',
@@ -29,7 +31,7 @@ class AwbStoreRequest extends BaseRequest
             'service_type'=>'nullable|string',
             'payment_type'=>'nullable|string',
             'collection'=>'nullable|numeric',
-            'is_reverse'=>'nullable|url',
+            'is_return'=>'nullable|bool',
             'weight'=>'required|numeric',
             'pieces'=>'required|numeric',
             'custom_field1'=>'nullable|string',
@@ -40,6 +42,9 @@ class AwbStoreRequest extends BaseRequest
 
     public function prepareForValidation(): void
     {
-        $this->merge(['is_reverse'=>$this->is_reverse??false]);
+        $this->merge([
+            'is_return'=>(bool)($this->is_reverse)??false ,
+            'user_id'=>auth()->id(),
+        ]);
     }
 }

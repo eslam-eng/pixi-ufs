@@ -18,7 +18,7 @@
             </div>
         @endif
 
-        @if (!is_null($selected_company) && $selected_company != 0)
+        @if (!is_null($selected_company) && $selected_company != 0 && $need_branches_select)
                 <div class="col-lg-4 col-md-4 col-sm-12">
                     <div class="main-content-label mg-b-5">@lang('app.branches')</div>
                     <select class="form-select"  id="branch_id"
@@ -36,9 +36,8 @@
 
             @if (!is_null($selected_company) && $selected_company != 0 && $need_departments_select)
                 <div class="col-md-4 col-lg-4 col-sm-4">
-                    <label for="basic-url" class="form-label">@lang('app.departments')</label>
+                    <div for="basic-url" class="main-content-label mg-b-5">@lang('app.departments')</div>
                     <div class="input-group mb-5">
-                        <span class="input-group-text" id="basic-addon3"><i class="fa fa-home"></i></span>
                         <select class="form-select"  id="department_id"
                                 name="{{$department_name}}"
                                 aria-label="Select department">

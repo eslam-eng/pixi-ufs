@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('awb_additional_infos', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(\App\Models\Awb::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('custom_field1')->nullable();
             $table->string('custom_field2')->nullable();
             $table->string('custom_field3')->nullable();
@@ -22,6 +23,9 @@ return new class extends Migration
             $table->string('custom_field5')->nullable();
             $table->string('custom_field6')->nullable();
             $table->string('custom_field7')->nullable();
+            $table->string('custom_field8')->nullable();
+            $table->string('custom_field9')->nullable();
+            $table->string('custom_field10')->nullable();
             $table->timestamps();
         });
     }

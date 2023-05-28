@@ -47,6 +47,7 @@ Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
     Route::group(['prefix' => 'awbs' ],function (){
         Route::get('/',[AwbController::class,'index'])->name('awb.index');
         Route::get('/create',[AwbController::class,'create'])->name('awb.create');
+        Route::post('/',[AwbController::class,'store'])->name('awb.store');
     });
 
     Route::get('switcherpage', Switcherpage::class)->name('switcherpage');

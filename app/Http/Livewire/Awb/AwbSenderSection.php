@@ -23,9 +23,9 @@ class AwbSenderSection extends Component
 
     public bool $need_departments_select = false;
 
-    public string $branch_name;
-    public string $company_name;
-    public string $department_name;
+    public string $branch_name_field;
+    public string $company_name_field;
+    public string $department_name_field;
 
     public function mount()
     {

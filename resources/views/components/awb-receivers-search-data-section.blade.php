@@ -6,7 +6,7 @@
 <div>
     <div class="row mb-4">
         <div class="col-lg-12 col-md-12 col-sm-12 mt-2 mb-3">
-            <div class="main-content-label mg-b-5">@lang('app.companies')</div>
+            <div class="main-content-label mg-b-5">@lang('app.receivers')</div>
             <select id="receivers_search" name="receiver_id"
                     class="form-control form-select select2 js-example-basic-single"
                     data-bs-placeholder="Select receiver" data-select2-id="1" tabindex="-1" aria-hidden="true">

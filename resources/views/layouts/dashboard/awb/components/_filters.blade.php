@@ -5,7 +5,7 @@
                 <div>
                     <a aria-controls="collapseExample" class="btn ripple btn-light collapsed"
                        data-bs-toggle="collapse" href="#collapseExample" role="button"
-                       aria-expanded="false"><i class="fa fa-filter pe-2"></i>@lang('app.receivers_filter')
+                       aria-expanded="false"><i class="fa fa-filter pe-2"></i>@lang('app.aws_filters')
                     </a>
                 </div>
                 <div>
@@ -16,23 +16,8 @@
                                 <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
                                     <div class="row row-sm">
                                         <div class="col-lg">
-                                            <div class="main-content-label mg-b-5"> Form Input and Textarea</div>
-                                            <input class="form-control" placeholder="Input box" type="text">
+                                           <x-receivers-select2-search/>
                                         </div>
-                                        <div class="col-lg mg-t-10 mg-lg-t-0">
-                                            <div class="main-content-label mg-b-5"> Form Input and Textarea</div>
-                                            <input class="form-control" placeholder="Input box (readonly)" readonly=""
-                                                   type="text">
-                                        </div>
-                                        <div class="col-lg mg-t-10 mg-lg-t-0">
-                                            <div class="main-content-label mg-b-5"> Form Input and Textarea</div>
-                                            <input class="form-control" disabled="" placeholder="Input box (disabled)"
-                                                   type="text">
-                                        </div>
-                                    </div>
-                                    <div class="row row-sm mg-t-20">
-                                        <div class="col-lg"><textarea class="form-control" placeholder="Textarea"
-                                                                      rows="3"></textarea></div>
                                     </div>
 
                                 </div>

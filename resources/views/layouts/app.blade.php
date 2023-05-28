@@ -15,8 +15,8 @@
 
     @include('layouts.components.styles')
 
-    @yield('after_styles')
     <livewire:styles />
+    @yield('after_styles')
 </head>
 
 <body class="ltr main-body app sidebar-mini">
@@ -96,7 +96,7 @@
         });
     }
 </script>
-@yield('script_footer')
 <livewire:scripts />
+@yield('script_footer')
 </body>
 </html>

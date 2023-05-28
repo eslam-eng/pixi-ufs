@@ -10,5 +10,5 @@ return [
     | The following language lines are used during
     */
 
-    'email_or_phone'=>'رقم التيفون او البريد الالكتروني'
+    'email_or_phone'=>'رقم التليفون او البريد الالكتروني'
 ];

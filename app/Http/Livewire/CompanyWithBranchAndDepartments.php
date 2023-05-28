@@ -20,6 +20,7 @@ class CompanyWithBranchAndDepartments extends Component
     public bool $is_supper_admin = false;
 
     public bool $need_departments_select = false;
+    public bool $need_branches_select = false;
 
     public string $branch_name;
     public string $company_name;
@@ -45,6 +46,7 @@ class CompanyWithBranchAndDepartments extends Component
     public function getBranchesAndDepartmentsForSelectedCompany()
     {
         if (!is_null($this->selected_company)) {
+            $this->need_branches_select = true ;
             $this->branches_options = app()->make(BranchService::class)->getBranchesForSelectDropDown(filters: ['company_id' => $this->selected_company]);
             if ($this->need_departments_select)
                 $this->departments_options = app()->make(DepartmentService::class)->getDepartmentsForSelectDropDown(filters: ['company_id' => $this->selected_company]);

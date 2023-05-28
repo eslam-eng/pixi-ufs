@@ -77,8 +77,9 @@ class AwbService extends BaseService
     }
 
 
-    private function calculateAwbShippingPrice(AwbDTO $awbDTO, PriceTable $priceTable)
+    public function deleteMultiple(array $ids)
     {
+        return $this->getQuery()->whereIn('id',$ids)->delete();
     }
 
 

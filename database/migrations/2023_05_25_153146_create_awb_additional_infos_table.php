@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('custom_field8')->nullable();
             $table->string('custom_field9')->nullable();
             $table->string('custom_field10')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -18,7 +18,8 @@ return new class extends Migration
             $table->float('height');
             $table->float('width');
             $table->float('length');
-            $table->foreignIdFor(\App\Models\Awb::class)->constrained();
+            $table->foreignIdFor(\App\Models\Awb::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

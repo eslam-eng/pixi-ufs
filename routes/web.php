@@ -47,7 +47,10 @@ Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
     Route::group(['prefix' => 'awbs' ],function (){
         Route::get('/',[AwbController::class,'index'])->name('awb.index');
         Route::get('/create',[AwbController::class,'create'])->name('awb.create');
+        Route::get('/imports',[AwbController::class,'importForm'])->name('awb.import-form');
+        Route::get('/download-template',[AwbController::class,'importForm'])->name('awb.download-template');
         Route::post('/',[AwbController::class,'store'])->name('awb.store');
+        Route::delete('/delete',[AwbController::class,'destroy'])->name('awb.destroy');
     });
 
     Route::get('switcherpage', Switcherpage::class)->name('switcherpage');

@@ -22,9 +22,9 @@
                     <div class="form-group mb-0 mt-3 justify-content-end">
                         <div>
                             <a class="btn ripple btn-primary" href="{{route('awb.create')}}"><i class="fe fe-plus me-2"></i>@lang('app.new')</a>
-                            <button type="button" class="btn btn-success"><i class="fa fa-upload pe-2"></i>@lang('app.import')</button>
+                            <a role="button" href="{{route('awb.import-form')}}" class="btn btn-success"><i class="fa fa-upload pe-2"></i>@lang('app.import')</a>
                             <button type="submit" class="btn btn-info"><i class="fa fa-download pe-2"></i>@lang('app.export_pdf')</button>
-                            <button class="btn btn-danger delete-selected-btn"><i class="fa fa-trash pe-2"></i>@lang('app.delete_selected')</button>
+                            <button data-url="{{route('awb.destroy')}}" data-csrf="{{csrf_token()}}" class="btn btn-danger delete-selected-btn"><i class="fa fa-trash pe-2"></i>@lang('app.delete_selected')</button>
                         </div>
                     </div>
                 </div>
@@ -42,4 +42,5 @@
 
 @section('scripts')
     @include('layouts.components.datatable-scripts')
+
 @endsection

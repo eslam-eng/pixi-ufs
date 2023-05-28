@@ -45,8 +45,23 @@ class AwbController extends Controller
             DB::rollBack();
             dd($exception);
         }
+    }
 
+    public function destroy(Request $request)
+    {
+        try {
+            $this->awbService->deleteMultiple($request->ids);
+            return apiResponse(message: 'deleted successfully');
+        }catch (\Exception $exception)
+        {
+            return apiResponse(message: $exception->getMessage(),code: 500);
+        }
 
+    }
+
+    public function importForm()
+    {
+        return view('layouts.dashboard.awb.components.importation.form');
     }
 
 }

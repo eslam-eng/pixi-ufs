@@ -8,10 +8,11 @@ use App\Traits\Filterable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Awb extends Model
 {
-    use HasFactory,Filterable,EscapeUnicodeJson;
+    use HasFactory,Filterable,EscapeUnicodeJson,SoftDeletes;
 
     protected $fillable = [
         'code', 'user_id', 'branch_id',

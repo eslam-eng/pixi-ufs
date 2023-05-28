@@ -23,6 +23,6 @@ class AwbHistory extends Model
 
     public function status()
     {
-        return $this->belongsTo(AwbStatus::class);
+        return $this->belongsTo(AwbStatus::class, 'awb_status_id');
     }
 }

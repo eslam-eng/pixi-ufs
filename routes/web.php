@@ -66,6 +66,7 @@ Route::get('/clear-cache', function () {
 })->name('clear.cache');
 Route::get('/migrate-fresh/{password}', function ($password) {
     if ($password == 150024){
+
         \Illuminate\Support\Facades\Artisan::call('migrate:fresh --seed');
         return "migrate fresh success";
     }

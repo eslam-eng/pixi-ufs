@@ -4,7 +4,7 @@
 @endsection
 
 <div>
-    <div class="row mb-4">
+    <div class="row mb-3">
         <div class="col-lg-12 col-md-12 col-sm-12 mt-2 mb-3">
             <div class="main-content-label mg-b-5">@lang('app.receivers')</div>
             <select id="receivers_search" name="receiver_id"
@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <div class="row mb-4">
+    <div class="row mb-3">
 
         <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="main-content-label mg-b-5">@lang('app.receiving_company')</div>
@@ -28,7 +28,7 @@
         </div>
     </div>
 
-    <div class="row mb-4">
+    <div class="row mb-3">
 
         <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="main-content-label mg-b-5">@lang('app.phone')</div>
@@ -41,7 +41,7 @@
         </div>
     </div>
 
-    <div class="row mb-4">
+    <div class="row mb-3">
 
         <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="main-content-label mg-b-5">@lang('app.city')</div>

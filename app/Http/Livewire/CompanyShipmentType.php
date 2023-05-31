@@ -3,37 +3,47 @@
 namespace App\Http\Livewire;
 
 use App\Enums\UsersType;
+use App\Services\CompanyShipmentTypeService;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 
 class CompanyShipmentType extends Component
 {
-    public Collection $shipment_types;
 
-    public $selected = null ;
+    protected $listeners = ['companySelected'];
 
-    public $company_id = null ;
+    public Collection|\Illuminate\Support\Collection $shipment_types;
 
-    protected $listeners = ['getShipmentTypeForSelectedCompany' => 'handleGetShipmentTypeForSelectedCompany'];
+    public $selected_shipment_type = null ;
 
-    public function render()
-    {
-        return view('livewire.shipment-type');
-    }
+    public $shipment_types_for_company_id = null ;
+
+    public $field_name = 'shipment_type_id';
 
     public function mount()
     {
         $user = getAuthUser();
-        if ($user->type == UsersType::SUPERADMIN())
-            $this->shipment_types  =\App\Models\CompanyShipmentType::all();
-        else
-            $this->shipment_types = \App\Models\CompanyShipmentType::query()->where('company_id',$this->company_id)->get();
+        switch ($user->type){
+            case UsersType::SUPERADMIN():
+                $this->shipment_types  = collect();
+                break;
+            case UsersType::ADMIN() :
+            case UsersType::EMPLOYEE():
+                $this->shipment_types  =app()->make(CompanyShipmentTypeService::class)->getAll(filters:['company_id'=>$this->shipment_types_for_company_id]);
+
+        }
+    }
+
+    public function companySelected($company_id)
+    {
+        // Perform some action with the updated message
+        $this->shipment_types_for_company_id = $company_id;
+        $this->shipment_types  =app()->make(CompanyShipmentTypeService::class)->getAll(filters:['company_id'=>$this->shipment_types_for_company_id]);
 
     }
 
-    public function handleGetShipmentTypeForSelectedCompany($company_id): void
+    public function render()
     {
-        $this->company_id = $company_id ;
-        $this->shipment_types = \App\Models\CompanyShipmentType::query()->where('company_id',$this->company_id)->get();
+        return view('livewire.shipment-type');
     }
 }

@@ -2,19 +2,18 @@
 
 namespace App\Exports;
 
+use App\Exports\Sheets\Awbs\AwbsSheet;
 use App\Exports\Sheets\Receiver\AreaDropDownSheet;
-use App\Exports\Sheets\Receiver\BranchesDropDownSheet;
 use App\Exports\Sheets\Receiver\CityDropDownSheet;
-use App\Exports\Sheets\Receiver\AwbsSheet;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class ReceiversExport implements WithMultipleSheets, WithEvents
+class AwbsExport implements WithMultipleSheets, WithEvents
 {
     use Exportable,RegistersEventListeners;
-    public function __construct(public $branches)
+    public function __construct()
     {
     }
 
@@ -26,9 +25,8 @@ class ReceiversExport implements WithMultipleSheets, WithEvents
     {
         $sheets = [];
         $sheets[0] = new AwbsSheet();
-        $sheets[1] = new BranchesDropDownSheet($this->branches);
-        $sheets[2] = new CityDropDownSheet();
-        $sheets[3] = new AreaDropDownSheet();
+        $sheets[1] = new CityDropDownSheet();
+        $sheets[2] = new AreaDropDownSheet();
         return $sheets;
     }
 }

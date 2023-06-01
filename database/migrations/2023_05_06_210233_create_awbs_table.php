@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('code')->nullable()->unique();
             $table->foreignIdFor(\App\Models\User::class)->constrained();
+            $table->foreignIdFor(\App\Models\Company::class)->constrained();
             $table->foreignIdFor(\App\Models\Branch::class)->constrained();
             $table->foreignIdFor(\App\Models\Department::class)->constrained();
             $table->foreignIdFor(\App\Models\Receiver::class);

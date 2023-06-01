@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ServiceTypesTableSeeder::class);
         $this->call(ShipmentTypesTableSeeder::class);
         $this->call(AwbStatusesTableSeeder::class);
-        $this->call(AwbsTableSeeder::class);
+//        $this->call(AwbsTableSeeder::class);
 
     }
 }

@@ -11,6 +11,7 @@ enum ImportTypeEnum: int
     use Options, Values,InvokableCases;
 
     case RECEIVERS = 1;
-    case AWB = 2;
+    case AWBWITHREFERENCE = 2;
+    case AWBWITHOUTREFERENCE = 3;
 
 }

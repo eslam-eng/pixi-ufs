@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('num_custom_fields')->default(1);
             $table->foreignIdFor(\App\Models\Location::class,'city_id')->constrained('locations');
             $table->foreignIdFor(\App\Models\Location::class,'area_id')->constrained('locations');
+            $table->smallInteger('importation_type')->default(\App\Enums\ImportTypeEnum::AWBWITHOUTREFERENCE);
             $table->timestamps();
         });
     }

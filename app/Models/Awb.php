@@ -15,7 +15,7 @@ class Awb extends Model
     use HasFactory, Filterable, EscapeUnicodeJson, SoftDeletes;
 
     protected $fillable = [
-        'code', 'user_id', 'branch_id',
+        'code', 'user_id','company_id' ,'branch_id',
         'department_id', 'receiver_id',
         'receiver_data', 'payment_type', 'service_type', 'is_return', 'shipment_type',
         'zone_price', 'additional_kg_price', 'collection', 'weight',
@@ -51,6 +51,11 @@ class Awb extends Model
     public function receiver()
     {
         return $this->belongsTo(Receiver::class);
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
     }
 
     public function history()

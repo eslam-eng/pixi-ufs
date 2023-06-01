@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DataTables\AwbsDataTable;
 use App\DTO\Awb\AwbDTO;
+use App\Enums\ImportationTypes;
 use App\Http\Requests\Awb\AwbStoreRequest;
 use App\Services\AwbService;
 use Illuminate\Http\Request;
@@ -14,6 +15,15 @@ class AwbController extends Controller
     public function __construct(public AwbService $awbService)
     {
     }
+
+//    public function index(Request $request)
+//    {
+//        $paginate = $request->paginate ?? 10 ;
+//        $filters = array_filter($request->get('filters', []));
+//        $withRelations = ['department:id,name', 'branch:id,name','company:id,name', 'additionalInfo'];
+//        $awbs =  $this->awbService->queryGet(filters: $filters , withRelations: $withRelations)->paginate($paginate);
+//        return view('layouts.dashboard.awb.index',['awbs'=>$awbs]);
+//    }
 
     public function index(AwbsDataTable $dataTable, Request $request)
     {
@@ -50,6 +60,18 @@ class AwbController extends Controller
     public function destroy(Request $request)
     {
         try {
+            $this->awbService->delete($request->id);
+            return apiResponse(message: 'deleted successfully');
+        }catch (\Exception $exception)
+        {
+            return apiResponse(message: $exception->getMessage(),code: 500);
+        }
+
+    }
+
+    public function deleteMultiple(Request $request)
+    {
+        try {
             $this->awbService->deleteMultiple($request->ids);
             return apiResponse(message: 'deleted successfully');
         }catch (\Exception $exception)
@@ -62,6 +84,21 @@ class AwbController extends Controller
     public function importForm()
     {
         return view('layouts.dashboard.awb.components.importation.form');
+    }
+
+    public function downloadTemplate()
+    {
+        $user = auth()->user()->load('company:id,name,importation_type');
+        $importation_type = $user->company?->importation_type ?? ImportationTypes::WITHOUTREFERENCE ;
+
+//        $filters = [];
+//        if ($importation_type == )
+//            $filters['company_id'] = 1;
+        $branches = $this->branchService->getAll(filters: $filters);
+        ob_end_clean();
+        ob_start();
+        return $excel->download(new ReceiversExport($branches), 'receivers' . time() . '.xlsx');
+
     }
 
 }

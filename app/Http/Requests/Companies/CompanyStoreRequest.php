@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Companies;
 
 use App\DTO\Company\CompanyDTO;
+use App\Enums\ImportTypeEnum;
 use App\Http\Requests\BaseRequest;
 
 class CompanyStoreRequest extends BaseRequest
@@ -26,17 +27,23 @@ class CompanyStoreRequest extends BaseRequest
             'name'=> 'required|string',
             'email'=> 'required|email|unique:companies,email',
             'ceo'=> 'nullable|string',
-            'phone'=> 'required|integer|unique:companies,phone',
-            'show_dashboard'=> 'required|boolean',
-            'notes'=> 'required|string',
-            'status'=> 'required|boolean',
-
-            'city_id'=> 'required|integer|exists:locations,id',
-            'area_id'=> 'required|integer|exists:locations,id',
-            'address'=> 'required|string',
+            'phone'=> 'required|string|unique:companies,phone',
+            'show_dashboard'=> 'nullable|boolean',
+            'notes'=> 'nullable|string',
+            'status'=> 'nullable|boolean',
+            'store_receivers'=> 'nullable|boolean',
+            'num_custom_fields'=>'required|integer',
+            'importation_type'=>'nullable|integer|in:'.ImportTypeEnum::IMPORTWITHREFERENCE->value.','.ImportTypeEnum::IMPORTWITHOUTREFERENCE->value,
+            'city_id' => 'required|integer|exists:locations,id',
+            'area_id' => 'required|integer|exists:locations,id',
+            'address' => 'required|string',
 
             'branches'=> 'required|array',
+            'branches.*'=> 'required|array',
+            'branches.*.*'=> 'required',
             'departments'=> 'required|array',
+            'departments.*'=> 'required|array',
+            'departments.*.*'=> 'required',
         ];
     }
 

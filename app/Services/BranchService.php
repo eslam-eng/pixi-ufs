@@ -45,8 +45,7 @@ class BranchService extends BaseService
      */
     public function store(BranchDTO $branchDTO): bool
     {
-        $branch = $this->model->create($branchDTO->branchData());
-        $branch->storeAddress($branchDTO->addressData());
+        $branch = $this->model->create($branchDTO->toArray());
         return true;
     }
 
@@ -62,8 +61,7 @@ class BranchService extends BaseService
         $branch = $this->findById($id);
         if (!$branch)
             throw new NotFoundException(trans('lang.not_found'));
-        $branch->update($branchDTO->branchData());
-        $branch->updateAddress($branchDTO->addressData());
+        $branch->update($branchDTO->toArray());
         return true;
     }
 

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AwbController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Livewire\Emptypage;
 use \App\Http\Livewire\Switcherpage;
 use App\Http\Controllers\ReceiverController;
@@ -38,6 +39,7 @@ Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
         Route::get('receivers',[ReceiverController::class,'search'])->name('receivers.search');
     });
     Route::resource('receivers',ReceiverController::class);
+    Route::resource('companies',CompanyController::class);
     Route::group(['prefix' => 'addresses' ],function (){
         Route::get('{id}/type/{type}',[AddressController::class,'create'])->name('addresses.create');
         Route::get('{id}/set-default',[AddressController::class,'create'])->name('addresses.set-default');

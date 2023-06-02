@@ -16,11 +16,12 @@ class CompanyDTO extends BaseDTO
         protected bool   $show_dashboard,
         protected ?string $notes,
         protected ?bool  $status,
-        protected bool   $is_default = true,
+        protected ?bool  $store_receivers,
         protected ?int    $city_id,
         protected ?int    $area_id,
         protected ?string $address,
-
+        protected int $num_custom_fields,
+        protected ?string $importation_type,
         protected ?array $departments,
         protected ?array $branches,
     )
@@ -34,15 +35,16 @@ class CompanyDTO extends BaseDTO
             email: $request->email,
             ceo: $request->ceo,
             phone: $request->phone,
-            show_dashboard: $request->show_dashboard,
+            show_dashboard: isset($request->show_dashboard),
             notes: $request->notes,
-            status: $request->status,
+            status: isset($request->status),
+            store_receivers: isset($request->store_receivers),
 
-            is_default: $request->is_default,
             city_id: $request->city_id,
             area_id: $request->area_id,
             address: $request->address,
-
+            num_custom_fields: $request->num_custom_fields,
+            importation_type: $request->importation_type,
             departments: $request->departments,
             branches: $request->branches,
         );
@@ -63,15 +65,15 @@ class CompanyDTO extends BaseDTO
             show_dashboard: Arr::get($data,'show_dashboard'),
             notes: Arr::get($data,'notes'),
             status: Arr::get($data,'status'),
+            store_receivers: Arr::get($data,'store_receivers'),
 
-            is_default: Arr::get($data,'is_default',true),
             city_id: Arr::get($data,'city_id'),
             area_id: Arr::get($data,'area_id'),
             address: Arr::get($data,'address'),
-
+            num_custom_fields: Arr::get($data,'num_custom_fields'),
+            importation_type: Arr::get($data,'importation_type'),
             departments: Arr::get($data,'departments'),
             branches: Arr::get($data,'branches'),
-
         );
     }
 
@@ -88,26 +90,15 @@ class CompanyDTO extends BaseDTO
             'show_dashboard'=> $this->show_dashboard,
             'notes'=> $this->notes,
             'status'=> $this->status,
+            'store_receivers'=> $this->store_receivers,
 
             'city_id'=> $this->city_id,
             'area_id'=> $this->area_id,
             'address'=> $this->address,
-            'is_default'=> $this->is_default,
-
+            'num_custom_fields'=> $this->num_custom_fields,
+            'importation_type'=> $this->importation_type,
             'branches'=> $this->branches,
             'departments'=> $this->departments,
-        ];
-    }
-
-    public function addressData(): array
-    {
-        return [
-
-            'city_id'=> $this->city_id,
-            'area_id'=> $this->area_id,
-            'address'=> $this->address,
-            'is_default'=> $this->is_default,
-
         ];
     }
 
@@ -121,26 +112,28 @@ class CompanyDTO extends BaseDTO
             'show_dashboard'=> $this->show_dashboard,
             'notes'=> $this->notes,
             'status'=> $this->status,
+            'store_receivers'=> $this->store_receivers,
+
+            'city_id'=> $this->city_id,
+            'area_id'=> $this->area_id,
+            'address'=> $this->address,
+            'num_custom_fields'=> $this->num_custom_fields,
+            'importation_type'=> $this->importation_type,
         ];
     }
 
-    public function branchesData(): array
+    public function branchesData(): array|bool
     {
-
+        
         $data = [];
         for($i = 0; $i < count($this->branches); $i++)
         {
             $data[$i] = [
                 'name' => $this->branches[$i]['name'],
                 'phone' => $this->branches[$i]['phone'],
+                'address' => $this->branches[$i]['address'],
                 'city_id' => $this->branches[$i]['city_id'],
                 'area_id' => $this->branches[$i]['area_id'],
-                'address' => $this->branches[$i]['address'],
-                'lat' => $this->branches[$i]['lat'],
-                'lng' => $this->branches[$i]['lng'],
-                'postal' => $this->branches[$i]['postal_code'],
-                'map_url' => $this->branches[$i]['map_url'],
-                'is_default' => true,
             ];
         }
         return $data;

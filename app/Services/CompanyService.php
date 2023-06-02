@@ -39,6 +39,11 @@ class CompanyService extends BaseService
         return $this->queryGet(filters: $filters)->select(['id','name'])->get();
     }
 
+    public function datatable(array $filters = [] , array $withRelations = []): Builder
+    {
+        return $this->queryGet(filters: $filters , withRelations: $withRelations);
+    }
+
     /**
      * create new receiver
      * @param array $data
@@ -47,16 +52,15 @@ class CompanyService extends BaseService
     public function store(CompanyDTO $companyDTO): bool
     {
         $company = $this->model->create($companyDTO->companyData());
-        $company->storeAddress($companyDTO->addressData());
-        foreach($companyDTO->branchesData() as $branch)
-        {
-            $branch['company_id'] = $company->id;
-            $this->branchService->store(BranchDTO::fromArray(data: $branch));
-        }
-
-        foreach($companyDTO->departmentsData() as $department)
-            $company->departments()->create($department);
-
+        if($companyDTO->branchesData())
+            foreach($companyDTO->branchesData() as $branch)
+            {
+                $branch['company_id'] = $company->id;
+                $this->branchService->store(BranchDTO::fromArray(data: $branch));
+            }
+        if($companyDTO->departmentsData())
+            foreach($companyDTO->departmentsData() as $department)
+                $company->departments()->create($department);
         return true;
     }
 
@@ -72,7 +76,7 @@ class CompanyService extends BaseService
         $company = $this->findById($id);
         if (!$company)
             throw new NotFoundException(trans('lang.not_found'));
-        $company->update($companyDTO->companyData());
+        $company->update($companyDTO->toArray());
         return true;
     }
 

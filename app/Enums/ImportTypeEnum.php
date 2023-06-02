@@ -12,5 +12,7 @@ enum ImportTypeEnum: int
 
     case RECEIVERS = 1;
     case AWB = 2;
+    case IMPORTWITHREFERENCE = 3;
+    case IMPORTWITHOUTREFERENCE = 4;
 
 }

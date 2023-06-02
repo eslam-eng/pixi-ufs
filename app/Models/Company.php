@@ -12,15 +12,10 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Company extends Model
 {
-    use HasFactory, HasAddresses, Filterable;
+    use HasFactory, Filterable;
 
-    protected $fillable = ['name', 'email','ceo', 'phone', 'show_dashboard', 'notes', 'status'];
+    protected $fillable = ['name', 'email','ceo', 'phone', 'address', 'city_id', 'area_id', 'show_dashboard', 'store_receivers', 'notes', 'status', 'importation_type'];
 
-
-    public function addresses(): MorphOne
-    {
-        return $this->MorphOne(Address::class, 'addressable')->where('is_default', ActivationStatus::ACTIVE());
-    }
 
     public function branches(): HasMany
     {

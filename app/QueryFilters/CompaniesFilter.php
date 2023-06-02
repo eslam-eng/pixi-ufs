@@ -19,11 +19,11 @@ class CompaniesFilter extends QueryFilter
 
     public function city_id($term)
     {
-        return $this->builder->where('status',$term);
+        return $this->builder->where('city_id',$term);
     }
 
     public function area_id($term){
-        return $this->builder->where('status',$term);
+        return $this->builder->where('area_id',$term);
     }
 
     public function keyword($term)

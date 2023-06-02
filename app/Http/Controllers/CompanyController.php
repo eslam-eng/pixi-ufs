@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
+use App\DataTables\CompaniesDatatable;
 use App\Enums\UsersType;
 use App\Exceptions\NotFoundException;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Companies\CompanyStoreRequest;
-use App\Http\Requests\Api\Companies\CompanyUpdateRequest;
+use App\Http\Requests\Companies\CompanyStoreRequest;
+use App\Http\Requests\Companies\CompanyUpdateRequest;
 use App\Http\Resources\Company\CompanyDropDownResource;
 use App\Http\Resources\Company\CompanyResource;
 use App\Services\CompanyService;
@@ -20,30 +21,35 @@ class CompanyController extends Controller
     {
     }
 
-    public function index(Request $request)
+    public function index(CompaniesDatatable $companiesDatatable, Request $request)
     {
         try {
             $filters = array_filter($request->all());
-            $withRelations = ['addresses' => fn($query) => $query->with(['city', 'area'])];
-            $companies = $this->companyService->listing(filters: $filters, withRelations: $withRelations);
-            return CompanyResource::collection($companies);
+            $withRelations = [];
+            return $companiesDatatable->with(['filters'=>$filters,'withRelations'=>$withRelations])->render('layouts.dashboard.companies.index');
         } catch (Exception $e) {
             return apiResponse(message: trans('lang.something_went_wrong'), code: $e->getCode());
         }
     }
 
+    public function create()
+    {
+        return view('layouts.dashboard.companies.create');
+    }
+
     public function store(CompanyStoreRequest $request)
     {
-        try {
+        // return $request->all();
+        // try {
             DB::beginTransaction();
-            $receiverDto = $request->toCompanyDTO();
-            $this->companyService->store($receiverDto);
+            $companyDTO = $request->toCompanyDTO();
+            $this->companyService->store($companyDTO);
             DB::commit();
-            return apiResponse(message: trans('lang.success_operation'));
-        } catch (Exception $e) {
-            DB::rollBack();
-            return apiResponse(message: trans('lang.something_went_wrong'), code: 422);
-        }
+            return redirect()->route('companies.index');
+        // } catch (Exception $e) {
+        //     DB::rollBack();
+        //     return apiResponse(message: $e->getMessage(), code: 422);
+        // }
     }
 
     public function getCompaniesForDropDown()
@@ -58,21 +64,29 @@ class CompanyController extends Controller
 
     public function edit(int $id)
     {
-        $withRelations = ['addresses'];
+        $withRelations = [];
         $company = $this->companyService->findById(id: $id, withRelations: $withRelations);
-        return CompanyResource::make($company);
+        return view('layouts.dashboard.companies.edit', compact('company'));
+    }
+    
+    public function show(int $id)
+    {
+        $withRelations = [];
+        $company = $this->companyService->findById(id: $id, withRelations: $withRelations);
+        return view('layouts.dashboard.companies.show', compact('company'));
     }
 
     public function update(CompanyUpdateRequest $request, int $id)
     {
         try {
+            DB::beginTransaction();
             $companyDTO = $request->toCompanyDTO();
             $this->companyService->update($id, $companyDTO);
-            return apiResponse(message: trans('lang.success_operation'));
-        } catch (NotFoundException $e) {
+            DB::commit();
+            return redirect()->route('branches.create');
+        }catch (Exception $e) {
+            DB::rollBack();
             return apiResponse(message: $e->getMessage(), code: 422);
-        } catch (Exception $e) {
-            return apiResponse(message: trans('lang.something_went_wrong'), code: 422);
         }
     }
 

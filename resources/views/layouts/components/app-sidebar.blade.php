@@ -42,7 +42,7 @@
                                     <ul class="slide-menu">
                                         <li class="side-menu__label1"><a href="javascript:void(0);">Utilities</a></li>
                                         <li><a class="slide-item" href="{{route('receivers.index')}}">@lang('app.receivers')</a></li>
-{{--                                        <li><a class="slide-item" href="{{url('extras')}}">@lang('app.companies')</a></li>--}}
+										<li><a class="slide-item" href="{{route('companies.index')}}">@lang('app.companies')</a></li>
                                     </ul>
                                 </li>
 

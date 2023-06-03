@@ -94,11 +94,9 @@ class CompanyController extends Controller
     {
         try {
             $this->companyService->destroy(id: $id);
-            return apiResponse(message: trans('lang.success_operation'));
-        } catch (NotFoundException $e) {
+            return redirect()->back();
+        }catch (Exception $e) {
             return apiResponse(message: $e->getMessage(), code: 422);
-        } catch (Exception $e) {
-            return apiResponse(message: trans('lang.something_went_wrong'), code: 422);
         }
     }
 

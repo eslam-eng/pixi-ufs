@@ -8,7 +8,7 @@ use App\Exceptions\NotFoundException;
 use App\Models\Company;
 use App\QueryFilters\CompaniesFilter;
 use Illuminate\Database\Eloquent\Builder;
-
+use Illuminate\Database\Eloquent\Model;
 
 class CompanyService extends BaseService
 {
@@ -88,12 +88,18 @@ class CompanyService extends BaseService
      */
     public function destroy(int $id): bool
     {
-        $company = $this->findById($id);
+        $company = $this->find($id);
+        $company->delete();
+        return true;
+    }
+
+    public function find(int $id, array $relations = []): Model
+    {
+        $company = Company::with($relations)->find($id);
         if (!$company)
             throw new NotFoundException(trans('lang.not_found'));
-        $company->delete();
-        $company->deleteAddresses();
-        return true;
+        
+        return $company;
     }
 
     /**

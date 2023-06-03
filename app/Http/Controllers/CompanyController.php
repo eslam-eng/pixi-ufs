@@ -64,7 +64,7 @@ class CompanyController extends Controller
 
     public function edit(int $id)
     {
-        $withRelations = [];
+        $withRelations = ['branches', 'departments'];
         $company = $this->companyService->findById(id: $id, withRelations: $withRelations);
         return view('layouts.dashboard.companies.edit', compact('company'));
     }
@@ -83,7 +83,7 @@ class CompanyController extends Controller
             $companyDTO = $request->toCompanyDTO();
             $this->companyService->update($id, $companyDTO);
             DB::commit();
-            return redirect()->route('branches.create');
+            return redirect()->route('companies.create');
         }catch (Exception $e) {
             DB::rollBack();
             return apiResponse(message: $e->getMessage(), code: 422);

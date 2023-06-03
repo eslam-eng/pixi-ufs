@@ -160,7 +160,7 @@
                             <div class="form-group mb-0 mt-3 justify-content-end">
                                 <div>
                                     <button type="submit" class="btn btn-success"><i
-                                            class="fa fa-save pe-2"></i>@lang('app.next')</button>
+                                            class="fa fa-save pe-2"></i>@lang('app.submit')</button>
 
                                     <a role="button" href="{{route('companies.index')}}" class="btn btn-danger"><i
                                             class="fa fa-backward pe-2"></i>@lang('app.back')</a>
@@ -170,7 +170,121 @@
                     </form>
                 </div>
             </div>
-            
+            {{-- start branches --}}
+            <div class="card">
+                <div class="card-header">
+                    <div class="breadcrumb-header justify-content-between">
+                        <div class="left-content">
+                            <div>
+                                <form method="get" action="{{ route('branches.create') }}">
+                                    <input type="hidden" name="company_id" value="{{ $company->id }}">
+                                    <button class="btn ripple btn-primary" type="submit">@lang('app.add_new_branch')</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <td>@lang('app.name')</td>
+                            <td>@lang('app.phone')</td>
+                            <td>@lang('app.status')</td>
+                            <td>@lang('app.address')</td>
+                            <td>@lang('app.city')</td>
+                            <td>@lang('app.area')</td>
+                            <td>@lang('app.actions')</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($company->branches as $branch)
+                            <tr>
+                                <td>{{$branch->name}}</td>
+                                <td>{{$branch->phone}}</td>
+                                <td>{{$branch->status}}</td>
+                                <td>{{$branch->address}}</td>
+                                <td>{{$branch->city?->title}}</td>
+                                <td>{{$branch->area?->title}}</td>
+                                <td>
+                                    <div>
+                                        <button data-bs-toggle="dropdown" class="btn btn-primary btn-block" aria-expanded="false">@lang('app.actions')
+                                            <i class="icon ion-ios-arrow-down tx-11 mg-l-3"></i>
+                                        </button>
+                                        <div class="dropdown-menu" style="">
+                                           <a href="{{route('branches.edit', $branch->id)}}" class="dropdown-item">@lang('app.edit')</a>
+                                           <div>
+                                            <form method="post" action="{{ route('branches.destroy', $branch->id) }}">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="dropdown-item" type="submit">@lang('app.delete')</button>
+                                            </form>
+                                           </div>
+                                        </div>
+                                        <!-- dropdown-menu -->
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {{-- end branches --}}
+
+            {{-- start departments --}}
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="breadcrumb-header justify-content-between">
+                        <div class="left-content">
+                            <div>
+                                <form method="get" action="{{ route('departments.create') }}">
+                                    <input type="hidden" name="company_id" value="{{ $company->id }}">
+                                    <button class="btn ripple btn-primary" type="submit">@lang('app.add_new_department')</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <td>@lang('app.name')</td>
+                            <td>@lang('app.actions')</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($company->departments as $department)
+                            <tr>
+                                <td>{{$department->name}}</td>
+                                <td>
+                                    <div>
+                                        <button data-bs-toggle="dropdown" class="btn btn-primary btn-block" aria-expanded="false">@lang('app.actions')
+                                            <i class="icon ion-ios-arrow-down tx-11 mg-l-3"></i>
+                                        </button>
+                                        <div class="dropdown-menu" style="">
+                                           <a href="{{route('departments.edit', $department->id)}}" class="dropdown-item">@lang('app.edit')</a>
+                                           <div>
+                                            <form method="post" action="{{ route('departments.destroy', $department->id) }}">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="dropdown-item" type="submit">@lang('app.delete')</button>
+                                            </form>
+                                           </div>
+                                        </div>
+                                        <!-- dropdown-menu -->
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            {{-- end departments --}}
         </div>
     </div>
 

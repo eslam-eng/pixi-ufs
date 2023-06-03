@@ -157,4 +157,9 @@ class AwbService extends BaseService
         return $awb;
     }
 
+    public function export(array $ids = [],array $withRelations = [])
+    {
+        return $this->queryGet(filters: ['ids'=>$ids],withRelations: $withRelations)->get();
+    }
+
 }

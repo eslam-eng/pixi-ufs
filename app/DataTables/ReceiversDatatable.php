@@ -6,6 +6,7 @@ use App\Enums\UsersType;
 use App\Models\Receiver;
 use App\Services\ReceiverService;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Str;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -29,7 +30,11 @@ class ReceiversDatatable extends DataTable
             })
             ->editColumn('branch_id', function (Receiver $receiver) {
                 return $receiver->branch->name;
-            })->addColumn('action', function (Receiver $receiver) {
+            })
+            ->editColumn('address1', function (Receiver $receiver) {
+                return Str::limit($receiver->address1,30);
+            })
+            ->addColumn('action', function (Receiver $receiver) {
                 return view(
                     'layouts.dashboard.receivers.components._actions',
                     ['model' => $receiver,'url'=>route('receivers.destroy',$receiver->id)]
@@ -75,10 +80,14 @@ class ReceiversDatatable extends DataTable
         return [
             Column::make('id')->title("#"),
             Column::make('name')->title(trans('app.receiver_name'))->orderable(false),
+            Column::make('phone1')->title(trans('app.phone1'))->searchable(false)->orderable(false),
+            Column::make('phone2')->title(trans('app.phone2'))->searchable(false)->orderable(false),
             Column::make('receiving_company')->title(trans('app.receiving_company'))->orderable(false),
+            Column::make('title')->title(trans('app.title'))->orderable(false)->searchable(false),
             Column::make('reference')->title(trans('app.reference'))->orderable(false),
             Column::make('company_id')->title(trans('app.company'))->searchable(false)->orderable(false),
             Column::make('branch_id')->title(trans('app.branch'))->searchable(false)->orderable(false),
+            Column::make('address1')->title(trans('app.address'))->searchable(false)->orderable(false),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

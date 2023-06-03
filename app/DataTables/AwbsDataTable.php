@@ -15,6 +15,17 @@ use Yajra\DataTables\Services\DataTable;
 class AwbsDataTable extends DataTable
 {
     /**
+     * Get query source of dataTable.
+     *
+     * @param \App\Models\Awb $model
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function query(AwbService $awbService): QueryBuilder
+    {
+        return $awbService->datatable(filters: $this->filters, withRelations: $this->withRelations);
+    }
+
+    /**
      * Build DataTable class.
      *
      * @param QueryBuilder $query Results from query() method.
@@ -30,44 +41,33 @@ class AwbsDataTable extends DataTable
                     ['name' => "awbs[]",'value'=>$awb->id]
                 );
             })
-            ->editColumn('company_id',function (Awb $awb){
-                return $awb->branch->company->name ;
+            ->editColumn('company_id', function (Awb $awb) {
+                return $awb->company->name;
             })
-            ->editColumn('branch_id',function (Awb $awb){
-                return $awb->branch->name ;
+            ->editColumn('branch_id', function (Awb $awb) {
+                return $awb->branch->name;
             })
-            ->editColumn('department_id',function (Awb $awb){
-                return $awb->department->name ;
+            ->editColumn('created_at', function (Awb $awb) {
+                return $awb->created_at->format('Y-m-d');
             })
-
-            ->editColumn('created_at',function (Awb $awb){
-                return $awb->created_at->format('Y-m-d') ;
+            ->addColumn('receiver', function (Awb $awb) {
+                return Arr::get($awb->receiver_data, 'name');
             })
-
-            ->addColumn('receiver',function (Awb $awb){
-               return Arr::get($awb->receiver_data , 'name');
+            ->addColumn('address', function (Awb $awb) {
+                return Str::limit(Arr::get($awb->receiver_data, 'address'), 30);
             })
-            ->addColumn('address',function (Awb $awb){
-                return Str::limit(Arr::get($awb->receiver_data , 'default_address.address'), 30); ;
+            ->addColumn('status', function (Awb $awb) {
+                return view('components._datatable-badge', [
+                    "class" => 'text-dark badge badge-info badge-pill fw-bold',
+                    "text" => $awb->latestStatus->status->name
+                ]);
             })
-
             ->addColumn('action', function (Awb $awb) {
                 return view(
                     'layouts.dashboard.receivers.components._actions',
-                    ['model' => $awb,'url'=>route('receivers.destroy',$awb->id)]
+                    ['model' => $awb, 'url' => route('awbs.destroy', $awb->id)]
                 );
             });
-    }
-
-    /**
-     * Get query source of dataTable.
-     *
-     * @param \App\Models\Awb $model
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function query(AwbService $awbService): QueryBuilder
-    {
-        return $awbService->datatable(filters: $this->filters, withRelations: $this->withRelations);
     }
 
     /**
@@ -95,11 +95,12 @@ class AwbsDataTable extends DataTable
         return [
             Column::make('check_box')->title('#')->searchable(false)->orderable(false),
             Column::make('code')->title(trans('app.awb_code')),
+            Column::make('user_id')->title(trans('app.company'))->searchable(false)->orderable(false),
             Column::make('company_id')->title(trans('app.company'))->searchable(false)->orderable(false),
             Column::make('branch_id')->title(trans('app.branch'))->searchable(false)->orderable(false),
-            Column::make('department_id')->title(trans('app.department'))->searchable(false)->orderable(false),
             Column::make('receiver')->title(trans('app.awb_receiver'))->searchable(false)->orderable(false),
             Column::make('address')->title(trans('app.address'))->searchable(false)->orderable(false),
+            Column::make('status')->title(trans('app.status'))->searchable(false)->orderable(false),
             Column::make('created_at')->title(trans('app.created_at'))->searchable(false)->orderable(false),
             Column::computed('action')
                 ->exportable(false)

@@ -20,7 +20,16 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name', 'email', 'password','phone','type','status','company_id','department_id','branch_id','notes'
+        'name',
+        'email',
+        'password',
+        'phone',
+        'type',
+        'status',
+        'company_id',
+        'department_id',
+        'branch_id',
+        'notes'
     ];
 
     /**
@@ -52,6 +61,15 @@ class User extends Authenticatable
         return $this->belongsTo(Company::class,'company_id');
     }
 
+    public function branch(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Company::class,'branch_id');
+    }
+
+    public function department(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Company::class,'department_id');
+    }
     public function getShowDashboardAttribute(): bool
     {
         return $this->relationLoaded('company') && $this->company->show_dashboard;

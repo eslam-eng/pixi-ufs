@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ReceiversDatatable;
+use App\DTO\Receiver\ReceiverDTO;
 use App\Enums\UsersType;
 use App\Exceptions\NotFoundException;
 use App\Exports\ReceiversExport;
@@ -36,7 +37,7 @@ class ReceiverController extends Controller
             if ($user->type != UsersType::SUPERADMIN())
                 $filters['company_id'] = $user->company_id ;
 
-            $withRelations = ['defaultAddress','branch:id,name,company_id','branch.company:id,name'];
+            $withRelations = ['city','area','branch:id,name,company_id','branch.company:id,name'];
             return $receiversDatatable->with(['filters'=>$filters,'withRelations'=>$withRelations])->render('layouts.dashboard.receivers.index');
         } catch (Exception $e) {
             $toast = [
@@ -56,10 +57,8 @@ class ReceiverController extends Controller
     public function store(ReceiverStoreRequest $request)
     {
         try {
-            DB::beginTransaction();
-            $receiverDto = $request->toReceiverDTO();
+            $receiverDto = ReceiverDTO::fromRequest($request);
             $this->receiverService->store($receiverDto);
-            DB::commit();
             $toast = [
                 'type' => 'success',
                 'title' => 'success',
@@ -95,7 +94,7 @@ class ReceiverController extends Controller
     public function edit(int $id)
     {
         try {
-            $withRelations = ['addresses' => fn($query) => $query->with(['city', 'area'])];
+            $withRelations = ['city', 'area'];
             $receiver = $this->receiverService->findById(id: $id, withRelations: $withRelations);
             return view('layouts.dashboard.receivers.edit',['receiver'=>$receiver]);
         } catch (Exception|NotFoundException $exception) {
@@ -106,7 +105,7 @@ class ReceiverController extends Controller
      public function update(ReceiverUpdateRequest $request, int $id)
     {
         try {
-            $receiverDTO = $request->toReceiverDTO();
+            $receiverDTO = ReceiverDTO::fromRequest($request);
             $this->receiverService->update($id, $receiverDTO);
             return apiResponse(message: trans('lang.success_operation'));
         } catch (Exception|NotFoundException $e) {
@@ -152,7 +151,7 @@ class ReceiverController extends Controller
             DB::beginTransaction();
             $user = getAuthUser();
             $file = $request->file('file');
-                (new ReceiversImport( auth_user: $user))->import($file)->onQueue('receivers_import');
+                (new ReceiversImport( auth_user: $user))->import($file)->onQueue('default');
             DB::commit();
             return apiResponse(message: trans('app.import_success_message'));
         }catch (Exception $exception)

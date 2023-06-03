@@ -14,13 +14,28 @@ class Receiver extends Model
     use HasFactory, HasAddresses, Filterable;
 
     protected $guarded = 'id';
-    protected $fillable = ['name', 'phone', 'receiving_company', 'branch_id', 'reference', 'title', 'notes'];
+    protected $fillable = [
+        'name', 'phone1','phone2',
+        'receiving_company', 'company_id', 'branch_id',
+        'address1', 'address2', 'city_id', 'area_id','lat','lng',
+        'reference', 'title', 'status', 'notes'
+    ];
 
     public function defaultAddress(): MorphOne
     {
         return $this->MorphOne(Address::class, 'addressable')->where('is_default', ActivationStatus::ACTIVE())->with('city','area');
     }
 
+    public function city()
+    {
+        return $this->belongsTo(Location::class,'city_id');
+    }
+
+
+    public function area()
+    {
+        return $this->belongsTo(Location::class,'area_id');
+    }
     public function branch(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Branch::class, 'branch_id');

@@ -16,7 +16,7 @@ class Awb extends Model
 
     protected $fillable = [
         'code', 'user_id','company_id' ,'branch_id',
-        'department_id', 'receiver_id',
+        'department_id', 'receiver_id','receiver_reference',
         'receiver_data', 'payment_type', 'service_type', 'is_return', 'shipment_type',
         'zone_price', 'additional_kg_price', 'collection', 'weight',
         'pieces', 'actual_recipient'
@@ -26,17 +26,16 @@ class Awb extends Model
         'receiver_data' => 'array'
     ];
 
-    protected function code(): Attribute
-    {
-        return Attribute::make(
-            set: fn($value) => time(),
-        );
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+
 
     public function branch()
     {
@@ -51,11 +50,6 @@ class Awb extends Model
     public function receiver()
     {
         return $this->belongsTo(Receiver::class);
-    }
-
-    public function company()
-    {
-        return $this->belongsTo(Company::class);
     }
 
     public function history()

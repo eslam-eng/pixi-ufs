@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Enums\ImportLogEnum;
+use App\Enums\ImportStatusEnum;
 use App\Enums\UsersType;
 use App\Exceptions\NotFoundException;
 use App\Exports\ReceiversExport;

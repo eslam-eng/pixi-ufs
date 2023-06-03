@@ -2,7 +2,7 @@
 
 namespace App\Imports\Receivers;
 
-use App\Enums\ImportLogEnum;
+use App\Enums\ImportStatusEnum;
 use App\Enums\ImportTypeEnum;
 use App\Models\ImportLog;
 use App\Models\Receiver;
@@ -101,7 +101,7 @@ class ReceiversImportSheet implements
                 $this->total_count = Arr::first($sheet_rows_count) - 1; // as the heding row already in total count number and i want to skip him
                 $this->importObject = ImportLog::create([
                     'total_count' => $this->total_count,
-                    'status_id' => ImportLogEnum::STARTED,
+                    'status_id' => ImportStatusEnum::STARTED,
                     'import_type' => ImportTypeEnum::RECEIVERS,
                     'errors' => [],
                     'created_by' => $this->auth_user->company_id,
@@ -109,7 +109,7 @@ class ReceiversImportSheet implements
             },
             ImportFailed::class => function (ImportFailed $event) {
                 $this->importObject->update([
-                    'status_id' => ImportLogEnum::FAILED,
+                    'status_id' => ImportStatusEnum::FAILED,
                 ]);
             },
         ];
@@ -127,7 +127,7 @@ class ReceiversImportSheet implements
         $this->importObject->update([
             'errors' => $errors,
             'failed_count' => $total_failures,
-            'status_id' => ImportLogEnum::PARTIALLY
+            'status_id' => ImportStatusEnum::PARTIALLY
         ]);
     }
 

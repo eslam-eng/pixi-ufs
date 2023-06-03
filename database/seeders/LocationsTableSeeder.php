@@ -12,23 +12,34 @@ class LocationsTableSeeder extends Seeder
      */
     public function run(): void
     {
+        $cities = $cities = [
+            'Cairo',
+            'New Cities',
+            'Alex',
+            'Delta Cities',
+            'Canal Cities',
+            'Upper Egypt 1',
+            'Upper Egypt 2',
+            'Upper Egypt 3',
+            'North Sinaa',
+            'South Sinaa',
+            'Remote Area Cairo',
+            'Remote Area Delta Cities',
+            'Remote Area Canal Cities',
+            'Remote Area Alex',
+            'Remote Area Upper Egypt',
+            'Other'
+        ];
 
-        $node = Location::create([
-            'title' => 'Egypt',
-            'children' => [
-                [
-                    'title' => 'Cairo',
-                    'children' => [
-                        [ 'title' => 'naser city'],
-                    ],
-                ],
-                [
-                    'title' => 'Giza',
-                    'children' => [
-                        [ 'title' => 'ramsis'],
-                    ],
-                ],
-            ],
+        $parentNode =  Location::create([
+            'title'=>"Egypt",
         ]);
+        foreach ($cities as $city)
+        {
+            $childern = $parentNode->children()->create([
+                'title'=>$city,
+            ]);
+            $childern->children()->create( [ 'title' => "$city ". 'areas']);
+        }
     }
 }

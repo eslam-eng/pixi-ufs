@@ -6,6 +6,7 @@
             class="custom-control-label custom-control-label-md  tx-17"></span>
     </label>
 </td>
+{{--todo move this to another place for load once not loadded with every row in datatatble--}}
 <script>
     $(document).ready(function () {
         var selected_ids = [];
@@ -44,7 +45,47 @@
                             toastr.error(response.message);
                     },
                     error: function(xhr) {
-                        toastr.error(result.message);
+                        toastr.error(xhr);
+                    }
+                });
+            }else{
+                swal({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'please select at least one to delete!',
+                })
+            }
+
+        });
+
+        $(".export-selected-btn").click(function () {
+            if (selected_ids.length)
+            {
+                var url = $(this).data('url');
+                var csrf = $(this).data('csrf')
+                var reload = $(this).data('reload');
+                $.ajax({
+                    url: url,
+                    type: 'post',
+                    data: {
+                        _token:csrf,
+                        ids:selected_ids,
+                        _method:'delete'
+                    },
+                    success: function(response) {
+                        if (response.status)
+                        {
+                            toastr.success(response.message);
+                            if(reload != true)
+                                $('.dataTable').DataTable().ajax.reload(null, false);
+                            else
+                                window.location.reload();
+                        }
+                        else
+                            toastr.error(response.message);
+                    },
+                    error: function(xhr) {
+                        toastr.error(xhr);
                     }
                 });
             }else{
@@ -57,5 +98,4 @@
 
         });
     });
-
 </script>

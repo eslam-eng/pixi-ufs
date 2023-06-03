@@ -14,7 +14,7 @@ class Company extends Model
 {
     use HasFactory, HasAddresses, Filterable;
 
-    protected $fillable = ['name', 'email','ceo', 'phone', 'show_dashboard', 'notes', 'status'];
+    protected $fillable = ['name', 'email','ceo', 'phone', 'show_dashboard', 'notes', 'status','importation_type'];
 
 
     public function addresses(): MorphOne

@@ -13,11 +13,12 @@ return new class extends Migration {
         Schema::create('awbs', function (Blueprint $table) {
             $table->id();
             $table->string('code')->nullable()->unique();
+            $table->string('receiver_reference')->nullable();
             $table->foreignIdFor(\App\Models\User::class)->constrained();
             $table->foreignIdFor(\App\Models\Company::class)->constrained();
             $table->foreignIdFor(\App\Models\Branch::class)->constrained();
             $table->foreignIdFor(\App\Models\Department::class)->constrained();
-            $table->foreignIdFor(\App\Models\Receiver::class);
+            $table->foreignIdFor(\App\Models\Receiver::class)->nullable();
             $table->text('receiver_data');
             $table->integer('payment_type');
             $table->string('service_type');

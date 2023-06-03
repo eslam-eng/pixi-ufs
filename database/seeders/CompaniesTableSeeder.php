@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Enums\ActivationStatus;
+use App\Enums\ImportTypeEnum;
 use App\Models\Company;
 use App\Models\Location;
 use Illuminate\Database\Seeder;
@@ -27,6 +28,7 @@ class CompaniesTableSeeder extends Seeder
                 'address'=>Str::random(20),
                 'city_id'=>$city_id,
                 'area_id'=>$area_id,
+                'importation_type'=>ImportTypeEnum::AWBWITHOUTREFERENCE(),
             ]
         );
     }

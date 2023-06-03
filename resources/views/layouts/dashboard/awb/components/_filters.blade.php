@@ -15,9 +15,29 @@
                             <form>
                                 <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
                                     <div class="row row-sm">
-                                        <div class="col-lg">
+                                        <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6">
                                            <x-receivers-select2-search/>
                                         </div>
+
+
+                                        <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6">
+                                           <livewire:company/>
+                                        </div>
+
+
+                                        <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6">
+                                           <livewire:branch/>
+                                        </div>
+
+                                        <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6">
+                                            <livewire:department/>
+                                        </div>
+
+
+                                        <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6">
+                                           filter created at here
+                                        </div>
+
                                     </div>
 
                                 </div>

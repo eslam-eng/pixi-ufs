@@ -29,7 +29,7 @@ class CityDropDownSheet implements FromCollection, WithTitle, WithEvents, WithMa
     {
         $sheet = $event->sheet;
         for ($row = 2; $row < 4; $row++) {
-            $objValidation = $sheet->getParent()->getSheet(0)->getCell("K" . $row)->getDataValidation();
+            $objValidation = $sheet->getParent()->getSheet(0)->getCell("D" . $row)->getDataValidation();
             $objValidation->setType(DataValidation::TYPE_LIST);
             $objValidation->setErrorStyle(DataValidation::STYLE_INFORMATION);
             $objValidation->setAllowBlank(false);

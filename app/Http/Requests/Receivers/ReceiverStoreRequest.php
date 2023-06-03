@@ -4,6 +4,7 @@ namespace App\Http\Requests\Receivers;
 
 use App\DTO\Receiver\ReceiverDTO;
 use App\Http\Requests\BaseRequest;
+use Illuminate\Validation\Rule;
 
 class ReceiverStoreRequest extends BaseRequest
 {
@@ -22,18 +23,21 @@ class ReceiverStoreRequest extends BaseRequest
     {
         return [
             'name' => 'required|string',
-            'phone' => 'required|string|unique:receivers,phone',
+            'phone1' => ['required','string',Rule::unique('receivers','phone1')->where('company_id',$this->user->company_id)],
+            'phone2' => 'nullable|string',
             'receiving_company' => 'nullable|string',
+            'receiving_branch' => 'nullable|string',
+            'company_id' => 'required|numeric|exists:companies,id',
             'branch_id' => 'required|numeric|exists:branches,id',
             'city_id' => 'required|integer|exists:locations,id',
             'area_id' => 'required|integer|exists:locations,id',
-            'reference' => 'nullable|string|unique:receivers,reference',
+            'reference' => ['nullable','string',Rule::unique('receivers','reference')->where('company_id',$this->user->company_id)],
             'title' => 'nullable|string',
             'notes' => 'nullable|string',
-            'address' => 'required|string',
+            'address1' => 'required|string',
+            'address2' => 'nullable|string',
             'lat' => 'string|nullable',
             'lng' => 'string|nullable',
-            'postal_code' => 'string|nullable',
             'map_url' => 'string|nullable',
         ];
     }
@@ -41,13 +45,8 @@ class ReceiverStoreRequest extends BaseRequest
     protected function prepareForValidation(): void
     {
         $this->merge([
-            'is_default' => true,
+            'user' => auth()->user(),
         ]);
 
-    }
-
-    public function toReceiverDTO(): \App\DTO\BaseDTO
-    {
-        return ReceiverDTO::fromRequest($this);
     }
 }

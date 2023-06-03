@@ -1,20 +1,18 @@
 <?php
 
-namespace App\Exports\Sheets\Awbs;
+namespace App\Exports;
 
-use Maatwebsite\Excel\Concerns\RegistersEventListeners;
+use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
-use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithTitle;
 
-class AwbsSheet implements
+class AwbsWithReferenceExport implements
     WithTitle,
-    WithEvents,
     ShouldAutoSize,
     withHeadings
 {
-    use RegistersEventListeners;
+    use Exportable;
 
 
     public function __construct()
@@ -34,16 +32,14 @@ class AwbsSheet implements
     {
         return [
             'reference',
-            'name',
-            'phone',
-            'receiving_company',
-            'title',
-            'address',
-            'company_Name',
-            'contact_name',
-            'address',
-            'city',//K
-            'area',//L
+            'weight',
+            'pieces',
+            'collection',
+            'note1',
+            'note2',
+            'note3',
+            'note4',
+            'note5',
         ];
     }
 }

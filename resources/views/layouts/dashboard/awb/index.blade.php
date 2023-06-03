@@ -22,9 +22,10 @@
                     <div class="form-group mb-0 mt-3 justify-content-end">
                         <div>
                             <a class="btn ripple btn-primary" href="{{route('awbs.create')}}"><i class="fe fe-plus me-2"></i>@lang('app.new')</a>
-                            <a role="button" href="#" class="btn btn-success"><i class="fa fa-upload pe-2"></i>@lang('app.import')</a>
-                            <button type="submit" class="btn btn-info"><i class="fa fa-download pe-2"></i>@lang('app.export_pdf')</button>
-                            <button data-url="#" data-csrf="{{csrf_token()}}" class="btn btn-danger delete-selected-btn"><i class="fa fa-trash pe-2"></i>@lang('app.delete_selected')</button>
+                            <a role="button" href="{{route('awb.import-form')}}" class="btn btn-success"><i class="fa fa-upload pe-2"></i>@lang('app.import')</a>
+                            <button class="btn ripple btn-primary" data-bs-target="#print_awbs_modal" data-bs-toggle="modal"><i class="fa fa-print"></i>@lang('app.print')</button>
+                            <button class="btn ripple btn-primary" data-bs-target="#export_pdf_modal" data-bs-toggle="modal"><i class="fa fa-download"></i>@lang('app.export_pdf')</button>
+                            <button data-url="{{route('awb.delete-multiple')}}" data-csrf="{{csrf_token()}}" class="btn btn-danger delete-selected-btn"><i class="fa fa-trash pe-2"></i>@lang('app.delete_selected')</button>
                         </div>
                     </div>
                 </div>
@@ -37,6 +38,9 @@
         </div>
     </div>
     <!-- End Row -->
+
+    @include('layouts.dashboard.awb.components.print-awbs-modal')
+    @include('layouts.dashboard.awb.components.export-pdf-modal')
 
 @endsection
 

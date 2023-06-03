@@ -3,6 +3,7 @@
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AwbController;
+use App\Http\Controllers\ImportLogsController;
 use App\Http\Livewire\Emptypage;
 use \App\Http\Livewire\Switcherpage;
 use App\Http\Controllers\ReceiverController;
@@ -45,10 +46,15 @@ Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
         Route::put('{id}',[AddressController::class,'update'])->name('address.update');
     });
     Route::resource('awbs',AwbController::class);
-    Route::group(['prefix' => 'awbs' ],function (){
-         Route::get('/imports',[AwbController::class,'importForm'])->name('awbs.import-form');
-        Route::get('/download-template',[AwbController::class,'importForm'])->name('awbs.download-template');
+    Route::delete('awbs-delete-multiple',[AwbController::class,'deleteMultiple'])->name('awb.delete-multiple');
+    Route::post('awbs-export',[AwbController::class,'export'])->name('awbs-export');
+    Route::group(['prefix' => 'awb' ],function (){
+        Route::get('/imports',[AwbController::class,'importForm'])->name('awb.import-form');
+        Route::post('/imports',[AwbController::class,'import'])->name('awb.import');
+        Route::get('/download-template',[AwbController::class,'downloadTemplate'])->name('awb.download-template');
     });
+
+    Route::get('import-logs',[ImportLogsController::class,'index'])->name('import-logs.index');
 
     Route::get('switcherpage', Switcherpage::class)->name('switcherpage');
 });

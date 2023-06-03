@@ -2,6 +2,11 @@
 
 namespace App\Imports\Awbs;
 
+use App\Enums\ImportStatusEnum;
+use App\Imports\Awbs\sheets\AwbsImportSheet;
+use App\Models\AwbServiceType;
+use App\Models\CompanyShipmentType;
+use App\Models\ImportLog;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Arr;
 use Maatwebsite\Excel\Concerns\Importable;
@@ -14,6 +19,7 @@ use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithLimit;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
+use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Events\AfterImport;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Events\BeforeImport;
@@ -33,29 +39,34 @@ class AwbsImport implements
 
     protected $totalRows = 0;
     protected $successCount = 0;
-    protected $successRate = 0;
     protected $total_failures = 0;
     public $importObject;
 
+    public $serviceType;
+    public $shipmentType;
+
     public function __construct(
-        public int  $import_type,
-        public int  $creator_id,
-        public int  $category_id,
-        public bool $products_market_provider_status_id = true
-    )
+        public $creator ,
+        public int $service_type_id ,
+        public int $shipment_type_id ,
+        public string $payment_type ,
+        public $importation_type)
     {
+        $this->serviceType = AwbServiceType::find($this->service_type_id);
+        $this->shipmentType = CompanyShipmentType::find($this->shipment_type_id);
+
     }
 
 
     public function sheets(): array
     {
         return [
-            'products' => new MarketProviderProductsImportSheet(
-                import_type: $this->import_type,
-                creator_id: $this->creator_id,
-                category_id: $this->category_id,
+            'awbs' => new AwbsImportSheet(
                 importObject: $this->importObject,
-                products_market_provider_status_id: $this->products_market_provider_status_id
+                creator: $this->creator,
+                payment_type: $this->payment_type,
+                service_type: $this->serviceType->name,
+                shipment_type: $this->shipmentType->name
             ),
         ];
     }
@@ -72,7 +83,7 @@ class AwbsImport implements
                 $total_rows = $this->importObject->total_count;
                 $this->successCount = $total_rows - $this->total_failures;
                 $import_status = $this->importObject->total_count > $total_rows
-                    ? ImportStatus::RUNNING : ImportStatus::PARTIALLY_FAILED;
+                    ? ImportStatusEnum::RUNNING() : ImportStatusEnum::PARTIALLY();
 
                 $this->importObject->update([
                     'success_count' => $this->successCount,
@@ -81,12 +92,12 @@ class AwbsImport implements
             },
             BeforeImport::class => function (BeforeImport $event) {
                 $total_count = Arr::first($event->getReader()->getTotalRows()) - 1;
-                $this->importObject = Import::create([
-                    'status_id' => ImportStatus::RUNNING,
+                $this->importObject = ImportLog::create([
+                    'status_id' => ImportStatusEnum::RUNNING(),
                     'total_count' => $total_count,
                     'success_count' => 0,
-                    'import_type' => $this->import_type,
-                    'created_by' => $this->creator_id,
+                    'import_type' => $this->importation_type,
+                    'created_by' => $this->creator->id,
                 ]);
             },
             AfterImport::class => function (AfterImport $event) {
@@ -101,7 +112,7 @@ class AwbsImport implements
                 $importObject->update($importData);},
             ImportFailed::class => function (ImportFailed $event) {
                 $this->importObject->update([
-                    'status_id' => ImportStatus::FAILED,
+                    'status_id' => ImportStatusEnum::FAILED(),
                 ]);
             },
         ];
@@ -110,23 +121,23 @@ class AwbsImport implements
 
     public function getQueueName(): string
     {
-        return 'product_seller_import';
+        return 'default';
     }
 
     public function getImportStatus(int $success_count): int
     {
         if (is_null($this->importObject->errors)) {
-            return ImportStatus::SUCCESSFUL;
+            return ImportStatusEnum::SUCCESSFUL();
         }
         if (!is_null($this->importObject->errors) && count($this->importObject->errors) > 0 && $success_count > 0) {
-            return ImportStatus::PARTIALLY_FAILED;
+            return ImportStatusEnum::PARTIALLY();
         }
-        return ImportStatus::FAILED;
+        return ImportStatusEnum::FAILED();
     }
 
     public function limit(): int
     {
         //limit in case of infinite
-        return config('settings.sheet_max_limit');
+        return 10000;
     }
 }

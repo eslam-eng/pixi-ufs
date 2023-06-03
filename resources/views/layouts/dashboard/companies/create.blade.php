@@ -130,34 +130,29 @@
 
                                 </div>
 
-                                <div class="card card-success mt-4">
-                                    <div class="card-header pb-2"><h5 class="card-title mb-0 pb-0">Address Info</h5></div>
-                                    <div class="card-body text-success">
-                                        <div class="row row-sm mb-4">
-                                            <div class="col-lg">
-                                                <div class="main-content-label mg-b-5">@lang('app.address')</div>
-                                                <input class="form-control" name="address" value="{{old('address')}}"  placeholder="@lang('app.address')"
-                                                    type="text" required>
+                                <div class="row row-sm mb-4">
+                                    <div class="col-lg">
+                                        <div class="main-content-label mg-b-5">@lang('app.address')</div>
+                                        <input class="form-control" name="address" value="{{old('address')}}"  placeholder="@lang('app.address')"
+                                            type="text" required>
 
-                                                @error('address')
-                                                <div class="text-danger"> {{$message}}</div>
-                                                @enderror
-                                            </div>
-
-                                        </div>
-
-                                        <div>
-                                            <livewire:locations-drop-down/>
-                                            @error('city_id')
-                                            <div class="text-danger"> {{$message}}</div>
-                                            @enderror
-                                            @error('area_id')
-                                            <div class="text-danger"> {{$message}}</div>
-                                            @enderror
-                                        </div>
-
+                                        @error('address')
+                                        <div class="text-danger"> {{$message}}</div>
+                                        @enderror
                                     </div>
+
                                 </div>
+
+                                <div>
+                                    <livewire:locations-drop-down/>
+                                    @error('city_id')
+                                    <div class="text-danger"> {{$message}}</div>
+                                    @enderror
+                                    @error('area_id')
+                                    <div class="text-danger"> {{$message}}</div>
+                                    @enderror
+                                </div>
+
                         </div>
                     </div>
                 </div>

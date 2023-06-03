@@ -74,23 +74,17 @@
 
                         </div>
 
-                        <div class="card card-success mt-4">
-                            <div class="card-header pb-2"><h5 class="card-title mb-0 pb-0">Address Info</h5></div>
-                            <div class="card-body text-success">
-                                <div class="row row-sm mb-4">
-                                    <div class="col-lg">
-                                        <div class="main-content-label mg-b-5">@lang('app.address')</div>
-                                        <label class="form-control">{{ $company->address }}</label>
-                                    </div>
-
-                                </div>
-
-                                <div>
-                                    <livewire:locations-drop-down city_id="{{ $company->city_id }}" area_id="{{ $company->area_id }}"/>
-                                    
-                                </div>
-
+                        <div class="row row-sm mb-4">
+                            <div class="col-lg">
+                                <div class="main-content-label mg-b-5">@lang('app.address')</div>
+                                <label class="form-control">{{ $company->address }}</label>
                             </div>
+
+                        </div>
+
+                        <div>
+                            <livewire:locations-drop-down city_id="{{ $company->city_id }}" area_id="{{ $company->area_id }}"/>
+                            
                         </div>
 
                         <div class="card-footer mt-4">
@@ -106,6 +100,101 @@
                         </div>
                 </div>
             </div>
+            {{-- start branches --}}
+            <div class="card">
+                <div class="card-header">
+                    <div class="breadcrumb-header justify-content-between">
+                        <div class="left-content">
+                            <div>
+                                <h3>@lang('app.branches')</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <td>@lang('app.name')</td>
+                            <td>@lang('app.phone')</td>
+                            <td>@lang('app.status')</td>
+                            <td>@lang('app.address')</td>
+                            <td>@lang('app.city')</td>
+                            <td>@lang('app.area')</td>
+                            <td>@lang('app.actions')</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($company->branches as $branch)
+                            <tr>
+                                <td>{{$branch->name}}</td>
+                                <td>{{$branch->phone}}</td>
+                                <td>{{$branch->status}}</td>
+                                <td>{{$branch->address}}</td>
+                                <td>{{$branch->city?->title}}</td>
+                                <td>{{$branch->area?->title}}</td>
+                                <td>
+                                    <div>
+                                        <button data-bs-toggle="dropdown" class="btn btn-primary btn-block" aria-expanded="false">@lang('app.actions')
+                                            <i class="icon ion-ios-arrow-down tx-11 mg-l-3"></i>
+                                        </button>
+                                        <div class="dropdown-menu" style="">
+                                           <a href="{{route('branches.show', $branch->id)}}" class="dropdown-item">@lang('app.show')</a>
+                                        </div>
+                                        <!-- dropdown-menu -->
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {{-- end branches --}}
+
+            {{-- start departments --}}
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="breadcrumb-header justify-content-between">
+                        <div class="left-content">
+                            <div>
+                                <h3>@lang('app.departments')</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <td>@lang('app.name')</td>
+                            <td>@lang('app.actions')</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($company->departments as $department)
+                            <tr>
+                                <td>{{$department->name}}</td>
+                                <td>
+                                    <div>
+                                        <button data-bs-toggle="dropdown" class="btn btn-primary btn-block" aria-expanded="false">@lang('app.actions')
+                                            <i class="icon ion-ios-arrow-down tx-11 mg-l-3"></i>
+                                        </button>
+                                        <div class="dropdown-menu" style="">
+                                           <a href="{{route('departments.show', $department->id)}}" class="dropdown-item">@lang('app.show')</a>
+                                        </div>
+                                        <!-- dropdown-menu -->
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            {{-- end departments --}}
             
         </div>
     </div>

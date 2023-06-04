@@ -17,6 +17,11 @@ class CompaniesFilter extends QueryFilter
         return $this->builder->where('status',$term);
     }
 
+    public function email($term)
+    {
+        return $this->builder->where('email',$term);
+    }
+
     public function city_id($term)
     {
         return $this->builder->where('city_id',$term);
@@ -24,6 +29,22 @@ class CompaniesFilter extends QueryFilter
 
     public function area_id($term){
         return $this->builder->where('area_id',$term);
+    }
+
+    public function phone($term){
+        return $this->builder->where('phone',$term);
+    }
+
+    public function show_dashboard($term){
+        return $this->builder->where('show_dashboard',$term);
+    }
+
+    public function store_receivers($term){
+        return $this->builder->where('store_receivers',$term);
+    }
+    
+    public function num_custom_fields($term){
+        return $this->builder->where('num_custom_fields',$term);
     }
 
     public function keyword($term)

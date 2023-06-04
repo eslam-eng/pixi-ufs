@@ -16,6 +16,7 @@ use App\Services\BranchService;
 use App\Services\CompanyService;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class BranchController extends Controller
@@ -37,7 +38,7 @@ class BranchController extends Controller
             $branchDTO = $request->toBranchDTO();
             $this->branchService->store($branchDTO);
             DB::commit();
-            return redirect()->back('companies.index');
+            return redirect()->route('companies.edit', Arr::get($branchDTO->toArray(), 'company_id'));
         } catch (Exception $e) {
             DB::rollBack();
             return apiResponse(message: $e->getMessage(), code: 422);
@@ -65,7 +66,7 @@ class BranchController extends Controller
             $branchDTO = $request->toBranchDTO();
             $this->branchService->update($id, $branchDTO);
             DB::commit();
-            return redirect()->route('companies.index');
+            return redirect()->route('companies.edit', Arr::get($branchDTO->toArray(), 'company_id'));
         }catch (Exception $e) {
             DB::rollBack();
             return apiResponse(message: $e->getMessage(), code: 422);

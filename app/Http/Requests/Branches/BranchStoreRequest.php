@@ -29,7 +29,7 @@ class BranchStoreRequest extends BaseRequest
             'city_id' => 'required|integer|exists:locations,id',
             'area_id' => 'required|integer|exists:locations,id',
             'address' => 'required|string',
-            'status' => 'required|integer',
+            'status' => 'nullable|boolean',
         ];
     }
 

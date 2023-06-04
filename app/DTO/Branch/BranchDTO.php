@@ -15,6 +15,7 @@ class BranchDTO extends BaseDTO
      * @param int|null $city_id
      * @param int|null $area_id
      * @param string|null $address
+     * @param ?bool  $status,
      */
     public function __construct(
         protected string $name,
@@ -23,6 +24,7 @@ class BranchDTO extends BaseDTO
         protected int   $city_id,
         protected int   $area_id,
         protected string $address,
+        protected ?bool  $status,
     )
     {
     }
@@ -36,6 +38,7 @@ class BranchDTO extends BaseDTO
             city_id: $request->city_id,
             area_id: $request->area_id,
             address: $request->address,
+            status: isset($request->status),
         );
     }
 
@@ -53,6 +56,7 @@ class BranchDTO extends BaseDTO
             city_id: Arr::get($data,'city_id'),
             area_id: Arr::get($data,'area_id'),
             address: Arr::get($data,'address'),
+            status: Arr::get($data,'status'),
         );
     }
 
@@ -68,6 +72,7 @@ class BranchDTO extends BaseDTO
             'city_id' => $this->city_id,
             'area_id' => $this->area_id,
             'address' => $this->address,
+            'status' => $this->status,
 
         ];
     }

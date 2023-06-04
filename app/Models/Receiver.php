@@ -18,7 +18,7 @@ class Receiver extends Model
         'name', 'phone1','phone2',
         'receiving_company', 'company_id', 'branch_id',
         'address1', 'address2', 'city_id', 'area_id','lat','lng',
-        'reference', 'title', 'status', 'notes'
+        'reference', 'title', 'status', 'notes','map_url'
     ];
 
     public function defaultAddress(): MorphOne

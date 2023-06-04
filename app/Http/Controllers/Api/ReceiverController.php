@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Enums\ImportStatusEnum;
 use App\Enums\UsersType;
 use App\Exceptions\NotFoundException;
 use App\Exports\ReceiversExport;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Receivers\ReceiverStoreRequest;
-use App\Http\Requests\Api\Receivers\ReceiverUpdateRequest;
+use App\Http\Requests\Receivers\ReceiverStoreRequest;
+use App\Http\Requests\Receivers\ReceiverUpdateRequest;
 use App\Http\Requests\FileUploadRequest;
+use App\Http\Requests\Receivers\ReceiverUpdateAddress;
+use App\Http\Requests\Receivers\ReceiverUpdateAddressAndPhone;
+use App\Http\Requests\Receivers\ReceiverUpdatePhone;
 use App\Http\Resources\Receiver\ReceiverEditResource;
 use App\Http\Resources\Receiver\ReceiverResource;
 use App\Imports\Receivers\ReceiversImport;
@@ -88,6 +90,42 @@ class ReceiverController extends Controller
             return apiResponse(message: trans('lang.success_operation'));
         } catch (Exception|NotFoundException $e) {
             return apiResponse(message: trans('lang.something_went_wrong'), code: 422);
+        }
+    }
+
+    public function updateReceiverPhone(ReceiverUpdatePhone $request, $id)
+    {
+        try{
+            $status = $this->receiverService->updateReceiverPhone(id: $id, data: $request->validated());
+            if(!$status)
+                return apiResponse(message: trans('app.something_went_wrong'), code: 422);
+            return apiResponse(message: trans('app.success_operation'));    
+        }catch(Exception $e){
+            return apiResponse( message: $e->getMessage(), code: 422);
+        }
+    }
+
+    public function updateReceiverAddress(ReceiverUpdateAddress $request, $id)
+    {
+        try{
+            $status = $this->receiverService->updateReceiverAddress(id: $id, data: $request->validated());
+            if(!$status)
+                return apiResponse(message: trans('app.something_went_wrong'), code: 422);
+            return apiResponse(message: trans('app.success_operation'));    
+        }catch(Exception $e){
+            return apiResponse( message: $e->getMessage(), code: 422);
+        }
+    }
+
+    public function AddPhoneAndAddress(ReceiverUpdateAddressAndPhone $request, $id)
+    {
+        try{
+            $status = $this->receiverService->AddPhoneAndAddress(id: $id, data: $request->validated());
+            if(!$status)
+                return apiResponse(message: trans('app.something_went_wrong'), code: 422);
+            return apiResponse(message: trans('app.success_operation'));    
+        }catch(Exception $e){
+            return apiResponse( message: $e->getMessage(), code: 422);
         }
     }
 

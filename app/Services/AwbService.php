@@ -103,52 +103,6 @@ class AwbService extends BaseService
         return $this->getQuery()->where('id',$id)->delete();
     }
 
-
-    public function cancelAwb(int $id, array $data):bool
-    {
-        $awb = $this->find($id);
-        $data = [
-            'user_id'=>$awb->user_id,
-            'awb_status_id'=>1,
-            'comment'=>$data['comment'],
-        ];
-        $awb->history()->create($data);
-        return true;
-    }
-
-    //there is no date to update it
-    public function awbReschedule(int $id, array $data):bool
-    {
-        $awb = $this->find($id);
-        $data = [
-            'user_id'=>$awb->user_id,
-            'awb_status_id'=>$data['status_id'],
-        ];
-        $awb->history()->create($data);
-        return true;
-    }
-
-    public function updateReceiverPhone(int $id, array $data):bool
-    {
-        $receiver = Receiver::find($id);
-        $receiver->update([
-            'phone'=>$data['phone'],
-        ]);
-        return true;
-    }
-
-    public function AddPhoneAndAddress(int $id, array $data):bool
-    {
-        $receiver = Receiver::find($id);
-        if(!$receiver)
-            throw new NotFoundException(trans('app.not_found'));
-        $receiver->update([
-            'phone'=>$data['phone'],
-        ]);
-        $receiver->storeAddress(Arr::except($data, $data['phone']));
-        return true;
-    }
-
     public function find(int $id, array $relations = [])
     {
         $awb = Awb::with($relations)->find($id);

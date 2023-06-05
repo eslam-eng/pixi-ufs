@@ -85,7 +85,6 @@ class CompaniesDatatable extends DataTable
             Column::make('show_dashboard')->title(trans('app.show_dashboard'))->orderable(false),
             Column::make('notes')->title(trans('app.notes'))->searchable(false)->orderable(false),
             Column::make('status')->title(trans('app.status'))->searchable(false)->orderable(false),
-            Column::make('store_receivers')->title(trans('app.store_receivers'))->searchable(false)->orderable(false),
             Column::make('address')->title(trans('app.address'))->searchable(false)->orderable(false),
             Column::make('num_custom_fields')->title(trans('app.num_custom_fields'))->searchable(false)->orderable(false),
             Column::make('city_id')->title(trans('app.city'))->orderable(false),

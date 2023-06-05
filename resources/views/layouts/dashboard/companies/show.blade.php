@@ -11,7 +11,7 @@
         <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
             <div class="card">
                 <div class="card-body">
-                    
+
                         <div class="row row-sm mb-4">
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.name')</div>
@@ -22,7 +22,7 @@
                                 <div class="main-content-label mg-b-5">@lang('app.email')</div>
                                 <label class="form-control">{{ $company->email }}</label>
                             </div>
-                            
+
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.ceo')</div>
                                 <label class="form-control">{{ $company->ceo }}</label>
@@ -55,7 +55,7 @@
                                 <input disabled type="checkbox" {{ $company->store_receivers == 1 ? "checked":"" }}>
                             </div>
 
-                            
+
                         </div>
 
                         <div class="row row-sm mb-4">
@@ -65,10 +65,10 @@
                                 <div class="main-content-label mg-b-5">@lang('app.num_custom_fields')</div>
                                 <label class="form-control">{{ $company->num_custom_fields }}</label>
                             </div>
-                            
+
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.importation_type')</div>
-                                <label class="form-control">{{ $company->importation_type == \App\Enums\ImportTypeEnum::IMPORTWITHREFERENCE->value ? \App\Enums\ImportTypeEnum::IMPORTWITHREFERENCE->name:\App\Enums\ImportTypeEnum::IMPORTWITHOUTREFERENCE->name }}</label>
+                                <label class="form-control">{{ $company->importation_type == \App\Enums\ImportTypeEnum::AWBWITHREFERENCE->value ? \App\Enums\ImportTypeEnum::AWBWITHREFERENCE->name:\App\Enums\ImportTypeEnum::AWBWITHOUTREFERENCE->name }}</label>
                             </div>
 
 
@@ -84,7 +84,7 @@
 
                         <div>
                             <livewire:locations-drop-down city_id="{{ $company->city_id }}" area_id="{{ $company->area_id }}"/>
-                            
+
                         </div>
 
                         <div class="card-footer mt-4">
@@ -195,7 +195,7 @@
             </div>
 
             {{-- end departments --}}
-            
+
         </div>
     </div>
 

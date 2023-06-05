@@ -11,7 +11,7 @@
         <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
             <div class="card">
                 <div class="card-body">
-                    
+
                     <form action="{{route('companies.update', $company->id)}}" method="post">
                         @csrf
                         @method('put')
@@ -33,7 +33,7 @@
                                     <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
                                 @enderror
                             </div>
-                            
+
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.ceo')</div>
                                 <input class="form-control" name="ceo" value="{{old('ceo') ?? $company->ceo}}"
@@ -94,7 +94,7 @@
                                 @enderror
                             </div>
 
-                            
+
                         </div>
 
                         <div class="row row-sm mb-4">
@@ -109,13 +109,13 @@
                                 <div class="text-danger"> {{$message}}</div>
                                 @enderror
                             </div>
-                            
+
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.importation_type')</div>
                                 <select class="form-control" name="importation_type">
                                     <option selected disabled>...</option>
-                                    <option {{ \App\Enums\ImportTypeEnum::IMPORTWITHREFERENCE->value == $company->importation_type ? "selected":"" }} value="{{ \App\Enums\ImportTypeEnum::IMPORTWITHREFERENCE->value }}">@lang('app.import_with_reference')</option>
-                                    <option {{ \App\Enums\ImportTypeEnum::IMPORTWITHOUTREFERENCE->value == $company->importation_type ? "selected":"" }} value="{{ \App\Enums\ImportTypeEnum::IMPORTWITHOUTREFERENCE->value }}">@lang('app.import_without_reference')</option>
+                                    <option {{ \App\Enums\ImportTypeEnum::AWBWITHREFERENCE->value == $company->importation_type ? "selected":"" }} value="{{ \App\Enums\ImportTypeEnum::AWBWITHREFERENCE->value }}">@lang('app.import_with_reference')</option>
+                                    <option {{ \App\Enums\ImportTypeEnum::AWBWITHOUTREFERENCE->value == $company->importation_type ? "selected":"" }} value="{{ \App\Enums\ImportTypeEnum::AWBWITHOUTREFERENCE->value }}">@lang('app.import_without_reference')</option>
                                 </select>
 
                                 @error('importation_type')

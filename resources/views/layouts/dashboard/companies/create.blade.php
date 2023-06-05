@@ -13,7 +13,7 @@
                 @csrf
                 {{-- start companies --}}
                 <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
-                    
+
                     <div class="card">
                         <div class="card-header">
                             <h3>@lang('app.companies')</h3>
@@ -37,7 +37,7 @@
                                             <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
                                         @enderror
                                     </div>
-                                    
+
                                     <div class="col-lg">
                                         <div class="main-content-label mg-b-5">@lang('app.ceo')</div>
                                         <input class="form-control" name="ceo" value="{{old('ceo')}}" placeholder="@lang('app.ceo')"
@@ -98,7 +98,7 @@
                                         @enderror
                                     </div>
 
-                                    
+
                                 </div>
 
                                 <div class="row row-sm mb-4">
@@ -113,13 +113,13 @@
                                         <div class="text-danger"> {{$message}}</div>
                                         @enderror
                                     </div>
-                                    
+
                                     <div class="col-lg">
                                         <div class="main-content-label mg-b-5">@lang('app.importation_type')</div>
                                         <select class="form-control" name="importation_type">
                                             <option selected disabled>...</option>
-                                            <option value="{{ \App\Enums\ImportTypeEnum::IMPORTWITHREFERENCE->value }}">@lang('app.import_with_reference')</option>
-                                            <option value="{{ \App\Enums\ImportTypeEnum::IMPORTWITHOUTREFERENCE->value }}">@lang('app.import_without_reference')</option>
+                                            <option value="{{ \App\Enums\ImportTypeEnum::AWBWITHREFERENCE->value }}">@lang('app.import_with_reference')</option>
+                                            <option value="{{ \App\Enums\ImportTypeEnum::AWBWITHOUTREFERENCE->value }}">@lang('app.import_without_reference')</option>
                                         </select>
 
                                         @error('importation_type')
@@ -179,7 +179,7 @@
                                                         <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
                                                     @enderror
                                                 </div>
-                
+
                                                 <div class="col-lg">
                                                     <div class="main-content-label mg-b-5">@lang('app.phone')</div>
                                                     <input class="form-control" value="{{old('branches[0][phone]')}}" name="branches[0][phone]" placeholder="@lang('app.phone')"
@@ -189,26 +189,26 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                
+
                                             <div class="row row-sm mb-4">
                                                 <div class="col-lg">
                                                     <div class="main-content-label mg-b-5">@lang('app.status')</div>
                                                     <input name="branches[0][status]" value="1"
                                                         placeholder="@lang('app.status')" type="checkbox" checked>
-                
+
                                                     @error('branches[0][status]')
                                                     <div class="text-danger"> {{$message}}</div>
                                                     @enderror
                                                 </div>
                                             </div>
-                
+
                                             <hr>
                                             <div class="row row-sm mb-4">
                                                 <div class="col-lg">
                                                     <div class="main-content-label mg-b-5">@lang('app.address')</div>
                                                     <input class="form-control" name="branches[0][address]" value="{{old('branches[0][address]')}}"  placeholder="@lang('app.address')"
                                                         type="text">
-                
+
                                                     @error('branches[0][address]')
                                                     <div class="text-danger"> {{$message}}</div>
                                                     @enderror
@@ -223,7 +223,7 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <button class="btn btn-danger remove-item">X</button>               
+                                            <button class="btn btn-danger remove-item">X</button>
                                         </div>
                                     </div>
                                 </div>
@@ -263,8 +263,8 @@
                                                             <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
                                                         @enderror
                                                     </div>
-                                                </div> 
-                                                <button class="btn btn-danger remove-item">X</button>               
+                                                </div>
+                                                <button class="btn btn-danger remove-item">X</button>
                                             </div>
                                         </div>
                                     </div>
@@ -282,7 +282,7 @@
                     </div>
                     </div>
                 {{-- end departments --}}
-                
+
                 {{-- start actons buttons --}}
                 <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
                     <div class="card">
@@ -291,7 +291,7 @@
                                 <div>
                                     <button type="submit" class="btn btn-success"><i
                                             class="fa fa-save pe-2"></i>@lang('app.submit')</button>
-            
+
                                     <a role="button" href="{{route('companies.index')}}" class="btn btn-danger"><i
                                             class="fa fa-backward pe-2"></i>@lang('app.back')</a>
                                 </div>
@@ -307,42 +307,40 @@
     <!-- End Row -->
 
 @endsection
-<script
-    src="https://code.jquery.com/jquery-3.7.0.js"
-    integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
-    crossorigin="anonymous">
-</script>
-<script>
-    $(document).ready(function(){
-        var branchIndex = 1;
-        var departmentIndex = 1;
-        $('.append-branch').on('click', function(){
-            
-            var item = $('.branches-items .item').first().html();
-            $('.branches-items').append('<div class="item mt-4">' + item + '</div>');
-            var inputs = $('.branches-items .item:last').find('input');
-            $('.branches-items .item:last [name="branches[0][name]"]').attr('name', 'branches['+ branchIndex +'][name]');
-            $('.branches-items .item:last [name="branches[0][phone]"]').attr('name', 'branches['+ branchIndex +'][phone]');
-            $('.branches-items .item:last [name="branches[0][status]"]').attr('name', 'branches['+ branchIndex +'][status]');
-            $('.branches-items .item:last [name="branches[0][address]"]').attr('name', 'branches['+ branchIndex +'][address]');
-            $('.branches-items .item:last [name="branches[0][city_id]"]').attr('name', 'branches['+ branchIndex +'][city_id]');
-            $('.branches-items .item:last [name="branches[0][area_id]"]').attr('name', 'branches['+ branchIndex +'][area_id]');
-            branchIndex++;
+@section('scripts')
+    <script>
+        $(document).ready(function(){
+            var branchIndex = 1;
+            var departmentIndex = 1;
+            $('.append-branch').on('click', function(){
+
+                var item = $('.branches-items .item').first().html();
+                $('.branches-items').append('<div class="item mt-4">' + item + '</div>');
+                var inputs = $('.branches-items .item:last').find('input');
+                $('.branches-items .item:last [name="branches[0][name]"]').attr('name', 'branches['+ branchIndex +'][name]');
+                $('.branches-items .item:last [name="branches[0][phone]"]').attr('name', 'branches['+ branchIndex +'][phone]');
+                $('.branches-items .item:last [name="branches[0][status]"]').attr('name', 'branches['+ branchIndex +'][status]');
+                $('.branches-items .item:last [name="branches[0][address]"]').attr('name', 'branches['+ branchIndex +'][address]');
+                $('.branches-items .item:last [name="branches[0][city_id]"]').attr('name', 'branches['+ branchIndex +'][city_id]');
+                $('.branches-items .item:last [name="branches[0][area_id]"]').attr('name', 'branches['+ branchIndex +'][area_id]');
+                branchIndex++;
+            });
+
+            $('.append-department').on('click', function(){
+
+                var item = $('.departments-items .item').first().html();
+
+                $('.departments-items').append('<div class="item mt-4">' + item + '</div>');
+                var inputs = $('.departments-items .item:last').find('input');
+                inputs.attr('name', 'departments['+ departmentIndex +'][name]');
+                departmentIndex++;
+            });
+            $('.items').on('click', '.remove-item', function(){
+                $(this).parent().remove();
+            });
+
         });
-        
-        $('.append-department').on('click', function(){
-            
-            var item = $('.departments-items .item').first().html();
-            
-            $('.departments-items').append('<div class="item mt-4">' + item + '</div>');
-            var inputs = $('.departments-items .item:last').find('input');
-            inputs.attr('name', 'departments['+ departmentIndex +'][name]');
-            departmentIndex++;
-        });
-        $('.items').on('click', '.remove-item', function(){
-            $(this).parent().remove();
-        });
-        
-    });
-    
-</script>
+
+    </script>
+@endsection
+

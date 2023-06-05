@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\Company::class)->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
             $table->foreignIdFor(\App\Models\Department::class)->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
             $table->foreignIdFor(\App\Models\Branch::class)->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
+            $table->string('device_token')->nullable();
             $table->string('notes')->nullable();
             $table->timestamps();
         });

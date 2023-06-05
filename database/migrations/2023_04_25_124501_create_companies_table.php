@@ -20,13 +20,11 @@ return new class extends Migration
             $table->boolean('show_dashboard')->default(\App\Enums\ActivationStatus::INACTIVE->value);
             $table->string('notes')->nullable();
             $table->boolean('status')->default(\App\Enums\ActivationStatus::ACTIVE->value);
-            $table->boolean('store_receivers')->default(false);
             $table->string('address');
             $table->integer('num_custom_fields')->default(1);
-            $table->enum('importation_type', [\App\Enums\ImportTypeEnum::IMPORTWITHREFERENCE->value, \App\Enums\ImportTypeEnum::IMPORTWITHOUTREFERENCE->value])->default(\App\Enums\ImportTypeEnum::IMPORTWITHREFERENCE->value);
+            $table->enum('importation_type', \App\Enums\ImportTypeEnum::values())->default(\App\Enums\ImportTypeEnum::AWBWITHOUTREFERENCE());
             $table->foreignIdFor(\App\Models\Location::class,'city_id')->constrained('locations');
             $table->foreignIdFor(\App\Models\Location::class,'area_id')->constrained('locations');
-            $table->smallInteger('importation_type')->default(\App\Enums\ImportTypeEnum::AWBWITHOUTREFERENCE());
             $table->timestamps();
         });
     }

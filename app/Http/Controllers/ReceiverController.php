@@ -130,6 +130,11 @@ class ReceiverController extends Controller
         }
     }
 
+    public function importForm()
+    {
+        return view('layouts.dashboard.receivers.importation.form');
+    }
+
     /**
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
@@ -149,20 +154,32 @@ class ReceiverController extends Controller
         return $excel->download(new ReceiversExport($branches), 'receivers' . time() . '.xlsx');
     }
 
-    public function ImportReceivers(FileUploadRequest $request)
+    public function import(FileUploadRequest $request)
     {
         try {
             DB::beginTransaction();
             $user = getAuthUser();
             $importation_type = ImportTypeEnum::RECEIVERS;
             $file = $request->file('file');
-                (new ReceiversImport( creator: $user,importation_type: $importation_type))->import($file)->onQueue('default');
+            $importObject = new ReceiversImport( creator: $user,importation_type: $importation_type);
+            $importObject->import($file)->onQueue('default');
             DB::commit();
-            return apiResponse(message: trans('app.import_success_message'));
+            $toast = [
+                'type' => 'success',
+                'title' => 'success',
+                'message' => trans('app.import_success_message')
+            ];
+            return to_route('import-logs.index')->with('toast',$toast);
         }catch (Exception $exception)
         {
             DB::rollBack();
-            return apiResponse(message: $exception->getMessage(),code: $exception->getCode());
+            dd($exception);
+            $toast = [
+                'type' => 'success',
+                'title' => 'success',
+                'message' => $exception->getMessage()
+            ];
+            return back()->with('toast',$toast);
         }
     }
 

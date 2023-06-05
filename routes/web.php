@@ -40,7 +40,9 @@ Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
         Route::get('receivers',[ReceiverController::class,'search'])->name('receivers.search');
     });
     Route::resource('receivers',ReceiverController::class);
-    Route::get('receivers-download-template',[ReceiverController::class,]);
+    Route::get('receivers-download-template/form',[ReceiverController::class,'importForm'])->name('receivers-download-template.form');
+    Route::get('receivers-download-template',[ReceiverController::class,'downloadReceiversTemplate'])->name('receivers-download-template');
+    Route::post('receivers-import',[ReceiverController::class,'import'])->name('receivers-import');
     Route::group(['prefix' => 'addresses' ],function (){
         Route::get('{id}/type/{type}',[AddressController::class,'create'])->name('addresses.create');
         Route::get('{id}/set-default',[AddressController::class,'create'])->name('addresses.set-default');
@@ -66,6 +68,7 @@ Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
     Route::get('import-logs',[ImportLogsController::class,'index'])->name('import-logs.index');
 
     Route::get('switcherpage', Switcherpage::class)->name('switcherpage');
+
 });
 
 Route::get('/clear-cache', function () {

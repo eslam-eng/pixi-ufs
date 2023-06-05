@@ -11,8 +11,8 @@
             <div class="card custom-card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <div class="text-dark mb-4">@lang('app.first_download_awb_template')</div>
-                        <a role="button" class="btn btn-info btn-block" href="{{route('awb.download-template')}}">download
+                        <div class="text-dark mb-4">@lang('app.first_download_receivers_template')</div>
+                        <a role="button" class="btn btn-info btn-block" href="{{route('receivers-download-template')}}">download
                             template</a>
                     </div>
                 </div>
@@ -29,20 +29,14 @@
         </div>
 
         <div class="col-lg-8">
-            <form method="post" action="{{route('awb.import')}}" enctype="multipart/form-data">
+            <form method="post" action="{{route('receivers-import')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="card custom-card">
                     <div class="card-body">
                         <div class="card-header">
-                            <div class="text-dark">@lang('app.first_upload_excel')</div>
+                            <div class="text-dark">@lang('app.second_step_upload_excel')</div>
                         </div>
                         <div class="card-body">
-                            <x-payment-types/>
-                            <hr>
-                            <x-service-types service_type_field_name="service_type_id"/>
-                            <hr>
-                            <livewire:company-shipment-type shipment_types_for_company_id="{{$company_id}}"/>
-                            <hr>
                             <div>
                                 <label for="formFileLg" class="form-label">File</label>
                                 <input name="file" class="form-control form-control-lg" type="file">

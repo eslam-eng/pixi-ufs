@@ -32,9 +32,10 @@ class ReceiversImportSheet implements ToArray,
     {
         $receiversData = [];
         foreach ($array as $row) {
-            $branch_id = isset($row['city']) ? substr($row['city'], (strpos($row['city'], "#") + 1)) : null;
-            $company_id = isset($row['city']) ? substr($row['city'], (strpos($row['city'], "#") + 1)) : null;
 
+            preg_match_all('/#(\d+)/', $row['branch'], $matches);
+            $company_id = $matches[1][0] ?? null;
+            $branch_id = $matches[1][1] ?? null;
 
             $receiver_city_id = isset($row['city']) ? substr($row['city'], (strpos($row['city'], "#") + 1)) : null;
             $receiver_area_id = isset($row['area']) ? substr($row['area'], (strpos($row['area'], "#") + 1)) : null;
@@ -55,8 +56,24 @@ class ReceiversImportSheet implements ToArray,
                 'reference' => $row['reference'],
                 'title' => $row['title']
             ];
+            $updated_columns = [
+                'name',
+                'phone1',
+                'phone2',
+                'receiving_company',
+                'company_id',
+                'branch_id',
+                'address1',
+                'address2',
+                'city_id',
+                'area_id',
+                'lat',
+                'lng',
+                'reference',
+                'title'
+            ];
 
-            Receiver::query()->upsert($receiversData, ['reference','company_id'],$receiversData);
+           Receiver::query()->upsert($receiversData, ['reference', 'company_id'], $updated_columns);
         }
     }
 
@@ -65,7 +82,6 @@ class ReceiversImportSheet implements ToArray,
     {
 
         return [
-            '*.reference' => 'string|nullable',
             '*.name' => 'required|string',
             '*.phone1' => 'required|string',
             '*.city' => 'required|string',

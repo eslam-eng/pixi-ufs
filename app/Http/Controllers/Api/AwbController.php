@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Services\AwbService;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Awb\AwbResource;
+use App\Http\Resources\AwbStatusResource;
 use Exception;
 
 class AwbController extends Controller
@@ -45,7 +46,7 @@ class AwbController extends Controller
             $data = $this->awbService->lastStatus(id: $id);
             if(!$data)
                 return apiResponse(message: trans('app.something_went_wrong'), code: 422);
-            return apiResponse(data: $data, message: trans('app.success_operation'));
+            return apiResponse(data: new AwbStatusResource($data), message: trans('app.success_operation'));
         }catch(Exception $e){
             return apiResponse( message: $e->getMessage(), code: 422);
         }

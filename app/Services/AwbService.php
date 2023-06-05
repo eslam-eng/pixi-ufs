@@ -90,7 +90,7 @@ class AwbService extends BaseService
     public function lastStatus(int $id)
     {
         $awb = $this->findById($id);
-        return $awb->latestStatus();
+        return $awb->latestStatus;
     }
 
     public function datatable(array $filters = [], array $withRelations = [])

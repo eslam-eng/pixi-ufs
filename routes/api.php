@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AddressController;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\AwbController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::group(['middleware'=>'auth:sanctum'], function(){
+    Route::get('/user/profile', [AuthController::class, 'getProfileDetails']);
+    Route::get('/user/destroy', [AuthController::class, 'destroy']);
+    Route::post('/user/change-password', [AuthController::class, 'changePassword']);
+});
+Route::post('/auth/login',[AuthController::class, 'login']);
 Route::get('/awbs', [AwbController::class, 'index']);
 Route::post('/awbs/details/{id}', [AwbController::class, 'awbDetails']);
 Route::post('/awbs/cancel/{id}', [AwbController::class, 'cancelAwb']);

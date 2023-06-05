@@ -39,4 +39,16 @@ class AwbController extends Controller
         }
     }
 
+    public function lastStatus($id)
+    {
+        try{
+            $data = $this->awbService->lastStatus(id: $id);
+            if(!$data)
+                return apiResponse(message: trans('app.something_went_wrong'), code: 422);
+            return apiResponse(data: $data, message: trans('app.success_operation'));
+        }catch(Exception $e){
+            return apiResponse( message: $e->getMessage(), code: 422);
+        }
+        
+    }
 }

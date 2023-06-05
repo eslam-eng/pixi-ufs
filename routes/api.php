@@ -25,6 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/awbs', [AwbController::class, 'index']);
 Route::post('/awbs/details/{id}', [AwbController::class, 'awbDetails']);
 Route::post('/awbs/status/{id}', [AwbHistoryController::class, 'awbStatus']);
+Route::get('/awbs/status/{id}', [AwbController::class, 'lastStatus']);
 Route::post('/receivers/update-phone/{id}', [ReceiverController::class, 'updateReceiverPhone']);
 Route::post('/receivers/update-address/{id}', [ReceiverController::class, 'updateReceiverAddress']);
 Route::post('/receivers/update-phone-and-address/{id}', [ReceiverController::class, 'AddPhoneAndAddress']);

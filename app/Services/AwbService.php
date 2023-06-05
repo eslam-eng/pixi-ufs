@@ -11,6 +11,7 @@ use App\Models\Receiver;
 use App\QueryFilters\AwbFilters;
 use App\QueryFilters\AwbsFilter;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 
 
@@ -84,6 +85,12 @@ class AwbService extends BaseService
         if (count($awb_additional_infos_data))
             $awb->additionalInfo()->create($awb_additional_infos_data);
         return $awb;
+    }
+
+    public function lastStatus(int $id)
+    {
+        $awb = $this->findById($id);
+        return $awb->latestStatus();
     }
 
     public function datatable(array $filters = [], array $withRelations = [])

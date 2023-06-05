@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class Awb extends Model
 {
@@ -19,7 +21,7 @@ class Awb extends Model
         'department_id', 'receiver_id','receiver_reference',
         'receiver_data', 'payment_type', 'service_type', 'is_return', 'shipment_type',
         'zone_price', 'additional_kg_price', 'collection', 'weight',
-        'pieces', 'actual_recipient'
+        'pieces', 'actual_recipient','card_number','title'
     ];
 
     protected $casts = [
@@ -65,6 +67,11 @@ class Awb extends Model
     public function latestStatus()
     {
         return $this->hasOne(AwbHistory::class, 'awb_id')->latestOfMany();
+    }
+
+    public function getReceiverAddressAttribute(): string
+    {
+        return Str::limit(Arr::get($this->receiver_data,'address'),90);
     }
 
     protected static function boot()

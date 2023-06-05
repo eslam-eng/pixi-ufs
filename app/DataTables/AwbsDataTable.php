@@ -54,7 +54,7 @@ class AwbsDataTable extends DataTable
                 return Arr::get($awb->receiver_data, 'name');
             })
             ->addColumn('address', function (Awb $awb) {
-                return Str::limit(Arr::get($awb->receiver_data, 'address'), 30);
+                return Str::limit(Arr::get($awb->receiver_data, 'address1'), 30);
             })
             ->addColumn('status', function (Awb $awb) {
                 return view('components._datatable-badge', [

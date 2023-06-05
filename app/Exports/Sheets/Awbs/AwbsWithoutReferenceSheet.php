@@ -44,7 +44,7 @@ class AwbsWithoutReferenceSheet implements
             'receiving_company',
             'receiving_branch',
             'title',
-            'address',
+            'address1',
             'phone2',
             'note1',
             'note2',

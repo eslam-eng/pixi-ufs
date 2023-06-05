@@ -156,10 +156,4 @@ class AwbService extends BaseService
             throw new NotFoundException(trans('app.not_found'));
         return $awb;
     }
-
-    public function export(array $ids = [],array $withRelations = [])
-    {
-        return $this->queryGet(filters: ['ids'=>$ids],withRelations: $withRelations)->get();
-    }
-
 }

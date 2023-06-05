@@ -242,7 +242,7 @@
 
 <style>
     * {
-        font-size: 10px;
+        font-size: 13px;
     }
     table {
         border-collapse: collapse!important;
@@ -260,13 +260,22 @@
     }
 </style>
 
-<script src="{{asset('assets/js/qrcode.min.js')}}"></script>
+{{--<script src="{{asset('assets/js/qrcode.min.js')}}"></script>--}}
 <script src="{{asset('assets/js/JsBarcode.all.min.js')}}"></script>
 
 <body>
 
 @foreach ($awbs as $awb)
     @include('layouts.dashboard.awb.print.awb-lable', ["resource" => $awb])
+    @if($is_print_duplicated)
+        @include('layouts.dashboard.awb.print.awb-lable', ["resource" => $awb])
+        @include('layouts.dashboard.awb.print.awb-lable', ["resource" => $awb])
+    @endif
 @endforeach
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        window.print();
+    });
+</script>
 </body>
 </html>

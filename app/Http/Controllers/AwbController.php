@@ -10,11 +10,14 @@ use App\Enums\UsersType;
 use App\Exceptions\NotFoundException;
 use App\Exports\AwbsWithoutReferenceExport;
 use App\Exports\AwbsWithReferenceExport;
+use App\Http\Requests\Awb\AwbChangeStatusRequest;
 use App\Http\Requests\Awb\AwbFileUploadExcelRequest;
 use App\Http\Requests\Awb\AwbStoreRequest;
 use App\Imports\Awbs\AwbsImport;
 use App\Imports\Awbs\AwbsSyncByReferenceImport;
 use App\Imports\Tenant\ProductImportClasses\AdminImportProducts;
+use App\Models\AwbStatus;
+use App\Services\AwbHistoryService;
 use App\Services\AwbService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -34,8 +37,9 @@ class AwbController extends Controller
             $filters['company_id'] = $user->company_id;
         if ($user->type == UsersType::EMPLOYEE())
             $filters['branch_id'] = $user->branch_id;
-        $withRelations = ['branch:id,name', 'company:id,name', 'user:id,name','latestStatus.status'];
-        return $dataTable->with(['filters' => $filters, 'withRelations' => $withRelations])->render('layouts.dashboard.awb.index');
+        $withRelations = ['branch:id,name', 'company:id,name', 'user:id,name', 'latestStatus.status'];
+        $awb_statuses = AwbStatus::all();
+        return $dataTable->with(['filters' => $filters, 'withRelations' => $withRelations])->render('layouts.dashboard.awb.index',compact('awb_statuses'));
     }
 
     public function create()
@@ -47,17 +51,16 @@ class AwbController extends Controller
     {
         try {
             $user = auth()->user();
-            $withRelations = ['company:id,name','branch:id,name','department:id,name','latestStatus.status','additionalInfo'];
-            $awb = $this->awbService->findById(id: $id,withRelations: $withRelations);
-            return  view('layouts.dashboard.awb.show',['awb'=>$awb,'user'=>$user]);
-        }catch (NotFoundException $exception)
-        {
+            $withRelations = ['company:id,name', 'branch:id,name', 'department:id,name', 'latestStatus.status', 'additionalInfo'];
+            $awb = $this->awbService->findById(id: $id, withRelations: $withRelations);
+            return view('layouts.dashboard.awb.show', ['awb' => $awb, 'user' => $user]);
+        } catch (NotFoundException $exception) {
             $toast = [
                 'type' => 'error',
                 'title' => 'Error',
                 'message' => $exception->getMessage()
             ];
-            return to_route('awbs.index')->with('toast',$toast);
+            return to_route('awbs.index')->with('toast', $toast);
         }
 
 
@@ -167,28 +170,12 @@ class AwbController extends Controller
         }
     }
 
-    public function export(Request $request)
+    public function printThreeInOnePage(Request $request)
     {
         try {
-            $ids = $request->ids ;
-            if (count($ids))
-                $awbs = $this->awbService->export(ids: $ids , withRelations: []);
-
-        }catch (\Exception $exception)
-        {
-            $toast = ['type' => 'error', 'title' => 'error', 'message' => "there is an error"];
-            return back()->with('toast', $toast);
-        }
-    }
-
-
-    public function printThreeDiffInOnePage(Request $request)
-    {
-        try {
-            $ids = $request->ids ;
-            if (count($ids))
-            {
-                $user = auth()->user();
+            $ids = $request->ids;
+            $is_print_duplicated = $request->boolean('is_duplicated') ?? false;
+            if (count($ids)) {
                 $withRelations = [
                     'company:id,name',
                     'department:id,name',
@@ -197,13 +184,30 @@ class AwbController extends Controller
                     'branch.area',
                     'additionalInfo'
                 ];
-                $awbs = $this->awbService->queryGet(filters: ['ids'=>$ids],withRelations:$withRelations)->get();
-                return view('layouts.dashboard.awb.print.print-awb-three-in-one-page',['awbs'=>$awbs,'user'=>$user]);
+                $awbs = $this->awbService->queryGet(filters: ['ids' => $ids], withRelations: $withRelations)->get();
+                return view('layouts.dashboard.awb.print.print-awb-three-in-one-page', ['awbs' => $awbs, 'is_print_duplicated' => $is_print_duplicated]);
+            } else {
+                $toast = ['type' => 'error', 'title' => 'error', 'message' => "please select at least one for print"];
+                return back()->with('toast', $toast);
+
             }
-        }catch (\Exception $exception)
-        {
+        } catch (\Exception $exception) {
             $toast = ['type' => 'error', 'title' => 'error', 'message' => "there is an error"];
             return back()->with('toast', $toast);
+        }
+    }
+
+    public function changeStatus(AwbChangeStatusRequest $request,AwbHistoryService $awbHistoryService)
+    {
+        try {
+            $result = $awbHistoryService->changeAwbStatus(status: $request->status,awb_ids: $request->ids);
+            if ($result)
+                return apiResponse(message: trans('app.awbs_status_changed_successfully'));
+            else
+                return apiResponse(message: trans('app.there_is_an_error_in_change_awbs_status'));
+        }catch (\Exception $exception)
+        {
+            return apiResponse(message: $exception->getMessage(),code: 500);
         }
     }
 

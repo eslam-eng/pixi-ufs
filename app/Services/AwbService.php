@@ -98,6 +98,11 @@ class AwbService extends BaseService
         return $this->getQuery()->whereIn('id',$ids)->delete();
     }
 
+    public function delete(int $id)
+    {
+        return $this->getQuery()->where('id',$id)->delete();
+    }
+
 
     public function cancelAwb(int $id, array $data):bool
     {
@@ -151,5 +156,4 @@ class AwbService extends BaseService
             throw new NotFoundException(trans('app.not_found'));
         return $awb;
     }
-
 }

@@ -43,11 +43,9 @@ class ReceiverService extends BaseService
      * @param array $data
      * @return bool
      */
-    public function store(ReceiverDTO $receiverDTO): bool
+    public function store(ReceiverDTO $receiverDTO)
     {
-        $receiver = $this->model->create($receiverDTO->receiverData());
-        $receiver->storeAddress($receiverDTO->addressData());
-        return true;
+        return $this->model->create($receiverDTO->toArray());
     }
 
     /**
@@ -62,7 +60,7 @@ class ReceiverService extends BaseService
         $receiver = $this->findById($id);
         if (!$receiver)
             throw new NotFoundException(trans('lang.not_found'));
-        $receiver->update($receiverDTO->receiverData());
+        $receiver->update($receiverDTO->toArray());
         return true;
     }
 

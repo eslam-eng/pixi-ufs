@@ -6,12 +6,12 @@ use ArchTech\Enums\InvokableCases;
 use ArchTech\Enums\Options;
 use ArchTech\Enums\Values;
 
-enum ImportLogEnum: int
+enum ImportStatusEnum: int
 {
     use Options, Values,InvokableCases;
 
-    case STARTED = 1;
+    case RUNNING = 1;
     case PARTIALLY = 2;
     case FAILED = 3;
-    case COMPLETED = 4;
+    case SUCCESSFUL = 4;
 }

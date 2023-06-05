@@ -20,7 +20,7 @@
             @endif
         </div>
         <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
-            <form action="{{route('awb.store')}}" method="post">
+            <form action="{{route('awbs.store')}}" method="post">
                 @csrf
                 <div class="row">
                     <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">

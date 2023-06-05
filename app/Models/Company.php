@@ -14,7 +14,7 @@ class Company extends Model
 {
     use HasFactory, Filterable;
 
-    protected $fillable = ['name', 'email','ceo', 'phone', 'address', 'city_id', 'area_id', 'show_dashboard', 'store_receivers', 'notes', 'status', 'importation_type'];
+    protected $fillable = ['name', 'email','ceo', 'phone', 'show_dashboard', 'notes', 'status','importation_type'];
 
 
     public function branches(): HasMany

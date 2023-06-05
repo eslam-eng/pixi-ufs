@@ -2,11 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Enums\PaymentTypesEnum;
 use App\Models\Awb;
 use App\Services\AwbService;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Column;
@@ -14,6 +14,17 @@ use Yajra\DataTables\Services\DataTable;
 
 class AwbsDataTable extends DataTable
 {
+    /**
+     * Get query source of dataTable.
+     *
+     * @param \App\Models\Awb $model
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function query(AwbService $awbService): QueryBuilder
+    {
+        return $awbService->datatable(filters: $this->filters, withRelations: $this->withRelations);
+    }
+
     /**
      * Build DataTable class.
      *
@@ -30,48 +41,33 @@ class AwbsDataTable extends DataTable
                     ['name' => "awbs[]",'value'=>$awb->id]
                 );
             })
-            ->editColumn('company_id',function (Awb $awb){
-                return $awb->branch->company->name ;
+            ->editColumn('company_id', function (Awb $awb) {
+                return $awb->company->name;
             })
-            ->editColumn('branch_id',function (Awb $awb){
-                return $awb->branch->name ;
+            ->editColumn('branch_id', function (Awb $awb) {
+                return $awb->branch->name;
             })
-            ->editColumn('department_id',function (Awb $awb){
-                return $awb->department->name ;
+            ->editColumn('created_at', function (Awb $awb) {
+                return $awb->created_at->format('Y-m-d');
             })
-            ->editColumn('payment_type',function (Awb $awb){
-                return PaymentTypesEnum::from($awb->payment_type)->name ;
+            ->addColumn('receiver', function (Awb $awb) {
+                return Arr::get($awb->receiver_data, 'name');
             })
-            ->editColumn('created_at',function (Awb $awb){
-                return $awb->created_at->format('Y-m-d') ;
+            ->addColumn('address', function (Awb $awb) {
+                return Str::limit(Arr::get($awb->receiver_data, 'address1'), 30);
             })
-            ->addColumn('branch_address',function (Awb $awb){
-                return $awb->branch->address ;
+            ->addColumn('status', function (Awb $awb) {
+                return view('components._datatable-badge', [
+                    "class" => 'text-dark badge badge-info badge-pill fw-bold',
+                    "text" => $awb->latestStatus->status->name
+                ]);
             })
-            ->addColumn('receiver',function (Awb $awb){
-               return Arr::get($awb->receiver_data , 'name');
-            })
-            ->addColumn('address',function (Awb $awb){
-                return Arr::get($awb->receiver_data , 'default_address.address');
-            })
-
             ->addColumn('action', function (Awb $awb) {
                 return view(
                     'layouts.dashboard.receivers.components._actions',
-                    ['model' => $awb,'url'=>route('receivers.destroy',$awb->id)]
+                    ['model' => $awb, 'url' => route('awbs.destroy', $awb->id)]
                 );
             });
-    }
-
-    /**
-     * Get query source of dataTable.
-     *
-     * @param \App\Models\Awb $model
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function query(AwbService $awbService): QueryBuilder
-    {
-        return $awbService->datatable(filters: $this->filters, withRelations: $this->withRelations);
     }
 
     /**
@@ -99,18 +95,12 @@ class AwbsDataTable extends DataTable
         return [
             Column::make('check_box')->title('#')->searchable(false)->orderable(false),
             Column::make('code')->title(trans('app.awb_code')),
+            Column::make('user_id')->title(trans('app.company'))->searchable(false)->orderable(false),
             Column::make('company_id')->title(trans('app.company'))->searchable(false)->orderable(false),
             Column::make('branch_id')->title(trans('app.branch'))->searchable(false)->orderable(false),
-            Column::make('department_id')->title(trans('app.department'))->searchable(false)->orderable(false),
-            Column::make('branch_address')->title(trans('app.branch_address'))->searchable(false)->orderable(false),
             Column::make('receiver')->title(trans('app.awb_receiver'))->searchable(false)->orderable(false),
             Column::make('address')->title(trans('app.address'))->searchable(false)->orderable(false),
-            Column::make('payment_type')->title(trans('app.payment_type'))->searchable(false)->orderable(false),
-            Column::make('service_type')->title(trans('app.service_type'))->searchable(false)->orderable(false),
-            Column::make('shipment_type')->title(trans('app.shipment_type'))->searchable(false)->orderable(false),
-            Column::make('zone_price')->title(trans('app.zone_price'))->searchable(false)->orderable(false),
-            Column::make('additional_kg_price')->title(trans('app.additional_kg_price'))->searchable(false)->orderable(false),
-            Column::make('net_price')->title(trans('app.net_price'))->searchable(false)->orderable(false),
+            Column::make('status')->title(trans('app.status'))->searchable(false)->orderable(false),
             Column::make('created_at')->title(trans('app.created_at'))->searchable(false)->orderable(false),
             Column::computed('action')
                 ->exportable(false)

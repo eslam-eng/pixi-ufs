@@ -11,7 +11,7 @@ class ServiceTypes extends Component
     public $options ;
 
     public $selected = null ;
-    public $service_type_field_name = 'service_type' ;
+    public $service_type_field_name = 'service_type_id' ;
     public $service_type_title = 'service_type' ;
     /**
      * Create a new component instance.

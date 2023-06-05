@@ -4,6 +4,7 @@ namespace App\Http\Requests\Receivers;
 
 use App\DTO\Receiver\ReceiverDTO;
 use App\Http\Requests\BaseRequest;
+use Illuminate\Validation\Rule;
 
 class ReceiverUpdateRequest extends BaseRequest
 {
@@ -24,17 +25,20 @@ class ReceiverUpdateRequest extends BaseRequest
     {
         return [
             'name' => 'required|string',
-            'phone' => 'required|numeric|unique:receivers,phone,' . $this->receiver,
+            'phone' => 'required|string|unique:receivers,phone',
             'receiving_company' => 'nullable|string',
-            'branch_id' => 'required|integer|exists:branches,id',
-            'reference' => 'nullable|string|unique:receivers,reference,' . $this->receiver,
+            'branch_id' => 'required|numeric|exists:branches,id',
+            'city_id' => 'required|integer|exists:locations,id',
+            'area_id' => 'required|integer|exists:locations,id',
+            'reference' => ['nullable','string',Rule::unique('receivers','reference')->where('company_id',$this->user->company_id)->ignore($this->receiver)],
             'title' => 'nullable|string',
             'notes' => 'nullable|string',
+            'address' => 'required|string',
+            'lat' => 'string|nullable',
+            'lng' => 'string|nullable',
+            'postal_code' => 'string|nullable',
+            'map_url' => 'string|nullable',
         ];
     }
 
-    public function toReceiverDTO(): \App\DTO\BaseDTO|ReceiverDTO
-    {
-        return ReceiverDTO::fromArray($this->all());
-    }
 }

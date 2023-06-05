@@ -5,6 +5,8 @@
     "/assets/js/custom1.js": "/assets/js/custom1.js",
     "/assets/js/generate-otp.js": "/assets/js/generate-otp.js",
     "/assets/js/table-data.js": "/assets/js/table-data.js",
+    "/assets/js/JsBarcode.all.min.js": "/assets/js/JsBarcode.all.min.js",
+    "/assets/js/qrcode.min.js": "/assets/js/qrcode.min.js",
     "/assets/js/tooltip.js": "/assets/js/tooltip.js",
     "/assets/js/create-awb.js": "/assets/js/create-awb.js",
     "/assets/css/style.css": "/assets/css/style.css",
@@ -17,6 +19,7 @@
     "/assets/img/6.jpg": "/assets/img/6.jpg",
     "/assets/img/card4.png": "/assets/img/card4.png",
     "/assets/img/loader.svg": "/assets/img/loader.svg",
+    "/assets/img/logo.jpeg": "/assets/img/logo.jpeg",
     "/assets/img/mastercard.png": "/assets/img/mastercard.png",
     "/assets/img/visa.png": "/assets/img/visa.png",
     "/assets/switcher/demo.css": "/assets/switcher/demo.css"

@@ -39,6 +39,7 @@
                                 return {
                                     id: receiver.id,
                                     text: receiver.name,
+                                    reference: receiver.reference,
                                 }
                             }),
                             pagination: {

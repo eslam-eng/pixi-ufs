@@ -74,23 +74,28 @@ class PriceTableService extends BaseService
      */
     public function getShipmentPrice(int $from, int $to): Model|Builder
     {
-        $priceTable = $this->getQuery()->where(function ($query) use($from,$to){
-            $query->where('location_from',$from)->where('location_to',$to);
-        })->where(function ($query) use($from,$to){
-            $query->where('location_from',$to)->where('location_to',$from);
+        $priceTable = $this->getQuery()->where(function ($query) use ($from, $to) {
+            $query->where('location_from', $from)->where('location_to', $to);
+        })->where(function ($query) use ($from, $to) {
+            $query->where('location_from', $to)->where('location_to', $from);
         })->first();
-        if (!$priceTable)
-        {
+        if (!$priceTable) {
             //todo get base governorates from settings
-            $base_city_id = Location::where('title','cairo')->first()?->id;
-            $priceTable = $this->getQuery()->where(function ($query) use($from,$to,$base_city_id){
-                $query->where('location_from',$base_city_id)->where('location_to',$from);
-            })->where(function ($query) use($from,$to,$base_city_id){
-                $query->where('location_from',$base_city_id)->where('location_to',$to);
-            })->orderBy('price', 'desc')->first();
+            $base_city_id = Location::where('title', 'cairo')->first()?->id;
+            $priceTable = $this->getQuery()
+                ->where(function ($query) use ($from, $to, $base_city_id) {
+                    $query->where('location_from', $base_city_id)->where('location_to', $from);
+                })
+                ->where(function ($query) use ($from, $to, $base_city_id) {
+                    $query->where('location_from', $base_city_id)->where('location_to', $to);
+                })
+                ->orderBy('price', 'desc')
+                ->first();
         }
-        if (!$priceTable)
-            throw new NotFoundException(trans('app.there_is_not_price_for_selected_destination'));
+        if (!$priceTable) {
+            //todo get base governorates and other location id from settings
+            $priceTable = Location::where('title', 'cairo')->where('title','Other')->first()?->id;
+        }
         return $priceTable;
     }
 }

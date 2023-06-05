@@ -25,11 +25,11 @@ class CompanyShipmentType extends Component
         $user = getAuthUser();
         switch ($user->type){
             case UsersType::SUPERADMIN():
-                $this->shipment_types  = collect();
+                $this->shipment_types  = app()->make(CompanyShipmentTypeService::class)->getAll();
                 break;
             case UsersType::ADMIN() :
-            case UsersType::EMPLOYEE():
-                $this->shipment_types  =app()->make(CompanyShipmentTypeService::class)->getAll(filters:['company_id'=>$this->shipment_types_for_company_id]);
+            case UsersType::EMPLOYEE() || isset($this->shipment_types_for_company_id):
+                $this->shipment_types  = app()->make(CompanyShipmentTypeService::class)->getAll(filters:['company_id'=>$this->shipment_types_for_company_id]);
 
         }
     }

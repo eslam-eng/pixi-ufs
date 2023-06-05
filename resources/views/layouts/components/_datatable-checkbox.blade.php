@@ -6,10 +6,10 @@
             class="custom-control-label custom-control-label-md  tx-17"></span>
     </label>
 </td>
+{{--todo move this to another place for load once not loadded with every row in datatatble--}}
 <script>
     $(document).ready(function () {
         var selected_ids = [];
-
         $('.datatable-checkboxes').change(function() {
             if ($(this).is(':checked')) {
                 // Perform action when checkbox is checked
@@ -21,6 +21,7 @@
                 console.log('Checkbox is unchecked.');
             }
         });
+
         $(".delete-selected-btn").click(function () {
             if (selected_ids.length)
             {
@@ -44,7 +45,7 @@
                             toastr.error(response.message);
                     },
                     error: function(xhr) {
-                        toastr.error(result.message);
+                        toastr.error(xhr);
                     }
                 });
             }else{
@@ -56,6 +57,91 @@
             }
 
         });
-    });
 
+        $(".print_awbs").click(function () {
+            if (selected_ids.length)
+            {
+                var url = $(this).data('url');
+                var csrf = $(this).data('csrf')
+                var reload = $(this).data('reload');
+                var is_duplicated = $(this).data('awbs_duplicated');
+                $.ajax({
+                    url: url,
+                    type: 'post',
+                    data: {
+                        _token:csrf,
+                        ids:selected_ids,
+                        is_duplicated:is_duplicated,
+                    },
+                    success: function(response) {
+                        if (response.status)
+                        {
+                            toastr.success(response.message);
+                            if(reload != true)
+                                $('.dataTable').DataTable().ajax.reload(null, false);
+                            else
+                                window.location.reload();
+                        }
+                        else
+                            toastr.error(response.message);
+                    },
+                    error: function(xhr) {
+                        toastr.error(xhr);
+                    }
+                });
+            }else{
+                $('#print_awbs_modal').modal('toggle');
+                swal({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'please select at least one to print!',
+                })
+            }
+
+        });
+
+        $("#change_awb_status").click(function () {
+            if (selected_ids.length)
+            {
+
+                var url = $(this).data('url');
+                var csrf = $(this).data('csrf')
+                var reload = $(this).data('reload');
+                var status_id = $("#awb_status").val();
+                $.ajax({
+                    url: url,
+                    type: 'post',
+                    data: {
+                        _token:csrf,
+                        ids:selected_ids,
+                        status:status_id
+                    },
+                    success: function(response) {
+                        if (response.status)
+                        {
+                            $('#changeAwbsStatus').modal('toggle');
+                            toastr.success(response.message);
+                            if(reload != true)
+                                $('.dataTable').DataTable().ajax.reload(null, false);
+                            else
+                                window.location.reload();
+                        }
+                        else
+                            toastr.error(response.message);
+                    },
+                    error: function(xhr) {
+                        toastr.error(xhr);
+                    }
+                });
+            }else{
+                $('#changeAwbsStatus').modal('toggle');
+                swal({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'please select at least one to change Status!',
+                })
+            }
+
+        });
+    });
 </script>

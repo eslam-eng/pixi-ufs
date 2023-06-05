@@ -26,6 +26,7 @@ return new class extends Migration
             $table->enum('importation_type', [\App\Enums\ImportTypeEnum::IMPORTWITHREFERENCE->value, \App\Enums\ImportTypeEnum::IMPORTWITHOUTREFERENCE->value])->default(\App\Enums\ImportTypeEnum::IMPORTWITHREFERENCE->value);
             $table->foreignIdFor(\App\Models\Location::class,'city_id')->constrained('locations');
             $table->foreignIdFor(\App\Models\Location::class,'area_id')->constrained('locations');
+            $table->smallInteger('importation_type')->default(\App\Enums\ImportTypeEnum::AWBWITHOUTREFERENCE());
             $table->timestamps();
         });
     }

@@ -39,14 +39,14 @@ class AwbService extends BaseService
      * @throws NotFoundException
      */
     //method for api with pagination
-    public function listing(array $filters = [], array $withRelations = [], int $limit = 3, $perPage = 10): \Illuminate\Contracts\Pagination\CursorPaginator
+    public function listing(array $filters = [], array $withRelations = [], $perPage = 3): \Illuminate\Contracts\Pagination\CursorPaginator
     {
-        return $this->queryGet(filters: $filters, withRelations: $withRelations, limit: $limit)->cursorPaginate($perPage);
+        return $this->queryGet(filters: $filters, withRelations: $withRelations)->cursorPaginate($perPage);
     }
 
-    public function queryGet(array $filters = [], array $withRelations = [], int $limit = 3): Builder
+    public function queryGet(array $filters = [], array $withRelations = []): Builder
     {
-        $awbs = $this->model->query()->with($withRelations)->orderBy('created_at', 'desc')->limit($limit);
+        $awbs = $this->model->query()->with($withRelations)->orderBy('id', 'desc');
         return $awbs->filter(new AwbFilters($filters));
     }
 

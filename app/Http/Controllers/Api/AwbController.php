@@ -24,7 +24,7 @@ class AwbController extends Controller
         try{
             $filters = $request->all();
             $withRelations = [];
-            $awbs = $this->awbService->listing($filters, $withRelations, $request->limit ?? 3);
+            $awbs = $this->awbService->listing($filters, $withRelations, $request->perPage ?? 3);
             return AwbResource::collection($awbs);
         }catch(Exception $e){
             return apiResponse( message: $e->getMessage(), code: 422);

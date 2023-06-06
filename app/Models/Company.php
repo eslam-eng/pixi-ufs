@@ -7,6 +7,7 @@ use App\Traits\Filterable;
 use App\Traits\HasAddresses;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
@@ -25,6 +26,14 @@ class Company extends Model
     public function departments(): HasMany
     {
         return $this->hasMany(Department::class);
+    }
+    public function city(): BelongsTo
+    {
+        return $this->BelongsTo(Location::class);
+    }
+    public function area(): BelongsTo
+    {
+        return $this->BelongsTo(Location::class);
     }
 
     public function scopeSearch($builder, $term)

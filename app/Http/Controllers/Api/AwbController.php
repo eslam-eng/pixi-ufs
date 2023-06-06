@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Services\AwbService;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Awb\AwbResource;
+use App\Http\Resources\Awb\AwbStatisticsResource;
 use App\Http\Resources\AwbStatusResource;
 use Exception;
 
@@ -21,7 +22,7 @@ class AwbController extends Controller
         try{
             $filters = $request->all();
             $withRelations = [];
-            $awbs = $this->awbService->listing($filters, $withRelations);
+            $awbs = $this->awbService->listing($filters, $withRelations, $request->limit ?? 3);
             return AwbResource::collection($awbs);
         }catch(Exception $e){
             return apiResponse( message: $e->getMessage(), code: 422);
@@ -47,6 +48,20 @@ class AwbController extends Controller
             if(!$data)
                 return apiResponse(message: trans('app.something_went_wrong'), code: 422);
             return apiResponse(data: new AwbStatusResource($data), message: trans('app.success_operation'));
+        }catch(Exception $e){
+            return apiResponse( message: $e->getMessage(), code: 422);
+        }
+        
+    }
+
+    public function statistics()
+    {
+        try{
+            $withRelations = ['latestStatus'];
+            $data = $this->awbService->listing(filters: [], withRelations: $withRelations);
+            if(!$data)
+                return apiResponse(message: trans('app.something_went_wrong'), code: 422);
+            return apiResponse(data: new AwbStatisticsResource($data), message: trans('app.success_operation'));
         }catch(Exception $e){
             return apiResponse( message: $e->getMessage(), code: 422);
         }

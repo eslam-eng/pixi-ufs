@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\DTO\Awb\AwbDTO;
 use App\Enums\AwbStatuses;
+use App\Enums\ImageTypeEnum;
 use App\Exceptions\NotFoundException;
 use App\Models\Awb;
 use App\Models\CompanyShipmentType;
@@ -93,6 +94,24 @@ class AwbService extends BaseService
         return $awb->latestStatus;
     }
 
+    public function pod(int $id, array $data): bool
+    {
+        $awb = $this->findById($id);
+        $awb->update(Arr::except($data, 'images'));
+        if (isset($data['images']) && is_array($data['images']))
+            foreach ($data['images'] as $image) {
+                $fileData = FileService::saveImage(file: $image, path: 'uploads/awbs', field_name: 'images');
+                $fileData['type'] = ImageTypeEnum::CARD;
+                $awb->storeAttachment($fileData);
+            }
+        $data = [
+            'user_id'=>$awb->user_id,
+            'awb_status_id'=>AwbStatuses::COLLECTED,
+        ];
+        $awb->history()->create($data);
+        return true;
+    }
+
     public function datatable(array $filters = [], array $withRelations = [])
     {
         $awbs = $this->getQuery()->with($withRelations);
@@ -117,10 +136,4 @@ class AwbService extends BaseService
             throw new NotFoundException(trans('app.not_found'));
         return $awb;
     }
-
-    public function export(array $ids = [],array $withRelations = [])
-    {
-        return $this->queryGet(filters: ['ids'=>$ids],withRelations: $withRelations)->get();
-    }
-
 }

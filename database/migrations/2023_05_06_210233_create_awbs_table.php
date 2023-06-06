@@ -31,6 +31,8 @@ return new class extends Migration {
             $table->float('weight')->default(1);
             $table->float('pieces')->default(1);
             $table->string('actual_recipient')->nullable();
+            $table->string('card_number')->nullable();
+            $table->string('title')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

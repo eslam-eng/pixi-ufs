@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('file_name');
             $table->string('path');
+            $table->string('extention');
+            $table->string('size');
             $table->string('field_name')->nullable();
-            $table->morphs('attachment');
             $table->string('caption')->nullable();
+            $table->morphs('attachmentable');
             $table->tinyInteger('type');
             $table->timestamps();
         });

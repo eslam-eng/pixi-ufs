@@ -23,7 +23,7 @@ class BranchesDropDownSheet implements FromCollection, WithTitle, WithEvents, Wi
     public static function afterSheet(AfterSheet $event): void
     {
         $sheet = $event->sheet;
-        for ($row = 2; $row < 100; $row++) {
+        for ($row = 2; $row < 4; $row++) {
             $objValidation = $sheet->getParent()->getSheet(0)->getCell("G" . $row)->getDataValidation();
             $objValidation->setType(DataValidation::TYPE_LIST);
             $objValidation->setErrorStyle(DataValidation::STYLE_INFORMATION);
@@ -35,7 +35,7 @@ class BranchesDropDownSheet implements FromCollection, WithTitle, WithEvents, Wi
             $objValidation->setError('Value is not in list.');
             $objValidation->setPromptTitle('Pick from list');
             $objValidation->setPrompt('Please pick a value from list.');
-            $objValidation->setFormula1('branches!$A$1:$A$50');
+            $objValidation->setFormula1('companies_branches!$A$1:$A$50');
         }
     }
 
@@ -49,14 +49,14 @@ class BranchesDropDownSheet implements FromCollection, WithTitle, WithEvents, Wi
      */
     public function title(): string
     {
-        return 'branches';
+        return 'companies_branches';
     }
 
 
     public function map($row): array
     {
         return [
-            $row->name . "#".$row->id
+            'company : '.$row->company->name . "#" . $row->company->id ." branch : " . $row->name . "#".$row->id
         ];
     }
 }

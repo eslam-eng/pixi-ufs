@@ -37,10 +37,7 @@ class ImportLogsDatatable extends DataTable
                 return $model->success_count;
             })
             ->editColumn('import_type', function (ImportLog $model) {
-                return view('components._datatable-badge', [
-                    "class" => 'text-dark badge badge-info badge-pill',
-                    "text" => $model->import_type_text
-                ]);
+                return  $model->import_type_text;
             })
             ->editColumn('created_by', function (ImportLog $model) {
                 return $model->user->name;
@@ -59,10 +56,7 @@ class ImportLogsDatatable extends DataTable
                 return $model->user?->department?->name;
             })
             ->editColumn('status_id', function (ImportLog $model) {
-                return view('components._datatable-badge', [
-                    "class" => 'text-dark badge badge-info badge-pill',
-                    "text" => $model->status_text
-                ]);
+                return  $model->status_text;
             })
             ->addColumn('action', function (ImportLog $model) {
                 return view('layouts.dashboard.Imports.components._actions', compact('model'));

@@ -66,7 +66,7 @@ class AwbsSyncWithReferenceSheet implements
                 'receiver_data' => [
                     'city' => $receiver->city->title,
                     'area' => $receiver->area->title,
-                    'address' => $receiver->address,
+                    'address1' => $receiver->address1,
                     'phone1' => $receiver->phone1,
                     'phone2' => $receiver->phone2,
                     'name' => $receiver->name,

@@ -17,8 +17,8 @@ class Receiver extends Model
     protected $fillable = [
         'name', 'phone1','phone2',
         'receiving_company', 'company_id', 'branch_id',
-        'address1', 'address2', 'city_id', 'area_id','lat','lng',
-        'reference', 'title', 'status', 'notes','map_url'
+        'address1', 'address2', 'city_id', 'area_id','lat','lng','map_url',
+        'reference', 'title', 'status', 'notes'
     ];
 
     public function defaultAddress(): MorphOne

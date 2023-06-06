@@ -53,7 +53,7 @@ class AwbsImportSheet implements
             $receiver_area_id = isset($row['area']) ? substr($row['area'], (strpos($row['area'], "#") + 1)) : null;
 
             $city_title = strstr($row['city'], "#", true);
-            $area_title = strstr($row['careaty'], "#", true);
+            $area_title = strstr($row['area'], "#", true);
 
             $priceTable = app(PriceTableService::class)->getShipmentPrice(from: $this->creator->branch->city_id, to: $receiver_city_id);
 
@@ -72,7 +72,7 @@ class AwbsImportSheet implements
                 'receiver_data' => [
                     'city' => $city_title,
                     'area' => $area_title,
-                    'address' => $row['address'],
+                    'address1' => $row['address1'],
                     'phone1' => $row['phone1'],
                     'phone2' => $row['phone2'],
                     'name' => $row['name'],

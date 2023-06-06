@@ -6,10 +6,12 @@ use App\Http\Requests\Awb\AwbStoreRequest;
 use Illuminate\Http\Request;
 use App\Services\AwbService;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Awb\AwbPodRequest;
 use App\Http\Resources\Awb\AwbResource;
 use App\Http\Resources\Awb\AwbStatisticsResource;
 use App\Http\Resources\AwbStatusResource;
 use Exception;
+use Illuminate\Auth\Events\Validated;
 
 class AwbController extends Controller
 {
@@ -62,6 +64,18 @@ class AwbController extends Controller
             if(!$data)
                 return apiResponse(message: trans('app.something_went_wrong'), code: 422);
             return apiResponse(data: new AwbStatisticsResource($data), message: trans('app.success_operation'));
+        }catch(Exception $e){
+            return apiResponse( message: $e->getMessage(), code: 422);
+        }
+        
+    }
+    public function pod(int $id, AwbPodRequest $request)
+    {
+        try{
+            $status = $this->awbService->pod(id: $id, data: $request->Validated());
+            if(!$status)
+                return apiResponse(message: trans('app.something_went_wrong'), code: 422);
+            return apiResponse(message: trans('app.success_operation'));
         }catch(Exception $e){
             return apiResponse( message: $e->getMessage(), code: 422);
         }

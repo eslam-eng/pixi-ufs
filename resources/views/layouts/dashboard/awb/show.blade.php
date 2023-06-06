@@ -19,11 +19,9 @@
                         @lang('app.awb_info')
                     </h5>
                     <div class="card-options">
-                        <a href="javascript:void(0);" class="card-options-collapse"
-                           data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="card-options-fullscreen" data-bs-toggle="card-fullscreen"><i
-                                class="fe fe-maximize"></i>
+
+                        <a role="button" href="{{route('awb-history.create',$awb->id)}}" class="btn btn-secondary">
+                            <i class="fa fa-history"></i> History
                         </a>
                     </div>
                 </div>
@@ -31,51 +29,64 @@
                    <table class="table table-striped">
                        <tbody>
                        <tr class="bg-info">
-                           <td colspan="2">status:</td>
+                           <td colspan="2">@lang('app.status'):</td>
                            <td colspan="2">{{$awb->latestStatus?->status?->name}}</td>
                        </tr>
                        <tr>
-                           <td>code:</td>
+                           <td>@lang('app.code'):</td>
                            <td>{{$awb->code}}</td>
-                           <td>company:</td>
+                           <td>@lang('app.company'):</td>
                            <td>{{$awb->company?->name}}</td>
                        </tr>
 
                        <tr>
-                           <td>branch:</td>
+                           <td>@lang('app.branch'):</td>
                            <td>{{$awb->branch?->name}}</td>
-                           <td>department:</td>
+                           <td>@lang('app.department'):</td>
                            <td>{{$awb->department?->name}}</td>
                        </tr>
 
 {{--                       @if($user->can('show_awbs_price'))--}}
                            <tr>
-                               <td>zone price</td>
+                               <td>@lang('app.zone_price')</td>
                                <td>{{$awb->zone_price}}</td>
-                               <td>additional kg price</td>
+                               <td>@lang('app.additional_kg_price')</td>
                                <td>{{$awb->additional_kg_price}}</td>
                            </tr>
                            <tr>
-                               <td>wight</td>
+                               <td>@lang('app.wight')</td>
                                <td>{{$awb->weight}}</td>
-                               <td>pieces</td>
+                               <td>@lang('app.pieces')</td>
                                <td>{{$awb->pieces}}</td>
                            </tr>
 {{--                       @endif--}}
 
 {{--                       @if($user->can('show_awbs_pod'))--}}
                            <tr>
-                               <td>actual_recipient</td>
-                               <td>{{$awb->actual_recipient}}</td>
-                               <td>additional kg price</td>
-                               <td>{{$awb->additional_kg_price}}</td>
+                               <td colspan="2">@lang('app.additional kg price')</td>
+                               <td colspan="2">{{$awb->additional_kg_price}}</td>
                            </tr>
 {{--                       @endif--}}
 {{--                       @if($user->can('show_awb_pod_attachment'))--}}
+                       <tr>
+                           <td colspan="4" class="text-center bg-info">@lang('app.POD') </td>
+                       </tr>
+                       <tr>
+                           <td colspan="2">@lang('app.actual-receipt') </td>
+                           <td colspan="2">{{$awb->actual_recipient}}</td>
+                       </tr>
+                       <tr>
+                           <td colspan="2">title</td>
+                           <td colspan="2">{{$awb->title}}</td>
+                       </tr>
                            <tr>
-                               <td colspan="2">pod</td>
-                               <td colspan="2"><button class="btn btn-sm btn-info">show Attachments</button></td>
+                               <td colspan="2">card</td>
+                               <td colspan="2">{{$awb->card_number}}</td>
                            </tr>
+                       <tr>
+                           <td colspan="2">@lang('app.pod')</td>
+                           <td colspan="2"><button class="btn btn-sm btn-info">show Attachments</button></td>
+                       </tr>
 {{--                       @endif--}}
 
                        </tbody>
@@ -90,14 +101,6 @@
                     <h5 class="card-title">
                         @lang('app.awb_receiver_info')
                     </h5>
-                    <div class="card-options">
-                        <a href="javascript:void(0);" class="card-options-collapse"
-                           data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="card-options-fullscreen" data-bs-toggle="card-fullscreen"><i
-                                class="fe fe-maximize"></i>
-                        </a>
-                    </div>
                 </div>
                 <div class="card-body">
                     <table class="table table-striped">
@@ -115,7 +118,7 @@
 
                         <tr>
                             <td>address:</td>
-                            <td colspan="3">{!!Arr::get($awb->receiver_data,'address')!!}</td>
+                            <td colspan="3">{!!Arr::get($awb->receiver_data,'address1')!!}</td>
                         </tr>
 
                         <tr>
@@ -148,14 +151,6 @@
                     <h5 class="card-title">
                         @lang('app.awb_additional_info')
                     </h5>
-                    <div class="card-options">
-                        <a href="javascript:void(0);" class="card-options-collapse"
-                           data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="card-options-fullscreen" data-bs-toggle="card-fullscreen"><i
-                                class="fe fe-maximize"></i>
-                        </a>
-                    </div>
                 </div>
                 <div class="card-body">
                     <table class="table table-striped">

@@ -60,7 +60,7 @@ return [
     'reference' => 'Reference',
     'delete_selected'=>'delete selected',
     'export_pdf'=>'Export Pdf',
-    'import'=>'Import Awbs',
+    'import'=>'Import',
     'actions'=>'Actions',
     'show'=>'Show',
     'edit'=>'Edit',

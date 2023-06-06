@@ -84,17 +84,6 @@
                                 @enderror
                             </div>
 
-                            <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.store_receivers')</div>
-                                <input name="store_receivers" value="1"
-                                    placeholder="@lang('app.store_receivers')" type="checkbox" {{ $company->store_receivers == 1 ? "checked":"" }}>
-
-                                @error('store_receivers')
-                                <div class="text-danger"> {{$message}}</div>
-                                @enderror
-                            </div>
-
-
                         </div>
 
                         <div class="row row-sm mb-4">
@@ -196,7 +185,7 @@
                             <tr>
                                 <td>{{$branch->name}}</td>
                                 <td>{{$branch->phone}}</td>
-                                <td>{{$branch->status}}</td>
+                                <td>{{$branch->status ? trans('app.yes'): trans('app.no')}}</td>
                                 <td>{{$branch->address}}</td>
                                 <td>{{$branch->city?->title}}</td>
                                 <td>{{$branch->area?->title}}</td>

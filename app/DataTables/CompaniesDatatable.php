@@ -30,9 +30,18 @@ class CompaniesDatatable extends DataTable
             ->addColumn('departments_count', function (Company $company) {
                 return $company->departments->count();
             })
-            // ->editColumn('branch_id', function (Company $company) {
-            //     return $company->branch->name;
-            // })
+            ->editColumn('show_dashboard', function (Company $company) {
+                return $company->show_dashboard ? trans('app.yes'):trans('app.no');
+            })
+            ->editColumn('status', function (Company $company) {
+                return $company->status ? trans('app.yes'):trans('app.no');
+            })
+            ->editColumn('city_id', function (Company $company) {
+                return $company->city->title;
+            })
+            ->editColumn('area_id', function (Company $company) {
+                return $company->area->title;
+            })
             ->addColumn('action', function (Company $company) {
                 return view(
                     'layouts.dashboard.companies.components._actions',

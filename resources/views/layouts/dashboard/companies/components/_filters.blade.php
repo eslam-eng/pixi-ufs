@@ -39,10 +39,6 @@
                                             <div class="main-content-label mg-b-5">@lang('app.status')</div>
                                             <input name="status" type="checkbox" value="1">
                                         </div>
-                                        <div class="col-lg">
-                                            <div class="main-content-label mg-b-5">@lang('app.store_receivers')</div>
-                                            <input name="store_receivers" type="checkbox" value="1">
-                                        </div>
                                     </div>
                                     <div class="row row-sm mt-4">
                                         <div class="col-lg">

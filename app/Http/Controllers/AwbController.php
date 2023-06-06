@@ -51,7 +51,12 @@ class AwbController extends Controller
     {
         try {
             $user = auth()->user();
-            $withRelations = ['company:id,name', 'branch:id,name', 'department:id,name', 'latestStatus.status', 'additionalInfo'];
+
+            $withRelations = [
+                'company:id,name', 'branch:id,name', 'department:id,name',
+                'additionalInfo','history'
+            ];
+
             $awb = $this->awbService->findById(id: $id, withRelations: $withRelations);
             return view('layouts.dashboard.awb.show', ['awb' => $awb, 'user' => $user]);
         } catch (NotFoundException $exception) {
@@ -62,8 +67,6 @@ class AwbController extends Controller
             ];
             return to_route('awbs.index')->with('toast', $toast);
         }
-
-
     }
 
     public function store(AwbStoreRequest $request)
@@ -129,7 +132,7 @@ class AwbController extends Controller
 
     public function import(AwbFileUploadExcelRequest $request)
     {
-        $user = auth()->user()->load('company:id,name,importation_type', 'branch:id,name,city_id');
+        $user = auth()->user()->load('company:id,name,importation_type', 'branch:id,name,city_id,area_id');
         $importation_type = $user->company?->importation_type;
 
         $awbImportDTO = AwbImportDTO::fromRequest($request);

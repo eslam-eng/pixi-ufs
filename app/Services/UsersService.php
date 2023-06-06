@@ -18,7 +18,7 @@ class UsersService extends BaseService
 
     public function setUserFcmToken($fcm_token)
     {
-        $user = auth()->user();
+        $user = auth('sanctum')->user();
         $user->update(['device_token' => $fcm_token]);
     }
 }

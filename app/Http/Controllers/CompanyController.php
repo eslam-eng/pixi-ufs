@@ -39,17 +39,16 @@ class CompanyController extends Controller
 
     public function store(CompanyStoreRequest $request)
     {
-        // return $request->all();
-        // try {
+        try {
             DB::beginTransaction();
             $companyDTO = $request->toCompanyDTO();
             $this->companyService->store($companyDTO);
             DB::commit();
             return redirect()->route('companies.index');
-        // } catch (Exception $e) {
-        //     DB::rollBack();
-        //     return apiResponse(message: $e->getMessage(), code: 422);
-        // }
+        } catch (Exception $e) {
+            DB::rollBack();
+            return apiResponse(message: $e->getMessage(), code: 422);
+        }
     }
 
     public function getCompaniesForDropDown()

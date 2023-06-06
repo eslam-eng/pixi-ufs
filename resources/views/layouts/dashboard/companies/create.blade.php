@@ -173,18 +173,18 @@
                                             <div class="row row-sm mb-4">
                                                 <div class="col-lg">
                                                     <div class="main-content-label mg-b-5">@lang('app.name')</div>
-                                                    <input class="form-control" name='branches[0][name]' value="{{old('branches[0][name]')}}" placeholder="@lang('app.name')"
+                                                    <input class="form-control" name='branches_name[]' value="{{old('branches_name[]')}}" placeholder="@lang('app.name')"
                                                         type="text">
-                                                    @error('branches[0][name]')
+                                                    @error('branches_name[]')
                                                         <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
                                                     @enderror
                                                 </div>
 
                                                 <div class="col-lg">
                                                     <div class="main-content-label mg-b-5">@lang('app.phone')</div>
-                                                    <input class="form-control" value="{{old('branches[0][phone]')}}" name="branches[0][phone]" placeholder="@lang('app.phone')"
+                                                    <input class="form-control" value="{{old('branches_phone[]')}}" name="branches_phone[]" placeholder="@lang('app.phone')"
                                                         type="text">
-                                                    @error('branches[0][phone]')
+                                                    @error('branches_phone[]')
                                                         <div class="text-danger"> {{$message}}</div>
                                                     @enderror
                                                 </div>
@@ -193,10 +193,10 @@
                                             <div class="row row-sm mb-4">
                                                 <div class="col-lg">
                                                     <div class="main-content-label mg-b-5">@lang('app.status')</div>
-                                                    <input name="branches[0][status]" value="1"
+                                                    <input name="branches_status[]" value="1"
                                                         placeholder="@lang('app.status')" type="checkbox" checked>
-
-                                                    @error('branches[0][status]')
+                
+                                                    @error('branches_status[]')
                                                     <div class="text-danger"> {{$message}}</div>
                                                     @enderror
                                                 </div>
@@ -206,24 +206,24 @@
                                             <div class="row row-sm mb-4">
                                                 <div class="col-lg">
                                                     <div class="main-content-label mg-b-5">@lang('app.address')</div>
-                                                    <input class="form-control" name="branches[0][address]" value="{{old('branches[0][address]')}}"  placeholder="@lang('app.address')"
+                                                    <input class="form-control" name="branches_address[]" value="{{old('branches_address[]')}}"  placeholder="@lang('app.address')"
                                                         type="text">
-
-                                                    @error('branches[0][address]')
+                
+                                                    @error('branches_address[]')
                                                     <div class="text-danger"> {{$message}}</div>
                                                     @enderror
                                                 </div>
                                                 <div class="col-lg">
-                                                    @livewire("locations-drop-down",['city_field_name'=>'branches[0][city_id]', 'area_field_name'=>'branches[0][area_id]'])
-                                                    @error('branches[0][city_id]')
+                                                    @livewire("locations-drop-down",['city_field_name'=>'branches_city_id[]', 'area_field_name'=>'branches_area_id[]'])
+                                                    @error('branches_city_id[]')
                                                     <div class="text-danger"> {{$message}}</div>
                                                     @enderror
-                                                    @error('branches[0][area_id]')
+                                                    @error('branches_area_id[]')
                                                     <div class="text-danger"> {{$message}}</div>
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <button class="btn btn-danger remove-item">X</button>
+                                                           
                                         </div>
                                     </div>
                                 </div>
@@ -257,14 +257,13 @@
                                                 <div class="row row-sm mb-4">
                                                     <div class="col-lg">
                                                         <div class="main-content-label mg-b-5">@lang('app.name')</div>
-                                                        <input class="form-control" name="departments[0][name]" value="{{old('departments[0][name]')}}" placeholder="@lang('app.name')"
+                                                        <input class="form-control" name="departments_name[]" value="{{old('departments_name[]')}}" placeholder="@lang('app.name')"
                                                             type="text">
-                                                        @error('departments[0][name]')
+                                                        @error('departments_name[]')
                                                             <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
                                                         @enderror
                                                     </div>
-                                                </div>
-                                                <button class="btn btn-danger remove-item">X</button>
+                                                </div> 
                                             </div>
                                         </div>
                                     </div>
@@ -307,40 +306,29 @@
     <!-- End Row -->
 
 @endsection
-@section('scripts')
-    <script>
-        $(document).ready(function(){
-            var branchIndex = 1;
-            var departmentIndex = 1;
-            $('.append-branch').on('click', function(){
-
-                var item = $('.branches-items .item').first().html();
-                $('.branches-items').append('<div class="item mt-4">' + item + '</div>');
-                var inputs = $('.branches-items .item:last').find('input');
-                $('.branches-items .item:last [name="branches[0][name]"]').attr('name', 'branches['+ branchIndex +'][name]');
-                $('.branches-items .item:last [name="branches[0][phone]"]').attr('name', 'branches['+ branchIndex +'][phone]');
-                $('.branches-items .item:last [name="branches[0][status]"]').attr('name', 'branches['+ branchIndex +'][status]');
-                $('.branches-items .item:last [name="branches[0][address]"]').attr('name', 'branches['+ branchIndex +'][address]');
-                $('.branches-items .item:last [name="branches[0][city_id]"]').attr('name', 'branches['+ branchIndex +'][city_id]');
-                $('.branches-items .item:last [name="branches[0][area_id]"]').attr('name', 'branches['+ branchIndex +'][area_id]');
-                branchIndex++;
-            });
-
-            $('.append-department').on('click', function(){
-
-                var item = $('.departments-items .item').first().html();
-
-                $('.departments-items').append('<div class="item mt-4">' + item + '</div>');
-                var inputs = $('.departments-items .item:last').find('input');
-                inputs.attr('name', 'departments['+ departmentIndex +'][name]');
-                departmentIndex++;
-            });
-            $('.items').on('click', '.remove-item', function(){
-                $(this).parent().remove();
-            });
-
+<script
+    src="https://code.jquery.com/jquery-3.7.0.js"
+    integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+    crossorigin="anonymous">
+</script>
+<script>
+    $(document).ready(function(){
+        $('.append-branch').on('click', function(){
+            
+            var item = $('.branches-items .item').first().html();
+            $('.branches-items').append('<div class="item mt-4">' + item + '<button class="btn btn-danger remove-item">X</button></div>');
         });
-
-    </script>
-@endsection
-
+        
+        $('.append-department').on('click', function(){
+            
+            var item = $('.departments-items .item').first().html();
+            
+            $('.departments-items').append('<div class="item mt-4">' + item + '<button class="btn btn-danger remove-item">X</button></div>');
+        });
+        $('.items').on('click', '.remove-item', function(){
+            $(this).parent().remove();
+        });
+        
+    });
+    
+</script>

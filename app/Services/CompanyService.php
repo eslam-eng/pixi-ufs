@@ -9,6 +9,7 @@ use App\Models\Company;
 use App\QueryFilters\CompaniesFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 
 class CompanyService extends BaseService
 {
@@ -52,15 +53,19 @@ class CompanyService extends BaseService
     public function store(CompanyDTO $companyDTO): bool
     {
         $company = $this->model->create($companyDTO->companyData());
-        if($companyDTO->branchesData())
-            foreach($companyDTO->branchesData() as $branch)
-            {
-                $branch['company_id'] = $company->id;
-                $this->branchService->store(BranchDTO::fromArray(data: $branch));
-            }
-        if($companyDTO->departmentsData())
-            foreach($companyDTO->departmentsData() as $department)
-                $company->departments()->create($department);
+        
+        $branches = [];
+        $departments = [];
+        
+        foreach($companyDTO->branchesData() as $key1=>$item)
+            foreach($item as $key2=>$value)
+                $branches[$key2][$key1] = $value;
+        $company->branches()->createMany($branches);
+        
+        foreach($companyDTO->departmentsData() as $key1=>$item)
+            foreach($item as $key2=>$value)
+                $departments[$key2][$key1] = $value;
+        $company->departments()->createMany($departments);
         return true;
     }
 

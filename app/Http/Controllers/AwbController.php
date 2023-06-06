@@ -51,7 +51,7 @@ class AwbController extends Controller
     {
         try {
             $user = auth()->user();
-            $withRelations = ['company:id,name', 'branch:id,name', 'department:id,name', 'latestStatus.status', 'additionalInfo'];
+            $withRelations = ['company:id,name', 'branch:id,name', 'department:id,name', 'history', 'latestStatus.status', 'additionalInfo'];
             $awb = $this->awbService->findById(id: $id, withRelations: $withRelations);
             return view('layouts.dashboard.awb.show', ['awb' => $awb, 'user' => $user]);
         } catch (NotFoundException $exception) {

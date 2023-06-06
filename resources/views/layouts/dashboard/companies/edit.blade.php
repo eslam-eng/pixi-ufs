@@ -185,7 +185,7 @@
                             <tr>
                                 <td>{{$branch->name}}</td>
                                 <td>{{$branch->phone}}</td>
-                                <td>{{$branch->status}}</td>
+                                <td>{{$branch->status ? trans('app.yes'): trans('app.no')}}</td>
                                 <td>{{$branch->address}}</td>
                                 <td>{{$branch->city?->title}}</td>
                                 <td>{{$branch->area?->title}}</td>

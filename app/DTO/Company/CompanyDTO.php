@@ -16,7 +16,6 @@ class CompanyDTO extends BaseDTO
         protected bool   $show_dashboard,
         protected ?string $notes,
         protected ?bool  $status,
-        protected ?bool  $store_receivers,
         protected ?int    $city_id,
         protected ?int    $area_id,
         protected ?string $address,
@@ -43,7 +42,6 @@ class CompanyDTO extends BaseDTO
             show_dashboard: isset($request->show_dashboard),
             notes: $request->notes,
             status: isset($request->status),
-            store_receivers: isset($request->store_receivers),
 
             city_id: $request->city_id,
             area_id: $request->area_id,
@@ -75,7 +73,6 @@ class CompanyDTO extends BaseDTO
             show_dashboard: Arr::get($data,'show_dashboard'),
             notes: Arr::get($data,'notes'),
             status: Arr::get($data,'status'),
-            store_receivers: Arr::get($data,'store_receivers'),
 
             city_id: Arr::get($data,'city_id'),
             area_id: Arr::get($data,'area_id'),
@@ -107,7 +104,6 @@ class CompanyDTO extends BaseDTO
             'show_dashboard'=> $this->show_dashboard,
             'notes'=> $this->notes,
             'status'=> $this->status,
-            'store_receivers'=> $this->store_receivers,
 
             'city_id'=> $this->city_id,
             'area_id'=> $this->area_id,
@@ -135,7 +131,6 @@ class CompanyDTO extends BaseDTO
             'show_dashboard'=> $this->show_dashboard,
             'notes'=> $this->notes,
             'status'=> $this->status,
-            'store_receivers'=> $this->store_receivers,
 
             'city_id'=> $this->city_id,
             'area_id'=> $this->area_id,

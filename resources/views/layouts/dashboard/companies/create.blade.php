@@ -69,16 +69,6 @@
                                     </div>
 
                                     <div class="col-lg">
-                                        <div class="main-content-label mg-b-5">@lang('app.notes')</div>
-                                        <input class="form-control" value="{{old('notes')}}" name="notes" placeholder="@lang('app.notes')"
-                                            type="text">
-
-                                        @error('notes')
-                                        <div class="text-danger"> {{$message}}</div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="col-lg">
                                         <div class="main-content-label mg-b-5">@lang('app.status')</div>
                                         <input name="status" value="1"
                                             placeholder="@lang('app.status')" type="checkbox" checked>
@@ -88,21 +78,19 @@
                                         @enderror
                                     </div>
 
-                                    <div class="col-lg">
-                                        <div class="main-content-label mg-b-5">@lang('app.store_receivers')</div>
-                                        <input name="store_receivers" value="1"
-                                            placeholder="@lang('app.store_receivers')" type="checkbox" checked>
-
-                                        @error('store_receivers')
-                                        <div class="text-danger"> {{$message}}</div>
-                                        @enderror
-                                    </div>
-
-
                                 </div>
 
                                 <div class="row row-sm mb-4">
 
+                                    <div class="col-lg">
+                                        <div class="main-content-label mg-b-5">@lang('app.notes')</div>
+                                        <input class="form-control" value="{{old('notes')}}" name="notes" placeholder="@lang('app.notes')"
+                                            type="text">
+
+                                        @error('notes')
+                                        <div class="text-danger"> {{$message}}</div>
+                                        @enderror
+                                    </div>
 
                                     <div class="col-lg">
                                         <div class="main-content-label mg-b-5">@lang('app.num_custom_fields')</div>

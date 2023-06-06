@@ -50,12 +50,6 @@
                                 <input disabled type="checkbox" {{ $company->status == 1 ? "checked":"" }}>
                             </div>
 
-                            <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.store_receivers')</div>
-                                <input disabled type="checkbox" {{ $company->store_receivers == 1 ? "checked":"" }}>
-                            </div>
-
-
                         </div>
 
                         <div class="row row-sm mb-4">

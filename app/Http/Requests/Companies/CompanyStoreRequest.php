@@ -38,19 +38,19 @@ class CompanyStoreRequest extends BaseRequest
             'address' => 'required|string',
 
             'branches_name'=> 'required|array',
-            'branches_name.*'=> 'required',
+            'branches_name.*'=> 'required|string',
             'branches_phone'=> 'required|array',
-            'branches_phone.*'=> 'required',
+            'branches_phone.*'=> 'required|string',
             'branches_address'=> 'required|array',
-            'branches_address.*'=> 'required',
+            'branches_address.*'=> 'required|string',
             'branches_status'=> 'required|array',
-            'branches_status.*'=> 'required',
+            'branches_status.*'=> 'required|string',
             'branches_city_id'=> 'required|array',
-            'branches_city_id.*'=> 'required',
+            'branches_city_id.*'=> 'required|string',
             'branches_area_id'=> 'required|array',
-            'branches_area_id.*'=> 'required',
+            'branches_area_id.*'=> 'required|string',
             'departments_name'=> 'required|array',
-            'departments_name.*'=> 'required',
+            'departments_name.*'=> 'required|string',
         ];
     }
 

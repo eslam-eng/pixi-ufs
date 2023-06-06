@@ -122,7 +122,23 @@ class AwbsImportSheet implements
         $number_of_awbs = count($awbData);
         $fcm_title = $number_of_awbs.'تم انشاء شحنات ';
         $fcm_body = "يرجي التوجه لاستلام الشحنات".$this->creator->company->name."تم انشاء شحنات خاصه بشركه : ";
-        $tokens = User::query()->where('type',UsersType::COURIER())->where('area_id',$this->creator->branch->area_id)->pluck('device_token')->toArray();
+        $users = User::query()->where('type',UsersType::COURIER())->where('area_id',$this->creator->branch->area_id)->select(['id','device_token'])->get();
+        $tokens = $users->pluck('device_token')->toArray();
+        foreach ($users as $user)
+        {
+            $notification_data =  [
+                'title' => [
+                    'ar' => $fcm_title,
+                    'en' => $fcm_title,
+                ],
+                'message' => [
+                    'ar' => $fcm_body,
+                    'en' => $fcm_body,
+                ],
+
+            ];
+            notifyUser($user , $notification_data);
+        }
         app()->make(PushNotificationService::class)->sendToTokens(title: $fcm_title,body: $fcm_body,tokens: $tokens);
 
     }

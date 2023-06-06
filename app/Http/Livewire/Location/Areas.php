@@ -17,7 +17,10 @@ class Areas extends Component
 
     public function mount()
     {
-        $this->areas = app()->make(LocationsService::class)->getAll(filters: ['parent' => $this->areas_for_city_id]);
+        $filters = [];
+        if ($this->areas_for_city_id)
+            $filters['parent'] = $this->areas_for_city_id ;
+        $this->areas = app()->make(LocationsService::class)->getAll(filters:$filters);
     }
 
     public function citySelected($city_id)

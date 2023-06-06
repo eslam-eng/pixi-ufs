@@ -79,7 +79,7 @@ class CompanyDTO extends BaseDTO
             address: Arr::get($data,'address'),
             num_custom_fields: Arr::get($data,'num_custom_fields'),
             importation_type: Arr::get($data,'importation_type'),
-            
+
             branches_name: Arr::get($data,'branches_name'),
             branches_phone: Arr::get($data,'branches_phone'),
             branches_address: Arr::get($data,'branches_address'),
@@ -110,7 +110,7 @@ class CompanyDTO extends BaseDTO
             'address'=> $this->address,
             'num_custom_fields'=> $this->num_custom_fields,
             'importation_type'=> $this->importation_type,
-            
+
             'branches_name'=> $this->branches_name,
             'branches_phone'=> $this->branches_phone,
             'branches_address'=> $this->branches_address,
@@ -155,7 +155,7 @@ class CompanyDTO extends BaseDTO
     public function departmentsData(): array
     {
         return [
-            'name'=>$this->departments_name,
+            'name'=> $this->departments_name,
         ];
     }
 

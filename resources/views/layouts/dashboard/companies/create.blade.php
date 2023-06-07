@@ -227,7 +227,7 @@
                                             <div class="row row-sm mb-4">
 
                                                 <div class="col-lg">
-                                                    @livewire("location.cities",['city_field_name'=>'branches_city_id[]'])
+                                                    @livewire("location.cities",['field_name'=>'branches_city_id[]'])
 
                                                     @error('branches_city_id[]')
                                                     <div class="text-danger"> {{$message}}</div>
@@ -238,7 +238,7 @@
                                                 </div>
 
                                                 <div class="col-lg">
-                                                    @livewire("location.areas",['area_field_name'=>'branches_area_id[]'])
+                                                    @livewire("location.areas",['field_name'=>'branches_area_id[]'])
                                                     @error('branches_area_id[]')
                                                     <div class="text-danger"> {{$message}}</div>
                                                     @enderror

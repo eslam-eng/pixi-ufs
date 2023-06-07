@@ -55,9 +55,10 @@ class CompanyService extends BaseService
         $company = $this->model->create($companyDTO->companyData());
 
         $branches = [];
+        $departments = [];
 
         $branchData = $companyDTO->branchesData();
-        if (count($branchData))
+        if (count($branchData['name']))
         {
             foreach($branchData['name'] as $index=>$value)
                 $branches[] = [
@@ -66,16 +67,20 @@ class CompanyService extends BaseService
                     'city_id'=>$branchData['city_id'][$index],
                     'area_id'=>$branchData['area_id'][$index],
                     'phone'=>$branchData['phone'][$index],
-                    'status'=>$branchData['status'][$index]
+                    'status'=>isset($branchData['status'][$index])
                 ];
 
-            $company->branches()->createMany($branches);
+                $company->branches()->createMany($branches);
         }
 
-        $departmentsData = $companyDTO->departmentsData() ;
-        if (count($departmentsData))
+        $departmentsData = $companyDTO->branchesData();
+        if (count($departmentsData['name']))
         {
-            $company->departments()->createMany($departmentsData);
+            foreach($departmentsData['name'] as $index=>$value)
+                $departments[] = [
+                    'name'=>$value,
+                ];
+            $company->departments()->createMany($departments);
         }
         return true;
     }

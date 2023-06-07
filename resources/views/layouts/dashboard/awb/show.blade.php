@@ -125,7 +125,7 @@
                         <tr>
                             <td colspan="2">@lang('app.pod')</td>
                             <td colspan="2">
-                                <button class="btn btn-sm btn-info">show Attachments</button>
+                                <button class="btn btn-sm btn-info btn-rounded">show Attachments</button>
                             </td>
                         </tr>
                         {{--                       @endif--}}

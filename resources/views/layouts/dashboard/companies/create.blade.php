@@ -251,7 +251,7 @@
                                 <div class="mt-4">
                                     <div class="form-group mb-0 mt-3 justify-content-end">
                                         <div>
-                                            <button type="button" class="btn btn-success append-branch"><i
+                                            <button type="button" class="btn btn-success btn-rounded append-branch"><i
                                                     class="fa fa-plus pe-2"></i></button>
                                         </div>
                                     </div>
@@ -287,7 +287,7 @@
                                 <div class="mt-4">
                                     <div class="form-group mb-0 mt-3 justify-content-end">
                                         <div>
-                                            <button type="button" class="btn btn-success append-department"><i
+                                            <button type="button" class="btn btn-success btn-rounded append-department"><i
                                                     class="fa fa-plus pe-2"></i></button>
                                         </div>
                                     </div>
@@ -307,10 +307,10 @@
                         <div class="card-body">
                             <div class="form-group mb-0 mt-3 justify-content-end">
                                 <div>
-                                    <button type="submit" class="btn btn-success"><i
+                                    <button type="submit" class="btn btn-success btn-rounded"><i
                                             class="fa fa-save pe-2"></i>@lang('app.submit')</button>
 
-                                    <a role="button" href="{{route('companies.index')}}" class="btn btn-danger"><i
+                                    <a role="button" href="{{route('companies.index')}}" class="btn btn-rounded btn-danger"><i
                                             class="fa fa-backward pe-2"></i>@lang('app.back')</a>
                                 </div>
                             </div>
@@ -335,7 +335,7 @@
         $('.append-branch').on('click', function () {
 
             var item = $('.branches-items .item').first().html();
-            $('.branches-items').append('<div class="item mt-4">' + item + '<button class="btn btn-danger remove-item">X</button></div>');
+            $('.branches-items').append('<div class="item mt-4">' + item + '<button class="btn btn-danger btn-rounded remove-item">X</button></div>');
         });
 
         $('.append-department').on('click', function () {

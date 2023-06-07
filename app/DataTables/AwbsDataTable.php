@@ -58,7 +58,7 @@ class AwbsDataTable extends DataTable
             })
             ->addColumn('status', function (Awb $awb) {
                 return view('components._datatable-badge', [
-                    "class" => 'text-dark badge badge-info badge-pill fw-bold',
+                    "class" => 'badge badge-info-transparent',
                     "text" => $awb->latestStatus->status->name
                 ]);
             })

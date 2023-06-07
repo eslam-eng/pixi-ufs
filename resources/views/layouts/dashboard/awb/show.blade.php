@@ -182,17 +182,15 @@
                 <div class="card-body">
                     <table class="table table-striped">
                         <thead class="bg-info">
-                            <th>{{ trans('app.id') }}</th>
-                            <th>{{ trans('app.status') }}</th>
                             <th>{{ trans('app.date') }}</th>
+                            <th>{{ trans('app.status') }}</th>
                             <th>{{ trans('app.description') }}</th>
                         </thead>
                         <tbody>
                         @foreach (Arr::sortDesc($awb->history) as $item)
                         <tr>
-                            <td>{{$item?->status?->id}}</td>
-                            <td>{{$item?->status?->name}}</td>
                             <td>{{$item?->created_at}}</td>
+                            <td>{{$item?->status?->name}}</td>
                             <td>{{$item->comment}}</th>
                         </tr>
                         @endforeach

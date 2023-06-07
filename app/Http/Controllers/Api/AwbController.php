@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Exceptions\NotFoundException;
 use App\Http\Requests\Awb\AwbStoreRequest;
 use Illuminate\Http\Request;
 use App\Services\AwbService;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Awb\AwbCancelRequest;
-use App\Http\Requests\Awb\AwbRescheduleRequest;
-use App\Http\Requests\Awb\AwbStoreAddressAndPhoneRequest;
-use App\Http\Requests\Awb\AwbUpdateReceiverPhone;
+use App\Http\Requests\Awb\AwbPodRequest;
 use App\Http\Resources\Awb\AwbResource;
+use App\Http\Resources\Awb\AwbStatisticsResource;
+use App\Http\Resources\AwbStatusResource;
 use Exception;
+use Illuminate\Auth\Events\Validated;
 
 class AwbController extends Controller
 {
@@ -25,7 +24,7 @@ class AwbController extends Controller
         try{
             $filters = $request->all();
             $withRelations = [];
-            $awbs = $this->awbService->listing($filters, $withRelations);
+            $awbs = $this->awbService->listing($filters, $withRelations, $request->perPage ?? 3);
             return AwbResource::collection($awbs);
         }catch(Exception $e){
             return apiResponse( message: $e->getMessage(), code: 422);
@@ -33,7 +32,7 @@ class AwbController extends Controller
         
     }
 
-    public function awbDetails(Request $request, $id)
+    public function awbDetails($id)
     {
         try{
             $withRelations = ['user', 'latestStatus'];
@@ -44,10 +43,36 @@ class AwbController extends Controller
         }
     }
 
-    public function cancelAwb(AwbCancelRequest $request, $id)
+    public function lastStatus($id)
     {
         try{
-            $status = $this->awbService->cancelAwb(id: $id, data: $request->validated());
+            $data = $this->awbService->lastStatus(id: $id);
+            if(!$data)
+                return apiResponse(message: trans('app.something_went_wrong'), code: 422);
+            return apiResponse(data: new AwbStatusResource($data), message: trans('app.success_operation'));
+        }catch(Exception $e){
+            return apiResponse( message: $e->getMessage(), code: 422);
+        }
+        
+    }
+
+    public function statistics()
+    {
+        try{
+            $withRelations = ['latestStatus'];
+            $data = $this->awbService->listing(filters: [], withRelations: $withRelations);
+            if(!$data)
+                return apiResponse(message: trans('app.something_went_wrong'), code: 422);
+            return apiResponse(data: new AwbStatisticsResource($data), message: trans('app.success_operation'));
+        }catch(Exception $e){
+            return apiResponse( message: $e->getMessage(), code: 422);
+        }
+        
+    }
+    public function pod(int $id, AwbPodRequest $request)
+    {
+        try{
+            $status = $this->awbService->pod(id: $id, data: $request->Validated());
             if(!$status)
                 return apiResponse(message: trans('app.something_went_wrong'), code: 422);
             return apiResponse(message: trans('app.success_operation'));
@@ -56,51 +81,4 @@ class AwbController extends Controller
         }
         
     }
-
-    public function awbReschedule(AwbRescheduleRequest $request, $id)
-    {
-        try{
-            $status = $this->awbService->awbReschedule(id: $id, data: $request->validated());
-            if(!$status)
-                return apiResponse(message: trans('app.something_went_wrong'), code: 422);
-            return apiResponse(message: trans('app.success_operation'));    
-        }catch(Exception $e){
-            return apiResponse( message: $e->getMessage(), code: 422);
-        }
-    }
-    public function updateReceiverPhone(AwbUpdateReceiverPhone $request, $id)
-    {
-        try{
-            $status = $this->awbService->updateReceiverPhone(id: $id, data: $request->validated());
-            if(!$status)
-                return apiResponse(message: trans('app.something_went_wrong'), code: 422);
-            return apiResponse(message: trans('app.success_operation'));    
-        }catch(Exception $e){
-            return apiResponse( message: $e->getMessage(), code: 422);
-        }
-    }
-
-    public function AddPhoneAndAddress(AwbStoreAddressAndPhoneRequest $request, $id)
-    {
-        try{
-            $status = $this->awbService->AddPhoneAndAddress(id: $id, data: $request->validated());
-            if(!$status)
-                return apiResponse(message: trans('app.something_went_wrong'), code: 422);
-            return apiResponse(message: trans('app.success_operation'));    
-        }catch(Exception $e){
-            return apiResponse( message: $e->getMessage(), code: 422);
-        }
-    }
-
-    public function create()
-    {
-        return view('layouts.dashboard.awb.create');
-    }
-
-    public function store(AwbStoreRequest $request)
-    {
-
-
-    }
-
 }

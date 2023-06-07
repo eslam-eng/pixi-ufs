@@ -24,11 +24,20 @@
                             </div>
 
                             <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.receiver_phone')</div>
-                                <input class="form-control" value="{{old('phone')}}" name="phone" placeholder="@lang('app.receiver_phone')"
+                                <div class="main-content-label mg-b-5">@lang('app.phone1')</div>
+                                <input class="form-control" value="{{old('phone1')}}" name="phone1" placeholder="@lang('app.receiver_phone')"
                                        type="text" required>
-                                @error('phone')
+                                @error('phone1')
                                     <div class="text-danger"> {{$message}}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-lg">
+                                <div class="main-content-label mg-b-5">@lang('app.phone2')</div>
+                                <input class="form-control" value="{{old('phone2')}}" name="phone2" placeholder="@lang('app.receiver_phone')"
+                                       type="text" required>
+                                @error('phone2')
+                                <div class="text-danger"> {{$message}}</div>
                                 @enderror
                             </div>
                         </div>
@@ -37,9 +46,19 @@
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.receiving_company')</div>
                                 <input class="form-control" value="{{old('receiving_company')}}" name="receiving_company"
-                                       placeholder="@lang('app.receiving_company')" type="text" required>
+                                       placeholder="@lang('app.receiving_company')" type="text">
 
                                 @error('receiving_company')
+                                <div class="text-danger"> {{$message}}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-lg">
+                                <div class="main-content-label mg-b-5">@lang('app.receiving_branch')</div>
+                                <input class="form-control" value="{{old('receiving_branch')}}" name="receiving_branch"
+                                       placeholder="@lang('app.receiving_branch')" type="text">
+
+                                @error('receiving_branch')
                                 <div class="text-danger"> {{$message}}</div>
                                 @enderror
                             </div>
@@ -55,27 +74,51 @@
                             </div>
                         </div>
 
-                       <div>
-                           <livewire:company-with-branch-and-departments company_name="company_id" branch_name="branch_id"/>
-                           @error('branch_id')
-                           <div class="text-danger"> {{$message}}</div>
-                           @enderror
-                       </div>
+
+                        <div class="row row-sm mb-4">
+                            <div class="col-lg">
+                                <livewire:company/>
+                                @error('company_id')
+                                <div class="text-danger"> {{$message}}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-lg">
+                               <livewire:branch/>
+                                @error('branch')
+                                    <div class="text-danger"> {{$message}}</div>
+                                @enderror
+                            </div>
+                        </div>
 
                         <div class="card card-success mt-4">
                             <div class="card-header pb-2"><h5 class="card-title mb-0 pb-0">Address Info</h5></div>
                             <div class="card-body text-success">
                                 <div class="row row-sm mb-4">
                                     <div class="col-lg">
-                                        <div class="main-content-label mg-b-5">@lang('app.address')</div>
-                                        <input class="form-control" name="address" value="{{old('address')}}"  placeholder="@lang('app.address')"
+                                        <div class="main-content-label mg-b-5">@lang('app.address1')</div>
+                                        <input class="form-control" name="address1" value="{{old('address1')}}"  placeholder="@lang('app.address')"
                                                type="text" required>
 
-                                        @error('address')
+                                        @error('address1')
                                         <div class="text-danger"> {{$message}}</div>
                                         @enderror
                                     </div>
 
+                                    <div class="col-lg">
+                                        <div class="main-content-label mg-b-5">@lang('app.address2')</div>
+                                        <input class="form-control" name="address2" value="{{old('address2')}}"  placeholder="@lang('app.address')"
+                                               type="text" required>
+
+                                        @error('address2')
+                                        <div class="text-danger"> {{$message}}</div>
+                                        @enderror
+                                    </div>
+
+
+                                </div>
+
+                                <div class="row row-sm mb-4">
                                     <div class="col-lg">
                                         <div class="main-content-label mg-b-5">@lang('app.lat')</div>
                                         <input class="form-control" value="{{old('lat')}}" name="lat" placeholder="@lang('app.lat')"
@@ -84,15 +127,6 @@
                                     <div class="col-lg">
                                         <div class="main-content-label mg-b-5">@lang('app.lng')</div>
                                         <input class="form-control" value="{{old('lng')}}" name="lng" placeholder="@lang('app.lng')"
-                                               type="text">
-                                    </div>
-                                </div>
-
-                                <div class="row row-sm mb-4">
-                                    <div class="col-lg">
-                                        <div class="main-content-label mg-b-5">@lang('app.postal_code')</div>
-                                        <input class="form-control" value="{{old('postal_code')}}" name="postal_code"
-                                               placeholder="@lang('app.postal_code')"
                                                type="text">
                                     </div>
 

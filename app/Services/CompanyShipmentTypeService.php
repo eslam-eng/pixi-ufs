@@ -4,8 +4,10 @@ namespace App\Services;
 
 use App\DTO\ServiceType\ServiceTypeDTO;
 use App\Exceptions\NotFoundException;
-use App\Models\AwbServiceType;
 use App\Models\CompanyShipmentType;
+use App\QueryFilters\BranchesFilters;
+use App\QueryFilters\CompanyShipmentTypeFilters;
+use Illuminate\Database\Eloquent\Builder;
 
 class CompanyShipmentTypeService extends BaseService
 {
@@ -17,12 +19,6 @@ class CompanyShipmentTypeService extends BaseService
     public function getModel(): CompanyShipmentType
     {
         return $this->model;
-    }
-
-
-    public function getAll(array $filters = [], array $withRelations = []): \Illuminate\Database\Eloquent\Collection|array
-    {
-        return $this->getModel()->all();
     }
 
     /**
@@ -62,5 +58,17 @@ class CompanyShipmentTypeService extends BaseService
         if (!$serviceType)
             throw new NotFoundException(trans('lang.not_found'));
         return $serviceType->delete();
+    }
+
+
+    public function CompanyShipmentTypeQueryBuilder(array $filters = [], array $withRelations = []): Builder
+    {
+        $branches = $this->getQuery()->with($withRelations);
+        return $branches->filter(new CompanyShipmentTypeFilters($filters));
+    }
+
+    public function getAll(array $filters = [], array $withRelations = []): \Illuminate\Database\Eloquent\Collection|array
+    {
+        return $this->CompanyShipmentTypeQueryBuilder(filters: $filters,withRelations: $withRelations)->get();
     }
 }

@@ -4,17 +4,17 @@ namespace App\Services;
 
 use App\DTO\Awb\AwbDTO;
 use App\Enums\AwbStatuses;
-use App\Enums\PaymentTypesEnum;
-use App\Exceptions\NotFoundException;
+use App\Enums\ImageTypeEnum;
 use App\Exceptions\NotFoundException;
 use App\Models\Awb;
 use App\Models\CompanyShipmentType;
-use App\Models\PriceTable;
-use App\QueryFilters\AwbsFilter;
 use App\Models\Receiver;
 use App\QueryFilters\AwbFilters;
+use App\QueryFilters\AwbsFilter;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+
 
 class AwbService extends BaseService
 {
@@ -39,14 +39,14 @@ class AwbService extends BaseService
      * @throws NotFoundException
      */
     //method for api with pagination
-    public function listing(array $filters = [], array $withRelations = [], $perPage = 10): \Illuminate\Contracts\Pagination\CursorPaginator
+    public function listing(array $filters = [], array $withRelations = [], $perPage = 3): \Illuminate\Contracts\Pagination\CursorPaginator
     {
         return $this->queryGet(filters: $filters, withRelations: $withRelations)->cursorPaginate($perPage);
     }
 
     public function queryGet(array $filters = [], array $withRelations = []): Builder
     {
-        $awbs = $this->model->query()->with($withRelations);
+        $awbs = $this->model->query()->with($withRelations)->orderBy('id', 'desc');
         return $awbs->filter(new AwbFilters($filters));
     }
 
@@ -88,10 +88,34 @@ class AwbService extends BaseService
         return $awb;
     }
 
+    public function lastStatus(int $id)
+    {
+        $awb = $this->findById($id);
+        return $awb->latestStatus;
+    }
+
+    public function pod(int $id, array $data): bool
+    {
+        $awb = $this->findById($id);
+        $awb->update(Arr::except($data, 'images'));
+        if (isset($data['images']) && is_array($data['images']))
+            foreach ($data['images'] as $image) {
+                $fileData = FileService::saveImage(file: $image, path: 'uploads/awbs', field_name: 'images');
+                $fileData['type'] = ImageTypeEnum::CARD;
+                $awb->storeAttachment($fileData);
+            }
+        $data = [
+            'user_id'=>$awb->user_id,
+            'awb_status_id'=>AwbStatuses::COLLECTED,
+        ];
+        $awb->history()->create($data);
+        return true;
+    }
+
     public function datatable(array $filters = [], array $withRelations = [])
     {
         $awbs = $this->getQuery()->with($withRelations);
-        return $awbs->filter(new AwbsFilter($filters));
+        return $awbs->filter(new AwbFilters($filters));
     }
 
 
@@ -100,50 +124,9 @@ class AwbService extends BaseService
         return $this->getQuery()->whereIn('id',$ids)->delete();
     }
 
-
-    public function cancelAwb(int $id, array $data):bool
+    public function delete(int $id)
     {
-        $awb = $this->find($id);
-        $data = [
-            'user_id'=>$awb->user_id,
-            'awb_status_id'=>1,
-            'comment'=>$data['comment'],
-        ];
-        $awb->history()->create($data);
-        return true;
-    }
-
-    //there is no date to update it
-    public function awbReschedule(int $id, array $data):bool
-    {
-        $awb = $this->find($id);
-        $data = [
-            'user_id'=>$awb->user_id,
-            'awb_status_id'=>$data['status_id'],
-        ];
-        $awb->history()->create($data);
-        return true;
-    }
-
-    public function updateReceiverPhone(int $id, array $data):bool
-    {
-        $receiver = Receiver::find($id);
-        $receiver->update([
-            'phone'=>$data['phone'],
-        ]);
-        return true;
-    }
-
-    public function AddPhoneAndAddress(int $id, array $data):bool
-    {
-        $receiver = Receiver::find($id);
-        if(!$receiver)
-            throw new NotFoundException(trans('app.not_found'));
-        $receiver->update([
-            'phone'=>$data['phone'],
-        ]);
-        $receiver->storeAddress(Arr::except($data, $data['phone']));
-        return true;
+        return $this->getQuery()->where('id',$id)->delete();
     }
 
     public function find(int $id, array $relations = [])
@@ -153,5 +136,4 @@ class AwbService extends BaseService
             throw new NotFoundException(trans('app.not_found'));
         return $awb;
     }
-
 }

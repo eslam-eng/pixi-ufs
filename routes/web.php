@@ -3,6 +3,8 @@
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AwbController;
+use App\Http\Controllers\AwbHistoryController;
+use App\Http\Controllers\ImportLogsController;
 use App\Http\Livewire\Emptypage;
 use \App\Http\Livewire\Switcherpage;
 use App\Http\Controllers\ReceiverController;
@@ -38,22 +40,35 @@ Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
         Route::get('receivers',[ReceiverController::class,'search'])->name('receivers.search');
     });
     Route::resource('receivers',ReceiverController::class);
+    Route::get('receivers-download-template/form',[ReceiverController::class,'importForm'])->name('receivers-download-template.form');
+    Route::get('receivers-download-template',[ReceiverController::class,'downloadReceiversTemplate'])->name('receivers-download-template');
+    Route::post('receivers-import',[ReceiverController::class,'import'])->name('receivers-import');
     Route::group(['prefix' => 'addresses' ],function (){
         Route::get('{id}/type/{type}',[AddressController::class,'create'])->name('addresses.create');
         Route::get('{id}/set-default',[AddressController::class,'create'])->name('addresses.set-default');
         Route::get('{id}/edit',[AddressController::class,'edit'])->name('address.edit');
         Route::put('{id}',[AddressController::class,'update'])->name('address.update');
     });
-    Route::group(['prefix' => 'awbs' ],function (){
-        Route::get('/',[AwbController::class,'index'])->name('awb.index');
-        Route::get('/create',[AwbController::class,'create'])->name('awb.create');
+    Route::resource('awbs',AwbController::class);
+
+    Route::delete('awbs-delete-multiple',[AwbController::class,'deleteMultiple'])->name('awb.delete-multiple');
+
+    Route::post('awbs-print-three-in-in-one',[AwbController::class,'printThreeInOnePage'])->name('awbs-print3*1');
+    Route::post('awbs-change-status',[AwbController::class,'changeStatus'])->name('awbs-change-status');
+
+    Route::group(['prefix' => 'awb-history'],function (){
+        Route::get('{awb_id}/create',[AwbHistoryController::class,'create'])->name('awb-history.create');
+    });
+    Route::group(['prefix' => 'awb' ],function (){
         Route::get('/imports',[AwbController::class,'importForm'])->name('awb.import-form');
-        Route::get('/download-template',[AwbController::class,'importForm'])->name('awb.download-template');
-        Route::post('/',[AwbController::class,'store'])->name('awb.store');
-        Route::delete('/delete',[AwbController::class,'destroy'])->name('awb.destroy');
+        Route::post('/imports',[AwbController::class,'import'])->name('awb.import');
+        Route::get('/download-template',[AwbController::class,'downloadTemplate'])->name('awb.download-template');
     });
 
+    Route::get('import-logs',[ImportLogsController::class,'index'])->name('import-logs.index');
+
     Route::get('switcherpage', Switcherpage::class)->name('switcherpage');
+
 });
 
 Route::get('/clear-cache', function () {

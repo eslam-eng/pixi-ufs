@@ -38,13 +38,19 @@ class ReceiversSheet implements
         return [
             'reference',
             'name',
-            'phone',
+            'phone1',
+            'city',//D
+            'area',//E
+            'phone2',
+            'branch',
+            'address1',
+            'address2',
+            'lat',
+            'lng',
+            'map_url',
             'receiving_company',
+            'receiving_branch',
             'title',
-            'address',
-            'branch', // f
-            'city',//g
-            'area',//h
         ];
     }
 }

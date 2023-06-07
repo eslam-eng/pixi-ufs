@@ -8,6 +8,7 @@ use App\Models\Receiver;
 use App\QueryFilters\ReceiversFilters;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 
 class ReceiverService extends BaseService
 {
@@ -43,11 +44,9 @@ class ReceiverService extends BaseService
      * @param array $data
      * @return bool
      */
-    public function store(ReceiverDTO $receiverDTO): bool
+    public function store(ReceiverDTO $receiverDTO)
     {
-        $receiver = $this->model->create($receiverDTO->receiverData());
-        $receiver->storeAddress($receiverDTO->addressData());
-        return true;
+        return $this->model->create($receiverDTO->toArray());
     }
 
     /**
@@ -62,7 +61,7 @@ class ReceiverService extends BaseService
         $receiver = $this->findById($id);
         if (!$receiver)
             throw new NotFoundException(trans('lang.not_found'));
-        $receiver->update($receiverDTO->receiverData());
+        $receiver->update($receiverDTO->toArray());
         return true;
     }
 
@@ -75,10 +74,46 @@ class ReceiverService extends BaseService
     public function destroy(int $id): bool
     {
         $receiver = $this->findById($id);
-        if (!$receiver)
-            throw new NotFoundException(trans('lang.not_found'));
         $receiver->delete();
         $receiver->deleteAddresses();
+        return true;
+    }
+
+    public function updateReceiverPhone(int $id, array $data):bool
+    {
+        $receiver = $this->findById($id);
+        $receiver->update([
+            'phone2'=>$data['phone'],
+        ]);
+        return true;
+    }
+
+    public function updateReceiverAddress(int $id, array $data):bool
+    {
+        $receiver = $this->findById($id);
+        $receiver->update([
+            'address1'=>$data['address'],
+            'lat'=>$data['lat'],
+            'lng'=>$data['lng'],
+            'map_url'=>$data['map_url'],
+            'city_id'=>$data['city_id'],
+            'area_id'=>$data['area_id'],
+        ]);
+        return true;
+    }
+
+    public function AddPhoneAndAddress(int $id, array $data):bool
+    {
+        $receiver = $this->findById($id);
+        $receiver->update([
+            'address1'=>$data['address'],
+            'lat'=>$data['lat'],
+            'lng'=>$data['lng'],
+            'map_url'=>$data['map_url'],
+            'city_id'=>$data['city_id'],
+            'area_id'=>$data['area_id'],
+            'phone2'=>$data['phone'],
+        ]);
         return true;
     }
 

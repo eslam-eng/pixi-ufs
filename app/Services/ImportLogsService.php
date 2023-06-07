@@ -18,16 +18,15 @@ class ImportLogsService extends BaseService
         return $this->model;
     }
 
-    //method for api with pagination
-    public function listing(array $filters = [], $withRelations = [], $perPage = 10): \Illuminate\Contracts\Pagination\CursorPaginator
-    {
-        return $this->importLogsQueryBuilder(filters: $filters, withRelations: $withRelations)->cursorPaginate($perPage);
-    }
-
     public function importLogsQueryBuilder(array $filters = [], array $withRelations = []): Builder
     {
         $addresses = $this->getQuery()->with($withRelations);
         return $addresses->filter(new ImportLogsFilter($filters));
+    }
+
+    public function datatable(array $filters = [], $withRelations = []): Builder
+    {
+        return $this->importLogsQueryBuilder(filters: $filters, withRelations: $withRelations)->orderByDesc('id');
     }
 
 }

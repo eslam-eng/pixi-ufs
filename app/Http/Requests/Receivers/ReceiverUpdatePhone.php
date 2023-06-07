@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Awb;
+namespace App\Http\Requests\Receivers;
 
 use App\DTO\Address\AddressDTO;
 use App\DTO\AwbHistory\AwbHistoryDTO;
 use App\Http\Requests\BaseRequest;
 
-class AwbUpdateReceiverPhone extends BaseRequest
+class ReceiverUpdatePhone extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.

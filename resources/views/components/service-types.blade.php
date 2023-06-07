@@ -4,7 +4,7 @@
             id="service_type" name="{{$service_type_field_name}}"
             aria-label="Select service type">
         @foreach($options as $service)
-            <option value="{{$service->name}}"
+            <option value="{{$service->id}}"
                     @if(!is_null($selected) && ($service->name == $selected)) selected @endif
             >{{$service->name}}</option>
         @endforeach

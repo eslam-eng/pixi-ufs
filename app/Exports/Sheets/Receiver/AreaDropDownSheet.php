@@ -30,8 +30,8 @@ class AreaDropDownSheet implements FromCollection, WithTitle, WithEvents, WithMa
     public static function afterSheet(AfterSheet $event)
     {
         $sheet = $event->sheet;
-        for ($row = 2; $row < 100; $row++) {
-            $objValidation = $sheet->getParent()->getSheet(0)->getCell("I" . $row)->getDataValidation();
+        for ($row = 2; $row < 4; $row++) {
+            $objValidation = $sheet->getParent()->getSheet(0)->getCell("E" . $row)->getDataValidation();
             $objValidation->setType(DataValidation::TYPE_LIST);
             $objValidation->setErrorStyle(DataValidation::STYLE_INFORMATION);
             $objValidation->setAllowBlank(false);
@@ -41,7 +41,6 @@ class AreaDropDownSheet implements FromCollection, WithTitle, WithEvents, WithMa
             $objValidation->setErrorTitle('Input error');
             $objValidation->setError('Value is not in list.');
             $objValidation->setPromptTitle('Pick from list');
-            $objValidation->setPrompt('Please pick a value from list.');
             $objValidation->setFormula1('areas!$A$1:$A$50');
         }
     }

@@ -2,11 +2,9 @@
 
 namespace App\Http\Requests\Awb;
 
-use App\DTO\Address\AddressDTO;
-use App\DTO\AwbHistory\AwbHistoryDTO;
 use App\Http\Requests\BaseRequest;
 
-class AwbCancelRequest extends BaseRequest
+class AwbPodRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +22,11 @@ class AwbCancelRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'comment'=>'required|string',
+            'actual_recipient'=>'required|string',
+            'card_number'=>'nullable|string|min:14|max:14',
+            'title'=>'nullable|string',
+            'images'=>'nullable|array',
+            'images.*'=>'required|image|mimes:png,jpg',
         ];
     }
 

@@ -23,6 +23,8 @@
                     <div class="breadcrumb-header justify-content-between">
                         <div class="left-content">
                             <a class="btn ripple btn-primary" href="{{route('receivers.create')}}"><i class="fe fe-plus me-2"></i>{{ trans('app.new') }}</a>
+                            <a role="button" href="{{route('receivers-download-template.form')}}" class="btn btn-success"><i class="fa fa-upload pe-2"></i>@lang('app.import')</a>
+
                         </div>
 {{--                        <div class="justify-content-center">--}}
 {{--                            <button type="button" class="btn btn-secondary">--}}

@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\Api\AddressController;
 use App\Http\Controllers\Api\AwbController;
+use App\Http\Controllers\Api\AwbHistoryController;
+use App\Http\Controllers\Api\CancelReasonController;
+use App\Http\Controllers\Api\ReceiverController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,10 +22,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/awbs', [AwbController::class, 'index']);
+Route::post('/awbs', [AwbController::class, 'index']);
+Route::get('/awbs/statistics', [AwbController::class, 'statistics']);
+Route::post('/awbs/pod/{id}', [AwbController::class, 'pod']);
 Route::post('/awbs/details/{id}', [AwbController::class, 'awbDetails']);
-Route::post('/awbs/cancel/{id}', [AwbController::class, 'cancelAwb']);
-Route::post('/awbs/reschedule/{id}', [AwbController::class, 'awbReschedule']);
-Route::post('/awbs/update-phone/{id}', [AwbController::class, 'updateReceiverPhone']);
-Route::post('/awbs/add-phone-and-address/{id}', [AwbController::class, 'AddPhoneAndAddress']);
+Route::post('/awbs/status/{id}', [AwbHistoryController::class, 'awbStatus']);
+Route::get('/awbs/status/{id}', [AwbController::class, 'lastStatus']);
+Route::post('/receivers/update-phone/{id}', [ReceiverController::class, 'updateReceiverPhone']);
+Route::post('/receivers/update-address/{id}', [ReceiverController::class, 'updateReceiverAddress']);
+Route::post('/receivers/update-phone-and-address/{id}', [ReceiverController::class, 'AddPhoneAndAddress']);
 Route::resource('addresses', AddressController::class);

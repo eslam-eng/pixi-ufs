@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('import_logs', function (Blueprint $table) {
             $table->id();
-            $table->json('errors')->nullable();
+            $table->longText('errors')->nullable();
             $table->smallInteger('import_type');
             $table->integer('total_count');
-            $table->integer('failed_count');
+            $table->integer('success_count')->default(0);
             $table->smallInteger('status_id');
-            $table->foreignIdFor(\App\Models\Company::class)->constrained();
+            $table->foreignIdFor(\App\Models\User::class,'created_by')->constrained('users');
             $table->timestamps();
         });
     }

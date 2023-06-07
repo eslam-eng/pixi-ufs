@@ -59,21 +59,26 @@ class CompanyService extends BaseService
         $departments = [];
 
         $branchData = $companyDTO->branchesData();
+        if (count($branchData))
+        {
+            foreach($branchData['name'] as $index=>$value)
+                $branches[] = [
+                    'name'=>$value,
+                    'address'=>$branchData['address'][$index],
+                    'city_id'=>$branchData['city_id'][$index],
+                    'area_id'=>$branchData['area_id'][$index],
+                    'phone'=>$branchData['phone'][$index],
+                    'status'=>$branchData['status'][$index]
+                ];
 
-        foreach($branchData['name'] as $index=>$value)
-            $branches[] = [
-                'name'=>$value,
-                'address'=>$branchData['address'][$index],
-                'city_id'=>$branchData['city_id'][$index],
-                'area_id'=>$branchData['area_id'][$index],
-                'phone'=>$branchData['phone'][$index],
-                'status'=>$branchData['status'][$index]
-            ];
+            $company->branches()->createMany($branches);
+        }
 
-        $company->branches()->createMany($branches);
         $departmentsData = $companyDTO->departmentsData() ;
-
-        $company->departments()->createMany($departmentsData);
+        if (count($departmentsData))
+        {
+            $company->departments()->createMany($departmentsData);
+        }
         return true;
     }
 

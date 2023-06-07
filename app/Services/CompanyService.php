@@ -53,19 +53,27 @@ class CompanyService extends BaseService
     public function store(CompanyDTO $companyDTO): bool
     {
         $company = $this->model->create($companyDTO->companyData());
-        
+
         $branches = [];
+
         $departments = [];
-        
-        foreach($companyDTO->branchesData() as $key1=>$item)
-            foreach($item as $key2=>$value)
-                $branches[$key2][$key1] = $value;
+
+        $branchData = $companyDTO->branchesData();
+
+        foreach($branchData['name'] as $index=>$value)
+            $branches[] = [
+                'name'=>$value,
+                'address'=>$branchData['address'][$index],
+                'city_id'=>$branchData['city_id'][$index],
+                'area_id'=>$branchData['area_id'][$index],
+                'phone'=>$branchData['phone'][$index],
+                'status'=>$branchData['status'][$index]
+            ];
+
         $company->branches()->createMany($branches);
-        
-        foreach($companyDTO->departmentsData() as $key1=>$item)
-            foreach($item as $key2=>$value)
-                $departments[$key2][$key1] = $value;
-        $company->departments()->createMany($departments);
+        $departmentsData = $companyDTO->departmentsData() ;
+
+        $company->departments()->createMany($departmentsData);
         return true;
     }
 
@@ -103,7 +111,7 @@ class CompanyService extends BaseService
         $company = Company::with($relations)->find($id);
         if (!$company)
             throw new NotFoundException(trans('lang.not_found'));
-        
+
         return $company;
     }
 

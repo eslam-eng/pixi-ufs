@@ -36,10 +36,8 @@ class GeneralNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'model_id' => $this->notification_data['model_id'],
             'title' => $this->notification_data['title'],
             'message' => $this->notification_data['message'],
-            'type' => $this->notification_data['type'],
         ];
     }
 }

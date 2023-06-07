@@ -120,9 +120,10 @@ class AwbsImportSheet implements
 
 //        $awbs_areas = array_unique($awbs_areas);
         $number_of_awbs = count($awbData);
-        $fcm_title = $number_of_awbs.'تم انشاء شحنات ';
-        $fcm_body = "يرجي التوجه لاستلام الشحنات".$this->creator->company->name."تم انشاء شحنات خاصه بشركه : ";
-        $users = User::query()->where('type',UsersType::COURIER())->where('area_id',$this->creator->branch->area_id)->select(['id','device_token'])->get();
+        $fcm_title = 'تم انشاء شحنات '.$number_of_awbs;
+        $fcm_body = $this->creator->company->name . 'يرجي التوجه لاستلام الشحنات من شركه :';
+        $users = User::query()
+            ->where('type',UsersType::COURIER())->where('area_id',$this->creator->branch->area_id)->select(['id','device_token'])->get();
         $tokens = $users->pluck('device_token')->toArray();
         foreach ($users as $user)
         {

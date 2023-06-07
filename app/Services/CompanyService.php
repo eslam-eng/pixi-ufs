@@ -90,8 +90,6 @@ class CompanyService extends BaseService
     public function update(int $id, CompanyDTO $companyDTO): bool
     {
         $company = $this->findById($id);
-        if (!$company)
-            throw new NotFoundException(trans('lang.not_found'));
         $company->update($companyDTO->toArray());
         return true;
     }

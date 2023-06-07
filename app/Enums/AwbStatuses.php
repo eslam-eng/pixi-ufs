@@ -10,7 +10,7 @@ enum AwbStatuses: int
 {
     use Options, Values, InvokableCases;
 
-    case PREPARE = 1;
+    case CREATE_SHIPMENT = 1;
     case DELIVERED = 2;
     case RETURN_PAID = 3;
     case RETURN_WITHOUT_PAID = 4;

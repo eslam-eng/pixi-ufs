@@ -39,14 +39,14 @@ class AwbService extends BaseService
      * @throws NotFoundException
      */
     //method for api with pagination
-    public function listing(array $filters = [], array $withRelations = [], $perPage = 3): \Illuminate\Contracts\Pagination\CursorPaginator
+    public function listing(array $filters = [], array $withRelations = [], $perPage = 5): \Illuminate\Contracts\Pagination\CursorPaginator
     {
         return $this->queryGet(filters: $filters, withRelations: $withRelations)->cursorPaginate($perPage);
     }
 
     public function queryGet(array $filters = [], array $withRelations = []): Builder
     {
-        $awbs = $this->model->query()->with($withRelations)->orderBy('id', 'desc');
+        $awbs = $this->model->query()->courier()->with($withRelations)->orderBy('id', 'desc');
         return $awbs->filter(new AwbFilters($filters));
     }
 
@@ -79,7 +79,7 @@ class AwbService extends BaseService
 
         $awb = $this->model->create($awb_data);
         //store default history
-        $awb->history()->create(['user_id' => $awbDTO->user_id, 'awb_status_id' => AwbStatuses::PREPARE->value]);
+        $awb->history()->create(['user_id' => $awbDTO->user_id, 'awb_status_id' => AwbStatuses::CREATE_SHIPMENT->value]);
         //get additional info
         $awb_additional_infos_data = array_filter($awbDTO->awbAdditionalInfos());
         //store additional infos

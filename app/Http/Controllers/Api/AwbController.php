@@ -24,12 +24,12 @@ class AwbController extends Controller
         try{
             $filters = $request->all();
             $withRelations = [];
-            $awbs = $this->awbService->listing($filters, $withRelations, $request->perPage ?? 3);
+            $awbs = $this->awbService->listing($filters, $withRelations, $request->perPage ?? 5);
             return AwbResource::collection($awbs);
         }catch(Exception $e){
             return apiResponse( message: $e->getMessage(), code: 422);
         }
-        
+
     }
 
     public function awbDetails($id)
@@ -53,7 +53,7 @@ class AwbController extends Controller
         }catch(Exception $e){
             return apiResponse( message: $e->getMessage(), code: 422);
         }
-        
+
     }
 
     public function statistics()
@@ -67,7 +67,7 @@ class AwbController extends Controller
         }catch(Exception $e){
             return apiResponse( message: $e->getMessage(), code: 422);
         }
-        
+
     }
     public function pod(int $id, AwbPodRequest $request)
     {
@@ -79,6 +79,6 @@ class AwbController extends Controller
         }catch(Exception $e){
             return apiResponse( message: $e->getMessage(), code: 422);
         }
-        
+
     }
 }

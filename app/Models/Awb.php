@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Enums\AwbStatuses;
 use App\Observers\AwbObserver;
 use App\Traits\EscapeUnicodeJson;
 use App\Traits\Filterable;
 use App\Traits\HasAttachment;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -73,6 +75,15 @@ class Awb extends Model
     public function getReceiverAddressAttribute(): string
     {
         return Str::limit(Arr::get($this->receiver_data,'address'),90);
+    }
+
+
+    public function scopeCourier(Builder $builder, $auth_user = null): Builder
+    {
+        if (is_null($auth_user))
+            $auth_user = auth()->user();
+        return $builder->whereIn('area_id',$auth_user->area_id)->whereHas('latestStatus',fn($query)=>$query->where('awb_status_id',AwbStatuses::CREATE_SHIPMENT()));
+
     }
 
     protected static function boot()

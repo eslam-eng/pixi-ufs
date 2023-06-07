@@ -29,7 +29,7 @@ class AwbFilters extends QueryFilter
             $query->where('awb_status_id', $term);
         });
     }
-    
+
     public function city_id($term)
     {
         return $this->builder->whereHas('receiver', function ($query) use ($term) {
@@ -63,7 +63,6 @@ class AwbFilters extends QueryFilter
     {
         return $this->builder->where('branch_id',$term);
     }
-
 
     public function department_id($term)
     {

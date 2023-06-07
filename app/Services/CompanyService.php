@@ -56,8 +56,6 @@ class CompanyService extends BaseService
 
         $branches = [];
 
-        $departments = [];
-
         $branchData = $companyDTO->branchesData();
         if (count($branchData))
         {

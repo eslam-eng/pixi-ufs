@@ -3,6 +3,9 @@
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AwbController;
+use App\Http\Controllers\BranchController;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\AwbHistoryController;
 use App\Http\Controllers\ImportLogsController;
 use App\Http\Livewire\Emptypage;
@@ -40,6 +43,9 @@ Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
         Route::get('receivers',[ReceiverController::class,'search'])->name('receivers.search');
     });
     Route::resource('receivers',ReceiverController::class);
+    Route::resource('companies',CompanyController::class);
+    Route::resource('branches',BranchController::class);
+    Route::resource('departments',DepartmentController::class);
     Route::get('receivers-download-template/form',[ReceiverController::class,'importForm'])->name('receivers-download-template.form');
     Route::get('receivers-download-template',[ReceiverController::class,'downloadReceiversTemplate'])->name('receivers-download-template');
     Route::post('receivers-import',[ReceiverController::class,'import'])->name('receivers-import');

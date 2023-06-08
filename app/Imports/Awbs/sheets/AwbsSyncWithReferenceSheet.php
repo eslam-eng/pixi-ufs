@@ -4,11 +4,14 @@ namespace App\Imports\Awbs\sheets;
 
 
 use App\Enums\AwbStatuses;
+use App\Enums\UsersType;
 use App\Models\Awb;
 use App\Models\AwbAdditionalInfo;
 use App\Models\AwbHistory;
 use App\Models\Receiver;
+use App\Models\User;
 use App\Services\PriceTableService;
+use App\Services\PushNotificationService;
 use Illuminate\Support\Arr;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
 use Maatwebsite\Excel\Concerns\SkipsFailures;
@@ -45,7 +48,7 @@ class AwbsSyncWithReferenceSheet implements
         $awbData = [];
         $awbsAdditionalInfo = [];
         $awbsHistory = [];
-
+//        $awbs_areas = [];
 
         foreach ($array as $row) {
             $receiver = $receivers->get(Arr::get($row, 'reference'));
@@ -107,16 +110,40 @@ class AwbsSyncWithReferenceSheet implements
 
         AwbAdditionalInfo::query()->upsert($awbsAdditionalInfo, 'awb_id', ['custom_field1', 'custom_field2', 'custom_field3', 'custom_field4', 'custom_field5']);
         AwbHistory::query()->upsert($awbsHistory, 'awb_id', ['user_id', 'awb_status_id']);
+
+//      $awbs_areas = array_unique($awbs_areas);
+
+        $number_of_awbs = count($awbData);
+        $fcm_title = $number_of_awbs.'تم انشاء شحنات ';
+        $fcm_body = "يرجي التوجه لاستلام الشحنات".$this->creator->company->name."تم انشاء شحنات خاصه بشركه : ";
+        $users = User::query()->where('type',UsersType::COURIER())->where('area_id',$this->creator->branch->area_id)->select(['id','device_token'])->get();
+        $tokens = $users->pluck('device_token')->toArray();
+        foreach ($users as $user)
+        {
+            $notification_data =  [
+                'title' => [
+                    'ar' => $fcm_title,
+                    'en' => $fcm_title,
+                ],
+                'message' => [
+                    'ar' => $fcm_body,
+                    'en' => $fcm_body,
+                ],
+
+            ];
+            notifyUser($user , $notification_data);
+        }
+        app()->make(PushNotificationService::class)->sendToTokens(title: $fcm_title,body: $fcm_body,tokens: $tokens);
+
+
+
     }
-
-
     public function rules(): array
     {
         return [
             '*.reference' => 'required|exists:receivers,reference',
             '*.weight' => 'required|numeric',
             '*.pieces' => 'required|numeric',
-            '*.collection' => 'nullable|numeric',
         ];
     }
 

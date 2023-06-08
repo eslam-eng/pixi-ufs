@@ -58,7 +58,7 @@ class CompanyService extends BaseService
         $departments = [];
 
         $branchData = $companyDTO->branchesData();
-        if (count($branchData['name']))
+        if (array_filter($branchData['name']))
         {
             foreach($branchData['name'] as $index=>$value)
                 $branches[] = [
@@ -74,7 +74,7 @@ class CompanyService extends BaseService
         }
 
         $departmentsData = $companyDTO->branchesData();
-        if (count($departmentsData['name']))
+        if (array_filter($departmentsData['name']))
         {
             foreach($departmentsData['name'] as $index=>$value)
                 $departments[] = [

@@ -7,20 +7,16 @@ use App\Traits\Filterable;
 use App\Traits\HasAddresses;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Company extends Model
 {
-    use HasFactory, HasAddresses, Filterable;
+    use HasFactory, Filterable;
 
-    protected $fillable = ['name', 'email','ceo', 'phone', 'show_dashboard', 'notes', 'status','importation_type'];
+    protected $fillable = ['name', 'email','ceo', 'phone', 'show_dashboard', 'notes', 'status','importation_type','address','city_id','area_id'];
 
-
-    public function addresses(): MorphOne
-    {
-        return $this->MorphOne(Address::class, 'addressable')->where('is_default', ActivationStatus::ACTIVE());
-    }
 
     public function branches(): HasMany
     {
@@ -30,6 +26,14 @@ class Company extends Model
     public function departments(): HasMany
     {
         return $this->hasMany(Department::class);
+    }
+    public function city(): BelongsTo
+    {
+        return $this->BelongsTo(Location::class);
+    }
+    public function area(): BelongsTo
+    {
+        return $this->BelongsTo(Location::class);
     }
 
     public function scopeSearch($builder, $term)

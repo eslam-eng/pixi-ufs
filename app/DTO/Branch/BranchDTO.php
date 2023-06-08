@@ -10,16 +10,12 @@ class BranchDTO extends BaseDTO
 
     /**
      * @param string $name
-     * @param string $phone
+     * @param ?string $phone
      * @param int $company_id
      * @param int|null $city_id
      * @param int|null $area_id
      * @param string|null $address
-     * @param string|null $lat
-     * @param string|null $lng
-     * @param string|null $postal_code
-     * @param string|null $map_url
-     * @param bool|null $is_default
+     * @param ?bool  $status,
      */
     public function __construct(
         protected string $name,
@@ -28,7 +24,7 @@ class BranchDTO extends BaseDTO
         protected int   $city_id,
         protected int   $area_id,
         protected string $address,
-        protected ?bool   $is_default,
+        protected ?bool  $status,
     )
     {
     }
@@ -42,7 +38,7 @@ class BranchDTO extends BaseDTO
             city_id: $request->city_id,
             area_id: $request->area_id,
             address: $request->address,
-            is_default: true
+            status: isset($request->status),
         );
     }
 
@@ -60,7 +56,7 @@ class BranchDTO extends BaseDTO
             city_id: Arr::get($data,'city_id'),
             area_id: Arr::get($data,'area_id'),
             address: Arr::get($data,'address'),
-            is_default: true
+            status: Arr::get($data,'status'),
         );
     }
 
@@ -76,28 +72,8 @@ class BranchDTO extends BaseDTO
             'city_id' => $this->city_id,
             'area_id' => $this->area_id,
             'address' => $this->address,
-            'is_default' => $this->is_default
+            'status' => $this->status,
 
-        ];
-    }
-
-    public function addressData(): array
-    {
-        return [
-            'city_id' => $this->city_id,
-            'area_id' => $this->area_id,
-            'address' => $this->address,
-            'is_default' => $this->is_default
-
-        ];
-    }
-
-    public function branchData(): array
-    {
-        return [
-            "name" => $this->name,
-            "phone" => $this->phone,
-            "company_id" => $this->company_id,
         ];
     }
 

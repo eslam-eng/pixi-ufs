@@ -168,6 +168,7 @@ return [
          * Package Service Providers...
          */
 
+        LaravelFCM\FCMServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -197,6 +198,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // ...
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-    ])->toArray(),
+        'FCM'      => LaravelFCM\Facades\FCM::class
+        ])->toArray(),
 
 ];

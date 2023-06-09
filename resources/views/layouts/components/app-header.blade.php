@@ -237,16 +237,12 @@
 													<div class="d-flex wd-100p">
 														<div class="main-img-user"><img alt="" src="{{asset('assets/img/faces/2.jpg')}}" class=""></div>
 														<div class="ms-3 my-auto">
-															<h6 class="tx-15 font-weight-semibold mb-0">Teri Dactyl</h6><span class="dropdown-title-text subtext op-6  tx-12">Premium Member</span>
+															<h6 class="tx-15 font-weight-semibold mb-0">{{auth()->user()->name}}</h6>
 														</div>
 													</div>
 												</div>
 												<a class="dropdown-item" href="{{url('profile')}}"><i class="far fa-user-circle"></i>Profile</a>
-												<a class="dropdown-item" href="{{url('chat')}}"><i class="far fa-smile"></i> chat</a>
-												<a class="dropdown-item" href="{{url('mail-read')}}"><i class="far fa-envelope "></i>Inbox</a>
-												<a class="dropdown-item" href="{{url('mail')}}"><i class="far fa-comment-dots"></i>Messages</a>
-												<a class="dropdown-item" href="{{url('mail-settings')}}"><i class="far fa-sun"></i>  Settings</a>
-												<a class="dropdown-item" href="{{url('signup')}}"><i class="far fa-arrow-alt-circle-left"></i> Sign Out</a>
+												<a class="dropdown-item" href="{{route('logout')}}"><i class="far fa-arrow-alt-circle-left"></i> Sign Out</a>
 											</div>
 										</li>
 									</ul>

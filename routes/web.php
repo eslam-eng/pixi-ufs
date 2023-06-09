@@ -27,17 +27,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'authentication','middleware' => 'guest'],function (){
     Route::get('login', [AuthController::class, 'loginForm'])->name('login');
-    Route::post('singin',[AuthController::class, 'login'])->name('singin');
+    Route::post('login',[AuthController::class, 'login'])->name('login');
 });
 
 Route::get('/', function () {
-    return view('livewire.index');
-})->name('home')->middleware('auth');
+    return redirect(route('home'));
+})->middleware('auth');
 //auth routes
 Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
     Route::get('/', function () {
         return view('livewire.index');
     })->name('home');
+
+    Route::get('logout',[AuthController::class,'logout'])->name('logout');
 
     Route::group(['prefix'=>'search'],function (){
         Route::get('receivers',[ReceiverController::class,'search'])->name('receivers.search');

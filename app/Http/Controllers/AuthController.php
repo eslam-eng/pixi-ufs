@@ -42,8 +42,8 @@ class AuthController extends Controller
 
     public function logout()
     {
-        Auth::user()->tokens()->delete();
-        return apiResponse(message: __('lang.logout_success'));
+        Auth::logout();
+        return to_route('login');
     }
 
     public function setFcmToken(StoreFcmTokenRequest $request): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory

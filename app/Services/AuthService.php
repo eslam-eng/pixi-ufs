@@ -28,6 +28,7 @@ class AuthService extends BaseService
         $credential = [$identifierField => $identifier, 'password' => $password , 'status'=>ActivationStatus::ACTIVE()];
         if (!auth()->attempt($credential))
             return throw new NotFoundException(__('lang.login_failed'));
+        logger('user exists');
         return $this->model->where($identifierField, $identifier)->first();
     }
 

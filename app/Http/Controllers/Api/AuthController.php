@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Exceptions\NotFoundException;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\Notification\StoreFcmTokenRequest;
 use App\Http\Resources\AuthUserResource;
 use App\Services\AuthService;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -27,7 +29,7 @@ class AuthController extends Controller
             $data = [
                 'access_token' => $token,
                 'token_type' => 'Bearer',
-                'user'=>AuthUserResource::make($user)
+                'user'=>new AuthUserResource($user)
             ];
             return apiResponse(data: $data);
         } catch (Exception|NotFoundException $e) {
@@ -46,5 +48,45 @@ class AuthController extends Controller
         $user = auth()->user() ;
         $this->authService->setUserFcmToken($user , $request->fcm_token);
         return apiResponse(message: trans('lang.success_operation'));
+    }
+
+    public function getProfileDetails()
+    {
+        try {
+            $user = auth('sanctum')->user();
+            if(!$user)
+                throw new Exception(trans('app.unauthorized'));
+            return apiResponse(data: AuthUserResource::make($user), message: trans('app.success_operation'));
+        } catch (Exception|NotFoundException $e) {
+            return apiResponse(message: $e->getMessage(), code: 422);
+        }
+    }
+
+    public function destroy()
+    {
+        try {
+            $user = auth('sanctum')->user();
+            if(!$user)
+                throw new Exception(trans('app.unauthorized'));
+            $status = $this->authService->destroy(user: $user);
+            if($status)
+                return apiResponse(message: trans('app.success_operation'));
+        } catch (Exception|NotFoundException $e) {
+            return apiResponse(message: $e->getMessage(), code: 422);
+        }
+    }
+
+    public function changePassword(ChangePasswordRequest $request)
+    {
+        try {
+            $user = auth('sanctum')->user();
+            if(!$user)
+                throw new Exception(trans('app.unauthorized'));
+            $status = $this->authService->changePassword(user: $user, data: $request->validated());
+            if($status)
+                return apiResponse(message: trans('app.success_operation'));
+        } catch (Exception|NotFoundException $e) {
+            return apiResponse(message: $e->getMessage(), code: 422);
+        }
     }
 }

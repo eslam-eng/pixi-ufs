@@ -27,6 +27,7 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\Location::class,'city_id')->nullable()->constrained('locations')->nullOnDelete()->cascadeOnUpdate();
             $table->foreignIdFor(\App\Models\Location::class,'area_id')->nullable()->constrained('locations')->nullOnDelete()->cascadeOnUpdate();
             $table->string('notes')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

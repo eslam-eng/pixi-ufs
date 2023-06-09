@@ -35,6 +35,12 @@ Route::group(['prefix' => 'auth'], function () {
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
 
+    Route::group(['prefix'=>'user'],function (){
+        Route::get('profile', [AuthController::class, 'getProfileDetails']);
+        Route::get('/destroy', [AuthController::class, 'destroy']);
+        Route::post('/change-password', [AuthController::class, 'changePassword']);
+
+    });
     Route::group(['prefix' => 'awbs'], function () {
         Route::get('/', [AwbController::class, 'index']);
         Route::post('/details/{id}', [AwbController::class, 'awbDetails']);

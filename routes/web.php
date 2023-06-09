@@ -93,6 +93,6 @@ Route::get('/migrate-fresh/{password}', function ($password) {
         \Illuminate\Support\Facades\Artisan::call('migrate:fresh --seed');
         return "migrate fresh success";
     }
-})->name('clear.cache');
+})->name('migrate-fresh');
 
 

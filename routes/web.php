@@ -32,7 +32,7 @@ Route::group(['prefix' => 'authentication','middleware' => 'guest'],function (){
 
 Route::get('/', function () {
     return view('livewire.index');
-})->name('home')->middleware('auth');
+})->name('/')->middleware('auth');
 //auth routes
 Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
     Route::get('/', function () {

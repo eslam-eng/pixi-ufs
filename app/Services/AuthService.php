@@ -41,7 +41,6 @@ class AuthService extends BaseService
     public function destroy(User $user): bool
     {
         $user->delete();
-        $user->deleteAddresses();
         return true;
     }
 
@@ -53,7 +52,7 @@ class AuthService extends BaseService
 
     public function changePassword(User $user, array $data): bool
     {
-        if(!Hash::check($data['old_password'], $user->password)) 
+        if(!Hash::check($data['old_password'], $user->password))
             throw new Exception(trans('app.not_match'));
         $user->update([
             'password'=> bcrypt($data['new_password']),

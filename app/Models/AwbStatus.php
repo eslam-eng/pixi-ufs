@@ -9,5 +9,5 @@ class AwbStatus extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'is_final', 'stepper', 'type', 'sms'];
+    protected $fillable = ['name', 'is_final', 'stepper', 'code','description','type', 'sms'];
 }

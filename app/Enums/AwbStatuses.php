@@ -10,6 +10,7 @@ enum AwbStatuses: int
 {
     use Options, Values, InvokableCases;
 
+//    codes for awb status
     case CREATE_SHIPMENT = 1;
 
     case CALLING_RECEIVER = 9 ;

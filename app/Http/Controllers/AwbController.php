@@ -55,7 +55,7 @@ class AwbController extends Controller
 
             $withRelations = [
                 'company:id,name', 'branch:id,name', 'department:id,name',
-                'additionalInfo','history'
+                'additionalInfo','history'=>fn($query)=>$query->orderByDesc('id')->with('status')
             ];
 
             $awb = $this->awbService->findById(id: $id, withRelations: $withRelations);
@@ -80,7 +80,7 @@ class AwbController extends Controller
             $toast = [
                 'type' => 'success',
                 'title' => 'success',
-                'message' => "$awb->code" . trans('app.aw_created_successfully')
+                'message' => "$awb->code " . trans('app.aw_created_successfully')
             ];
             DB::commit();
             return to_route('awb.index')->with('toast', $toast);

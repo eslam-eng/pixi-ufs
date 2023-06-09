@@ -14,8 +14,8 @@ return new class extends Migration {
             $table->id();
             $table->string('code')->nullable()->unique();
             $table->string('receiver_reference')->nullable();
-            $table->string('receiver_city')->nullable();
-            $table->string('receiver_area')->nullable();
+            $table->string('receiver_city_id')->nullable();
+            $table->string('receiver_area_id')->nullable();
             $table->foreignIdFor(\App\Models\User::class)->constrained();
             $table->foreignIdFor(\App\Models\Company::class)->constrained();
             $table->foreignIdFor(\App\Models\Branch::class)->constrained();

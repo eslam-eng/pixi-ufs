@@ -14,13 +14,9 @@
 							</div>
 							<div class="logo-horizontal">
 								<a href="{{url('index')}}" class="header-logo">
-									<img src="{{asset('assets/img/brand/logo.png')}}" class="mobile-logo logo-1" alt="logo">
-									<img src="{{asset('assets/img/brand/logo-white.png')}}" class="mobile-logo dark-logo-1" alt="logo">
+									<img src="{{asset('assets/img/logo.jpeg')}}" class="mobile-logo logo-1" alt="logo">
+									<img src="{{asset('assets/img/logo.jpeg')}}" class="mobile-logo dark-logo-1" alt="logo">
 								</a>
-							</div>
-							<div class="main-header-center ms-4 d-sm-none d-md-none d-lg-block form-group">
-								<input class="form-control" placeholder="Search..." type="search">
-								<button class="btn"><i class="fas fa-search"></i></button>
 							</div>
 						</div>
 						<div class="main-header-right">
@@ -39,182 +35,10 @@
 												<span class="light-layout"><svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" width="24" height="24" viewBox="0 0 24 24"><path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z"/></svg></span>
 											</a>
 										</li>
-										<li class="dropdown nav-item  main-header-message ">
-											<a class="new nav-link"  data-bs-toggle="dropdown" href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" width="24" height="24" viewBox="0 0 24 24"><path d="M20 4H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2zm0 2v.511l-8 6.223-8-6.222V6h16zM4 18V9.044l7.386 5.745a.994.994 0 0 0 1.228 0L20 9.044 20.002 18H4z"/></svg><span class="badge bg-secondary header-badge">5</span></a>
-											<div class="dropdown-menu">
-												<div class="menu-header-content text-start border-bottom">
-													<div class="d-flex">
-														<h6 class="dropdown-title mb-1 tx-15 font-weight-semibold">Messages</h6>
-														<span class="badge badge-pill badge-warning ms-auto my-auto float-end">Mark All Read</span>
-													</div>
-													<p class="dropdown-title-text subtext mb-0 op-6 pb-0 tx-12 ">You have 4 unread messages</p>
-												</div>
-												<div class="main-message-list chat-scroll">
-													<a href="{{url('chat')}}" class="dropdown-item d-flex border-bottom">
-														<div class="  drop-img  cover-image  " data-image-src="{{asset('assets/img/faces/3.jpg')}}">
-															<span class="avatar-status bg-teal"></span>
-														</div>
-														<div class="wd-90p">
-															<div class="d-flex">
-																<h5 class="mb-0 name">Teri Dactyl</h5>
-															</div>
-															<p class="mb-0 desc">I'm sorry but i'm not sure how to help you with that......</p>
-															<p class="time mb-0 text-start float-start ms-2 mt-2">Mar 15 3:55 PM</p>
-														</div>
-													</a>
-													<a href="{{url('chat')}}" class="dropdown-item d-flex border-bottom">
-														<div class="drop-img cover-image" data-image-src="{{asset('assets/img/faces/2.jpg')}}">
-															<span class="avatar-status bg-teal"></span>
-														</div>
-														<div class="wd-90p">
-															<div class="d-flex">
-																<h5 class="mb-0 name">Allie Grater</h5>
-															</div>
-															<p class="mb-0 desc">All set ! Now, time to get to you now......</p>
-															<p class="time mb-0 text-start float-start ms-2 mt-2">Mar 06 01:12 AM</p>
-														</div>
-													</a>
-													<a href="{{url('chat')}}" class="dropdown-item d-flex border-bottom">
-														<div class="drop-img cover-image" data-image-src="{{asset('assets/img/faces/9.jpg')}}">
-															<span class="avatar-status bg-teal"></span>
-														</div>
-														<div class="wd-90p">
-															<div class="d-flex">
-																<h5 class="mb-0 name">Aida Bugg</h5>
-															</div>
-															<p class="mb-0 desc">Are you ready to pickup your Delivery...</p>
-															<p class="time mb-0 text-start float-start ms-2 mt-2">Feb 25 10:35 AM</p>
-														</div>
-													</a>
-													<a href="{{url('chat')}}" class="dropdown-item d-flex border-bottom">
-														<div class="drop-img cover-image" data-image-src="{{asset('assets/img/faces/12.jpg')}}">
-															<span class="avatar-status bg-teal"></span>
-														</div>
-														<div class="wd-90p">
-															<div class="d-flex">
-																<h5 class="mb-0 name">John Quil</h5>
-															</div>
-															<p class="mb-0 desc">Here are some products ...</p>
-															<p class="time mb-0 text-start float-start ms-2 mt-2">Feb 12 05:12 PM</p>
-														</div>
-													</a>
-													<a href="{{url('chat')}}" class="dropdown-item d-flex border-bottom">
-														<div class="drop-img cover-image" data-image-src="{{asset('assets/img/faces/5.jpg')}}">
-															<span class="avatar-status bg-teal"></span>
-														</div>
-														<div class="wd-90p">
-															<div class="d-flex">
-																<h5 class="mb-0 name">Liz Erd</h5>
-															</div>
-															<p class="mb-0 desc">I'm sorry but i'm not sure how...</p>
-															<p class="time mb-0 text-start float-start ms-2 mt-2">Jan 29 03:16 PM</p>
-														</div>
-													</a>
-												</div>
-												<div class="text-center dropdown-footer">
-													<a class="btn btn-primary btn-sm btn-block text-center"  href="{{url('chat')}}">VIEW ALL</a>
-												</div>
-											</div>
-										</li>
-										<li class="dropdown nav-item main-header-notification d-flex">
-											<a class="new nav-link"  data-bs-toggle="dropdown" href="javascript:void(0);">
-												<svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13.586V10c0-3.217-2.185-5.927-5.145-6.742C13.562 2.52 12.846 2 12 2s-1.562.52-1.855 1.258C7.185 4.074 5 6.783 5 10v3.586l-1.707 1.707A.996.996 0 0 0 3 16v2a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-2a.996.996 0 0 0-.293-.707L19 13.586zM19 17H5v-.586l1.707-1.707A.996.996 0 0 0 7 14v-4c0-2.757 2.243-5 5-5s5 2.243 5 5v4c0 .266.105.52.293.707L19 16.414V17zm-7 5a2.98 2.98 0 0 0 2.818-2H9.182A2.98 2.98 0 0 0 12 22z"/></svg><span class=" pulse"></span>
-											</a>
-											<div class="dropdown-menu">
-												<div class="menu-header-content text-start border-bottom">
-													<div class="d-flex">
-														<h6 class="dropdown-title mb-1 tx-15 font-weight-semibold">Notifications</h6>
-														<span class="badge badge-pill badge-warning ms-auto my-auto float-end">Mark All Read</span>
-													</div>
-													<p class="dropdown-title-text subtext mb-0 op-6 pb-0 tx-12 ">You have 4 unread Notifications</p>
-												</div>
-												<div class="main-notification-list Notification-scroll">
-													<a class="d-flex p-3 border-bottom" href="{{url('mail')}}">
-														<div class="notifyimg bg-pink">
-															<i class="far fa-folder-open text-white"></i>
-														</div>
-														<div class="ms-3">
-															<h5 class="notification-label mb-1">New files available</h5>
-															<div class="notification-subtext">10 hour ago</div>
-														</div>
-														<div class="ms-auto" >
-															<i class="las la-angle-right text-end text-muted"></i>
-														</div>
-													</a>
-													<a class="d-flex p-3  border-bottom" href="{{url('mail')}}">
-														<div class="notifyimg bg-purple">
-															<i class="fab fa-delicious text-white"></i>
-														</div>
-														<div class="ms-3">
-															<h5 class="notification-label mb-1">Updates Available</h5>
-															<div class="notification-subtext">2 days ago</div>
-														</div>
-														<div class="ms-auto" >
-															<i class="las la-angle-right text-end text-muted"></i>
-														</div>
-													</a>
-													<a class="d-flex p-3 border-bottom" href="{{url('mail')}}">
-														<div class="notifyimg bg-success">
-															<i class="fa fa-cart-plus text-white"></i>
-														</div>
-														<div class="ms-3">
-															<h5 class="notification-label mb-1">New Order Received</h5>
-															<div class="notification-subtext">1 hour ago</div>
-														</div>
-														<div class="ms-auto" >
-															<i class="las la-angle-right text-end text-muted"></i>
-														</div>
-													</a>
-													<a class="d-flex p-3 border-bottom" href="{{url('mail')}}">
-														<div class="notifyimg bg-warning">
-															<i class="far fa-envelope-open text-white"></i>
-														</div>
-														<div class="ms-3">
-															<h5 class="notification-label mb-1">New review received</h5>
-															<div class="notification-subtext">1 day ago</div>
-														</div>
-														<div class="ms-auto" >
-															<i class="las la-angle-right text-end text-muted"></i>
-														</div>
-													</a>
-													<a class="d-flex p-3 border-bottom" href="{{url('mail')}}">
-														<div class="notifyimg bg-danger">
-															<i class="fab fa-wpforms text-white"></i>
-														</div>
-														<div class="ms-3">
-															<h5 class="notification-label mb-1">22 verified registrations</h5>
-															<div class="notification-subtext">2 hour ago</div>
-														</div>
-														<div class="ms-auto" >
-															<i class="las la-angle-right text-end text-muted"></i>
-														</div>
-													</a>
-													<a class="d-flex p-3 border-bottom" href="{{url('mail')}}">
-														<div class="">
-															<i class="far fa-check-square text-white notifyimg bg-primary"></i>
-														</div>
-														<div class="ms-3">
-															<h5 class="notification-label mb-1">Project has been approved</h5>
-															<span class="notification-subtext">4 hour ago</span>
-														</div>
-														<div class="ms-auto" >
-															<i class="las la-angle-right text-end text-muted"></i>
-														</div>
-													</a>
-												</div>
-												<div class="dropdown-footer">
-													<a class="btn btn-primary btn-sm btn-block" href="{{url('mail')}}">VIEW ALL</a>
-												</div>
-											</div>
-										</li>
 										<li class="nav-item full-screen fullscreen-button">
 											<a class="new nav-link full-screen-link" href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" width="24" height="24" viewBox="0 0 24 24"><path d="M5 5h5V3H3v7h2zm5 14H5v-5H3v7h7zm11-5h-2v5h-5v2h7zm-2-4h2V3h-7v2h5z"/></svg></a>
 										</li>
-										<li class="dropdown main-header-message right-toggle">
-											<a class="new nav-link nav-link pe-0" data-bs-toggle="sidebar-right" data-bs-target=".sidebar-right">
-												<svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" width="24" height="24" viewBox="0 0 24 24"><path d="M4 6h16v2H4zm4 5h12v2H8zm5 5h7v2h-7z"/></svg>
-											</a>
-										</li>
+
 										<li class="nav-link search-icon d-lg-none d-block">
 											<form class="navbar-form" role="search">
 												<div class="input-group">

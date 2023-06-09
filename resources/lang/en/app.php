@@ -25,7 +25,7 @@ return [
     'city' => 'city',
     'area' => 'Area',
     'awb_receiver_info' => 'Receiver Info',
-    'search_receivers' => 'Companies & Receivers',
+    'search_receivers' => 'Search Receivers',
     'receiving_company' => 'Receiving Company',
     'awb_info' => 'Awb Info',
     'service_type' => 'Service Type',

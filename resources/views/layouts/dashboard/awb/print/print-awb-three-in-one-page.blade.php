@@ -275,9 +275,9 @@
     @endif
 @endforeach
 <script>
-    // document.addEventListener("DOMContentLoaded", function() {
-    //     window.print();
-    // });
+    document.addEventListener("DOMContentLoaded", function() {
+        window.print();
+    });
 </script>
 </body>
 </html>

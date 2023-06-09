@@ -5,7 +5,7 @@
         </button>
         <div class="dropdown-menu" style="">
             <a href="{{route('awbs.show',$model->id)}}" class="dropdown-item">@lang('app.show')</a>
-            <a href="{{route('awbs.edit',$model->id)}}" class="dropdown-item">@lang('app.edit')</a>
+{{--            <a href="{{route('awbs.edit',$model->id)}}" class="dropdown-item">@lang('app.edit')</a>--}}
             <button role="button" onclick="destroy('{{$url}}')" class="dropdown-item">@lang('app.delete')</button>
         </div>
         <!-- dropdown-menu -->

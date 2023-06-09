@@ -10,28 +10,46 @@
                 </div>
                 <div>
 
-                    <div class="collapse show" id="collapseExample" style="">
+                    <div class="collapse" id="collapseExample" style="">
                         <div class="mt-4">
                             <form class="datatables_parameters">
                                 <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
                                     <div class="row row-sm">
                                         <div class="col-lg">
-                                            <livewire:locations-drop-down/>
+                                            <livewire:location.cities/>
                                                 @error('city_id')
                                                 <div class="text-danger"> {{$message}}</div>
                                                 @enderror
-                                                @error('area_id')
-                                                <div class="text-danger"> {{$message}}</div>
-                                                @enderror
                                         </div>
-                                        <div class="col-lg mg-t-10 mg-lg-t-0">
-                                            <livewire:company-with-branch-and-departments company_name="company_id" branch_name="branch_id"/>
-                                                @error('branch_id')
-                                                <div class="text-danger"> {{$message}}</div>
-                                                @enderror
+                                        <div class="col-lg">
+                                            <livewire:location.areas/>
+                                            @error('area_id')
+                                            <div class="text-danger"> {{$message}}</div>
+                                            @enderror
                                         </div>
                                     </div>
-                                    
+
+                                    <div class="row row-sm">
+                                        <div class="col-lg">
+                                            <livewire:company/>
+                                            @error('company_id')
+                                            <div class="text-danger"> {{$message}}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-lg">
+                                            <livewire:branch/>
+                                            @error('branch_id')
+                                            <div class="text-danger"> {{$message}}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-lg">
+                                            <livewire:department/>
+                                            @error('department_id')
+                                            <div class="text-danger"> {{$message}}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+
                                 </div>
 
                                 <div class="card-footer">

@@ -78,12 +78,12 @@
                                 return {
                                     id: receiver.id,
                                     text: receiver.name,
-                                    phone:receiver.phone,
+                                    phone:receiver.phone1,
                                     receiving_company:receiver.receiving_company,
                                     branch:receiver.branch.name,
-                                    address:receiver.default_address.address,
-                                    city:receiver.default_address.city.title,
-                                    area:receiver.default_address.area.title,
+                                    address:receiver.address1,
+                                    city:receiver.city.title,
+                                    area:receiver.area.title,
                                 }
                             }),
                             pagination: {
@@ -99,6 +99,7 @@
                 selectOnClose: true,
             }).on('select2:select', function (e) {
                 var data = e.params.data;
+                console.log(data);
                 $('#receiving_company').val(data.receiving_company);
                 $('#branch_name').val(data.branch);
                 $('#phone').val(data.phone);

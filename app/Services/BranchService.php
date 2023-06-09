@@ -16,6 +16,11 @@ class BranchService extends BaseService
     {
     }
 
+    public function getModel(): Branch
+    {
+        return $this->model;
+    }
+
     //method for api with pagination
     public function listing(array $filters = [], array $withRelations = [], $perPage = 10): \Illuminate\Contracts\Pagination\CursorPaginator
     {

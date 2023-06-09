@@ -40,6 +40,15 @@
 
                                     </div>
 
+                                    <div class="row row-sm">
+                                        <div class="col-lg">
+                                            <livewire:location.cities/>
+                                        </div>
+                                        <div class="col-lg">
+                                            <livewire:location.areas/>
+                                        </div>
+                                    </div>
+
                                 </div>
 
                                 <div class="card-footer">

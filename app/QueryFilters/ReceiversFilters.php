@@ -46,7 +46,7 @@ class ReceiversFilters extends QueryFilter
 
     public function keyword($term)
     {
-        return $this->builder->where('name', 'LIKE', "%{$term}%")->orWhere('phone', 'LIKE', "%{$term}%")->where('reference',"LIKE","%{$term}%");
+        return $this->builder->where('name', 'LIKE', "%{$term}%")->orWhere('phone1', 'LIKE', "%{$term}%")->orWhere('phone2', 'LIKE', "%{$term}%")->where('reference',"LIKE","%{$term}%");
     }
 
 }

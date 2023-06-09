@@ -14,7 +14,7 @@ use Illuminate\Support\Arr;
 class CompanyService extends BaseService
 {
 
-    public function __construct(public Company $model, private BranchService $branchService)
+    public function __construct(public Company $model, public BranchService $branchService)
     {
     }
 
@@ -25,7 +25,7 @@ class CompanyService extends BaseService
 
     public function queryGet(array $filters = [],array $withRelations = []): builder
     {
-        $result = $this->model->query()->with($withRelations);
+        $result = $this->getQuery()->with($withRelations);
         return $result->filter(new CompaniesFilter($filters));
     }
 

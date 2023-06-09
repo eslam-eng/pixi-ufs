@@ -8,6 +8,7 @@ use App\Enums\AwbStatuses;
 use App\Enums\ImageTypeEnum;
 use App\Exceptions\NotFoundException;
 use App\Models\Awb;
+use App\Models\AwbStatus;
 use App\Models\CompanyShipmentType;
 use App\Models\Receiver;
 use App\QueryFilters\AwbFilters;
@@ -52,11 +53,17 @@ class AwbService extends BaseService
     }
 
 
+    /**
+     * @throws NotFoundException
+     */
     public function store(AwbDTO $awbDTO)
     {
 
+        //get default status
+        $awb_status = AwbStatus::query()->where('code',AwbStatuses::CREATE_SHIPMENT->value)->first();
+
 //      get receiver object info
-        $receiver = $this->receiverService->findById(id: $awbDTO->receiver_id, withRelations: ['defaultAddress']);
+        $receiver = $this->receiverService->findById(id: $awbDTO->receiver_id);
 
         //get branch address city and area
         $branch = $this->branchService->findById($awbDTO->branch_id);
@@ -80,7 +87,7 @@ class AwbService extends BaseService
 
         $awb = $this->model->create($awb_data);
         //store default history
-        $awb->history()->create(['user_id' => $awbDTO->user_id, 'awb_status_id' => AwbStatuses::CREATE_SHIPMENT->value]);
+        $awb->history()->create(['user_id' => $awbDTO->user_id, 'awb_status_id' => $awb_status]);
         //get additional info
         $awb_additional_infos_data = array_filter($awbDTO->awbAdditionalInfos());
         //store additional infos

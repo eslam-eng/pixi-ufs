@@ -33,16 +33,13 @@ class AwbFilters extends QueryFilter
 
     public function city_id($term)
     {
-        return $this->builder->whereHas('receiver', function ($query) use ($term) {
-            $query->where('city_id', $term);
-        });
+        return $this->builder->where('receiver_city_id',$term);
     }
 
     public function area_id($term)
     {
-        return $this->builder->whereHas('receiver', function ($query) use ($term) {
-            $query->where('area_id', $term);
-        });
+        return $this->builder->where('receiver_area_id',$term);
+
     }
 
     public function ids($term)

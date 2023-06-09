@@ -21,7 +21,7 @@ class Awb extends Model
     use HasFactory, Filterable, EscapeUnicodeJson, SoftDeletes, HasAttachment;
 
     protected $fillable = [
-        'code', 'user_id','company_id' ,'branch_id',
+        'code', 'user_id','company_id' ,'branch_id','receiver_city_id', 'receiver_area_id',
         'department_id', 'receiver_id','receiver_reference',
         'receiver_data', 'payment_type', 'service_type', 'is_return', 'shipment_type',
         'zone_price', 'additional_kg_price', 'collection', 'weight',

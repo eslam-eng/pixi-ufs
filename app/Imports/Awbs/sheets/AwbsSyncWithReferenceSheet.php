@@ -77,7 +77,7 @@ class AwbsSyncWithReferenceSheet implements
                     'name' => $receiver->name,
                     'receiving_company' => $receiver->receiving_company,
                     'receiving_branch' => $receiver->receiving_branch,
-                    'titles' => $receiver->title,
+                    'title' => $receiver->title,
                 ],
                 'payment_type' => $this->payment_type,
                 'service_type' => $this->service_type,

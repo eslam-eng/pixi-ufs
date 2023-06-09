@@ -84,7 +84,7 @@ class AwbsImportSheet implements
                     'name' => $row['name'],
                     'receiving_company' => $row['receiving_company'],
                     'receiving_branch' => $row['receiving_branch'],
-                    'titles' => $row['title'],
+                    'title' => $row['title'],
                 ],
                 'payment_type' => $this->payment_type,
                 'service_type' => $this->service_type,

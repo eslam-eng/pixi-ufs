@@ -325,29 +325,27 @@
     <!-- End Row -->
 
 @endsection
-<script
-    src="https://code.jquery.com/jquery-3.7.0.js"
-    integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
-    crossorigin="anonymous">
-</script>
-<script>
-    $(document).ready(function () {
-        $('.append-branch').on('click', function () {
+@section('scripts')
+    <script>
+        $(document).ready(function () {
+            $('.append-branch').on('click', function () {
 
-            var item = $('.branches-items .item').first().html();
-            $('.branches-items').append('<div class="item mt-4">' + item + '<button class="btn btn-danger btn-rounded remove-item">X</button></div>');
+                var item = $('.branches-items .item').first().html();
+                $('.branches-items').append('<div class="item mt-4">' + item + '<button class="btn btn-danger btn-rounded remove-item">X</button></div>');
+            });
+
+            $('.append-department').on('click', function () {
+
+                var item = $('.departments-items .item').first().html();
+
+                $('.departments-items').append('<div class="item mt-4">' + item + '<button class="btn btn-danger remove-item">X</button></div>');
+            });
+            $('.items').on('click', '.remove-item', function () {
+                $(this).parent().remove();
+            });
+
         });
 
-        $('.append-department').on('click', function () {
+    </script>
+@endsection
 
-            var item = $('.departments-items .item').first().html();
-
-            $('.departments-items').append('<div class="item mt-4">' + item + '<button class="btn btn-danger remove-item">X</button></div>');
-        });
-        $('.items').on('click', '.remove-item', function () {
-            $(this).parent().remove();
-        });
-
-    });
-
-</script>

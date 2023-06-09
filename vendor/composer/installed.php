@@ -3,13 +3,22 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '53975b6f07c8c8ac34791f6695497df846d3962b',
+        'reference' => '1c2952a60de740e67b52a7a673f824c1cba5a28d',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
+        'apility/laravel-fcm' => array(
+            'pretty_version' => 'v1.5.0',
+            'version' => '1.5.0.0',
+            'reference' => '23b8feab8372b53d620edf7b94794b8e28ed0271',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../apility/laravel-fcm',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'archtechx/enums' => array(
             'pretty_version' => 'v0.3.2',
             'version' => '0.3.2.0',
@@ -36,6 +45,12 @@
             'install_path' => __DIR__ . '/../brick/math',
             'aliases' => array(),
             'dev_requirement' => false,
+        ),
+        'brozot/laravel-fcm' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => '*',
+            ),
         ),
         'composer/semver' => array(
             'pretty_version' => '3.3.2',
@@ -439,7 +454,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '53975b6f07c8c8ac34791f6695497df846d3962b',
+            'reference' => '1c2952a60de740e67b52a7a673f824c1cba5a28d',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

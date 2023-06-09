@@ -8,7 +8,8 @@ use App\Exceptions\NotFoundException;
 use App\Models\Company;
 use App\QueryFilters\CompaniesFilter;
 use Illuminate\Database\Eloquent\Builder;
-
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 
 class CompanyService extends BaseService
 {
@@ -39,6 +40,11 @@ class CompanyService extends BaseService
         return $this->queryGet(filters: $filters)->select(['id','name'])->get();
     }
 
+    public function datatable(array $filters = [] , array $withRelations = []): Builder
+    {
+        return $this->queryGet(filters: $filters , withRelations: $withRelations);
+    }
+
     /**
      * create new receiver
      * @param array $data
@@ -47,16 +53,35 @@ class CompanyService extends BaseService
     public function store(CompanyDTO $companyDTO): bool
     {
         $company = $this->model->create($companyDTO->companyData());
-        $company->storeAddress($companyDTO->addressData());
-        foreach($companyDTO->branchesData() as $branch)
+
+        $branches = [];
+        $departments = [];
+
+        $branchData = $companyDTO->branchesData();
+        if (array_filter($branchData['name']))
         {
-            $branch['company_id'] = $company->id;
-            $this->branchService->store(BranchDTO::fromArray(data: $branch));
+            foreach($branchData['name'] as $index=>$value)
+                $branches[] = [
+                    'name'=>$value,
+                    'address'=>$branchData['address'][$index],
+                    'city_id'=>$branchData['city_id'][$index],
+                    'area_id'=>$branchData['area_id'][$index],
+                    'phone'=>$branchData['phone'][$index],
+                    'status'=>isset($branchData['status'][$index])
+                ];
+
+                $company->branches()->createMany($branches);
         }
 
-        foreach($companyDTO->departmentsData() as $department)
-            $company->departments()->create($department);
-
+        $departmentsData = $companyDTO->branchesData();
+        if (array_filter($departmentsData['name']))
+        {
+            foreach($departmentsData['name'] as $index=>$value)
+                $departments[] = [
+                    'name'=>$value,
+                ];
+            $company->departments()->createMany($departments);
+        }
         return true;
     }
 
@@ -70,9 +95,7 @@ class CompanyService extends BaseService
     public function update(int $id, CompanyDTO $companyDTO): bool
     {
         $company = $this->findById($id);
-        if (!$company)
-            throw new NotFoundException(trans('lang.not_found'));
-        $company->update($companyDTO->companyData());
+        $company->update($companyDTO->toArray());
         return true;
     }
 
@@ -84,12 +107,18 @@ class CompanyService extends BaseService
      */
     public function destroy(int $id): bool
     {
-        $company = $this->findById($id);
+        $company = $this->find($id);
+        $company->delete();
+        return true;
+    }
+
+    public function find(int $id, array $relations = []): Model
+    {
+        $company = Company::with($relations)->find($id);
         if (!$company)
             throw new NotFoundException(trans('lang.not_found'));
-        $company->delete();
-        $company->deleteAddresses();
-        return true;
+
+        return $company;
     }
 
     /**

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->enum('stepper',\App\Enums\Stepper::values())->default(\App\Enums\Stepper::INCOMPANY());
             $table->enum('type',\App\Enums\AwbStatusCategory::values())->default(\App\Enums\AwbStatusCategory::AWB());
             $table->string('sms')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

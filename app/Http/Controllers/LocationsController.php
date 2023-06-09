@@ -2,17 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Exceptions\NotFoundException;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\LoginRequest;
-use App\Http\Requests\StoreFcmTokenRequest;
-use App\Http\Resources\AuthUserResource;
 use App\Http\Resources\LocationsResource;
-use App\Services\AuthService;
 use App\Services\LocationService;
 use App\Services\LocationsService;
-use Exception;
-use Illuminate\Support\Facades\Auth;
 
 class LocationsController extends Controller
 {

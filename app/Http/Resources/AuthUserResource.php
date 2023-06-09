@@ -3,7 +3,6 @@
 namespace App\Http\Resources;
 
 use App\Enums\UsersType;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AuthUserResource extends JsonResource
@@ -11,10 +10,12 @@ class AuthUserResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @return array<string, mixed>
+     * @param  \Illuminate\Http\Request  $request
+     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
-    public function toArray(Request $request): array
+    public function toArray($request)
     {
+
         return [
             'name'=>$this->name,
             'email'=>$this->email,
@@ -25,5 +26,4 @@ class AuthUserResource extends JsonResource
             'permissions'=>$this->when($this->type != UsersType::SUPERADMIN() , $this->getPermissionNames())
         ];
     }
-
 }

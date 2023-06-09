@@ -15,6 +15,7 @@
                 // Perform action when checkbox is checked
                 selected_ids.push($(this).val())
                 console.log('Checkbox is checked.');
+
             } else {
                 // Perform action when checkbox is unchecked
                 selected_ids.pop($(this).val())
@@ -57,38 +58,30 @@
             }
 
         });
-
-        $(".print_awbs").click(function () {
+        //
+        $(".print_awbs").click(function (event) {
+            event.preventDefault();
             if (selected_ids.length)
             {
-                var url = $(this).data('url');
-                var csrf = $(this).data('csrf')
-                var reload = $(this).data('reload');
-                var is_duplicated = $(this).data('awbs_duplicated');
-                $.ajax({
-                    url: url,
-                    type: 'post',
-                    data: {
-                        _token:csrf,
-                        ids:selected_ids,
-                        is_duplicated:is_duplicated,
-                    },
-                    success: function(response) {
-                        if (response.status)
-                        {
-                            toastr.success(response.message);
-                            if(reload != true)
-                                $('.dataTable').DataTable().ajax.reload(null, false);
-                            else
-                                window.location.reload();
-                        }
-                        else
-                            toastr.error(response.message);
-                    },
-                    error: function(xhr) {
-                        toastr.error(xhr);
-                    }
-                });
+                $('#awbs_ids').val(JSON.stringify(selected_ids));
+                $('#default_print_awbs').submit();
+            }else{
+                $('#print_awbs_modal').modal('toggle');
+                swal({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'please select at least one to print!',
+                })
+            }
+
+        });
+
+        $(".print_duplicated").click(function (event) {
+            event.preventDefault();
+            if (selected_ids.length)
+            {
+                $('#awbs_ids_duplicate').val(JSON.stringify(selected_ids));
+                $('#print_duplicate_awbs').submit();
             }else{
                 $('#print_awbs_modal').modal('toggle');
                 swal({

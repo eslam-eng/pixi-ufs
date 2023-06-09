@@ -94,7 +94,10 @@ class PriceTableService extends BaseService
         }
         if (!$priceTable) {
             //todo get base governorates and other location id from settings
-            $priceTable = Location::where('title', 'cairo')->where('title','Other')->first()?->id;
+            $base_city_id = Location::where('title', 'cairo')->first()?->id;
+            $base_distination = Location::where('title', 'Other')->first()?->id;
+            $priceTable = $this->getQuery()
+                ->where('location_from',$base_city_id)->where('location_to',$base_distination)->first();
         }
         return $priceTable;
     }

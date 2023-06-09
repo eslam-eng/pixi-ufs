@@ -15,8 +15,8 @@
                 <svg id="barcode{{ $resource->id }}" class="w3-block"></svg>
             </td>
 
-            <td style="width: 25%;padding: 20px" class="w3-display-container w3-padding">
-                <div id="qrcode_{{ $resource->id }}" class="w3-block"></div>
+            <td style="width: 25%;padding: 20px" class="w3-padding qrcode">
+                <div id="qrcode_{{ $resource->id }}" class="w3-left"></div>
             </td>
         </tr>
     </table>
@@ -24,8 +24,8 @@
     <div>
         <table class="w3-table w3-bordered w3-border-black custom-table">
 
-            <tr class="w3-indigo">
-                <th colspan="4" class="w3-center" style="font-size: 17px">Sender</th>
+            <tr style="background-color: #fc4400 !important">
+                <th colspan="4" class="w3-center" style="font-size: 17px;color: #fff">Sender</th>
             </tr>
 
             <tr>
@@ -38,8 +38,8 @@
                 <td colspan="2"><b class="w3-left">Department : </b><span class="w3-right">{{ $resource?->department?->name }}</span></td>
             </tr>
 
-            <tr class="w3-indigo">
-                <th colspan="4" class="w3-center" style="font-size: 17px">Receiver</th>
+            <tr style="background-color: #fc4400 !important">
+                <th colspan="4" class="w3-center" style="font-size: 17px;color: #fff">Receiver</th>
             </tr>
 
             <tr>
@@ -49,7 +49,7 @@
 
             <tr>
                 <td colspan="2"><b class="w3-left">Company : </b> <span class="w3-right"> {!! Arr::get($resource->receiver_data,'receiving_company') !!}</span></td>
-                <td colspan="2"><b class="w3-left">weight : </b><span class="w3-padding">{{$resource->weight}}</span> <b class="w3-left">pieces : </b><span class="w3-padding">{{$resource->pieces}}</span></td>
+                <td colspan="2"><b>weight : </b><span class="w3-padding">{{$resource->weight}}</span> <b>pieces : </b><span class="w3-padding">{{$resource->pieces}}</span></td>
             </tr>
 
             <tr>
@@ -62,12 +62,11 @@
             </tr>
 
             <tr>
-                <td colspan="2"><b class="w3-left">note1 : </b> <span>  {{ Str::limit($resource->additionalInfo->custom_field1,45) }}</span></td>
-                <td colspan="2"><b class="w3-left">note2 : </b><span> {{ Str::limit($resource->additionalInfo->custom_field2,45) }}</span></td>
+                <td colspan="2"><b class="w3-left">note1 : </b> <span>  {{ Str::limit($resource->additionalInfo?->custom_field1,45) }}</span></td>
+                <td colspan="2"><b class="w3-left">note2 : </b><span> {{ Str::limit($resource->additionalInfo?->custom_field2,45) }}</span></td>
             </tr>
         </table>
     </div>
-
     <script>
         JsBarcode("#barcode{{ $resource->id }}", "{{ $resource->code }}", {
             font: 'Arial',
@@ -75,14 +74,16 @@
             fontSize: 18,
         });
 
-        {{--var qrcode = new QRCode(document.getElementById("qrcode_{{ $resource->id }}"), {--}}
-        {{--    text: "https://webisora.com",--}}
-        {{--    width: 100,--}}
-        {{--    height: 90,--}}
-        {{--    colorDark : "#17191d",--}}
-        {{--    colorLight : "#ffffff",--}}
-        {{--    correctLevel : QRCode.CorrectLevel.H--}}
-        {{--});--}}
+        @if(!$is_print_duplicated)
+        var qrcode = new QRCode(document.getElementById("qrcode_{{ $resource->id }}"), {
+            text: "{{$resource->id}}",
+            width: 105,
+            height: 90,
+            colorDark : "#17191d",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
+        });
+        @endif
 
     </script>
 

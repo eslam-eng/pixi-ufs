@@ -2,21 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Enums\ImportStatusEnum;
+use App\Enums\ImportTypeEnum;
 use App\Enums\UsersType;
 use App\Exceptions\NotFoundException;
 use App\Exports\ReceiversExport;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Receivers\ReceiverStoreRequest;
-use App\Http\Requests\Api\Receivers\ReceiverUpdateRequest;
 use App\Http\Requests\FileUploadRequest;
-use App\Http\Resources\Receiver\ReceiverEditResource;
-use App\Http\Resources\Receiver\ReceiverResource;
+use App\Http\Requests\Receivers\ReceiverUpdateAddress;
+use App\Http\Requests\Receivers\ReceiverUpdateAddressAndPhone;
+use App\Http\Requests\Receivers\ReceiverUpdatePhone;
 use App\Imports\Receivers\ReceiversImport;
 use App\Services\BranchService;
 use App\Services\ReceiverService;
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Excel;
 
@@ -27,67 +25,40 @@ class ReceiverController extends Controller
 
     }
 
-    /**
-     * get all receivers
-     */
-    public function index(Request $request)
+
+    public function updateReceiverPhone(ReceiverUpdatePhone $request, $id)
     {
         try {
-            $filters = array_filter($request->all());
-            $withRelations = ['branch.company:id,name', 'defaultAddress'];
-            $receivers = $this->receiverService->listing(filters: $filters, withRelations: $withRelations);
-            return ReceiverResource::collection($receivers);
+            $status = $this->receiverService->updateReceiverPhone(id: $id, data: $request->validated());
+            if (!$status)
+                return apiResponse(message: trans('app.something_went_wrong'), code: 422);
+            return apiResponse(message: trans('app.success_operation'));
         } catch (Exception $e) {
-            return apiResponse(message: trans('lang.something_went_wrong'), code: $e->getCode());
+            return apiResponse(message: $e->getMessage(), code: 422);
         }
     }
 
-//    public function show(int $id)
-//    {
-//        try {
-//            $withRelations = ['branch.company:id,name','addresses'=>fn($query)=>$query->with(['city','area'])];
-//            $receiver = $this->receiverService->findById(id: $id, withRelations: $withRelations);
-//            return ReceiverEditResource::make($receiver);
-//
-//        }catch (Exception|NotFoundException $exception)
-//        {
-//            return apiResponse(message: $exception->getMessage(),code: 404);
-//        }
-//    }
-
-
-    public function edit(int $id)
+    public function updateReceiverAddress(ReceiverUpdateAddress $request, $id)
     {
         try {
-            $withRelations = ['branch.company:id,name', 'addresses' => fn($query) => $query->with(['city', 'area'])];
-            $receiver = $this->receiverService->findById(id: $id, withRelations: $withRelations);
-            return ReceiverEditResource::make($receiver);
-        } catch (Exception|NotFoundException $exception) {
-            return apiResponse(message: $exception->getMessage(), code: 404);
-        }
-    }
-
-    public function store(ReceiverStoreRequest $request)
-    {
-        try {
-            DB::beginTransaction();
-            $receiverDto = $request->toReceiverDTO();
-            $this->receiverService->store($receiverDto);
-            DB::commit();
-            return apiResponse(message: trans('lang.success_operation'));
+            $status = $this->receiverService->updateReceiverAddress(id: $id, data: $request->validated());
+            if (!$status)
+                return apiResponse(message: trans('app.something_went_wrong'), code: 422);
+            return apiResponse(message: trans('app.success_operation'));
         } catch (Exception $e) {
-            return apiResponse(message: trans('lang.something_went_wrong'), code: 422);
+            return apiResponse(message: $e->getMessage(), code: 422);
         }
     }
 
-    public function update(ReceiverUpdateRequest $request, int $id)
+    public function AddPhoneAndAddress(ReceiverUpdateAddressAndPhone $request, $id)
     {
         try {
-            $receiverDTO = $request->toReceiverDTO();
-            $this->receiverService->update($id, $receiverDTO);
-            return apiResponse(message: trans('lang.success_operation'));
-        } catch (Exception|NotFoundException $e) {
-            return apiResponse(message: trans('lang.something_went_wrong'), code: 422);
+            $status = $this->receiverService->AddPhoneAndAddress(id: $id, data: $request->validated());
+            if (!$status)
+                return apiResponse(message: trans('app.something_went_wrong'), code: 422);
+            return apiResponse(message: trans('app.success_operation'));
+        } catch (Exception $e) {
+            return apiResponse(message: $e->getMessage(), code: 422);
         }
     }
 
@@ -129,13 +100,16 @@ class ReceiverController extends Controller
             DB::beginTransaction();
             $user = getAuthUser();
             $file = $request->file('file');
-                (new ReceiversImport( auth_user: $user))->import($file)->onQueue('receivers_import');
+            $importObject = new ReceiversImport(
+                creator: $user,
+                importation_type: ImportTypeEnum::RECEIVERS(),
+            );
+            $importObject->import($file)->onQueue('default');
             DB::commit();
             return apiResponse(message: trans('app.import_success_message'));
-        }catch (Exception $exception)
-        {
+        } catch (Exception $exception) {
             DB::rollBack();
-            return apiResponse(message: $exception->getMessage(),code: $exception->getCode());
+            return apiResponse(message: $exception->getMessage(), code: $exception->getCode());
         }
     }
 }

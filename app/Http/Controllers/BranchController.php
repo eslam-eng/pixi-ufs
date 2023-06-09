@@ -1,92 +1,86 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
+use App\DataTables\CompaniesDatatable;
+use App\Enums\UsersType;
 use App\Exceptions\NotFoundException;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Branches\BranchStoreRequest;
-use App\Http\Requests\Api\Branches\BranchUpdateRequest;
-use App\Http\Resources\BranchResource;
+use App\Http\Requests\Branches\BranchStoreRequest;
+use App\Http\Requests\Branches\BranchUpdateRequest;
+use App\Http\Requests\Companies\CompanyStoreRequest;
+use App\Http\Requests\Companies\CompanyUpdateRequest;
+use App\Http\Resources\Company\CompanyDropDownResource;
+use App\Http\Resources\Company\CompanyResource;
 use App\Services\BranchService;
+use App\Services\CompanyService;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class BranchController extends Controller
 {
-    public function __construct(private BranchService $branchService)
+    public function __construct(protected BranchService $branchService)
     {
-
     }
 
-    /**
-     * get all branches
-     */
-    public function index(Request $request)
+    public function create(Request $request)
     {
-        try {
-            $filters = array_filter($request->all());
-            $withRelations = ['company:id,name','addresses'=>fn($query)=>$query->with(['city','area'])];
-            $branches = $this->branchService->listing(filters: $filters, withRelations: $withRelations);
-            return BranchResource::collection($branches);
-        } catch (Exception $e) {
-            return apiResponse(message: trans('lang.something_went_wrong'), code: $e->getCode());
-        }
+        $company_id = $request->company_id;
+        return view('layouts.dashboard.branches.create', compact('company_id'));
     }
 
     public function store(BranchStoreRequest $request)
     {
         try {
             DB::beginTransaction();
-                $branchDto = $request->toBranchDTO();
-                $this->branchService->store($branchDto);
+            $branchDTO = $request->toBranchDTO();
+            $this->branchService->store($branchDTO);
             DB::commit();
-            return apiResponse(message: trans('lang.success_operation'));
+            return redirect()->route('companies.edit', Arr::get($branchDTO->toArray(), 'company_id'));
         } catch (Exception $e) {
             DB::rollBack();
-            return apiResponse(message: trans('lang.something_went_wrong'), code: 422);
+            return apiResponse(message: $e->getMessage(), code: 422);
         }
     }
 
     public function edit(int $id)
     {
-        try {
-            $branch = $this->branchService->findById(id: $id,withRelations: ['company','addresses']);
-            return  BranchResource::make($branch);
-        }catch (NotFoundException $exception){
-            return apiResponse(message: $exception->getMessage(), code: 422);
-        }catch (Exception $exception){
-            return apiResponse(message: trans('lang.something_went_wrong'), code: 422);
-
-        }
+        $withRelations = [];
+        $branch = $this->branchService->find(id: $id);
+        return view('layouts.dashboard.branches.edit', compact('branch'));
+    }
+    
+    public function show(int $id)
+    {
+        $withRelations = [];
+        $branch = $this->branchService->find(id: $id);
+        return view('layouts.dashboard.branches.show', compact('branch'));
     }
 
     public function update(BranchUpdateRequest $request, int $id)
     {
         try {
             DB::beginTransaction();
-            $branchDto = $request->toBranchDTO();
-            $this->branchService->update($id, $branchDto);
+            $branchDTO = $request->toBranchDTO();
+            $this->branchService->update($id, $branchDTO);
             DB::commit();
-            return apiResponse(message: trans('lang.success_operation'));
-        } catch (Exception|NotFoundException $e) {
-            return apiResponse(message: trans('lang.something_went_wrong'), code: 422);
+            return redirect()->route('companies.edit', Arr::get($branchDTO->toArray(), 'company_id'));
+        }catch (Exception $e) {
+            DB::rollBack();
+            return apiResponse(message: $e->getMessage(), code: 422);
         }
     }
 
-    /**
-     * delete existing branch
-     * @param int $id
-     */
     public function destroy(int $id)
     {
         try {
             $this->branchService->destroy(id: $id);
-            return apiResponse(message: trans('lang.success_operation'));
-        } catch (NotFoundException $e) {
-            return apiResponse(message: $e->getMessage(), code: 422);
-        } catch (Exception $e) {
+            return redirect()->back();
+        }catch (Exception $e) {
             return apiResponse(message: trans('lang.something_went_wrong'), code: 422);
         }
     }
+
 }

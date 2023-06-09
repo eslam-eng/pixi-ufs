@@ -22,6 +22,7 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
+        dd($request->all());
         try {
             $this->authService->loginWithEmailOrPhone(identifier: $request->identifier, password: $request->password);
             $toast = [

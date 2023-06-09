@@ -97,5 +97,11 @@ return [
     'success_count'=>'Success Count',
     'user'=>'User',
     'import_type'=>'Import Type',
+    'all_companies'=>'All Companies',
+    'all_receivers'=>'All Receivers',
+    'receivers_page_title'=>'Receivers',
+    'phone1'=>'Phone1',
+    'phone2'=>'phone2',
+    'title'=>'Title',
 
 ];

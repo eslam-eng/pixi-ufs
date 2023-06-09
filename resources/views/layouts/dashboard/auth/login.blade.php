@@ -31,7 +31,7 @@
                                                         <div class="tab-content">
                                                             <div class="tab-pane active" id="tab5">
                                                                 <form action="{{route('login')}}" method="post">
-                                                                    @csrf
+                                                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
                                                                     <div class="form-group">
                                                                         <label>@lang('app.email_or_phone')</label>
                                                                         <input class="form-control" name="identifier"

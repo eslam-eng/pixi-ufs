@@ -17,20 +17,6 @@ class AwbHistoryService extends BaseService
        return  $this->model ;
     }
 
-    public function awbStatus(int $id, array $data):bool
-    {
-        $awb = Awb::find($id);
-        if(!$awb)
-            throw new NotFoundException(trans('app.not_found'));
-        $data = [
-            'user_id'=>$awb->user_id,
-            'awb_status_id'=>$data['status_id'],
-            'comment'=>$data['comment'],
-        ];
-        $awb->history()->create($data);
-        return true;
-    }
-
     public function changeAwbStatus(int $status , array $awb_ids = [])
     {
         $inserted_data = [];

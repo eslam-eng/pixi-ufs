@@ -26,6 +26,8 @@ class AwbHistoryRequest extends BaseRequest
         return [
             'status_id'=>'required|integer|exists:awb_statuses,id',
             'comment'=>'nullable|string',
+            'lat'=>'nullable|string',
+            'lng'=>'nullable|string',
         ];
     }
 

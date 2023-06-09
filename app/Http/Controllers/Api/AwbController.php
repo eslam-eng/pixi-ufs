@@ -45,7 +45,7 @@ class AwbController extends Controller
     public function status(int $id , AwbChangeStatusRequest $request)
     {
         try {
-            $status = $this->awbService->status(id: $id, awb_status_data: $request->Validated());
+            $status = $this->awbService->status(id: $id, awb_status_data: $request->validated());
             if (!$status)
                 return apiResponse(message: trans('app.something_went_wrong'), code: 422);
             return apiResponse(message: trans('app.success_operation'));
@@ -57,7 +57,7 @@ class AwbController extends Controller
     public function pod(int $id, AwbPodRequest $request)
     {
         try {
-            $status = $this->awbService->pod(id: $id, data: $request->Validated());
+            $status = $this->awbService->pod(id: $id, data: $request->validated());
             if (!$status)
                 return apiResponse(message: trans('app.something_went_wrong'), code: 422);
             return apiResponse(message: trans('app.success_operation'));

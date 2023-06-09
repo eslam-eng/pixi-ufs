@@ -6,7 +6,7 @@ use App\Exceptions\NotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\LoginRequest;
-use App\Http\Requests\StoreFcmTokenRequest;
+use App\Http\Requests\Notification\StoreFcmTokenRequest;
 use App\Http\Resources\AuthUserResource;
 use App\Services\AuthService;
 use Exception;

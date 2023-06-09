@@ -1,9 +1,12 @@
 <?php
 
-use App\Http\Controllers\Api\AddressController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\AwbController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\NotificationController;
+use App\Http\Controllers\Api\PhoneVerifyController;
+use App\Http\Controllers\Api\ReceiverController;
+use App\Http\Controllers\Api\RestPasswordController;
+use App\Http\Controllers\Api\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,19 +20,48 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('phone/verify', PhoneVerifyController::class);
+    Route::post('password/forget', PhoneVerifyController::class);
+    Route::post('password/reset', RestPasswordController::class);
+    Route::group(['middleware' => 'auth:sanctum'], function () {
+        Route::post('user/set-fcm-token', [AuthController::class, 'setFcmToken']);
+        Route::get('user', [AuthController::class, 'authUser']);
+        Route::patch('user', [AuthController::class, 'update']);
+    });
 });
-Route::group(['middleware'=>'auth:sanctum'], function(){
-    Route::get('/user/profile', [AuthController::class, 'getProfileDetails']);
-    Route::get('/user/destroy', [AuthController::class, 'destroy']);
-    Route::post('/user/change-password', [AuthController::class, 'changePassword']);
+
+
+Route::group(['middleware' => 'auth:sanctum'], function () {
+
+    Route::group(['prefix'=>'user'],function (){
+        Route::get('profile', [AuthController::class, 'getProfileDetails']);
+        Route::get('/destroy', [AuthController::class, 'destroy']);
+        Route::post('/change-password', [AuthController::class, 'changePassword']);
+
+    });
+    Route::group(['prefix' => 'awbs'], function () {
+        Route::get('/', [AwbController::class, 'index']);
+        Route::post('/details/{id}', [AwbController::class, 'awbDetails']);
+        Route::post('/update-phone/{id}', [AwbController::class, 'updateReceiverPhone']);
+        Route::post('/add-phone-and-address/{id}', [AwbController::class, 'AddPhoneAndAddress']);
+        Route::post('/pod/{id}', [AwbController::class, 'pod']);
+
+    });
+
+    Route::post('update-device-token', [UsersController::class, 'updateDeviceToken']);
+
+    Route::group(['prefix' => 'notifications'], function () {
+        Route::post('/send', [NotificationController::class, 'sendFcmNotification']);
+        Route::get('/', [NotificationController::class, 'getNotifications']);
+        Route::get('/{notification_id}/mark-as-read', [NotificationController::class, 'markAsRead']);
+    });
+
+    Route::group(['prefix' => 'receivers'], function () {
+        Route::post('/update-phone/{id}', [ReceiverController::class, 'updateReceiverPhone']);
+        Route::post('/update-address/{id}', [ReceiverController::class, 'updateReceiverAddress']);
+        Route::post('/update-phone-and-address/{id}', [ReceiverController::class, 'AddPhoneAndAddress']);
+    });
+
 });
-Route::post('/auth/login',[AuthController::class, 'login']);
-Route::get('/awbs', [AwbController::class, 'index']);
-Route::post('/awbs/details/{id}', [AwbController::class, 'awbDetails']);
-Route::post('/awbs/cancel/{id}', [AwbController::class, 'cancelAwb']);
-Route::post('/awbs/reschedule/{id}', [AwbController::class, 'awbReschedule']);
-Route::post('/awbs/update-phone/{id}', [AwbController::class, 'updateReceiverPhone']);
-Route::post('/awbs/add-phone-and-address/{id}', [AwbController::class, 'AddPhoneAndAddress']);
-Route::resource('addresses', AddressController::class);

@@ -2,10 +2,9 @@
 
 namespace App\Services;
 
+use App\Exceptions\NotFoundException;
 use App\Models\Awb;
 use App\Models\AwbHistory;
-use Illuminate\Database\Eloquent\Model;
-
 class AwbHistoryService extends BaseService
 {
 
@@ -16,11 +15,6 @@ class AwbHistoryService extends BaseService
     public function getModel(): AwbHistory
     {
        return  $this->model ;
-    }
-
-    public function store()
-    {
-
     }
 
     public function changeAwbStatus(int $status , array $awb_ids = [])

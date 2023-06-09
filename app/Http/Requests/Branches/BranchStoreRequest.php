@@ -29,15 +29,8 @@ class BranchStoreRequest extends BaseRequest
             'city_id' => 'required|integer|exists:locations,id',
             'area_id' => 'required|integer|exists:locations,id',
             'address' => 'required|string',
+            'status' => 'nullable|boolean',
         ];
-    }
-
-    protected function prepareForValidation(): void
-    {
-        $this->merge([
-            'is_default' => true,
-        ]);
-
     }
 
     public function toBranchDTO(): \App\DTO\BaseDTO

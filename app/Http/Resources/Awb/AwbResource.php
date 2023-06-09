@@ -19,7 +19,12 @@ class AwbResource extends JsonResource
         return [
             'id'=>$this->id,
             'code'=>$this->code,
-            'receiver_data'=>$this->receiver_data['name'],
+            'company'=>$this->company->name,
+            'status'=>$this->latestStatus->status->name,
+            'receiver_name'=>$this->receiver_data['name'],
+            'receiver_phone'=>$this->receiver_data['phone1'],
+            'receiver_area'=>$this->receiver_data['area'],
+            'receiver_address'=>$this->receiver_data['address1'],
         ];
     }
 }

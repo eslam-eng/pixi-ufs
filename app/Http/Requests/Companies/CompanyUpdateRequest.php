@@ -27,9 +27,9 @@ class CompanyUpdateRequest extends BaseRequest
             'email'=> 'required|email|unique:companies,email,'.$this->company,
             'ceo'=> 'required|string',
             'phone'=> 'required|numeric|unique:companies,phone,'.$this->company,
-            'show_dashboard'=> 'required|boolean',
+            'show_dashboard'=> 'nullable|boolean',
             'notes'=> 'required|string',
-            'status'=> 'required|boolean',
+            'status'=> 'nullable|boolean',
         ];
     }
 

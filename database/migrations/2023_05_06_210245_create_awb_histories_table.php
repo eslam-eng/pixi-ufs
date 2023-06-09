@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\Awb::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignIdFor(\App\Models\User::class)->constrained();
             $table->foreignIdFor(\App\Models\AwbStatus::class)->constrained();
+            $table->string('lat')->nullable();
+            $table->string('lng')->nullable();
             $table->string('comment')->nullable();
             $table->softDeletes();
             $table->timestamps();

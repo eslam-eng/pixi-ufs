@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Companies;
 
 use App\DTO\Company\CompanyDTO;
+use App\Enums\ImportTypeEnum;
 use App\Http\Requests\BaseRequest;
 
 class CompanyStoreRequest extends BaseRequest
@@ -26,17 +27,30 @@ class CompanyStoreRequest extends BaseRequest
             'name'=> 'required|string',
             'email'=> 'required|email|unique:companies,email',
             'ceo'=> 'nullable|string',
-            'phone'=> 'required|integer|unique:companies,phone',
-            'show_dashboard'=> 'required|boolean',
-            'notes'=> 'required|string',
-            'status'=> 'required|boolean',
+            'phone'=> 'required|string|unique:companies,phone',
+            'show_dashboard'=> 'nullable|boolean',
+            'notes'=> 'nullable|string',
+            'status'=> 'nullable|boolean',
+            'num_custom_fields'=>'required|integer',
+            'importation_type'=>'nullable|integer|in:'.ImportTypeEnum::AWBWITHREFERENCE->value.','.ImportTypeEnum::AWBWITHOUTREFERENCE->value,
+            'city_id' => 'required|integer|exists:locations,id',
+            'area_id' => 'required|integer|exists:locations,id',
+            'address' => 'required|string',
 
-            'city_id'=> 'required|integer|exists:locations,id',
-            'area_id'=> 'required|integer|exists:locations,id',
-            'address'=> 'required|string',
-
-            'branches'=> 'required|array',
-            'departments'=> 'required|array',
+            'branches_name'=> 'nullable|array',
+            'branches_name.*'=> 'nullable|string',
+            'branches_phone'=> 'nullable|array',
+            'branches_phone.*'=> 'nullable|string',
+            'branches_address'=> 'nullable|array',
+            'branches_address.*'=> 'nullable|string',
+            'branches_status'=> 'nullable|array',
+            'branches_status.*'=> 'nullable|boolean',
+            'branches_city_id'=> 'nullable|array',
+            'branches_city_id.*'=> 'nullable|string',
+            'branches_area_id'=> 'nullable|array',
+            'branches_area_id.*'=> 'nullable|string',
+            'departments_name'=> 'nullable|array',
+            'departments_name.*'=> 'nullable|string',
         ];
     }
 

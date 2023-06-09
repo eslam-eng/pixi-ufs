@@ -20,6 +20,7 @@ use App\Models\AwbStatus;
 use App\Services\AwbHistoryService;
 use App\Services\AwbService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Excel;
 
@@ -51,7 +52,12 @@ class AwbController extends Controller
     {
         try {
             $user = auth()->user();
-            $withRelations = ['company:id,name', 'branch:id,name', 'department:id,name', 'latestStatus.status', 'additionalInfo'];
+
+            $withRelations = [
+                'company:id,name', 'branch:id,name', 'department:id,name',
+                'additionalInfo','history'
+            ];
+
             $awb = $this->awbService->findById(id: $id, withRelations: $withRelations);
             return view('layouts.dashboard.awb.show', ['awb' => $awb, 'user' => $user]);
         } catch (NotFoundException $exception) {
@@ -62,8 +68,6 @@ class AwbController extends Controller
             ];
             return to_route('awbs.index')->with('toast', $toast);
         }
-
-
     }
 
     public function store(AwbStoreRequest $request)
@@ -129,7 +133,7 @@ class AwbController extends Controller
 
     public function import(AwbFileUploadExcelRequest $request)
     {
-        $user = auth()->user()->load('company:id,name,importation_type', 'branch:id,name,city_id');
+        $user = auth()->user()->load('company:id,name,importation_type', 'branch:id,name,city_id,area_id');
         $importation_type = $user->company?->importation_type;
 
         $awbImportDTO = AwbImportDTO::fromRequest($request);
@@ -173,9 +177,10 @@ class AwbController extends Controller
     public function printThreeInOnePage(Request $request)
     {
         try {
-            $ids = $request->ids;
+            $awbs_ids = $request->ids;
+            $awbs_ids = json_decode($awbs_ids);
             $is_print_duplicated = $request->boolean('is_duplicated') ?? false;
-            if (count($ids)) {
+            if (count($awbs_ids)) {
                 $withRelations = [
                     'company:id,name',
                     'department:id,name',
@@ -184,13 +189,13 @@ class AwbController extends Controller
                     'branch.area',
                     'additionalInfo'
                 ];
-                $awbs = $this->awbService->queryGet(filters: ['ids' => $ids], withRelations: $withRelations)->get();
-                return view('layouts.dashboard.awb.print.print-awb-three-in-one-page', ['awbs' => $awbs, 'is_print_duplicated' => $is_print_duplicated]);
-            } else {
-                $toast = ['type' => 'error', 'title' => 'error', 'message' => "please select at least one for print"];
-                return back()->with('toast', $toast);
+                $awbs = $this->awbService->queryGet(filters: ['ids' => $awbs_ids], withRelations: $withRelations)->get();
+                return  view('layouts.dashboard.awb.print.print-awb-three-in-one-page', ['awbs' => $awbs, 'is_print_duplicated' => $is_print_duplicated]);
 
+            } else {
+                return apiResponse(message: "please select at least one for print",code: 422);
             }
+            return apiResponse(data: $awbs_rendered);
         } catch (\Exception $exception) {
             $toast = ['type' => 'error', 'title' => 'error', 'message' => "there is an error"];
             return back()->with('toast', $toast);

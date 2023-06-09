@@ -11,9 +11,9 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Branch extends Model
 {
-    use HasFactory, HasAddresses, Filterable;
+    use HasFactory, Filterable;
     protected $table = 'branches';
-    protected $fillable = ['name','company_id','address','city_id','area_id','phone'];
+    protected $fillable = ['name','company_id','address','city_id','area_id','phone', 'status'];
 
     public function company(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {

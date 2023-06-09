@@ -4,12 +4,15 @@ namespace App\Imports\Awbs\sheets;
 
 
 use App\Enums\AwbStatuses;
+use App\Enums\UsersType;
 use App\Models\Awb;
 use App\Models\AwbAdditionalInfo;
 use App\Models\AwbHistory;
 use App\Models\Location;
 use App\Models\Receiver;
+use App\Models\User;
 use App\Services\PriceTableService;
+use App\Services\PushNotificationService;
 use Illuminate\Support\Arr;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
 use Maatwebsite\Excel\Concerns\SkipsFailures;
@@ -47,11 +50,12 @@ class AwbsImportSheet implements
         $awbData = [];
         $awbsAdditionalInfo = [];
         $awbsHistory = [];
+//        $awbs_areas = [];
 
         foreach ($array as $row) {
             $receiver_city_id = isset($row['city']) ? substr($row['city'], (strpos($row['city'], "#") + 1)) : null;
             $receiver_area_id = isset($row['area']) ? substr($row['area'], (strpos($row['area'], "#") + 1)) : null;
-
+//            $awbs_areas[] = $receiver_area_id;
             $city_title = strstr($row['city'], "#", true);
             $area_title = strstr($row['area'], "#", true);
 
@@ -64,6 +68,8 @@ class AwbsImportSheet implements
 
             $awbData = [
                 'receiver_reference' => $row['reference'],
+                'receiver_city_id' => $receiver_city_id,
+                'receiver_area_id' => $receiver_area_id,
                 'user_id' => $this->creator->id,
                 'company_id' => $this->creator->company_id,
                 'branch_id' => $this->creator->branch_id,
@@ -78,7 +84,7 @@ class AwbsImportSheet implements
                     'name' => $row['name'],
                     'receiving_company' => $row['receiving_company'],
                     'receiving_branch' => $row['receiving_branch'],
-                    'titles' => $row['title'],
+                    'title' => $row['title'],
                 ],
                 'payment_type' => $this->payment_type,
                 'service_type' => $this->service_type,
@@ -114,6 +120,30 @@ class AwbsImportSheet implements
         AwbAdditionalInfo::query()->upsert($awbsAdditionalInfo, 'awb_id', ['custom_field1', 'custom_field2', 'custom_field3', 'custom_field4', 'custom_field5']);
         AwbHistory::query()->upsert($awbsHistory, 'awb_id', ['user_id', 'awb_status_id']);
 
+//        $awbs_areas = array_unique($awbs_areas);
+        $number_of_awbs = count($awbData);
+        $fcm_title = 'تم انشاء شحنات '.$number_of_awbs;
+        $fcm_body = $this->creator->company->name . 'يرجي التوجه لاستلام الشحنات من شركه :';
+        $users = User::query()
+            ->where('type',UsersType::COURIER())->where('area_id',$this->creator->branch->area_id)->select(['id','device_token'])->get();
+        $tokens = $users->pluck('device_token')->toArray();
+        foreach ($users as $user)
+        {
+            $notification_data =  [
+                'title' => [
+                    'ar' => $fcm_title,
+                    'en' => $fcm_title,
+                ],
+                'message' => [
+                    'ar' => $fcm_body,
+                    'en' => $fcm_body,
+                ],
+
+            ];
+            notifyUser($user , $notification_data);
+        }
+        app()->make(PushNotificationService::class)->sendToTokens(title: $fcm_title,body: $fcm_body,tokens: $tokens);
+
     }
 
 
@@ -121,14 +151,13 @@ class AwbsImportSheet implements
     {
 
         return [
-            '*.reference' => 'required|exists:receivers,reference',
             '*.name' => 'required|string',
             '*.phone1' => 'required|string',
             '*.city' => 'required|string',
             '*.area' => 'nullable|string',
             '*.weight' => 'required|numeric',
             '*.pieces' => 'required|numeric',
-            '*.address' => 'required|string'
+            '*.address1' => 'required|string'
         ];
     }
 

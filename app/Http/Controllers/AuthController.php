@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\NotFoundException;
 use App\Http\Requests\LoginRequest;
-use App\Http\Requests\StoreFcmTokenRequest;
+use App\Http\Requests\Notification\StoreFcmTokenRequest;
 use App\Services\AuthService;
 use Exception;
 use Illuminate\Support\Facades\Auth;

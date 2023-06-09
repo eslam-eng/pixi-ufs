@@ -31,8 +31,8 @@ Route::group(['prefix' => 'authentication','middleware' => 'guest'],function (){
 });
 
 Route::get('/', function () {
-    return redirect(route('home'));
-})->middleware('auth');
+    return view('livewire.index');
+})->name('home')->middleware('auth');
 //auth routes
 Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
     Route::get('/', function () {

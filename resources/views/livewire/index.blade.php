@@ -29,7 +29,7 @@
 											<div class="row">
 												<div class="col-xl-9 col-lg-7 col-md-6 col-sm-12">
 													<div class="text-justified align-items-center">
-														<h3 class="text-dark font-weight-semibold mb-2 mt-0">Hi,{{auth()->user()->name}} <span class="text-primary">Nick!</span></h3>
+														<h3 class="text-dark font-weight-semibold mb-2 mt-0">Hi,{{auth()->user()->name}} </h3>
 														<p class="text-dark tx-14 mb-3 lh-3">system upgrade working.... </p>
 													</div>
 												</div>

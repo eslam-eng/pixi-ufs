@@ -89,7 +89,7 @@ class ImportLogsDatatable extends DataTable
             Column::make('total_count')->title(trans('app.total_count'))->searchable(false)->orderable(false),
             Column::make('success_count')->title(trans('app.success_count'))->searchable(false)->orderable(false),
             Column::make('created_by')->title(trans('app.user'))->searchable(false)->orderable(false),
-            Column::make('company')->title(trans('app.branch'))->searchable(false)->orderable(false),
+            Column::make('company')->title(trans('app.company'))->searchable(false)->orderable(false),
             Column::make('branch')->title(trans('app.branch'))->searchable(false)->orderable(false),
             Column::make('department')->title(trans('app.department'))->searchable(false)->orderable(false),
             Column::make('import_type')->title(trans('app.import_type'))->searchable(false)->orderable(false),

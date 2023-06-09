@@ -5,7 +5,7 @@
                 <div>
                     <a aria-controls="collapseExample" class="btn ripple btn-light collapsed"
                        data-bs-toggle="collapse" href="#collapseExample" role="button"
-                       aria-expanded="false"><i class="fa fa-filter pe-2"></i>@lang('app.aws_filters')
+                       aria-expanded="false"><i class="fa fa-filter pe-2"></i>@lang('app.filter')
                     </a>
                 </div>
                 <div>
@@ -54,8 +54,8 @@
                                 <div class="card-footer">
                                     <div class="form-group mb-0 mt-3 justify-content-end">
                                         <div>
-                                            <button type="submit" class="btn btn-success"><i class="fa fa-search pe-2"></i>@lang('app.search')</button>
-                                            <button type="reset" class="btn btn-secondary ms-4">@lang('app.reset')</button>
+                                            <button type="submit" class="btn btn-rounded btn-success"><i class="fa fa-search pe-2"></i>@lang('app.search')</button>
+                                            <button type="reset" class="btn btn-rounded btn-secondary ms-4">@lang('app.reset')</button>
                                         </div>
                                     </div>
                                 </div>

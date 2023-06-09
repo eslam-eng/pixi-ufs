@@ -5,7 +5,7 @@
                 <div>
                     <a aria-controls="collapseExample" class="btn ripple btn-light collapsed"
                        data-bs-toggle="collapse" href="#collapseExample" role="button"
-                       aria-expanded="false"><i class="fa fa-filter pe-2"></i>@lang('app.receivers_filter')
+                       aria-expanded="false"><i class="fa fa-filter pe-2"></i>@lang('app.filter')
                     </a>
                 </div>
                 <div>

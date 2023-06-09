@@ -3,7 +3,7 @@
 @section('content')
 
     {{--    breadcrumb --}}
-    @include('layouts.components.breadcrumb',['title' => trans('companies_page_title'),'first_list_item' => trans('app.companies'),'last_list_item' => trans('app.add_company')])
+    @include('layouts.components.breadcrumb',['title' => trans('app.companies_page_title'),'first_list_item' => trans('app.companies'),'last_list_item' => trans('app.add_company')])
     {{--    end breadcrumb --}}
 
     <!-- Row -->
@@ -143,7 +143,7 @@
                                         </select>
 
                                         @error('importation_type')
-                                        <div class="text-danger"> {{$message}}</div>
+                                            <div class="text-danger"> {{$message}}</div>
                                         @enderror
                                     </div>
 

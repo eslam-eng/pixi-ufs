@@ -61,6 +61,8 @@ class AwbsSyncWithReferenceSheet implements
 
             $awbData = [
                 'receiver_reference' => $receiver->reference,
+                'receiver_city_id' => $receiver->city?->id,
+                'receiver_area_id' => $receiver->area?->id,
                 'user_id' => $this->creator->id,
                 'company_id' => $this->creator->company_id,
                 'branch_id' => $this->creator->branch_id,
@@ -75,7 +77,7 @@ class AwbsSyncWithReferenceSheet implements
                     'name' => $receiver->name,
                     'receiving_company' => $receiver->receiving_company,
                     'receiving_branch' => $receiver->receiving_branch,
-                    'titles' => $receiver->title,
+                    'title' => $receiver->title,
                 ],
                 'payment_type' => $this->payment_type,
                 'service_type' => $this->service_type,

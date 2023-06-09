@@ -6,7 +6,7 @@ use App\DTO\Address\AddressDTO;
 use App\DTO\AwbHistory\AwbHistoryDTO;
 use App\Http\Requests\BaseRequest;
 
-class AwbUpdateReceiverPhone extends BaseRequest
+class AwbHistoryRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,10 @@ class AwbUpdateReceiverPhone extends BaseRequest
     public function rules(): array
     {
         return [
-            'phone'=>'required|string',
+            'status_id'=>'required|integer|exists:awb_statuses,id',
+            'comment'=>'nullable|string',
+            'lat'=>'nullable|string',
+            'lng'=>'nullable|string',
         ];
     }
 

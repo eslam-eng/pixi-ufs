@@ -16,6 +16,7 @@ class AwbObserver
     public function created(Awb $awb)
     {
         $now = Carbon::now()->format('Y-m-d');
+        $now = str_replace('-','',$now);
         $awb->update(['code' => $now .$awb->id]);
     }
 

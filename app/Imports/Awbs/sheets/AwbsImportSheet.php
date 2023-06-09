@@ -68,6 +68,8 @@ class AwbsImportSheet implements
 
             $awbData = [
                 'receiver_reference' => $row['reference'],
+                'receiver_city_id' => $receiver_city_id,
+                'receiver_area_id' => $receiver_area_id,
                 'user_id' => $this->creator->id,
                 'company_id' => $this->creator->company_id,
                 'branch_id' => $this->creator->branch_id,
@@ -82,7 +84,7 @@ class AwbsImportSheet implements
                     'name' => $row['name'],
                     'receiving_company' => $row['receiving_company'],
                     'receiving_branch' => $row['receiving_branch'],
-                    'titles' => $row['title'],
+                    'title' => $row['title'],
                 ],
                 'payment_type' => $this->payment_type,
                 'service_type' => $this->service_type,

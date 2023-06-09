@@ -17,22 +17,23 @@ class AwbDetailsResource extends JsonResource
     public function toArray($request)
     {
         return [
+
             'id'=>$this->id,
-            'from'=>$this->whenLoaded('company', [
-                'company_name'=>null,
-            ]),
-            'receiver_data'=>json_decode($this->receiver_data),
-            'shipment_info'=>[
-                'weight'=>$this->weight,
-                'peice'=>$this->weight,
-                'shipment_type'=>$this->shipment_type,
-                'code'=>$this->code,
-                'status'=>$this->whenLoaded('latestStatus', $this->latestStatus->status->name),
-            ],
-            'payment_info'=>[
-                'payment_type'=>$this->payment_type,
-                'collection'=>$this->collection,
-            ],
+            'code'=>$this->code,
+            'company'=>$this->company->name,
+            'status'=>$this->latestStatus->status->name,
+            'weight'=>$this->latestStatus->status->name,
+            'pieces'=>$this->pieces,
+            'shipment_type'=>$this->shipment_type,
+            'payment_type'=>$this->payment_typ,
+            'service_type'=>$this->service_type,
+            'note1'=>$this->note1,
+            'note2'=>$this->note2,
+            'collection'=>$this->collection,
+            'receiver_name'=>$this->receiver_data['name'],
+            'receiver_phone'=>$this->receiver_data['phone1'],
+            'receiver_area'=>$this->receiver_data['area'],
+            'receiver_address'=>$this->receiver_data['address1'],
         ];
     }
 }

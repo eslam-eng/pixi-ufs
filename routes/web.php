@@ -62,10 +62,11 @@ Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
     Route::delete('awbs-delete-multiple',[AwbController::class,'deleteMultiple'])->name('awb.delete-multiple');
 
     Route::post('awbs-print-three-in-in-one',[AwbController::class,'printThreeInOnePage'])->name('awbs-print3*1');
-    Route::post('awbs-change-status',[AwbController::class,'changeStatus'])->name('awbs-change-status');
+    Route::post('awbs-change-status',[AwbController::class,'changeStatusForMultipleAwbs'])->name('awbs-change-status');
 
     Route::group(['prefix' => 'awb-history'],function (){
         Route::get('{awb_id}/create',[AwbHistoryController::class,'create'])->name('awb-history.create');
+        Route::post('{awb_id}/store',[AwbHistoryController::class,'store'])->name('awb-history.store');
     });
     Route::group(['prefix' => 'awb' ],function (){
         Route::get('/imports',[AwbController::class,'importForm'])->name('awb.import-form');

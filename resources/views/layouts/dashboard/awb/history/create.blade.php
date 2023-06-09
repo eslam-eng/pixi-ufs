@@ -7,301 +7,134 @@
     {{--    end breadcrumb --}}
 
     <!-- Row -->
-    <div class="row">
-        <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
-            <form action="{{route('awbs-history.store')}}" method="post">
-                @csrf
-                <div class="row">
-                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="main-content-label mg-b-5">Sender Info</div>
-                                <div class="pd-30 pd-sm-20">
-                                    <div class="row row-xs">
-                                        <div class="col-md-4 col-lg-4 col-sm-12">
-                                            <livewire:company/>
-                                        </div>
-                                        <div class="col-md-4 col-lg-4 col-sm-12 mg-t-5 mg-md-t-0">
-                                            <livewire:branch/>
-                                        </div>
-                                        <div class="col-md-4 col-lg-4 col-sm-12 mg-t-5 mg-md-t-0">
-                                            <livewire:department/>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="pd-30 pd-sm-20">
-                                    <div class="row row-xs">
-                                        <div class="col-md-6 col-lg-6 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="form-label">@lang('app.phone')</label>
-                                                <p id="branch_phone" class="form-control"></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-6 col-sm-12 mg-t-10 mg-md-t-0">
-                                            <label class="form-label">@lang('app.address')</label>
-                                            <p id="branch_address" class="form-control"></p>
-                                        </div>
-                                        <div class="col-md-6 col-lg-6 col-sm-12 mg-t-10 mg-md-t-0">
-                                            <label class="form-label">@lang('app.city')</label>
-                                            <p id="branch_city" class="form-control"></p>
-                                        </div>
-                                        <div class="col-md-6 col-lg-6 col-sm-12 mg-t-10 mg-md-t-0">
-                                            <label class="form-label">@lang('app.area')</label>
-                                            <p id="branch_area" class="form-control"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="main-content-label mg-b-5">Receiver Info</div>
-                                <div class="pd-30 pd-sm-20">
-                                    <div class="row row-xs">
-                                        <x-awb-receivers-search-data-section/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-12 col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="main-content-label mg-b-5">@lang('app.awb_info')</div>
-                                <div class="pd-30 pd-sm-20">
-                                    <div class="row row-xs">
-                                        <div class="col-md-4">
-                                            <x-service-types/>
-                                        </div>
-                                        <div class="col-md-4 mg-t-10 mg-md-t-0">
-                                            <x-payment-types/>
-                                        </div>
-                                        <div class="col-md-4 mg-t-10 mg-md-t-0">
-                                            <livewire:company-shipment-type/>
-                                        </div>
-                                    </div>
-
-                                    <div class="row row-xs">
-                                        <div class="col-md-3">
-                                            <label class="form-label">@lang('app.collection')</label>
-                                            <input class="form-control" type="number" name="collection"/>
-                                        </div>
-                                        <div class="col-md-2 mt-5 ms-3">
-                                            <label class="ckbox">
-                                                <input type="checkbox" name="is_return">
-                                                <span
-                                                    class="font-weight-bold text-dark">@lang('app.awb_is_reverse')
-                                                </span>
-                                            </label>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <label class="form-label">@lang('app.pieces')</label>
-                                            <input class="form-control" type="number" name="collection"/>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <label class="form-label">@lang('app.weight')</label>
-                                            <input class="form-control" type="number" name="collection"/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="main-content-label mg-b-5">@lang('app.awb_additional_info')</div>
-                                <div class="pd-30 pd-sm-20">
-                                    <div class="row row-xs">
-                                        <div class="col-md-3 col-lg-3">
-                                            <label class="form-label">@lang('app.custom_field1')</label>
-                                            <input class="form-control" type="text" name="custom_field1"/>
-                                        </div>
-                                        <div class="col-md-3 col-lg-3">
-                                            <label class="form-label">@lang('app.custom_field2')</label>
-                                            <input class="form-control" type="text" name="custom_field1"/>
-                                        </div>
-                                        <div class="col-md-3 col-lg-3">
-                                            <label class="form-label">@lang('app.custom_field3')</label>
-                                            <input class="form-control" type="text" name="custom_field1"/>
-                                        </div>
-                                        <div class="col-md-3 col-lg-3">
-                                            <label class="form-label">@lang('app.custom_field4')</label>
-                                            <input class="form-control" type="text" name="custom_field1"/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <div class="row row-sm">
+        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+            <div class="card custom-card">
+                <div class="card-header  d-flex custom-card-header border-bottom-0 ">
+                    <h5 class="card-title">
+                        @lang('app.awb_info')
+                    </h5>
                 </div>
-                <div class="mt-4">
-                    <div class="form-group mb-0 mt-3 justify-content-end">
-                        <div>
-                            <button type="submit" class="btn btn-success"><i
-                                    class="fa fa-save pe-2"></i>@lang('app.save')</button>
-
-                            <a role="button" href="{{route('receivers.index')}}" class="btn btn-danger"><i
-                                    class="fa fa-backward pe-2"></i>@lang('app.back')</a>
+                <div class="container">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
-                    </div>
+                    @endif
                 </div>
+                <div class="card-body">
+                    {{--                    change history using form --}}
+                    <form action="{{route('awb-history.store',$awb->id)}}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="col mb-4">
+                            <label class="form-label">@lang('app.status')</label>
+                            <select id="awb_status" name="status_id" class="form-control form-select" data-bs-placeholder="Select Status">
+                                <option selected>@lang('app.select_status')</option>
+                                @foreach($statuses as $status)
+                                    <option data-code="{{$status->code}}" value="{{$status->id}}" {{$status->id == old("status_id")?'selected':''}}>{{$status->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col mb-4">
+                            <label class="form-label">@lang('app.comment')</label>
+                            <input type="text" name="comment" class="form-control">
+                        </div>
+                        <div id="pod_section">
+                            <h4 class="text-primary text-center">POD Data</h4>
+                            <div class="col mb-4">
+                                <div class="form-group">
+                                    <label class="form-label">@lang('app.actual_receipt')</label>
+                                    <input type="text" name="actual_recipient" class="form-control">
+                                </div>
+                            </div>
 
-            </form>
+                            <div class="col mb-4">
+                                <label class="form-label">@lang('app.title')</label>
+                                <input type="text" name="title" class="form-control">
+                            </div>
+
+                            <div class="col mb-4">
+                                <label class="form-label">@lang('app.card_number')</label>
+                                <input type="text" name="card_number" class="form-control">
+                            </div>
+
+                            <div class="col mb-4">
+                                <label class="form-label">@lang('app.images')</label>
+                                <input type="file" name="images" class="form-control">
+                            </div>
+
+                        </div>
+
+                        <div class="mt-4">
+                            <div class="form-group mb-0 mt-3 justify-content-end">
+                                <div>
+                                    <button type="submit" class="btn btn-success"><i
+                                            class="fa fa-save pe-2"></i>@lang('app.save')</button>
+
+                                    <a role="button" href="{{route('receivers.index')}}" class="btn btn-danger"><i
+                                            class="fa fa-backward pe-2"></i>@lang('app.back')</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
-            <form action="{{route('awbs.store')}}" method="post">
-                @csrf
-                <div class="row">
-                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="main-content-label mg-b-5">Sender Info</div>
-                                <div class="pd-30 pd-sm-20">
-                                    <div class="row row-xs">
-                                        <div class="col-md-4 col-lg-4 col-sm-12">
-                                            <livewire:company/>
-                                        </div>
-                                        <div class="col-md-4 col-lg-4 col-sm-12 mg-t-5 mg-md-t-0">
-                                            <livewire:branch/>
-                                        </div>
-                                        <div class="col-md-4 col-lg-4 col-sm-12 mg-t-5 mg-md-t-0">
-                                            <livewire:department/>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="pd-30 pd-sm-20">
-                                    <div class="row row-xs">
-                                        <div class="col-md-6 col-lg-6 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="form-label">@lang('app.phone')</label>
-                                                <p id="branch_phone" class="form-control"></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-6 col-sm-12 mg-t-10 mg-md-t-0">
-                                            <label class="form-label">@lang('app.address')</label>
-                                            <p id="branch_address" class="form-control"></p>
-                                        </div>
-                                        <div class="col-md-6 col-lg-6 col-sm-12 mg-t-10 mg-md-t-0">
-                                            <label class="form-label">@lang('app.city')</label>
-                                            <p id="branch_city" class="form-control"></p>
-                                        </div>
-                                        <div class="col-md-6 col-lg-6 col-sm-12 mg-t-10 mg-md-t-0">
-                                            <label class="form-label">@lang('app.area')</label>
-                                            <p id="branch_area" class="form-control"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="main-content-label mg-b-5">Receiver Info</div>
-                                <div class="pd-30 pd-sm-20">
-                                    <div class="row row-xs">
-                                        <x-awb-receivers-search-data-section/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
 
-                    <div class="col-lg-12 col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="main-content-label mg-b-5">@lang('app.awb_info')</div>
-                                <div class="pd-30 pd-sm-20">
-                                    <div class="row row-xs">
-                                        <div class="col-md-4">
-                                            <x-service-types/>
-                                        </div>
-                                        <div class="col-md-4 mg-t-10 mg-md-t-0">
-                                            <x-payment-types/>
-                                        </div>
-                                        <div class="col-md-4 mg-t-10 mg-md-t-0">
-                                            <livewire:company-shipment-type/>
-                                        </div>
-                                    </div>
+            <div class="card">
+                <div class="card-header bg-transparent pb-0">
+                    <div><h3 class="card-title mb-2">History</h3></div>
+                </div>
+                <div class="card-body mt-0">
+                    <div class="latest-timeline mt-4">
+                        <ul class="timeline mb-0">
+                            @foreach($awb->history as $history)
+                                <li>
+                                    <div class="featured_icon1"></div>
+                                </li>
+                                <li class="mt-0 activity border br-5 p-2">
+                                    <div><span class="text-dark float-end">{{$history->created_at->format('Y-m-d h:i A')}}</span></div>
 
-                                    <div class="row row-xs">
-                                        <div class="col-md-3">
-                                            <label class="form-label">@lang('app.collection')</label>
-                                            <input class="form-control" type="number" name="collection"/>
-                                        </div>
-                                        <div class="col-md-2 mt-5 ms-3">
-                                            <label class="ckbox">
-                                                <input type="checkbox" name="is_return">
-                                                <span
-                                                    class="font-weight-bold text-dark">@lang('app.awb_is_reverse')
-                                                </span>
-                                            </label>
-                                        </div>
+                                    <p class="mb-2 font-weight-semibold text-dark tx-13">{{$history->status->name}}</p>
+                                    <p class="text-muted mt-0 mb-0">{{$history->status->description}}</p>
+                                    @isset($history->lat,$history->lng)
+                                        <a href="https://www.google.com/maps?q=' . {{$history->lat}} . ',' . {{$history->lng}}" class="tx-12 text-dark text-end">
+                                            <p class="mb-1 font-weight-semibold text-dark tx-13 pull-right"><i class="fa fa-map-marker fa-2x"></i> map</p>
+                                        </a>
+                                    @endisset
 
-                                        <div class="col-md-3">
-                                            <label class="form-label">@lang('app.pieces')</label>
-                                            <input class="form-control" type="number" name="collection"/>
-                                        </div>
+                                </li>
+                            @endforeach
 
-                                        <div class="col-md-3">
-                                            <label class="form-label">@lang('app.weight')</label>
-                                            <input class="form-control" type="number" name="collection"/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="main-content-label mg-b-5">@lang('app.awb_additional_info')</div>
-                                <div class="pd-30 pd-sm-20">
-                                    <div class="row row-xs">
-                                        <div class="col-md-3 col-lg-3">
-                                            <label class="form-label">@lang('app.custom_field1')</label>
-                                            <input class="form-control" type="text" name="custom_field1"/>
-                                        </div>
-                                        <div class="col-md-3 col-lg-3">
-                                            <label class="form-label">@lang('app.custom_field2')</label>
-                                            <input class="form-control" type="text" name="custom_field1"/>
-                                        </div>
-                                        <div class="col-md-3 col-lg-3">
-                                            <label class="form-label">@lang('app.custom_field3')</label>
-                                            <input class="form-control" type="text" name="custom_field1"/>
-                                        </div>
-                                        <div class="col-md-3 col-lg-3">
-                                            <label class="form-label">@lang('app.custom_field4')</label>
-                                            <input class="form-control" type="text" name="custom_field1"/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </ul>
                     </div>
                 </div>
-                <div class="mt-4">
-                    <div class="form-group mb-0 mt-3 justify-content-end">
-                        <div>
-                            <button type="submit" class="btn btn-success"><i
-                                    class="fa fa-save pe-2"></i>@lang('app.save')</button>
+            </div>
 
-                            <a role="button" href="{{route('receivers.index')}}" class="btn btn-danger"><i
-                                    class="fa fa-backward pe-2"></i>@lang('app.back')</a>
-                        </div>
-                    </div>
-                </div>
-
-            </form>
         </div>
+
     </div>
 
     <!-- End Row -->
 
+@endsection
+@section('scripts')
+    <script>
+        $("#pod_section").css('display','none');
+        $("#awb_status").change(function () {
+            const option = $(this).find('option:selected');
+            const code = option.data('code');
+             if (code == {{\App\Enums\AwbStatuses::DELIVERED->value}})
+                 $("#pod_section").css('display','block');
+            else
+                 $("#pod_section").css('display','none');
+        });
+    </script>
 @endsection

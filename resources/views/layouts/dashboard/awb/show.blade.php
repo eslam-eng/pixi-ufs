@@ -18,12 +18,12 @@
                     <h5 class="card-title">
                         @lang('app.awb_info')
                     </h5>
-                    {{--                    <div class="card-options">--}}
+                    <div class="card-options">
 
-                    {{--                        <a role="button" href="{{route('awb-history.create',$awb->id)}}" class="btn btn-secondary">--}}
-                    {{--                            <i class="fa fa-history"></i> History--}}
-                    {{--                        </a>--}}
-                    {{--                    </div>--}}
+                        <a role="button" href="{{route('awb-history.create',$awb->id)}}" class="btn btn-rounded btn-secondary">
+                            <i class="fa fa-history"></i> change status
+                        </a>
+                    </div>
                 </div>
                 <div class="card-body">
                     <table class="table table-striped">

@@ -202,10 +202,10 @@ class AwbController extends Controller
         }
     }
 
-    public function changeStatus(AwbChangeStatusRequest $request,AwbHistoryService $awbHistoryService)
+    public function changeStatusForMultipleAwbs(AwbChangeStatusRequest $request,AwbHistoryService $awbHistoryService)
     {
         try {
-            $result = $awbHistoryService->changeAwbStatus(status: $request->status,awb_ids: $request->ids);
+            $result = $awbHistoryService->changeMultipleAwbStatus(status: $request->status,awb_ids: $request->ids);
             if ($result)
                 return apiResponse(message: trans('app.awbs_status_changed_successfully'));
             else
@@ -215,5 +215,4 @@ class AwbController extends Controller
             return apiResponse(message: $exception->getMessage(),code: 500);
         }
     }
-
 }

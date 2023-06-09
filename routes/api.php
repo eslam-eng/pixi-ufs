@@ -43,7 +43,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
     Route::group(['prefix' => 'awbs'], function () {
         Route::get('/', [AwbController::class, 'index']);
-        Route::post('/details/{id}', [AwbController::class, 'awbDetails']);
+        Route::get('/details/{id}', [AwbController::class, 'awbDetails']);
         Route::post('/update-phone/{id}', [AwbController::class, 'updateReceiverPhone']);
         Route::post('/add-phone-and-address/{id}', [AwbController::class, 'AddPhoneAndAddress']);
         Route::post('/pod/{id}', [AwbController::class, 'pod']);

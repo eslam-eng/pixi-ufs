@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\DTO\Awb\AwbDTO;
+use App\DTO\AwbStatus\AwbStatusDTO;
 use App\Enums\AwbStatuses;
 use App\Enums\ImageTypeEnum;
 use App\Exceptions\NotFoundException;
@@ -46,7 +47,7 @@ class AwbService extends BaseService
 
     public function queryGet(array $filters = [], array $withRelations = []): Builder
     {
-        $awbs = $this->model->query()->courier()->with($withRelations)->orderBy('id', 'desc');
+        $awbs = $this->model->query()->with($withRelations)->orderBy('id', 'desc');
         return $awbs->filter(new AwbFilters($filters));
     }
 
@@ -87,29 +88,25 @@ class AwbService extends BaseService
             $awb->additionalInfo()->create($awb_additional_infos_data);
         return $awb;
     }
-
-    public function lastStatus(int $id)
-    {
-        $awb = $this->findById($id);
-        return $awb->latestStatus;
-    }
-
     public function pod(int $id, array $data): bool
     {
+        $user_id = auth('sanctum')->id();
         $awb = $this->findById($id);
-        $awb->update(Arr::except($data, 'images'));
+        $awb_data = Arr::except($data , ['title','actual_recipient','title','card_number']);
+        $awb->update($awb_data);
         if (isset($data['images']) && is_array($data['images']))
             foreach ($data['images'] as $image) {
                 $fileData = FileService::saveImage(file: $image, path: 'uploads/awbs', field_name: 'images');
                 $fileData['type'] = ImageTypeEnum::CARD;
                 $awb->storeAttachment($fileData);
             }
-        $data = [
-            'user_id'=>$awb->user_id,
-            'awb_status_id'=>AwbStatuses::COLLECTED,
+        $awb_history_data = [
+            'user_id'=>$user_id,
+            'awb_status_id'=>$awb->id,
+            'lat'=>$data['lat'],
+            'lng'=>$data['lng'],
         ];
-        $awb->history()->create($data);
-        return true;
+        return  $awb->history()->create($awb_history_data);
     }
 
     public function datatable(array $filters = [], array $withRelations = [])
@@ -129,11 +126,10 @@ class AwbService extends BaseService
         return $this->getQuery()->where('id',$id)->delete();
     }
 
-    public function find(int $id, array $relations = [])
+    public function status(int $id , array $awb_status_data = [])
     {
-        $awb = Awb::with($relations)->find($id);
-        if(!$awb)
-            throw new NotFoundException(trans('app.not_found'));
-        return $awb;
+        $awb = $this->findById($id);
+        return $awb->history()->create($awb_status_data);
     }
+
 }

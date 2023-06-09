@@ -75,7 +75,6 @@ class ReceiverService extends BaseService
     {
         $receiver = $this->findById($id);
         $receiver->delete();
-        $receiver->deleteAddresses();
         return true;
     }
 
@@ -93,11 +92,11 @@ class ReceiverService extends BaseService
         $receiver = $this->findById($id);
         $receiver->update([
             'address1'=>$data['address'],
-            'lat'=>$data['lat'],
-            'lng'=>$data['lng'],
-            'map_url'=>$data['map_url'],
-            'city_id'=>$data['city_id'],
-            'area_id'=>$data['area_id'],
+            'lat'=>Arr::get($data,'lat'),
+            'lng'=>Arr::get($data,'lng'),
+            'map_url'=>Arr::get($data,'map_url'),
+            'city_id'=>Arr::get($data,'city_id'),
+            'area_id'=>Arr::get($data,'area_id'),
         ]);
         return true;
     }
@@ -106,13 +105,13 @@ class ReceiverService extends BaseService
     {
         $receiver = $this->findById($id);
         $receiver->update([
-            'address1'=>$data['address'],
-            'lat'=>$data['lat'],
-            'lng'=>$data['lng'],
-            'map_url'=>$data['map_url'],
-            'city_id'=>$data['city_id'],
-            'area_id'=>$data['area_id'],
-            'phone2'=>$data['phone'],
+            'address1'=>Arr::get($data,'address'),
+            'lat'=>Arr::get($data,'lat'),
+            'lng'=>Arr::get($data,'lng'),
+            'map_url'=>Arr::get($data,'map_url'),
+            'city_id'=>Arr::get($data,'city_id'),
+            'area_id'=>Arr::get($data,'area_id'),
+            'phone2'=>Arr::get($data,'phone'),
         ]);
         return true;
     }

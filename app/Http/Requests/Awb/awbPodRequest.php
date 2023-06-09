@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Awb;
 
+use App\Enums\AwbStatuses;
 use App\Http\Requests\BaseRequest;
 
 class AwbPodRequest extends BaseRequest
@@ -15,19 +16,24 @@ class AwbPodRequest extends BaseRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
+     * @return string[]
      */
     public function rules(): array
     {
         return [
             'actual_recipient'=>'required|string',
-            'card_number'=>'nullable|string|min:14|max:14',
             'title'=>'nullable|string',
+            'card_number'=>'nullable|string|min:14|max:14',
             'images'=>'nullable|array',
             'images.*'=>'required|image|mimes:png,jpg',
+            'lat'=>'nullable|string',
+            'lng'=>'nullable|string',
         ];
+    }
+
+    public function prepareForValidation()
+    {
+        $this->merge(['status'=>AwbStatuses::DELIVERED()]);
     }
 
 }

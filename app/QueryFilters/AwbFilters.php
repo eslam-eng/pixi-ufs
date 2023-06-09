@@ -3,6 +3,7 @@
 namespace App\QueryFilters;
 
 use App\Abstracts\QueryFilter;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class AwbFilters extends QueryFilter
@@ -46,7 +47,7 @@ class AwbFilters extends QueryFilter
 
     public function ids($term)
     {
-        return $this->builder->whereIn('id',$term);
+        return $this->builder->whereIn('id',Arr::wrap($term));
     }
 
     public function reference($term)

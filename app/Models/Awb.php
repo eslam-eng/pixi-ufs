@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\AwbStatuses;
+use App\Enums\UsersType;
 use App\Observers\AwbObserver;
 use App\Traits\EscapeUnicodeJson;
 use App\Traits\Filterable;
@@ -74,7 +75,7 @@ class Awb extends Model
 
     public function getReceiverAddressAttribute(): string
     {
-        return Str::limit(Arr::get($this->receiver_data,'address'),90);
+        return Str::limit(Arr::get($this->receiver_data,'address1'),90);
     }
 
 
@@ -82,6 +83,8 @@ class Awb extends Model
     {
         if (is_null($auth_user))
             $auth_user = auth()->user();
+        if ($auth_user->type != UsersType::COURIER->value)
+            return $builder;
         return $builder->whereIn('area_id',$auth_user->area_id)->whereHas('latestStatus',fn($query)=>$query->where('awb_status_id',AwbStatuses::CREATE_SHIPMENT()));
 
     }

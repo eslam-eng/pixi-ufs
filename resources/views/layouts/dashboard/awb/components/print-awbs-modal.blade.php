@@ -6,9 +6,24 @@
                 <h6 class="modal-title">Print Type</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-                <button  data-url="{{route('awbs-print3*1')}}" data-awbs_duplicated="0" data-csrf="{{csrf_token()}}" type="button" class="btn btn-success mb-1 print_awbs"><i class="fa fa-print fa-2x p-2"></i><h4 class="text-dark">print 3 * 1</h4></button>
+                <div class="row">
+                    <div class="col-md-4 col-lg-4 col-sm-12">
+                        <form action="{{route('awbs-print3*1')}}" method="post" id="default_print_awbs">
+                            @csrf
+                            <input type="hidden" value="" name="ids" id="awbs_ids">
+                            <button type="submit" class="btn btn-success mb-1 print_awbs"><i class="fa fa-print fa-2x p-2"></i><h4 class="text-dark">print 3 * 1</h4></button>
+                        </form></div>
+                    <div class="col-md-6 col-lg-6 col-sm-12">
+                        <form action="{{route('awbs-print3*1')}}" method="post" id="print_duplicate_awbs">
+                            @csrf
+                            <input type="hidden" value="" name="ids" id="awbs_ids_duplicate">
+                            <input type="hidden" value="1" name="is_duplicated" id="is_duplicated">
+                            <button type="submit" class="btn btn-success mb-1 print_duplicated"><i class="fa fa-print fa-2x p-2"></i><h4 class="text-dark">print 3 * 1 Duplicate</h4></button>
+                        </form>
+                    </div>
+                </div>
 
-                <button data-url="{{route('awbs-print3*1')}}" data-awbs_duplicated="1" data-csrf="{{csrf_token()}}" type="button" class="btn btn-info mb-1 print_awbs"><i class="fa fa-print fa-2x p-2"></i> <h4 class="text-dark">print 3 * 1 Duplicate</h4></button>
+
 
             </div>
             <div class="modal-footer">

@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Awb\AwbStoreRequest;
-use Illuminate\Http\Request;
-use App\Services\AwbService;
+use App\Enums\AwbStatuses;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Awb\Api\AwbChangeStatusRequest;
 use App\Http\Requests\Awb\AwbPodRequest;
+use App\Http\Resources\Awb\AwbDetailsResource;
 use App\Http\Resources\Awb\AwbResource;
-use App\Http\Resources\Awb\AwbStatisticsResource;
-use App\Http\Resources\AwbStatusResource;
+use App\Services\AwbService;
 use Exception;
-use Illuminate\Auth\Events\Validated;
+use Illuminate\Http\Request;
 
 class AwbController extends Controller
 {
@@ -21,64 +20,50 @@ class AwbController extends Controller
 
     public function index(Request $request)
     {
-        try{
+        try {
             $filters = $request->all();
+            $filters['status'] = $request->get('status',AwbStatuses::CREATE_SHIPMENT());
             $withRelations = [];
             $awbs = $this->awbService->listing($filters, $withRelations, $request->perPage ?? 5);
             return AwbResource::collection($awbs);
-        }catch(Exception $e){
-            return apiResponse( message: $e->getMessage(), code: 422);
+        } catch (Exception $e) {
+            return apiResponse(message: $e->getMessage(), code: 422);
         }
-
     }
 
     public function awbDetails($id)
     {
-        try{
-            $withRelations = ['user', 'latestStatus'];
-            $awb = $this->awbService->find(id: $id, relations: $withRelations);
-            return apiResponse(data: new AwbResource($awb), message: trans('app.sucess_operation'));
-        }catch(Exception $e){
-            return apiResponse( message: $e->getMessage(), code: 422);
+        try {
+            $withRelations = ['company:id,name','latestStatus.status'];
+            $awb = $this->awbService->findById(id: $id, withRelations: $withRelations);
+            return apiResponse(data: new AwbDetailsResource($awb), message: trans('app.success_operation'));
+        } catch (Exception $e) {
+            return apiResponse(message: $e->getMessage(), code: 422);
         }
     }
 
-    public function lastStatus($id)
+    public function status(int $id , AwbChangeStatusRequest $request)
     {
-        try{
-            $data = $this->awbService->lastStatus(id: $id);
-            if(!$data)
-                return apiResponse(message: trans('app.something_went_wrong'), code: 422);
-            return apiResponse(data: new AwbStatusResource($data), message: trans('app.success_operation'));
-        }catch(Exception $e){
-            return apiResponse( message: $e->getMessage(), code: 422);
-        }
-
-    }
-
-    public function statistics()
-    {
-        try{
-            $withRelations = ['latestStatus'];
-            $data = $this->awbService->listing(filters: [], withRelations: $withRelations);
-            if(!$data)
-                return apiResponse(message: trans('app.something_went_wrong'), code: 422);
-            return apiResponse(data: new AwbStatisticsResource($data), message: trans('app.success_operation'));
-        }catch(Exception $e){
-            return apiResponse( message: $e->getMessage(), code: 422);
-        }
-
-    }
-    public function pod(int $id, AwbPodRequest $request)
-    {
-        try{
-            $status = $this->awbService->pod(id: $id, data: $request->Validated());
-            if(!$status)
+        try {
+            $status = $this->awbService->status(id: $id, awb_status_data: $request->Validated());
+            if (!$status)
                 return apiResponse(message: trans('app.something_went_wrong'), code: 422);
             return apiResponse(message: trans('app.success_operation'));
-        }catch(Exception $e){
-            return apiResponse( message: $e->getMessage(), code: 422);
+        } catch (Exception $e) {
+            return apiResponse(message: $e->getMessage(), code: 422);
         }
-
     }
+
+    public function pod(int $id, AwbPodRequest $request)
+    {
+        try {
+            $status = $this->awbService->pod(id: $id, data: $request->Validated());
+            if (!$status)
+                return apiResponse(message: trans('app.something_went_wrong'), code: 422);
+            return apiResponse(message: trans('app.success_operation'));
+        } catch (Exception $e) {
+            return apiResponse(message: $e->getMessage(), code: 422);
+        }
+    }
+
 }

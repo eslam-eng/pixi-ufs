@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class AwbHistory extends Model
 {
     use HasFactory,SoftDeletes;
-    protected $fillable = ['awb_id','user_id','awb_status_id','comment'];
+    protected $fillable = ['awb_id','user_id','awb_status_id','comment','lat','lng'];
 
     public function awb()
     {

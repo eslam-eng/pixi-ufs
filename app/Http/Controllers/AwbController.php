@@ -20,6 +20,7 @@ use App\Models\AwbStatus;
 use App\Services\AwbHistoryService;
 use App\Services\AwbService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Excel;
 
@@ -176,9 +177,10 @@ class AwbController extends Controller
     public function printThreeInOnePage(Request $request)
     {
         try {
-            $ids = $request->ids;
+            $awbs_ids = $request->ids;
+            $awbs_ids = json_decode($awbs_ids);
             $is_print_duplicated = $request->boolean('is_duplicated') ?? false;
-            if (count($ids)) {
+            if (count($awbs_ids)) {
                 $withRelations = [
                     'company:id,name',
                     'department:id,name',
@@ -187,13 +189,13 @@ class AwbController extends Controller
                     'branch.area',
                     'additionalInfo'
                 ];
-                $awbs = $this->awbService->queryGet(filters: ['ids' => $ids], withRelations: $withRelations)->get();
-                return view('layouts.dashboard.awb.print.print-awb-three-in-one-page', ['awbs' => $awbs, 'is_print_duplicated' => $is_print_duplicated]);
-            } else {
-                $toast = ['type' => 'error', 'title' => 'error', 'message' => "please select at least one for print"];
-                return back()->with('toast', $toast);
+                $awbs = $this->awbService->queryGet(filters: ['ids' => $awbs_ids], withRelations: $withRelations)->get();
+                return  view('layouts.dashboard.awb.print.print-awb-three-in-one-page', ['awbs' => $awbs, 'is_print_duplicated' => $is_print_duplicated]);
 
+            } else {
+                return apiResponse(message: "please select at least one for print",code: 422);
             }
+            return apiResponse(data: $awbs_rendered);
         } catch (\Exception $exception) {
             $toast = ['type' => 'error', 'title' => 'error', 'message' => "there is an error"];
             return back()->with('toast', $toast);

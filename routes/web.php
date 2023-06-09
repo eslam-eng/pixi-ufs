@@ -49,12 +49,12 @@ Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
     Route::get('receivers-download-template/form',[ReceiverController::class,'importForm'])->name('receivers-download-template.form');
     Route::get('receivers-download-template',[ReceiverController::class,'downloadReceiversTemplate'])->name('receivers-download-template');
     Route::post('receivers-import',[ReceiverController::class,'import'])->name('receivers-import');
-    Route::group(['prefix' => 'addresses' ],function (){
-        Route::get('{id}/type/{type}',[AddressController::class,'create'])->name('addresses.create');
-        Route::get('{id}/set-default',[AddressController::class,'create'])->name('addresses.set-default');
-        Route::get('{id}/edit',[AddressController::class,'edit'])->name('address.edit');
-        Route::put('{id}',[AddressController::class,'update'])->name('address.update');
-    });
+//    Route::group(['prefix' => 'addresses' ],function (){
+//        Route::get('{id}/type/{type}',[AddressController::class,'create'])->name('addresses.create');
+//        Route::get('{id}/set-default',[AddressController::class,'create'])->name('addresses.set-default');
+//        Route::get('{id}/edit',[AddressController::class,'edit'])->name('address.edit');
+//        Route::put('{id}',[AddressController::class,'update'])->name('address.update');
+//    });
     Route::resource('awbs',AwbController::class);
 
     Route::delete('awbs-delete-multiple',[AwbController::class,'deleteMultiple'])->name('awb.delete-multiple');

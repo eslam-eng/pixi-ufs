@@ -6,7 +6,11 @@
         <div class="dropdown-menu" style="">
             <a href="{{route('companies.show',$model->id)}}" class="dropdown-item">@lang('app.show')</a>
             <a href="{{route('companies.edit',$model->id)}}" class="dropdown-item">@lang('app.edit')</a>
-            <button role="button" onclick="destroy('{{$url}}')" class="dropdown-item">@lang('app.delete')</button>
+            <form method="post" action="{{route('companies.destroy',$model->id)}}">
+                @csrf
+                @method('delete')
+                <button type="submit" class="dropdown-item">@lang('app.delete')</button>
+            </form>
         </div>
         <!-- dropdown-menu -->
     </div>

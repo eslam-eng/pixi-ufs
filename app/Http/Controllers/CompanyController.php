@@ -63,16 +63,25 @@ class CompanyController extends Controller
 
     public function edit(int $id)
     {
-        $withRelations = ['branches', 'departments'];
-        $company = $this->companyService->findById(id: $id, withRelations: $withRelations);
-        return view('layouts.dashboard.companies.edit', compact('company'));
+        try{
+            $withRelations = ['branches', 'departments'];
+            $company = $this->companyService->findById(id: $id, withRelations: $withRelations);
+            return view('layouts.dashboard.companies.edit', compact('company'));
+        }catch(Exception $e){
+            return redirect()->back();
+        }
     }
     
     public function show(int $id)
     {
-        $withRelations = [];
-        $company = $this->companyService->findById(id: $id, withRelations: $withRelations);
-        return view('layouts.dashboard.companies.show', compact('company'));
+        try {
+            $withRelations = [];
+            $company = $this->companyService->findById(id: $id, withRelations: $withRelations);
+            return view('layouts.dashboard.companies.show', compact('company'));
+        }catch (Exception $e) {
+            DB::rollBack();
+            return apiResponse(message: $e->getMessage(), code: 422);
+        }
     }
 
     public function update(CompanyUpdateRequest $request, int $id)

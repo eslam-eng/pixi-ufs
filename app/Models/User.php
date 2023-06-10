@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Traits\Filterable;
 use App\Traits\HasAddresses;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,7 +16,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use SoftDeletes, HasApiTokens, HasFactory, Notifiable,HasRoles, HasAddresses;
+    use SoftDeletes, Filterable, HasApiTokens, HasFactory, Notifiable,HasRoles, HasAddresses;
 
     /**
      * The attributes that are mass assignable.
@@ -69,6 +70,17 @@ class User extends Authenticatable
     public function getShowDashboardAttribute(): bool
     {
         return $this->relationLoaded('company') && $this->company->show_dashboard;
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(Location::class,'city_id');
+    }
+
+
+    public function area()
+    {
+        return $this->belongsTo(Location::class,'area_id');
     }
 
 }

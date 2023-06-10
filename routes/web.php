@@ -11,6 +11,7 @@ use App\Http\Controllers\ImportLogsController;
 use App\Http\Livewire\Emptypage;
 use \App\Http\Livewire\Switcherpage;
 use App\Http\Controllers\ReceiverController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,6 +49,7 @@ Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
     Route::resource('companies',CompanyController::class);
     Route::resource('branches',BranchController::class);
     Route::resource('departments',DepartmentController::class);
+    Route::resource('users',UsersController::class);
     Route::get('receivers-download-template/form',[ReceiverController::class,'importForm'])->name('receivers-download-template.form');
     Route::get('receivers-download-template',[ReceiverController::class,'downloadReceiversTemplate'])->name('receivers-download-template');
     Route::post('receivers-import',[ReceiverController::class,'import'])->name('receivers-import');

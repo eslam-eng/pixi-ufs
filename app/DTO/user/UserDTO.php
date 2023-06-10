@@ -14,11 +14,14 @@ class UserDTO extends BaseDTO
      * @param string $password',
      * @param string $phone',
      * @param int $type',
-     * @param int $status',
+     * @param ?bool $status',
      * @param ?int $company_id',
      * @param ?int $branch_id',
      * @param ?int $department_id',
      * @param ?string $notes'
+     * @param ?int $city_id'
+     * @param ?int $area_id'
+     * @param ?string $address'
      */
     public function __construct(
         protected string $name,
@@ -31,6 +34,9 @@ class UserDTO extends BaseDTO
         protected int $branch_id,
         protected int $department_id,
         protected string $notes,
+        protected int $city_id,
+        protected int $area_id,
+        protected string $address,
     )
     {
     }
@@ -43,11 +49,14 @@ class UserDTO extends BaseDTO
             password: $request->password,
             phone: $request->phone,
             type: $request->type,
-            status: $request->status,
+            status: isset($request->status),
             company_id: $request->company_id,
             branch_id: $request->branch_id,
             department_id: $request->department_id,
             notes: $request->notes,
+            city_id: $request->city_id,
+            area_id: $request->area_id,
+            address: $request->address,
         );
     }
 
@@ -69,6 +78,9 @@ class UserDTO extends BaseDTO
             branch_id: Arr::get($data,'branch_id'),
             department_id: Arr::get($data,'department_id'),
             notes: Arr::get($data,'notes'),
+            city_id: Arr::get($data,'city_id'),
+            area_id: Arr::get($data,'area_id'),
+            address: Arr::get($data,'address'),
         );
     }
 
@@ -88,6 +100,9 @@ class UserDTO extends BaseDTO
             'branch_id' => $this->branch_id,
             'department_id' => $this->department_id,
             'notes' => $this->notes,
+            'city_id' => $this->city_id,
+            'area_id' => $this->area_id,
+            'address' => $this->address,
 
         ];
     }

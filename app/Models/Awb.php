@@ -63,6 +63,11 @@ class Awb extends Model
         return $this->hasMany(AwbHistory::class, 'awb_id');
     }
 
+    public function dimension(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(AwbDetail::class, 'awb_id');
+    }
+
     public function additionalInfo(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(AwbAdditionalInfo::class, 'awb_id');

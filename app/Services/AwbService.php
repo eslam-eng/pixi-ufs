@@ -8,6 +8,7 @@ use App\Enums\AwbStatuses;
 use App\Enums\ImageTypeEnum;
 use App\Exceptions\NotFoundException;
 use App\Models\Awb;
+use App\Models\AwbServiceType;
 use App\Models\AwbStatus;
 use App\Models\CompanyShipmentType;
 use App\Models\Receiver;
@@ -59,8 +60,9 @@ class AwbService extends BaseService
     public function store(AwbDTO $awbDTO)
     {
 
+        $awb_dimension = [];
         //get default status
-        $awb_status = AwbStatus::query()->where('code',AwbStatuses::CREATE_SHIPMENT->value)->first();
+        $awb_status_id = AwbStatus::query()->where('code',AwbStatuses::CREATE_SHIPMENT->value)->first()?->id;
 
 //      get receiver object info
         $receiver = $this->receiverService->findById(id: $awbDTO->receiver_id);
@@ -69,12 +71,14 @@ class AwbService extends BaseService
         $branch = $this->branchService->findById($awbDTO->branch_id);
         //get shipment type & payment type
         $shipment_type = CompanyShipmentType::find($awbDTO->shipment_type);
-        if (!$shipment_type)
-            throw new NotFoundException(trans('app.shipment_type_not_found'));
+        $service_type = AwbServiceType::find($awbDTO->service_type);
+        if (!$shipment_type|| !$service_type)
+            throw new NotFoundException(trans('app.shipment_type_or_service_type_not_found'));
 
-        $priceTable = $this->priceTableService->getShipmentPrice(from: $branch->city_id, to: $receiver->defaultAddress->city_id);
+        $priceTable = $this->priceTableService->getShipmentPrice(from: $branch->city_id, to: $receiver->city_id);
 
-        $awbDTO->company_shipment_type = $shipment_type->name;
+        $awbDTO->shipment_type = $shipment_type->name;
+        $awbDTO->service_type = $service_type->name;
 
         $awbDTO->zone_price = $priceTable->price;
         //check on weight if there is additional kg price or not
@@ -87,12 +91,27 @@ class AwbService extends BaseService
 
         $awb = $this->model->create($awb_data);
         //store default history
-        $awb->history()->create(['user_id' => $awbDTO->user_id, 'awb_status_id' => $awb_status]);
+        $awb->history()->create(['user_id' => $awbDTO->user_id, 'awb_status_id' => $awb_status_id]);
         //get additional info
         $awb_additional_infos_data = array_filter($awbDTO->awbAdditionalInfos());
+
         //store additional infos
         if (count($awb_additional_infos_data))
             $awb->additionalInfo()->create($awb_additional_infos_data);
+
+        $awb_shipment_dimension = array_filter($awbDTO->shipmentDimensions());
+        $length = Arr::get($awb_shipment_dimension,'length');
+        foreach ($length as $index => $dimension)
+        {
+            $awb_dimension[] = [
+              'awb_id'=>$awb->id,
+                'height'=>$awb_shipment_dimension['height'][$index],
+                'width'=>$awb_shipment_dimension['width'][$index],
+                'length'=>$dimension,
+
+            ];
+        }
+        $awb->dimension()->createMany($awb_dimension);
         return $awb;
     }
     public function pod(int $id, array $data): bool

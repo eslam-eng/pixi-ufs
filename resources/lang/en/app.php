@@ -103,5 +103,6 @@ return [
     'phone1'=>'Phone1',
     'phone2'=>'phone2',
     'title'=>'Title',
+    'add'=>'Add',
 
 ];

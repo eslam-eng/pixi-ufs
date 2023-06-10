@@ -15,12 +15,10 @@ use App\Http\Requests\Awb\AwbFileUploadExcelRequest;
 use App\Http\Requests\Awb\AwbStoreRequest;
 use App\Imports\Awbs\AwbsImport;
 use App\Imports\Awbs\AwbsSyncByReferenceImport;
-use App\Imports\Tenant\ProductImportClasses\AdminImportProducts;
 use App\Models\AwbStatus;
 use App\Services\AwbHistoryService;
 use App\Services\AwbService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Excel;
 
@@ -83,10 +81,16 @@ class AwbController extends Controller
                 'message' => "$awb->code " . trans('app.aw_created_successfully')
             ];
             DB::commit();
-            return to_route('awb.index')->with('toast', $toast);
+            return to_route('awbs.index')->with('toast', $toast);
         } catch (\Exception $exception) {
             DB::rollBack();
-            dd($exception);
+            $toast = [
+                'type' => 'error',
+                'title' => 'error',
+                'message' => trans('app.there_is_an_error')
+            ];
+            DB::commit();
+            return back()->with('toast', $toast);
         }
     }
 
@@ -122,8 +126,8 @@ class AwbController extends Controller
     {
         $user = auth()->user()->load('company:id,name,importation_type');
         $importation_type = $user->company?->importation_type ?? ImportTypeEnum::AWBWITHOUTREFERENCE;
-        ob_end_clean();
         ob_start();
+        ob_end_clean();
         if ($importation_type == ImportTypeEnum::AWBWITHOUTREFERENCE())
             return $excel->download(new AwbsWithoutReferenceExport(), 'awbs_without_reference_' . time() . '.xlsx');
         else

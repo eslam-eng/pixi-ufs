@@ -12,95 +12,91 @@
             <div class="card">
                 <div class="card-body">
 
-                        <div class="row row-sm mb-4">
-                            <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.name')</div>
-                                <label class="form-control">{{ $company->name }}</label>
-                            </div>
-
-                            <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.email')</div>
-                                <label class="form-control">{{ $company->email }}</label>
-                            </div>
-
-                            <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.ceo')</div>
-                                <label class="form-control">{{ $company->ceo }}</label>
-                            </div>
-
-                            <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.phone')</div>
-                                <label class="form-control">{{ $company->phone }}</label>
-                            </div>
+                    <div class="row row-sm mb-4">
+                        <div class="col-lg">
+                            <div class="main-content-label mg-b-5">@lang('app.name')</div>
+                            <label class="form-control">{{ $company->name }}</label>
                         </div>
 
-                        <div class="row row-sm mb-4">
-                            <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.show_dashboard')</div>
-                                <input disabled type="checkbox" {{ $company->show_dashboard == 1 ? "checked":"" }}>
-                            </div>
-
-                            <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.notes')</div>
-                                <label class="form-control">{{ $company->notes }}</label>
-                            </div>
-
-                            <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.status')</div>
-                                <input disabled type="checkbox" {{ $company->status == 1 ? "checked":"" }}>
-                            </div>
-
+                        <div class="col-lg">
+                            <div class="main-content-label mg-b-5">@lang('app.email')</div>
+                            <label class="form-control">{{ $company->email }}</label>
                         </div>
 
-                        <div class="row row-sm mb-4">
-
-
-                            <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.num_custom_fields')</div>
-                                <label class="form-control">{{ $company->num_custom_fields }}</label>
-                            </div>
-
-                            <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.importation_type')</div>
-                                <label class="form-control">{{ $company->importation_type == \App\Enums\ImportTypeEnum::AWBWITHREFERENCE->value ? \App\Enums\ImportTypeEnum::AWBWITHREFERENCE->name:\App\Enums\ImportTypeEnum::AWBWITHOUTREFERENCE->name }}</label>
-                            </div>
-
-
+                        <div class="col-lg">
+                            <div class="main-content-label mg-b-5">@lang('app.ceo')</div>
+                            <label class="form-control">{{ $company->ceo }}</label>
                         </div>
 
-                        <div class="row row-sm mb-4">
-                            <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.address')</div>
-                                <label class="form-control">{{ $company->address }}</label>
-                            </div>
+                        <div class="col-lg">
+                            <div class="main-content-label mg-b-5">@lang('app.phone')</div>
+                            <label class="form-control">{{ $company->phone }}</label>
+                        </div>
+                    </div>
 
+                    <div class="row row-sm mb-4">
+
+
+                        <div class="col-lg">
+                            <div class="main-content-label mg-b-5">@lang('app.num_custom_fields')</div>
+                            <label class="form-control">{{ $company->num_custom_fields }}</label>
                         </div>
 
-                        <div>
-                            <livewire:locations-drop-down city_id="{{ $company->city_id }}" area_id="{{ $company->area_id }}"/>
-
+                        <div class="col-lg">
+                            <div class="main-content-label mg-b-5">@lang('app.importation_type')</div>
+                            <label
+                                class="form-control">{{ $company->importation_type == \App\Enums\ImportTypeEnum::AWBWITHREFERENCE->value ? \App\Enums\ImportTypeEnum::AWBWITHREFERENCE->name:\App\Enums\ImportTypeEnum::AWBWITHOUTREFERENCE->name }}</label>
                         </div>
 
-                        <div class="card-footer mt-4">
-                            <div class="form-group mb-0 mt-3 justify-content-end">
-                                <div>
-                                    <button type="submit" class="btn btn-success"><i
-                                            class="fa fa-save pe-2"></i>@lang('app.next')</button>
 
-                                    <a role="button" href="{{route('companies.index')}}" class="btn btn-danger"><i
-                                            class="fa fa-backward pe-2"></i>@lang('app.back')</a>
-                                </div>
-                            </div>
+                    </div>
+
+                    <div class="row row-sm mb-4">
+                        <div class="col-lg">
+                            <div class="main-content-label mg-b-5">@lang('app.address')</div>
+                            <label class="form-control">{{ $company->address }}</label>
                         </div>
+
+                        <div class="col-lg">
+                            <div class="main-content-label mg-b-5">@lang('app.city')</div>
+                            <label class="form-control">{{ $company->city->title }}</label>
+                        </div>
+
+                        <div class="col-lg">
+                            <div class="main-content-label mg-b-5">@lang('app.area')</div>
+                            <label class="form-control">{{ $company->area->title }}</label>
+                        </div>
+
+                    </div>
+
+                    <div class="row row-sm mb-4">
+                        <div class="col-lg">
+                            <div class="main-content-label mg-b-5">@lang('app.show_dashboard')</div>
+                            <input disabled type="checkbox" {{ $company->show_dashboard == 1 ? "checked":"" }}>
+                        </div>
+
+                        <div class="col-lg">
+                            <div class="main-content-label mg-b-5">@lang('app.notes')</div>
+                            <label class="form-control">{{ $company->notes }}</label>
+                        </div>
+
+                        <div class="col-lg">
+                            <div class="main-content-label mg-b-5">@lang('app.status')</div>
+                            <input disabled type="checkbox" {{ $company->status == 1 ? "checked":"" }}>
+                        </div>
+
+                    </div>
                 </div>
             </div>
             {{-- start branches --}}
             <div class="card">
                 <div class="card-header">
-                    <div class="breadcrumb-header justify-content-between">
-                        <div class="left-content">
+                    <div class="card-header">
+                        <div class="form-group mb-0 mt-3 justify-content-end">
                             <div>
-                                <h3>@lang('app.branches')</h3>
+                                <h4 class="pe-4">Branches
+                                    <a role="button" href="{{route('branches.create')}}" class="btn btn-rounded btn-success"><i class="fa fa-plus-square pe-2"></i>@lang('app.add')</a>
+                                </h4>
                             </div>
                         </div>
                     </div>
@@ -123,19 +119,22 @@
                             <tr>
                                 <td>{{$branch->name}}</td>
                                 <td>{{$branch->phone}}</td>
-                                <td>{{$branch->status ? trans('app.yes':trans('app.no') )}}</td>
+                                <td>{{$branch->status ? trans('app.yes') : trans('app.no') }}</td>
                                 <td>{{$branch->address}}</td>
                                 <td>{{$branch->city?->title}}</td>
                                 <td>{{$branch->area?->title}}</td>
                                 <td>
                                     <div>
-                                        <button data-bs-toggle="dropdown" class="btn btn-primary btn-block" aria-expanded="false">@lang('app.actions')
+                                        <button data-bs-toggle="dropdown" class="btn btn-primary btn-block"
+                                                aria-expanded="false">@lang('app.actions')
                                             <i class="icon ion-ios-arrow-down tx-11 mg-l-3"></i>
                                         </button>
                                         <div class="dropdown-menu" style="">
-                                           <a href="{{route('branches.show', $branch->id)}}" class="dropdown-item">@lang('app.show')</a>
+                                            <a href="{{route('branches.destroy', $branch->id)}}"
+                                               class="dropdown-item">@lang('app.show')</a>
+                                            <a href="{{route('branches.edit', $branch->id)}}"
+                                               class="dropdown-item">@lang('app.show')</a>
                                         </div>
-                                        <!-- dropdown-menu -->
                                     </div>
                                 </td>
                             </tr>
@@ -150,11 +149,11 @@
 
             <div class="card">
                 <div class="card-header">
-                    <div class="breadcrumb-header justify-content-between">
-                        <div class="left-content">
-                            <div>
-                                <h3>@lang('app.departments')</h3>
-                            </div>
+                    <div class="form-group mb-0 mt-3 justify-content-end">
+                        <div>
+                            <h4 class="pe-4">Departments
+                                <a role="button" href="{{route('departments.create')}}" class="btn btn-rounded btn-success"><i class="fa fa-plus-square pe-2"></i>@lang('app.add')</a>
+                            </h4>
                         </div>
                     </div>
                 </div>
@@ -172,11 +171,13 @@
                                 <td>{{$department->name}}</td>
                                 <td>
                                     <div>
-                                        <button data-bs-toggle="dropdown" class="btn btn-primary btn-block" aria-expanded="false">@lang('app.actions')
+                                        <button data-bs-toggle="dropdown" class="btn btn-primary btn-block"
+                                                aria-expanded="false">@lang('app.actions')
                                             <i class="icon ion-ios-arrow-down tx-11 mg-l-3"></i>
                                         </button>
                                         <div class="dropdown-menu" style="">
-                                           <a href="{{route('departments.show', $department->id)}}" class="dropdown-item">@lang('app.show')</a>
+                                            <a href="{{route('departments.edit', $department->id)}}"
+                                               class="dropdown-item">@lang('app.show')</a>
                                         </div>
                                         <!-- dropdown-menu -->
                                     </div>
@@ -187,9 +188,7 @@
                     </table>
                 </div>
             </div>
-
             {{-- end departments --}}
-
         </div>
     </div>
 

@@ -28,7 +28,7 @@ class AwbStoreRequest extends BaseRequest
             'department_id'=>'required|integer|exists:departments,id',
             'receiver_id'=>'required|integer|exists:receivers,id',
             'shipment_type_id'=>'required|integer|exists:company_shipment_types,id',
-            'service_type'=>'nullable|string',
+            'service_type_id'=>'integer|required',
             'payment_type'=>'nullable|string',
             'collection'=>'nullable|numeric',
             'is_return'=>'nullable|bool',
@@ -37,6 +37,16 @@ class AwbStoreRequest extends BaseRequest
             'custom_field1'=>'nullable|string',
             'custom_field2'=>'nullable|string',
             'custom_field3'=>'nullable|string',
+
+            'length'=>'sometimes|required|array',
+            'length.*'=>'required',
+
+            'width'=>'sometimes|required|array',
+            'width.*'=>'required',
+
+            'height'=>'sometimes|required|array',
+            'height.*'=>'required',
+
         ];
     }
 

@@ -95,7 +95,7 @@
                         <div class="form-group mb-0 mt-3 justify-content-end">
                             <div>
                                 <form method="get" action="{{ route('branches.create') }}">
-                                    <h4 class="pe-4">Branches
+                                    <h4 class="pe-4">
                                         <input type="hidden" name="company_id" value="{{ $company->id }}">
                                         <button class="btn ripple btn-primary" type="submit">@lang('app.add_new_branch')</button>
                                     </h4>
@@ -158,11 +158,9 @@
                     <div class="form-group mb-0 mt-3 justify-content-end">
                         <div>
                             <form method="get" action="{{ route('departments.create') }}">
-                                <h4 class="pe-4">Departments
-                                    <h4 class="pe-4">Departments
-                                        <input type="hidden" name="company_id" value="{{ $company->id }}">
-                                        <button class="btn ripple btn-primary" type="submit">@lang('app.add_new_department')</button>
-                                    </h4>
+                                <h4 class="pe-4">
+                                    <input type="hidden" name="company_id" value="{{ $company->id }}">
+                                    <button class="btn ripple btn-primary" type="submit">@lang('app.add_new_department')</button>
                                 </h4>
                             </form>
                         </div>

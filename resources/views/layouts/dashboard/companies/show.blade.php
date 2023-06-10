@@ -94,9 +94,12 @@
                     <div class="card-header">
                         <div class="form-group mb-0 mt-3 justify-content-end">
                             <div>
-                                <h4 class="pe-4">Branches
-                                    <a role="button" href="{{route('branches.create')}}" class="btn btn-rounded btn-success"><i class="fa fa-plus-square pe-2"></i>@lang('app.add')</a>
-                                </h4>
+                                <form method="get" action="{{ route('branches.create') }}">
+                                    <h4 class="pe-4">Branches
+                                        <input type="hidden" name="company_id" value="{{ $company->id }}">
+                                        <button class="btn ripple btn-primary" type="submit">@lang('app.add_new_branch')</button>
+                                    </h4>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -130,10 +133,13 @@
                                             <i class="icon ion-ios-arrow-down tx-11 mg-l-3"></i>
                                         </button>
                                         <div class="dropdown-menu" style="">
-                                            <a href="{{route('branches.destroy', $branch->id)}}"
-                                               class="dropdown-item">@lang('app.show')</a>
                                             <a href="{{route('branches.edit', $branch->id)}}"
-                                               class="dropdown-item">@lang('app.show')</a>
+                                               class="dropdown-item">@lang('app.edit')</a>
+                                            <form method="post" action="{{ route('branches.destroy', $branch->id) }}">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="dropdown-item" type="submit">@lang('app.delete')</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </td>
@@ -151,9 +157,14 @@
                 <div class="card-header">
                     <div class="form-group mb-0 mt-3 justify-content-end">
                         <div>
-                            <h4 class="pe-4">Departments
-                                <a role="button" href="{{route('departments.create')}}" class="btn btn-rounded btn-success"><i class="fa fa-plus-square pe-2"></i>@lang('app.add')</a>
-                            </h4>
+                            <form method="get" action="{{ route('departments.create') }}">
+                                <h4 class="pe-4">Departments
+                                    <h4 class="pe-4">Departments
+                                        <input type="hidden" name="company_id" value="{{ $company->id }}">
+                                        <button class="btn ripple btn-primary" type="submit">@lang('app.add_new_department')</button>
+                                    </h4>
+                                </h4>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -177,7 +188,12 @@
                                         </button>
                                         <div class="dropdown-menu" style="">
                                             <a href="{{route('departments.edit', $department->id)}}"
-                                               class="dropdown-item">@lang('app.show')</a>
+                                               class="dropdown-item">@lang('app.edit')</a>
+                                            <form method="post" action="{{ route('departments.destroy', $department->id) }}">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="dropdown-item" type="submit">@lang('app.delete')</button>
+                                            </form>
                                         </div>
                                         <!-- dropdown-menu -->
                                     </div>

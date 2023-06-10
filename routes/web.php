@@ -46,7 +46,7 @@ Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
     });
     Route::resource('receivers',ReceiverController::class);
     Route::resource('companies',CompanyController::class);
-    Route::resource('branches',BranchController::class);
+    Route::resource('branches',BranchController::class)->except('show');
     Route::resource('departments',DepartmentController::class);
     Route::get('receivers-download-template/form',[ReceiverController::class,'importForm'])->name('receivers-download-template.form');
     Route::get('receivers-download-template',[ReceiverController::class,'downloadReceiversTemplate'])->name('receivers-download-template');
@@ -97,3 +97,7 @@ Route::get('/migrate-fresh/{password}', function ($password) {
 })->name('migrate-fresh');
 
 
+Route::fallback(function () {
+    //return "not_match";
+    abort(404);
+});

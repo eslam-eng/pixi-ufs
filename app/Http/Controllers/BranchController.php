@@ -52,12 +52,12 @@ class BranchController extends Controller
         return view('layouts.dashboard.branches.edit', compact('branch'));
     }
     
-    public function show(int $id)
-    {
-        $withRelations = [];
-        $branch = $this->branchService->find(id: $id);
-        return view('layouts.dashboard.branches.show', compact('branch'));
-    }
+    // public function show(int $id)
+    // {
+    //     $withRelations = [];
+    //     $branch = $this->branchService->find(id: $id);
+    //     return view('layouts.dashboard.branches.show', compact('branch'));
+    // }
 
     public function update(BranchUpdateRequest $request, int $id)
     {

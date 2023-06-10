@@ -46,7 +46,7 @@
                                         <div class="col-lg">
                                             <div class="main-content-label mg-b-5">@lang('app.status')</div>
                                             <input name="status" value="{{ $branch->status }}"
-                                                placeholder="@lang('app.status')" type="checkbox" checked>
+                                                type="checkbox" {{ $branch->status ? "checked":"" }}>
         
                                             @error('status')
                                             <div class="text-danger"> {{$message}}</div>

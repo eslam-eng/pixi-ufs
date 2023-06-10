@@ -180,7 +180,7 @@
                                         <div class="featured_icon1"></div>
                                     </li>
                                     <li class="mt-0 activity border br-5 p-2">
-                                        <div><span class="text-dark float-end">{{$history->created_at->format('Y-m-d h:i A')}}</span></div>
+                                        <div><span class="text-dark float-end">{{isset($history->created_at)?$history->created_at->format('Y-m-d h:i A'):$history->created_at}}</span></div>
 
                                         <p class="mb-2 font-weight-semibold text-dark tx-13">{{$history->status->name}}</p>
                                         <p class="text-muted mt-0 mb-0">{{$history->status->description}}</p>

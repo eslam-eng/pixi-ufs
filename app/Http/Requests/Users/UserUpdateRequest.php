@@ -36,6 +36,8 @@ class UserUpdateRequest extends BaseRequest
             'city_id' => 'required|integer|exists:locations,id',
             'area_id' => 'required|integer|exists:locations,id',
             'address'=>'required|string',
+            'permissions' => 'required|array|min:1',
+            'permissions.*' => 'string|exists:permissions,name',
         ];
     }
 

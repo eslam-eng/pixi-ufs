@@ -8,6 +8,7 @@ use App\Http\Requests\Users\UserUpdateRequest;
 use App\Services\UserService;
 use Exception;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 
 class UsersController extends Controller
 {
@@ -45,7 +46,9 @@ class UsersController extends Controller
     public function create()
     {
         try{
-            return view('layouts.dashboard.users.create');
+            $permissions = Permission::all();
+            $permissions = $permissions->groupBy('category');
+            return view('layouts.dashboard.users.create', compact('permissions'));
         }catch(Exception $e){
             return redirect()->back();
         }
@@ -77,7 +80,9 @@ class UsersController extends Controller
     {
         try{
             $user = $this->userService->findById(id: $id);
-            return view('layouts.dashboard.users.show', compact('user'));
+            $permissions = Permission::all();
+            $permissions = $permissions->groupBy('category');
+            return view('layouts.dashboard.users.show', compact('user', 'permissions'));
         }catch(Exception $e){
             return redirect()->back();
         }
@@ -93,7 +98,9 @@ class UsersController extends Controller
     {
         try{
             $user = $this->userService->findById(id: $id);
-            return view('layouts.dashboard.users.edit', compact('user'));
+            $permissions = Permission::all();
+            $permissions = $permissions->groupBy('category');
+            return view('layouts.dashboard.users.edit', compact('user', 'permissions'));
         }catch(Exception $e){
             return redirect()->back();
         }

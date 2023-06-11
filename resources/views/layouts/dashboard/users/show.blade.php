@@ -88,6 +88,34 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row row-sm mb-4">
+                            <div class="col-lg">
+                                {{-- permissions --}}
+                                @foreach($permissions as $key =>$permission)
+
+                                    <div class="col-sm-4 col-xl-4 border-5">
+                                        <div class="card card-absolute">
+                                            <div class="card-header bg-primary">
+                                                <h5 class="text-white">{{trans('app.'.$key)}}</h5>
+                                            </div>
+
+                                                <div class="card-body">
+                                                    @foreach($permission as $item)
+                                                        <div class="mb-3 m-t-15">
+                                                            <div class="form-check checkbox checkbox-primary mb-0">
+                                                                <input class="form-check-input" name="permissions[]" value="{{$item->name}}" id="checkbox-primary-{{$item->id}}" type="checkbox" data-bs-original-title="" title="{{$item->name}}" {{ $user->can($item->name) ? "checked":""}} @disabled(true)>
+                                                                <label class="form-check-label" for="checkbox-primary-{{$item->id}}">{{$item->name}}</label>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+
+                                        </div>
+                                    </div>
+
+                                @endforeach
+                            </div>
+                        </div>
 
                         <div class="card-footer mt-4">
                             <div class="form-group mb-0 mt-3 justify-content-end">

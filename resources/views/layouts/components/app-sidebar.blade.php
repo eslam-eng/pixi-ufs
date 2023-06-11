@@ -4,7 +4,7 @@
 						<div class="main-sidebar-header active">
 							<a class="header-logo active" href="{{url('index')}}">
 								{{-- <img src="{{asset('assets/img/brand/logo.png')}}" class="main-logo  desktop-logo" alt="logo"> --}}
-								<p class="text-center p-2 tx-17">{{auth()->user()->company->name}}</p>
+								<p class="text-center p-2 tx-17">{{auth()->user()->company->name ?? ""}}</p>
 							</a>
 						</div>
 						<div class="main-sidemenu">

@@ -8,6 +8,8 @@ use App\QueryFilters\UsersFilters;
 use App\Services\BaseService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Arr;
+
 class UserService extends BaseService
 {
 
@@ -46,7 +48,10 @@ class UserService extends BaseService
      */
     public function store(UserDTO $userDTO)
     {
-        $this->getModel()->create($userDTO->toArray());
+        $user = $this->getModel()->create($userDTO->toArray());
+        if($user)
+            $user->givePermissionTo(Arr::get($userDTO->toArray(), 'permissions'));
+
     }
 
     /**
@@ -59,7 +64,9 @@ class UserService extends BaseService
     public function update(UserDTO $userDTO, $id)
     {
         $user = $this->findById($id);
-        return $user->update($userDTO->toArray());
+        $user->update($userDTO->toArray());
+        $user->syncPermissions(Arr::get($userDTO->toArray(), 'permissions'));
+        return true;
     }
 
     /**

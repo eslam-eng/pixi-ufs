@@ -22,6 +22,7 @@ class UserDTO extends BaseDTO
      * @param ?int $city_id'
      * @param ?int $area_id'
      * @param ?string $address'
+     * @param array $permissions'
      */
     public function __construct(
         protected string $name,
@@ -37,6 +38,7 @@ class UserDTO extends BaseDTO
         protected int $city_id,
         protected int $area_id,
         protected string $address,
+        protected array $permissions,
     )
     {
     }
@@ -57,6 +59,7 @@ class UserDTO extends BaseDTO
             city_id: $request->city_id,
             area_id: $request->area_id,
             address: $request->address,
+            permissions: $request->permissions,
         );
     }
 
@@ -81,6 +84,7 @@ class UserDTO extends BaseDTO
             city_id: Arr::get($data,'city_id'),
             area_id: Arr::get($data,'area_id'),
             address: Arr::get($data,'address'),
+            permissions: Arr::get($data,'permissions'),
         );
     }
 
@@ -103,7 +107,7 @@ class UserDTO extends BaseDTO
             'city_id' => $this->city_id,
             'area_id' => $this->area_id,
             'address' => $this->address,
-
+            'permissions' => $this->permissions,
         ];
     }
 

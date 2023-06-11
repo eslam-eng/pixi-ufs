@@ -27,7 +27,7 @@ class UsersDatatable extends DataTable
         return (new EloquentDataTable($query))
             ->setRowId('id')
             ->editColumn('company_id', function (User $user) {
-                return $user->company->name;
+                return $user->company->name ?? "";
             })
             ->editColumn('status', function (User $user) {
                 return $user->status ? trans('app.yes'):trans('app.no');
@@ -36,10 +36,16 @@ class UsersDatatable extends DataTable
                 return UsersType::from($user->type)->name;
             })
             ->editColumn('branch_id', function (User $user) {
-                return $user->branch->name;
+                return $user->branch->name ?? "";
             })
             ->editColumn('department_id', function (User $user) {
-                return $user->department->name;
+                return $user->department->name ?? "";
+            })
+            ->editColumn('city_id', function (User $user) {
+                return $user->city->title ?? "";
+            })
+            ->editColumn('area_id', function (User $user) {
+                return $user->area->title ?? "";
             })
             ->editColumn('address', function (User $user) {
                 return Str::limit($user->address,30);

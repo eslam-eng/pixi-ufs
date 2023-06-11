@@ -30,25 +30,16 @@
                                         <div class="col-lg mg-t-10 mg-lg-t-0">
                                             <div class="col-lg">
                                                 <livewire:company/>
-                                                @error('company_id')
-                                                <div class="text-danger"> {{$message}}</div>
-                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-lg mg-t-10 mg-lg-t-0">
                                             <div class="col-lg">
                                                 <livewire:branch/>
-                                                @error('branch_id')
-                                                <div class="text-danger"> {{$message}}</div>
-                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-lg mg-t-10 mg-lg-t-0">
                                             <div class="col-lg">
                                                 <livewire:department/>
-                                                @error('department_id')
-                                                <div class="text-danger"> {{$message}}</div>
-                                                @enderror
                                             </div>
                                         </div>
                                     </div>

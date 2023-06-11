@@ -25,7 +25,9 @@ class UsersController extends Controller
     public function index(UsersDatatable $usersDatatable , Request $request)
     {
         try {
-            $filters = $request->all();
+            $filters = array_filter($request->get('filters', []), function ($value) {
+                return ($value !== null && $value !== false && $value !== '');
+            });
             $withRelations = ['city','area','branch', 'company'];
             return $usersDatatable->with(['filters'=>$filters,'withRelations'=>$withRelations])->render('layouts.dashboard.users.index');
         } catch (Exception $e) {

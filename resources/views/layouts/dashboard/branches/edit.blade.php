@@ -3,7 +3,7 @@
 @section('content')
 
     {{--    breadcrumb --}}
-    @include('layouts.components.breadcrumb',['title' => trans('branches_page_title'),'first_list_item' => trans('app.branches'),'last_list_item' => trans('app.add_branch')])
+    @include('layouts.components.breadcrumb',['title' => trans('branches_page_title'),'first_list_item' => trans('app.branches'),'last_list_item' => trans('app.edit_branch')])
     {{--    end breadcrumb --}}
 
     <!-- Row -->
@@ -46,7 +46,7 @@
                                         <div class="col-lg">
                                             <div class="main-content-label mg-b-5">@lang('app.status')</div>
                                             <input name="status" value="{{ $branch->status }}"
-                                                placeholder="@lang('app.status')" type="checkbox" checked>
+                                                type="checkbox" {{ $branch->status ? "checked":"" }}>
         
                                             @error('status')
                                             <div class="text-danger"> {{$message}}</div>

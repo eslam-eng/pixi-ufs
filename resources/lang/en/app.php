@@ -104,5 +104,9 @@ return [
     'phone2'=>'phone2',
     'title'=>'Title',
     'add'=>'Add',
+    'submit'=>'Submit',
+    'back'=>'back',
+    'add_new_branch'=>'Add New Branch',
+    'add_new_department'=>'Add New Department',
 
 ];

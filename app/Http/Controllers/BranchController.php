@@ -38,26 +38,46 @@ class BranchController extends Controller
             $branchDTO = $request->toBranchDTO();
             $this->branchService->store($branchDTO);
             DB::commit();
-            return redirect()->route('companies.edit', Arr::get($branchDTO->toArray(), 'company_id'));
+            $toast = [
+                'type' => 'success',
+                'title' => 'success',
+                'message' => trans('app.receiver_created_successfully')
+            ];
+            return to_route('companies.edit', $branchDTO->company_id)->with('toast',$toast);
         } catch (Exception $e) {
             DB::rollBack();
-            return apiResponse(message: $e->getMessage(), code: 422);
+            $toast = [
+                'type' => 'error',
+                'title' => 'success',
+                'message' => trans('app.receiver_created_successfully')
+            ];
+            return to_route('companies.edit', $branchDTO->company_id)->with('toast',$toast);
         }
     }
 
     public function edit(int $id)
     {
-        $withRelations = [];
-        $branch = $this->branchService->find(id: $id);
-        return view('layouts.dashboard.branches.edit', compact('branch'));
+        try {
+            $branch = $this->branchService->findById(id: $id);
+            return view('layouts.dashboard.branches.edit', compact('branch'));
+        }catch (Exception $exception)
+        {
+            $toast = [
+                'type' => 'error',
+                'title' => 'success',
+                'message' => trans('app.receiver_created_successfully')
+            ];
+            return back()->with('toast',$toast);
+        }
+
     }
-    
-    public function show(int $id)
-    {
-        $withRelations = [];
-        $branch = $this->branchService->find(id: $id);
-        return view('layouts.dashboard.branches.show', compact('branch'));
-    }
+
+    // public function show(int $id)
+    // {
+    //     $withRelations = [];
+    //     $branch = $this->branchService->find(id: $id);
+    //     return view('layouts.dashboard.branches.show', compact('branch'));
+    // }
 
     public function update(BranchUpdateRequest $request, int $id)
     {

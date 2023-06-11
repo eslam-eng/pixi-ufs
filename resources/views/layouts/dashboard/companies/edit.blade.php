@@ -21,7 +21,7 @@
                                 <input class="form-control" name="name" value="{{old('name') ?? $company->name}}"
                                        type="text" required>
                                 @error('name')
-                                    <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
+                                <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
                                 @enderror
                             </div>
 
@@ -30,7 +30,7 @@
                                 <input class="form-control" name="email" value="{{old('email') ?? $company->email}}"
                                        type="email" required>
                                 @error('email')
-                                    <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
+                                <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
                                 @enderror
                             </div>
 
@@ -39,7 +39,7 @@
                                 <input class="form-control" name="ceo" value="{{old('ceo') ?? $company->ceo}}"
                                        type="text" required>
                                 @error('ceo')
-                                    <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
+                                <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
                                 @enderror
                             </div>
 
@@ -48,37 +48,35 @@
                                 <input class="form-control" value="{{old('phone') ?? $company->phone}}" name="phone"
                                        type="text" required>
                                 @error('phone')
-                                    <div class="text-danger"> {{$message}}</div>
+                                <div class="text-danger"> {{$message}}</div>
                                 @enderror
                             </div>
                         </div>
 
                         <div class="row row-sm mb-4">
                             <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.show_dashboard')</div>
-                                <input name="show_dashboard" value="1"
-                                    placeholder="@lang('app.show_dashboard')" type="checkbox" {{ $company->show_dashboard == 1 ? "checked":"" }}>
 
+                                <div class="main-content-label mg-b-5">@lang('app.show_dashboard')</div>
+                                <label class="custom-control custom-checkbox custom-control-md">
+                                    <input type="checkbox" class="custom-control-input"
+                                           name="show_dashboard" value="1" {{ $company->show_dashboard == 1 ? "checked":"" }}>
+                                    <span
+                                        class="custom-control-label custom-control-label-md  tx-17"></span>
+                                </label>
                                 @error('show_dashboard')
                                 <div class="text-danger"> {{$message}}</div>
                                 @enderror
                             </div>
 
-                            <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.notes')</div>
-                                <input class="form-control" value="{{old('notes') ?? $company->notes}}" name="notes"
-                                       type="text">
-
-                                @error('notes')
-                                <div class="text-danger"> {{$message}}</div>
-                                @enderror
-                            </div>
 
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.status')</div>
-                                <input name="status" value="1"
-                                    placeholder="@lang('app.status')" type="checkbox" {{ $company->status == 1 ? "checked":"" }}>
-
+                                <label class="custom-control custom-checkbox custom-control-md">
+                                    <input type="checkbox" class="custom-control-input"
+                                           name="status" value="1" {{ $company->status == 1 ? "checked":"" }}>
+                                    <span
+                                        class="custom-control-label custom-control-label-md  tx-17"></span>
+                                </label>
                                 @error('status')
                                 <div class="text-danger"> {{$message}}</div>
                                 @enderror
@@ -91,7 +89,9 @@
 
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.num_custom_fields')</div>
-                                <input class="form-control" value="{{old('num_custom_fields') ?? $company->num_custom_fields}}" name="num_custom_fields"
+                                <input class="form-control"
+                                       value="{{old('num_custom_fields') ?? $company->num_custom_fields}}"
+                                       name="num_custom_fields"
                                        type="number">
 
                                 @error('num_custom_fields')
@@ -103,8 +103,10 @@
                                 <div class="main-content-label mg-b-5">@lang('app.importation_type')</div>
                                 <select class="form-control" name="importation_type">
                                     <option selected disabled>...</option>
-                                    <option {{ \App\Enums\ImportTypeEnum::AWBWITHREFERENCE->value == $company->importation_type ? "selected":"" }} value="{{ \App\Enums\ImportTypeEnum::AWBWITHREFERENCE->value }}">@lang('app.import_with_reference')</option>
-                                    <option {{ \App\Enums\ImportTypeEnum::AWBWITHOUTREFERENCE->value == $company->importation_type ? "selected":"" }} value="{{ \App\Enums\ImportTypeEnum::AWBWITHOUTREFERENCE->value }}">@lang('app.import_without_reference')</option>
+                                    <option
+                                        {{ \App\Enums\ImportTypeEnum::AWBWITHREFERENCE->value == $company->importation_type ? "selected":"" }} value="{{ \App\Enums\ImportTypeEnum::AWBWITHREFERENCE->value }}">@lang('app.import_with_reference')</option>
+                                    <option
+                                        {{ \App\Enums\ImportTypeEnum::AWBWITHOUTREFERENCE->value == $company->importation_type ? "selected":"" }} value="{{ \App\Enums\ImportTypeEnum::AWBWITHOUTREFERENCE->value }}">@lang('app.import_without_reference')</option>
                                 </select>
 
                                 @error('importation_type')
@@ -117,8 +119,22 @@
 
                         <div class="row row-sm mb-4">
                             <div class="col-lg">
+                                <div class="main-content-label mg-b-5">@lang('app.notes')</div>
+                                <input class="form-control" value="{{old('notes') ?? $company->notes}}" name="notes"
+                                       type="text">
+
+                                @error('notes')
+                                <div class="text-danger"> {{$message}}</div>
+                                @enderror
+                            </div>
+
+                        </div>
+
+                        <div class="row row-sm mb-4">
+                            <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.address')</div>
-                                <input class="form-control" name="address" value="{{old('address') ?? $company->address}}"
+                                <input class="form-control" name="address"
+                                       value="{{old('address') ?? $company->address}}"
                                        type="text" required>
 
                                 @error('address')
@@ -128,24 +144,34 @@
 
                         </div>
 
-                        <div>
-                            @livewire('locations-drop-down',["city_id"=>"{{ $company->city_id }}", "area_id"=>"{{ $company->area_id }}"])
+                        <div class="row row-sm mb-4">
+                            <div class="col-lg">
 
-                            @error('city_id')
-                            <div class="text-danger"> {{$message}}</div>
-                            @enderror
-                            @error('area_id')
-                            <div class="text-danger"> {{$message}}</div>
-                            @enderror
+                                @livewire('location.cities',['selected_city' => "$company->city_id"])
+                                @error('city_id')
+                                <div class="text-danger"> {{$message}}</div>
+                                @enderror
+                            </div>
+
+
+                            <div class="col-lg">
+
+                                @livewire('location.areas',['selected_area' => "$company->area_id",'areas_for_city_id' => "$company->city_id"])
+                                @error('area_id')
+                                <div class="text-danger"> {{$message}}</div>
+                                @enderror
+                            </div>
                         </div>
+
 
                         <div class="card-footer mt-4">
                             <div class="form-group mb-0 mt-3 justify-content-end">
                                 <div>
-                                    <button type="submit" class="btn btn-success"><i
+                                    <button type="submit" class="btn btn-rounded btn-success"><i
                                             class="fa fa-save pe-2"></i>@lang('app.submit')</button>
 
-                                    <a role="button" href="{{route('companies.index')}}" class="btn btn-danger"><i
+                                    <a role="button" href="{{route('companies.index')}}"
+                                       class="btn btn-rounded btn-danger"><i
                                             class="fa fa-backward pe-2"></i>@lang('app.back')</a>
                                 </div>
                             </div>
@@ -161,7 +187,8 @@
                             <div>
                                 <form method="get" action="{{ route('branches.create') }}">
                                     <input type="hidden" name="company_id" value="{{ $company->id }}">
-                                    <button class="btn ripple btn-primary" type="submit">@lang('app.add_new_branch')</button>
+                                    <button class="btn btn-rounded btn-primary"
+                                            type="submit">@lang('app.add_new_branch')</button>
                                 </form>
                             </div>
                         </div>
@@ -191,18 +218,22 @@
                                 <td>{{$branch->area?->title}}</td>
                                 <td>
                                     <div>
-                                        <button data-bs-toggle="dropdown" class="btn btn-primary btn-block" aria-expanded="false">@lang('app.actions')
+                                        <button data-bs-toggle="dropdown" class="btn btn-rounded btn-primary btn-block"
+                                                aria-expanded="false">@lang('app.actions')
                                             <i class="icon ion-ios-arrow-down tx-11 mg-l-3"></i>
                                         </button>
                                         <div class="dropdown-menu" style="">
-                                           <a href="{{route('branches.edit', $branch->id)}}" class="dropdown-item">@lang('app.edit')</a>
-                                           <div>
-                                            <form method="post" action="{{ route('branches.destroy', $branch->id) }}">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="dropdown-item" type="submit">@lang('app.delete')</button>
-                                            </form>
-                                           </div>
+                                            <a href="{{route('branches.edit', $branch->id)}}"
+                                               class="dropdown-item">@lang('app.edit')</a>
+                                            <div>
+                                                <form method="post"
+                                                      action="{{ route('branches.destroy', $branch->id) }}">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button class="dropdown-item"
+                                                            type="submit">@lang('app.delete')</button>
+                                                </form>
+                                            </div>
                                         </div>
                                         <!-- dropdown-menu -->
                                     </div>
@@ -224,7 +255,8 @@
                             <div>
                                 <form method="get" action="{{ route('departments.create') }}">
                                     <input type="hidden" name="company_id" value="{{ $company->id }}">
-                                    <button class="btn ripple btn-primary" type="submit">@lang('app.add_new_department')</button>
+                                    <button class="btn btn-rounded btn-primary"
+                                            type="submit">@lang('app.add_new_department')</button>
                                 </form>
                             </div>
                         </div>
@@ -235,7 +267,7 @@
                         <thead>
                         <tr>
                             <td>@lang('app.name')</td>
-                            <td>@lang('app.actions')</td>
+                            <td width="300">@lang('app.actions')</td>
                         </tr>
                         </thead>
                         <tbody>
@@ -244,18 +276,16 @@
                                 <td>{{$department->name}}</td>
                                 <td>
                                     <div>
-                                        <button data-bs-toggle="dropdown" class="btn btn-primary btn-block" aria-expanded="false">@lang('app.actions')
+                                        <button data-bs-toggle="dropdown" class="btn btn-rounded btn-primary btn-block"
+                                                aria-expanded="false">@lang('app.actions')
                                             <i class="icon ion-ios-arrow-down tx-11 mg-l-3"></i>
                                         </button>
                                         <div class="dropdown-menu" style="">
-                                           <a href="{{route('departments.edit', $department->id)}}" class="dropdown-item">@lang('app.edit')</a>
-                                           <div>
-                                            <form method="post" action="{{ route('departments.destroy', $department->id) }}">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="dropdown-item" type="submit">@lang('app.delete')</button>
-                                            </form>
-                                           </div>
+                                            <a href="{{route('departments.edit', $department->id)}}"
+                                               class="dropdown-item">@lang('app.edit')</a>
+                                            <div>
+                                                <button role="button" onclick="destroy('{{$url}}')" class="dropdown-item">@lang('app.delete')</button>
+                                            </div>
                                         </div>
                                         <!-- dropdown-menu -->
                                     </div>
@@ -272,5 +302,4 @@
     </div>
 
     <!-- End Row -->
-
 @endsection

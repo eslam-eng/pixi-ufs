@@ -13,17 +13,43 @@
                     <div class="collapse" id="collapseExample" style="">
                         <div class="mt-4">
                             <form class="datatables_parameters">
-                                <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
-                                    <div class="row row-sm mt-4">
-                                        <div class="col-lg">
-                                            <livewire:location.cities/>
-                                        </div>
-                                        <div class="col-lg">
-                                            <livewire:location.areas/>
-                                        </div>
+                                <div class="row row-sm mt-4">
+                                    <div class="col-lg">
+                                        <livewire:location.cities/>
                                     </div>
-
+                                    <div class="col-lg">
+                                        <livewire:location.areas/>
+                                    </div>
                                 </div>
+
+                                <div class="row row-sm mt-4 mb-4">
+                                    <div class="col-lg">
+                                        <div class="main-content-label mg-b-5">@lang('app.email')</div>
+                                        <input class="form-control" name="email" placeholder="@lang('app.email')"
+                                                type="email">
+                                    </div>
+                                    <div class="col-lg">
+                                        <div class="main-content-label mg-b-5">@lang('app.phone')</div>
+                                        <input class="form-control" name="phone"
+                                               placeholder="@lang('app.phone')"
+                                               type="text" required>
+                                    </div>
+                                    <div class="col-lg">
+                                        <div class="main-content-label mg-b-5">@lang('app.show_dashboard')</div>
+                                        <select class="form-control" name="show_dashboard">
+                                            <option value="1">{{ trans('app.yes') }}</option>
+                                            <option value="0">{{ trans('app.no') }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg">
+                                        <div class="main-content-label mg-b-5">@lang('app.status')</div>
+                                        <select class="form-control" name="status">
+                                            <option value="1">{{ trans('app.yes') }}</option>
+                                            <option value="0">{{ trans('app.no') }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
 
                                 <div class="card-footer">
                                     <div class="form-group mb-0 mt-3 justify-content-end">

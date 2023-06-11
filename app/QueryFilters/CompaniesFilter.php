@@ -32,7 +32,7 @@ class CompaniesFilter extends QueryFilter
     }
 
     public function phone($term){
-        return $this->builder->where('phone1',$term)->orWhere('phone2',$term);
+        return $this->builder->where('phone',$term);
     }
 
     public function show_dashboard($term){

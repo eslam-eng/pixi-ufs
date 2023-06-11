@@ -25,7 +25,9 @@ class CompanyController extends Controller
     public function index(CompaniesDatatable $companiesDatatable, Request $request)
     {
         try {
-            $filters = array_filter($request->all());
+            $filters = array_filter($request->get('filters', []), function ($value) {
+                return ($value !== null && $value !== false && $value !== '');
+            });
             $withRelations = [];
             return $companiesDatatable->with(['filters'=>$filters,'withRelations'=>$withRelations])->render('layouts.dashboard.companies.index');
         } catch (Exception $e) {

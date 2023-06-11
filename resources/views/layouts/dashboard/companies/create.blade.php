@@ -211,13 +211,16 @@
                                                     @enderror
                                                 </div>
 
+                                            </div>
+
+                                            <div class="row row-sm mb-4">
                                                 <div class="col-lg mt-4">
                                                     <label class="custom-control custom-checkbox custom-control-lg"> <input
-                                                            type="checkbox" class="custom-control-input" value="1" name="branches_status[]"> <span
+                                                            type="checkbox" class="custom-control-input" value="1" checked name="branches_status[]"> <span
                                                             class="custom-control-label custom-control-label-lg  tx-20">@lang('app.status')</span>
                                                     </label>
 
-                                                     @error('branches_status[]')
+                                                    @error('branches_status[]')
                                                     <div class="text-danger"> {{$message}}</div>
                                                     @enderror
                                                 </div>

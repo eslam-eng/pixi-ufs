@@ -12,6 +12,7 @@ use App\Http\Resources\Company\CompanyDropDownResource;
 use App\Http\Resources\Company\CompanyResource;
 use App\Services\CompanyService;
 use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -44,10 +45,20 @@ class CompanyController extends Controller
             $companyDTO = $request->toCompanyDTO();
             $this->companyService->store($companyDTO);
             DB::commit();
-            return redirect()->route('companies.index');
+            $toast = [
+                'type' => 'success',
+                'title' => 'success',
+                'message' => trans('app.receiver_created_successfully')
+            ];
+            return back()->with('toast',$toast);
         } catch (Exception $e) {
             DB::rollBack();
-            return apiResponse(message: $e->getMessage(), code: 422);
+            $toast = [
+                'type' => 'error',
+                'title' => 'error',
+                'message' => trans('app.receiver_created_successfully')
+            ];
+            return back()->with('toast',$toast);
         }
     }
 
@@ -63,16 +74,25 @@ class CompanyController extends Controller
 
     public function edit(int $id)
     {
-        $withRelations = ['branches', 'departments'];
-        $company = $this->companyService->findById(id: $id, withRelations: $withRelations);
-        return view('layouts.dashboard.companies.edit', compact('company'));
+        try{
+            $withRelations = ['branches', 'departments'];
+            $company = $this->companyService->findById(id: $id, withRelations: $withRelations);
+            return view('layouts.dashboard.companies.edit', compact('company'));
+        }catch(Exception $e){
+            return redirect()->back();
+        }
     }
-    
+
     public function show(int $id)
     {
-        $withRelations = [];
-        $company = $this->companyService->findById(id: $id, withRelations: $withRelations);
-        return view('layouts.dashboard.companies.show', compact('company'));
+        try {
+            $withRelations = [];
+            $company = $this->companyService->findById(id: $id, withRelations: $withRelations);
+            return view('layouts.dashboard.companies.show', compact('company'));
+        }catch (Exception $e) {
+            DB::rollBack();
+            return apiResponse(message: $e->getMessage(), code: 422);
+        }
     }
 
     public function update(CompanyUpdateRequest $request, int $id)
@@ -93,9 +113,17 @@ class CompanyController extends Controller
     {
         try {
             $this->companyService->destroy(id: $id);
-            return redirect()->back();
-        }catch (Exception $e) {
+            return apiResponse(message: trans('lang.success_operation'));
+        }catch (QueryException $e) {
+            // Exception was thrown, do something to handle the error
+            $errorCode = $e->errorInfo[1];
+            if ($errorCode == 1451) {
+                return apiResponse(message: "cannot deleted related to another records", code: 500);
+            }
+        } catch (NotFoundException $e) {
             return apiResponse(message: $e->getMessage(), code: 422);
+        } catch (Exception $e) {
+            return apiResponse(message: trans('lang.something_went_wrong'), code: 422);
         }
     }
 

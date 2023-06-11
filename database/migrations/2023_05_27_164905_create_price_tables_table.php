@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('price_tables', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Company::class)->constrained();
+            $table->foreignIdFor(\App\Models\Company::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignIdFor(\App\Models\Location::class,'location_from')->constrained('locations');
             $table->foreignIdFor(\App\Models\Location::class,'location_to')->constrained('locations');
             $table->float('price');

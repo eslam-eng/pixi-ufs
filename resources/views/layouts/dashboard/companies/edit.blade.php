@@ -226,13 +226,7 @@
                                             <a href="{{route('branches.edit', $branch->id)}}"
                                                class="dropdown-item">@lang('app.edit')</a>
                                             <div>
-                                                <form method="post"
-                                                      action="{{ route('branches.destroy', $branch->id) }}">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button class="dropdown-item"
-                                                            type="submit">@lang('app.delete')</button>
-                                                </form>
+                                                <button role="button" onclick="destroy('{{route('branches.destroy',$branch->id)}}')" class="dropdown-item">@lang('app.delete')</button>
                                             </div>
                                         </div>
                                         <!-- dropdown-menu -->
@@ -284,7 +278,7 @@
                                             <a href="{{route('departments.edit', $department->id)}}"
                                                class="dropdown-item">@lang('app.edit')</a>
                                             <div>
-                                                <button role="button" onclick="destroy('{{$url}}')" class="dropdown-item">@lang('app.delete')</button>
+                                                <button role="button" onclick="destroy('{{route('departments.destroy',$department->id)}}')" class="dropdown-item">@lang('app.delete')</button>
                                             </div>
                                         </div>
                                         <!-- dropdown-menu -->

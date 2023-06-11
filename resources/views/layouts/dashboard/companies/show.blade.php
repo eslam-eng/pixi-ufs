@@ -97,7 +97,7 @@
                                 <form method="get" action="{{ route('branches.create') }}">
                                     <h4 class="pe-4">
                                         <input type="hidden" name="company_id" value="{{ $company->id }}">
-                                        <button class="btn ripple btn-primary" type="submit">@lang('app.add_new_branch')</button>
+                                        <button class="btn btn-rounded btn-primary" type="submit">@lang('app.add_new_branch')</button>
                                     </h4>
                                 </form>
                             </div>
@@ -128,18 +128,15 @@
                                 <td>{{$branch->area?->title}}</td>
                                 <td>
                                     <div>
-                                        <button data-bs-toggle="dropdown" class="btn btn-primary btn-block"
+                                        <button data-bs-toggle="dropdown" class="btn btn-rounded btn-primary btn-block"
                                                 aria-expanded="false">@lang('app.actions')
                                             <i class="icon ion-ios-arrow-down tx-11 mg-l-3"></i>
                                         </button>
                                         <div class="dropdown-menu" style="">
                                             <a href="{{route('branches.edit', $branch->id)}}"
                                                class="dropdown-item">@lang('app.edit')</a>
-                                            <form method="post" action="{{ route('branches.destroy', $branch->id) }}">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="dropdown-item" type="submit">@lang('app.delete')</button>
-                                            </form>
+                                            <button role="button" onclick="destroy('{{route('branches.destroy',$branch->id)}}')" class="dropdown-item">@lang('app.delete')</button>
+
                                         </div>
                                     </div>
                                 </td>
@@ -160,7 +157,7 @@
                             <form method="get" action="{{ route('departments.create') }}">
                                 <h4 class="pe-4">
                                     <input type="hidden" name="company_id" value="{{ $company->id }}">
-                                    <button class="btn ripple btn-primary" type="submit">@lang('app.add_new_department')</button>
+                                    <button class="btn btn-rounded btn-primary" type="submit">@lang('app.add_new_department')</button>
                                 </h4>
                             </form>
                         </div>
@@ -171,7 +168,7 @@
                         <thead>
                         <tr>
                             <td>@lang('app.name')</td>
-                            <td>@lang('app.actions')</td>
+                            <td width="250px">@lang('app.actions')</td>
                         </tr>
                         </thead>
                         <tbody>
@@ -180,18 +177,15 @@
                                 <td>{{$department->name}}</td>
                                 <td>
                                     <div>
-                                        <button data-bs-toggle="dropdown" class="btn btn-primary btn-block"
+                                        <button data-bs-toggle="dropdown" class="btn btn-rounded btn-primary btn-block"
                                                 aria-expanded="false">@lang('app.actions')
                                             <i class="icon ion-ios-arrow-down tx-11 mg-l-3"></i>
                                         </button>
                                         <div class="dropdown-menu" style="">
                                             <a href="{{route('departments.edit', $department->id)}}"
                                                class="dropdown-item">@lang('app.edit')</a>
-                                            <form method="post" action="{{ route('departments.destroy', $department->id) }}">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="dropdown-item" type="submit">@lang('app.delete')</button>
-                                            </form>
+                                            <button role="button" onclick="destroy('{{route('departments.destroy',$department->id)}}')" class="dropdown-item">@lang('app.delete')</button>
+
                                         </div>
                                         <!-- dropdown-menu -->
                                     </div>

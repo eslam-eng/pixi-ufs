@@ -15,6 +15,7 @@ use App\Http\Resources\Company\CompanyResource;
 use App\Services\BranchService;
 use App\Services\CompanyService;
 use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -97,8 +98,16 @@ class BranchController extends Controller
     {
         try {
             $this->branchService->destroy(id: $id);
-            return redirect()->back();
-        }catch (Exception $e) {
+            return apiResponse(message: trans('lang.success_operation'));
+        }catch (QueryException $e) {
+            // Exception was thrown, do something to handle the error
+            $errorCode = $e->errorInfo[1];
+            if ($errorCode == 1451) {
+                return apiResponse(message: "cannot deleted related to another records", code: 500);
+            }
+        } catch (NotFoundException $e) {
+            return apiResponse(message: $e->getMessage(), code: 422);
+        } catch (Exception $e) {
             return apiResponse(message: trans('lang.something_went_wrong'), code: 422);
         }
     }

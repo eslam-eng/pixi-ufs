@@ -57,7 +57,7 @@ class DepartmentService extends BaseService
      */
     public function update(int $id, DepartmentDTO $departmentDTO): bool
     {
-        $department = $this->find($id);
+        $department = $this->findById($id);
         $department->update($departmentDTO->toArray());
         return true;
     }
@@ -70,17 +70,9 @@ class DepartmentService extends BaseService
      */
     public function destroy(int $id): bool
     {
-        $department = $this->find($id);
+        $department = $this->findById($id);
         $department->delete();
         return true;
-    }
-
-    public function find(int $id): Model
-    {
-        $department = Department::find($id);
-        if (!$department)
-            throw new NotFoundException(trans('lang.not_found'));
-        return $department;
     }
 
     public function getDepartmentsForSelectDropDown(array $filters = []): \Illuminate\Database\Eloquent\Collection|array

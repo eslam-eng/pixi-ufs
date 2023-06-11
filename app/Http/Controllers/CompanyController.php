@@ -50,9 +50,9 @@ class CompanyController extends Controller
             $toast = [
                 'type' => 'success',
                 'title' => 'success',
-                'message' => trans('app.receiver_created_successfully')
+                'message' => trans('app.success_operation')
             ];
-            return back()->with('toast',$toast);
+            return redirect()->route('companies.index')->with(['toast' =>$toast]);
         } catch (Exception $e) {
             DB::rollBack();
             $toast = [
@@ -104,7 +104,12 @@ class CompanyController extends Controller
             $companyDTO = $request->toCompanyDTO();
             $this->companyService->update($id, $companyDTO);
             DB::commit();
-            return redirect()->route('companies.index');
+            $toast = [
+                'type' => 'success',
+                'title' => 'success',
+                'message' => trans('app.success_operation')
+            ];
+            return redirect()->route('companies.index')->with(['toast' =>$toast]);
         }catch (Exception $e) {
             DB::rollBack();
             return apiResponse(message: $e->getMessage(), code: 422);

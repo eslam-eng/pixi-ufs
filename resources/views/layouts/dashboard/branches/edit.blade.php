@@ -26,7 +26,7 @@
                                         <div class="col-lg">
                                             <div class="main-content-label mg-b-5">@lang('app.name')</div>
                                             <input class="form-control" name='name' value="{{old('name') ?? $branch->name}}" placeholder="@lang('app.name')"
-                                                type="text">
+                                                type="text" required>
                                             @error('name')
                                                 <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
                                             @enderror
@@ -35,7 +35,7 @@
                                         <div class="col-lg">
                                             <div class="main-content-label mg-b-5">@lang('app.phone')</div>
                                             <input class="form-control" value="{{old('phone') ?? $branch->phone}}" name="phone" placeholder="@lang('app.phone')"
-                                                type="text">
+                                                type="text" required>
                                             @error('phone')
                                                 <div class="text-danger"> {{$message}}</div>
                                             @enderror
@@ -59,7 +59,7 @@
                                         <div class="col-lg">
                                             <div class="main-content-label mg-b-5">@lang('app.address')</div>
                                             <input class="form-control" name="address" value="{{old('address') ?? $branch->address}}"  placeholder="@lang('app.address')"
-                                                type="text">
+                                                type="text" required>
         
                                             @error('address')
                                             <div class="text-danger"> {{$message}}</div>

@@ -135,11 +135,9 @@
                                         <div class="dropdown-menu" style="">
                                             <a href="{{route('branches.edit', $branch->id)}}"
                                                class="dropdown-item">@lang('app.edit')</a>
-                                            <form method="post" action="{{ route('branches.destroy', $branch->id) }}">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="dropdown-item" type="submit">@lang('app.delete')</button>
-                                            </form>
+                                            <div>
+                                                <button role="button" onclick="destroy('{{route('branches.destroy', $branch->id)}}')" class="dropdown-item">@lang('app.delete')</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </td>
@@ -187,11 +185,9 @@
                                         <div class="dropdown-menu" style="">
                                             <a href="{{route('departments.edit', $department->id)}}"
                                                class="dropdown-item">@lang('app.edit')</a>
-                                            <form method="post" action="{{ route('departments.destroy', $department->id) }}">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="dropdown-item" type="submit">@lang('app.delete')</button>
-                                            </form>
+                                            <div>
+                                                <button role="button" onclick="destroy('{{route('departments.destroy', $department->id)}}')" class="dropdown-item">@lang('app.delete')</button>
+                                            </div>
                                         </div>
                                         <!-- dropdown-menu -->
                                     </div>

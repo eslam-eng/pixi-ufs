@@ -8,15 +8,6 @@
 
     <!-- Row -->
     <div class="row">
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
         {{-- start branches --}}
         <div class="col-lg-12 col-md-12">
             <div class="card custom-card">
@@ -34,10 +25,10 @@
                                         <div class="col-lg">
                                             <div class="main-content-label mg-b-5">@lang('app.name')</div>
                                             <input class="form-control" name='name' value="{{old('name')}}" placeholder="@lang('app.name')"
-                                                type="text">
-                                            @error('name')
-                                                <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
-                                            @enderror
+                                                type="text" required>
+                                                @error('name')
+                                                    <div class="text-danger"> {{$message}}</div>
+                                                @enderror
                                         </div>
         
                                     </div>

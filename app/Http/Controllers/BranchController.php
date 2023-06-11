@@ -41,17 +41,17 @@ class BranchController extends Controller
             $toast = [
                 'type' => 'success',
                 'title' => 'success',
-                'message' => trans('app.receiver_created_successfully')
+                'message' => trans('app.success_operation')
             ];
-            return to_route('companies.edit', $branchDTO->company_id)->with('toast',$toast);
+            return to_route('companies.edit', Arr::get($branchDTO->toArray(), 'company_id'))->with('toast',$toast);
         } catch (Exception $e) {
             DB::rollBack();
             $toast = [
                 'type' => 'error',
                 'title' => 'success',
-                'message' => trans('app.receiver_created_successfully')
+                'message' => trans('app.success_operation')
             ];
-            return to_route('companies.edit', $branchDTO->company_id)->with('toast',$toast);
+            return to_route('companies.edit', Arr::get($branchDTO->toArray(), 'company_id'))->with('toast',$toast);
         }
     }
 
@@ -65,7 +65,7 @@ class BranchController extends Controller
             $toast = [
                 'type' => 'error',
                 'title' => 'success',
-                'message' => trans('app.receiver_created_successfully')
+                'message' => trans('app.success_operation')
             ];
             return back()->with('toast',$toast);
         }
@@ -97,7 +97,12 @@ class BranchController extends Controller
     {
         try {
             $this->branchService->destroy(id: $id);
-            return redirect()->back();
+            $toast = [
+                'type' => 'success',
+                'title' => 'success',
+                'message' => trans('app.success_operation')
+            ];
+            return redirect()->back()->with(['toast'=>$toast]);
         }catch (Exception $e) {
             return apiResponse(message: trans('lang.something_went_wrong'), code: 422);
         }

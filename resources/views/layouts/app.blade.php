@@ -90,6 +90,11 @@
                         }
                         else
                             toastr.error(result.message);
+                    } ,
+                    error: function(jqXHR, textStatus, errorThrown) {
+
+                        var errorMessage = jqXHR.responseJSON.message;
+                        toastr.error(errorMessage);
                     }
                 });
             }

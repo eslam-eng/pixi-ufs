@@ -77,14 +77,6 @@ class BranchService extends BaseService
         return true;
     }
 
-    public function find(int $id): Model
-    {
-        $branch = Branch::find($id);
-        if (!$branch)
-            throw new NotFoundException(trans('lang.not_found'));
-        return $branch;
-    }
-
     public function getBranchesForSelectDropDown(array $filters = []): \Illuminate\Database\Eloquent\Collection|array
     {
         return $this->branchQueryBuilder(filters: $filters)->select(['id','name'])->get();

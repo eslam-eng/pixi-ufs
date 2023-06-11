@@ -1,6 +1,6 @@
 <td class="text-end">
     <div>
-        <button data-bs-toggle="dropdown" class="btn btn-primary btn-block" aria-expanded="false">@lang('app.actions')
+        <button data-bs-toggle="dropdown" class="btn btn-rounded btn-primary btn-block" aria-expanded="false">@lang('app.actions')
             <i class="icon ion-ios-arrow-down tx-11 mg-l-3"></i>
         </button>
         <div class="dropdown-menu" style="">

@@ -188,7 +188,7 @@ class ReceiverController extends Controller
         try {
             $key_word = $request->get('keyword');
             $filters  = ['keyword'=>$key_word] ;
-            $receivers = app()->make(ReceiverService::class)->receiverQueryBuilder(filters: $filters,withRelations: ['defaultAddress','branch:id,name'])->limit(15)->get();
+            $receivers = app()->make(ReceiverService::class)->receiverQueryBuilder(filters: $filters,withRelations: ['city','area','branch:id,name'])->limit(15)->get();
             return apiResponse(data: $receivers ,code: 200);
         }catch (Exception $exception)
         {

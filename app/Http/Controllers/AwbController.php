@@ -15,12 +15,10 @@ use App\Http\Requests\Awb\AwbFileUploadExcelRequest;
 use App\Http\Requests\Awb\AwbStoreRequest;
 use App\Imports\Awbs\AwbsImport;
 use App\Imports\Awbs\AwbsSyncByReferenceImport;
-use App\Imports\Tenant\ProductImportClasses\AdminImportProducts;
 use App\Models\AwbStatus;
 use App\Services\AwbHistoryService;
 use App\Services\AwbService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Excel;
 
@@ -55,7 +53,7 @@ class AwbController extends Controller
 
             $withRelations = [
                 'company:id,name', 'branch:id,name', 'department:id,name',
-                'additionalInfo','history'
+                'additionalInfo','history'=>fn($query)=>$query->orderByDesc('id')->with('status')
             ];
 
             $awb = $this->awbService->findById(id: $id, withRelations: $withRelations);
@@ -80,13 +78,19 @@ class AwbController extends Controller
             $toast = [
                 'type' => 'success',
                 'title' => 'success',
-                'message' => "$awb->code" . trans('app.aw_created_successfully')
+                'message' => "$awb->code " . trans('app.aw_created_successfully')
             ];
             DB::commit();
-            return to_route('awb.index')->with('toast', $toast);
+            return to_route('awbs.index')->with('toast', $toast);
         } catch (\Exception $exception) {
             DB::rollBack();
-            dd($exception);
+            $toast = [
+                'type' => 'error',
+                'title' => 'error',
+                'message' => trans('app.there_is_an_error')
+            ];
+            DB::commit();
+            return back()->with('toast', $toast);
         }
     }
 
@@ -122,8 +126,8 @@ class AwbController extends Controller
     {
         $user = auth()->user()->load('company:id,name,importation_type');
         $importation_type = $user->company?->importation_type ?? ImportTypeEnum::AWBWITHOUTREFERENCE;
-        ob_end_clean();
         ob_start();
+        ob_end_clean();
         if ($importation_type == ImportTypeEnum::AWBWITHOUTREFERENCE())
             return $excel->download(new AwbsWithoutReferenceExport(), 'awbs_without_reference_' . time() . '.xlsx');
         else
@@ -202,10 +206,10 @@ class AwbController extends Controller
         }
     }
 
-    public function changeStatus(AwbChangeStatusRequest $request,AwbHistoryService $awbHistoryService)
+    public function changeStatusForMultipleAwbs(AwbChangeStatusRequest $request,AwbHistoryService $awbHistoryService)
     {
         try {
-            $result = $awbHistoryService->changeAwbStatus(status: $request->status,awb_ids: $request->ids);
+            $result = $awbHistoryService->changeMultipleAwbStatus(status: $request->status,awb_ids: $request->ids);
             if ($result)
                 return apiResponse(message: trans('app.awbs_status_changed_successfully'));
             else
@@ -215,5 +219,4 @@ class AwbController extends Controller
             return apiResponse(message: $exception->getMessage(),code: 500);
         }
     }
-
 }

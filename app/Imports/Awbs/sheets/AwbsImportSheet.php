@@ -3,12 +3,10 @@
 namespace App\Imports\Awbs\sheets;
 
 
-use App\Enums\AwbStatuses;
 use App\Enums\UsersType;
 use App\Models\Awb;
 use App\Models\AwbAdditionalInfo;
 use App\Models\AwbHistory;
-use App\Models\Location;
 use App\Models\Receiver;
 use App\Models\User;
 use App\Services\PriceTableService;
@@ -38,6 +36,7 @@ class AwbsImportSheet implements
         public int    $payment_type,
         public string $service_type,
         public string $shipment_type,
+        public int    $status_id,
     )
     {
     }
@@ -113,7 +112,7 @@ class AwbsImportSheet implements
             $awbsHistory[] = [
                 'awb_id' => $awb->id,
                 'user_id' => $this->creator->id,
-                'awb_status_id' => AwbStatuses::PREPARE(),
+                'awb_status_id' => $this->status_id,
             ];
         }
 
@@ -122,27 +121,27 @@ class AwbsImportSheet implements
 
 //        $awbs_areas = array_unique($awbs_areas);
         $number_of_awbs = count($awbData);
-        $fcm_title = 'تم انشاء شحنات '.$number_of_awbs;
+        $fcm_title = 'تم انشاء شحنات ' . $number_of_awbs;
         $fcm_body = $this->creator->company->name . 'يرجي التوجه لاستلام الشحنات من شركه :';
         $users = User::query()
-            ->where('type',UsersType::COURIER())->where('area_id',$this->creator->branch->area_id)->select(['id','device_token'])->get();
-        $tokens = $users->pluck('device_token')->toArray();
-        foreach ($users as $user)
-        {
-            $notification_data =  [
-                'title' => [
-                    'ar' => $fcm_title,
-                    'en' => $fcm_title,
-                ],
-                'message' => [
-                    'ar' => $fcm_body,
-                    'en' => $fcm_body,
-                ],
-
-            ];
-            notifyUser($user , $notification_data);
+            ->where('type', UsersType::COURIER())->where('area_id', $this->creator->branch->area_id)->select(['id', 'device_token'])->get();
+        if ($users->isNotEmpty()) {
+            $tokens = $users->pluck('device_token')->toArray();
+            foreach ($users as $user) {
+                $notification_data = [
+                    'title' => [
+                        'ar' => $fcm_title,
+                        'en' => $fcm_title,
+                    ],
+                    'message' => [
+                        'ar' => $fcm_body,
+                        'en' => $fcm_body,
+                    ],
+                ];
+                notifyUser($user, $notification_data);
+            }
+            app()->make(PushNotificationService::class)->sendToTokens(title: $fcm_title, body: $fcm_body, tokens: $tokens);
         }
-        app()->make(PushNotificationService::class)->sendToTokens(title: $fcm_title,body: $fcm_body,tokens: $tokens);
 
     }
 

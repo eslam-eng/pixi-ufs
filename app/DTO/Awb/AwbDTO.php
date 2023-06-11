@@ -31,12 +31,13 @@ class AwbDTO extends BaseDTO
      */
     public function __construct(
         public int        $user_id,
+        public int        $company_id,
         public int        $branch_id,
         public int        $department_id,
         public int        $receiver_id,
         public            $receiver_data,
         public string     $payment_type,
-        public string     $service_type,
+        public int|string     $service_type,
         public bool       $is_return,
         public int|string $shipment_type,
         public ?float     $zone_price,
@@ -49,6 +50,9 @@ class AwbDTO extends BaseDTO
         public ?string    $custom_field3,
         public ?string    $custom_field4,
         public ?string    $custom_field5,
+        public ?array    $length,
+        public ?array    $width,
+        public ?array    $height,
     )
     {
     }
@@ -57,12 +61,13 @@ class AwbDTO extends BaseDTO
     {
         return new self(
             user_id: $request->user_id,
+            company_id: $request->company_id,
             branch_id: $request->branch_id,
             department_id: $request->department_id,
             receiver_id: $request->receiver_id,
             receiver_data: $request->receiver_data,
             payment_type: $request->payment_type,
-            service_type: $request->service_type,
+            service_type: $request->service_type_id,
             is_return: $request->is_return,
             shipment_type: $request->shipment_type_id,
             zone_price: $request->zone_price,
@@ -75,6 +80,10 @@ class AwbDTO extends BaseDTO
             custom_field3: $request->custom_field3,
             custom_field4: $request->custom_field4,
             custom_field5: $request->custom_field5,
+
+            length: $request->length,
+            width: $request->width,
+            height: $request->height,
         );
     }
 
@@ -87,12 +96,13 @@ class AwbDTO extends BaseDTO
     {
         return new self(
             user_id: Arr::get($data, 'user_id'),
+            company_id: Arr::get($data, 'company_id'),
             branch_id: Arr::get($data, 'branch_id'),
             department_id: Arr::get($data, 'department_id'),
             receiver_id: Arr::get($data, 'receiver_id'),
             receiver_data: Arr::get($data, 'receiver_data'),
             payment_type: Arr::get($data, 'payment_type'),
-            service_type: Arr::get($data, 'service_type'),
+            service_type: Arr::get($data, 'service_type_id'),
             is_return: Arr::get($data, 'is_return'),
             shipment_type: Arr::get($data, 'shipment_type_id'),
             zone_price: Arr::get($data, 'zone_price'),
@@ -105,6 +115,11 @@ class AwbDTO extends BaseDTO
             custom_field3: Arr::get($data, 'custom_field3'),
             custom_field4: Arr::get($data, 'custom_field4'),
             custom_field5: Arr::get($data, 'custom_field5'),
+
+            length: Arr::get($data, 'length'),
+            width: Arr::get($data, 'width'),
+            height: Arr::get($data, 'height'),
+
         );
     }
 
@@ -115,6 +130,7 @@ class AwbDTO extends BaseDTO
     {
         return [
             "user_id" => $this->user_id,
+            "company_id" => $this->company_id,
             "branch_id" => $this->branch_id,
             "department_id" => $this->department_id,
             "receiver_id" => $this->receiver_id,
@@ -139,6 +155,15 @@ class AwbDTO extends BaseDTO
             "custom_field3" => $this->custom_field3,
             "custom_field4" => $this->custom_field4,
             "custom_field5" => $this->custom_field5,
+        ];
+    }
+
+    public function shipmentDimensions(): array
+    {
+        return [
+            "length" => $this->length,
+            "width" => $this->width,
+            "height" => $this->height,
         ];
     }
 

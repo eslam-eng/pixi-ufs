@@ -112,13 +112,17 @@
 
                                         <div class="col-md-3">
                                             <label class="form-label">@lang('app.pieces')</label>
-                                            <input class="form-control" type="number" name="collection"/>
+                                            <input class="form-control" value="1" id="pieces" type="number" name="pieces"/>
                                         </div>
 
                                         <div class="col-md-3">
                                             <label class="form-label">@lang('app.weight')</label>
-                                            <input class="form-control" type="number" name="collection"/>
+                                            <input class="form-control" value="1" type="number" name="weight"/>
                                         </div>
+                                    </div>
+
+                                    <div class="row row-xs" id="awb_details">
+
                                     </div>
                                 </div>
                             </div>

@@ -8,6 +8,7 @@ use App\Enums\UsersType;
 use App\Models\Awb;
 use App\Models\AwbAdditionalInfo;
 use App\Models\AwbHistory;
+use App\Models\AwbStatus;
 use App\Models\Receiver;
 use App\Models\User;
 use App\Services\PriceTableService;
@@ -37,6 +38,7 @@ class AwbsSyncWithReferenceSheet implements
         public int    $payment_type,
         public string $service_type,
         public string $shipment_type,
+        public int $status_id,
     )
     {
     }
@@ -106,7 +108,7 @@ class AwbsSyncWithReferenceSheet implements
             $awbsHistory[] = [
                 'awb_id' => $awb->id,
                 'user_id' => $this->creator->id,
-                'awb_status_id' => AwbStatuses::PREPARE(),
+                'awb_status_id' =>$this->status_id,
             ];
         }
 
@@ -119,26 +121,26 @@ class AwbsSyncWithReferenceSheet implements
         $fcm_title = $number_of_awbs.'تم انشاء شحنات ';
         $fcm_body = "يرجي التوجه لاستلام الشحنات".$this->creator->company->name."تم انشاء شحنات خاصه بشركه : ";
         $users = User::query()->where('type',UsersType::COURIER())->where('area_id',$this->creator->branch->area_id)->select(['id','device_token'])->get();
-        $tokens = $users->pluck('device_token')->toArray();
-        foreach ($users as $user)
+        if ($users->isNotEmpty())
         {
-            $notification_data =  [
-                'title' => [
-                    'ar' => $fcm_title,
-                    'en' => $fcm_title,
-                ],
-                'message' => [
-                    'ar' => $fcm_body,
-                    'en' => $fcm_body,
-                ],
+            $tokens = $users->pluck('device_token')->toArray();
+            foreach ($users as $user)
+            {
+                $notification_data =  [
+                    'title' => [
+                        'ar' => $fcm_title,
+                        'en' => $fcm_title,
+                    ],
+                    'message' => [
+                        'ar' => $fcm_body,
+                        'en' => $fcm_body,
+                    ],
 
-            ];
-            notifyUser($user , $notification_data);
+                ];
+                notifyUser($user , $notification_data);
+            }
+            app()->make(PushNotificationService::class)->sendToTokens(title: $fcm_title,body: $fcm_body,tokens: $tokens);
         }
-        app()->make(PushNotificationService::class)->sendToTokens(title: $fcm_title,body: $fcm_body,tokens: $tokens);
-
-
-
     }
     public function rules(): array
     {

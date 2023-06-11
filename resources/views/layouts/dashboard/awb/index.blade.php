@@ -24,7 +24,7 @@
                             <a class="btn btn-rounded btn-primary" href="{{route('awbs.create')}}"><i class="fe fe-plus me-2"></i>@lang('app.new')</a>
                             <a role="button" href="{{route('awb.import-form')}}" class="btn btn-rounded btn-success"><i class="fa fa-upload pe-2"></i>@lang('app.import')</a>
                             <a class="btn btn-rounded btn-dark" data-bs-target="#changeAwbsStatus" data-bs-toggle="modal" href="">@lang('app.change_status')</a>
-                            <button class="btn btn-rounded btn-primary" data-bs-target="#print_awbs_modal" data-bs-toggle="modal"><i class="fa fa-print"></i>@lang('app.print')</button>
+                            <button class="btn btn-rounded btn-primary" data-bs-target="#print_awbs_modal" data-bs-toggle="modal"><i class="fa fa-print pe-2"></i>@lang('app.print')</button>
                             <button data-url="{{route('awb.delete-multiple')}}" data-csrf="{{csrf_token()}}" class="btn btn-danger btn-rounded delete-selected-btn"><i class="fa fa-trash pe-2"></i>@lang('app.delete_selected')</button>
                         </div>
                     </div>

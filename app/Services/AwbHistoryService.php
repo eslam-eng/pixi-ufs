@@ -17,7 +17,7 @@ class AwbHistoryService extends BaseService
        return  $this->model ;
     }
 
-    public function changeAwbStatus(int $status , array $awb_ids = [])
+    public function changeMultipleAwbStatus(int $status , array $awb_ids = [])
     {
         $inserted_data = [];
         $user_id = auth()->id();
@@ -31,6 +31,12 @@ class AwbHistoryService extends BaseService
         }
 
         return $this->model->insert($inserted_data);
+    }
+
+
+    public function status(Awb $awb , array $data = [])
+    {
+        return $awb->history()->create($data);
     }
 
 }

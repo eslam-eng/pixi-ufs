@@ -2,9 +2,11 @@
 
 namespace App\Imports\Awbs;
 
+use App\Enums\AwbStatuses;
 use App\Enums\ImportStatusEnum;
 use App\Imports\Awbs\sheets\AwbsImportSheet;
 use App\Models\AwbServiceType;
+use App\Models\AwbStatus;
 use App\Models\CompanyShipmentType;
 use App\Models\ImportLog;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -45,6 +47,8 @@ class AwbsImport implements
     public $serviceType;
     public $shipmentType;
 
+    public int $status_id ;
+
     public function __construct(
         public $creator ,
         public int $service_type_id ,
@@ -54,7 +58,7 @@ class AwbsImport implements
     {
         $this->serviceType = AwbServiceType::find($this->service_type_id);
         $this->shipmentType = CompanyShipmentType::find($this->shipment_type_id);
-
+        $this->status_id = AwbStatus::query()->where('code',AwbStatuses::CREATE_SHIPMENT->value)->first()?->id;
     }
 
 
@@ -66,7 +70,8 @@ class AwbsImport implements
                 creator: $this->creator,
                 payment_type: $this->payment_type,
                 service_type: $this->serviceType->name,
-                shipment_type: $this->shipmentType->name
+                shipment_type: $this->shipmentType->name,
+                status_id: $this->status_id
             ),
         ];
     }

@@ -12,18 +12,39 @@ class UsersFilters extends QueryFilter
         parent::__construct($params);
     }
 
+    public function email($term)
+    {
+        return $this->builder->where('email',$term);
+    }
+    public function phone($term)
+    {
+        return $this->builder->where('phone',$term);
+    }
     public function status($term)
     {
         return $this->builder->where('status',$term);
     }
+    public function type($term)
+    {
+        return $this->builder->where('type',$term);
+    }
 
     public function city_id($term)
     {
-        return $this->builder->where('status',$term);
+        return $this->builder->where('city_id',$term);
     }
 
     public function area_id($term){
-        return $this->builder->where('status',$term);
+        return $this->builder->where('area_id',$term);
+    }
+    public function company_id($term){
+        return $this->builder->where('company_id',$term);
+    }
+    public function branch_id($term){
+        return $this->builder->where('branch_id',$term);
+    }
+    public function department_id($term){
+        return $this->builder->where('department_id',$term);
     }
 
     public function keyword($term)

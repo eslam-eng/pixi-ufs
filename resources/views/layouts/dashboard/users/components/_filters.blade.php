@@ -52,6 +52,35 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row row-sm mb-4">
+                                        <div class="col-lg">
+                                            <div class="main-content-label mg-b-5">@lang('app.email')</div>
+                                            <input class="form-control" value="{{old('email')}}" name="email"
+                                                   placeholder="@lang('app.email')" type="email">
+                                        </div>
+                                        <div class="col-lg">
+                                            <div class="main-content-label mg-b-5">@lang('app.phone')</div>
+                                            <input class="form-control" value="{{old('phone')}}" name="phone"
+                                                   placeholder="@lang('app.phone')" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="row row-sm mb-4">
+                                        <div class="col-lg">
+                                            <div class="main-content-label mg-b-5">@lang('app.status')</div>
+                                            <select class="form-control" name="status">
+                                                <option value="1">{{ trans('app.yes') }}</option>
+                                                <option value="0">{{ trans('app.no') }}</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg">
+                                            <div class="main-content-label mg-b-5">@lang('app.type')</div>
+                                            <select class="form-control" name="type">
+                                                @foreach (App\Enums\UsersType::options() as $name=>$value)
+                                                <option value="{{ $value }}">{{ $name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
                                     
                                 </div>
 

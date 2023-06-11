@@ -33,9 +33,9 @@ class UserUpdateRequest extends BaseRequest
             'branch_id' => 'nullable|integer|exists:branches,id',
             'department_id' => 'nullable|integer|exists:departments,id',
             'notes' => 'nullable|string',
-            'city_id' => 'required|integer|exists:locations,id',
-            'area_id' => 'required|integer|exists:locations,id',
-            'address'=>'required|string',
+            'city_id' => 'nullable|integer|exists:locations,id',
+            'area_id' => 'nullable|integer|exists:locations,id',
+            'address'=>'nullable|string',
             'permissions' => 'required|array|min:1',
             'permissions.*' => 'string|exists:permissions,name',
         ];

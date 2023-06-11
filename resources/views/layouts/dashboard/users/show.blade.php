@@ -42,29 +42,29 @@
                         <div class="row row-sm mb-4">
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.company')</div>
-                                    <label class="form-control">{{ $user->company->name }}</label>
+                                    <label class="form-control">{{ $user->company->name ?? "" }}</label>
                             </div>
 
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.branch')</div>
-                                <label class="form-control">{{ $user->branch->name }}</label>
+                                <label class="form-control">{{ $user->branch->name ?? "" }}</label>
                             </div>
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.department')</div>
-                                <label class="form-control">{{ $user->department->name }}</label>
+                                <label class="form-control">{{ $user->department->name ?? "" }}</label>
                             </div>
                         </div>
                         <div class="row row-sm mb-4">
                             <div class="col-lg">
                                 <div class="col-lg">
                                     <div class="main-content-label mg-b-5">@lang('app.city')</div>
-                                    <label class="form-control">{{ $user->city->title }}</label>
+                                    <label class="form-control">{{ $user->city->title ?? "" }}</label>
                                 </div>
                             </div>
                             <div class="col-lg mg-t-10 mg-lg-t-0">
                                 <div class="col-lg">
                                     <div class="main-content-label mg-b-5">@lang('app.area')</div>
-                                    <label class="form-control">{{ $user->area->title }}</label>
+                                    <label class="form-control">{{ $user->area->title ?? "" }}</label>
                                 </div>
                             </div>
                         </div>

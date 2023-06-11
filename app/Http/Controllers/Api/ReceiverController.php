@@ -8,7 +8,7 @@ use App\Exceptions\NotFoundException;
 use App\Exports\ReceiversExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FileUploadRequest;
-use App\Http\Requests\Receivers\ReceiverUpdateAddress;
+use App\Http\Requests\Receivers\PriceTableUpdateRequest;
 use App\Http\Requests\Receivers\ReceiverUpdateAddressAndPhone;
 use App\Http\Requests\Receivers\ReceiverUpdatePhone;
 use App\Imports\Receivers\ReceiversImport;
@@ -38,7 +38,7 @@ class ReceiverController extends Controller
         }
     }
 
-    public function updateReceiverAddress(ReceiverUpdateAddress $request, $id)
+    public function updateReceiverAddress(PriceTableUpdateRequest $request, $id)
     {
         try {
             $status = $this->receiverService->updateReceiverAddress(id: $id, data: $request->validated());

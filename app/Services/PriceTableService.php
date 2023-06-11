@@ -48,8 +48,6 @@ class PriceTableService extends BaseService
     public function update(int $id, PriceTableDTO $priceTableDTO): bool
     {
         $price_table = $this->findById($id);
-        if (!$price_table)
-            throw new NotFoundException(trans('lang.not_found'));
         $price_table->update($priceTableDTO->toArray());
         return true;
     }
@@ -63,8 +61,6 @@ class PriceTableService extends BaseService
     public function destroy(int $id): bool
     {
         $price_table = $this->findById($id);
-        if (!$price_table)
-            throw new NotFoundException(trans('lang.not_found'));
         $price_table->delete();
         return true;
     }

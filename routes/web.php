@@ -8,6 +8,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\AwbHistoryController;
 use App\Http\Controllers\ImportLogsController;
+use App\Http\Controllers\PriceTableController;
 use App\Http\Livewire\Emptypage;
 use \App\Http\Livewire\Switcherpage;
 use App\Http\Controllers\ReceiverController;
@@ -75,6 +76,8 @@ Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
     });
 
     Route::get('import-logs',[ImportLogsController::class,'index'])->name('import-logs.index');
+
+    Route::resource('prices', PriceTableController::class);
 
     Route::get('switcherpage', Switcherpage::class)->name('switcherpage');
 

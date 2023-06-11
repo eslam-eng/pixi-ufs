@@ -4,7 +4,7 @@ namespace App\Http\Requests\Awb;
 
 use App\Http\Requests\BaseRequest;
 
-class AwbRescheduleRequest extends BaseRequest
+class AwbBulkChangeStatusRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,8 @@ class AwbRescheduleRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'status_id'=>'required|integer|exists:awb_statuses,id',
+            'ids'=>'required|array',
+            'status'=>'required|exists:awb_statuses,id',
         ];
     }
 

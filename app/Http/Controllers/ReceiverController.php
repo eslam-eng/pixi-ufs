@@ -149,8 +149,6 @@ class ReceiverController extends Controller
             $filters['id'] = $user->branch_id ;
         $withRelations = ['company:id,name'];
         $branches = $this->branchService->getAll(filters: $filters,withRelations: $withRelations);
-        ob_end_clean();
-        ob_start();
         return $excel->download(new ReceiversExport($branches), 'receivers' . time() . '.xlsx');
     }
 

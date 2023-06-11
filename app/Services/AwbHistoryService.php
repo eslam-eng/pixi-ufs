@@ -2,9 +2,12 @@
 
 namespace App\Services;
 
-use App\Exceptions\NotFoundException;
+use App\Enums\AwbStatuses;
+use App\Enums\ImageTypeEnum;
 use App\Models\Awb;
 use App\Models\AwbHistory;
+use Illuminate\Support\Arr;
+
 class AwbHistoryService extends BaseService
 {
 
@@ -14,19 +17,18 @@ class AwbHistoryService extends BaseService
 
     public function getModel(): AwbHistory
     {
-       return  $this->model ;
+        return $this->model;
     }
 
-    public function changeMultipleAwbStatus(int $status , array $awb_ids = [])
+    public function changeMultipleAwbStatus(int $status, array $awb_ids = [])
     {
         $inserted_data = [];
         $user_id = auth()->id();
-        foreach ($awb_ids as $id)
-        {
-            $inserted_data []= [
-                'awb_id'=>$id,
-                'user_id'=>$user_id,
-                'awb_status_id'=>$status
+        foreach ($awb_ids as $id) {
+            $inserted_data [] = [
+                'awb_id' => $id,
+                'user_id' => $user_id,
+                'awb_status_id' => $status
             ];
         }
 
@@ -34,8 +36,23 @@ class AwbHistoryService extends BaseService
     }
 
 
-    public function status(Awb $awb , array $data = [])
+    public function changeStatus(Awb $awb, array $data = [])
     {
+        $status = Arr::get($data, 'status');
+        if (isset($status) && $status?->code == AwbStatuses::DELIVERED->value) {
+            $pod_data = [
+                'actual_recipient' => Arr::get($data, 'actual_recipient'),
+                'title' => Arr::get($data, 'title'),
+                'card_number' => Arr::get($data, 'card_number'),
+            ];
+            if (isset($data['images']) && is_array($data['images']))
+                foreach ($data['images'] as $image) {
+                    $fileData = FileService::saveImage(file: $image, path: 'uploads/pod/awbs', field_name: 'images');
+                    $fileData['type'] = ImageTypeEnum::CARD;
+                    $awb->storeAttachment($fileData);
+                }
+            $awb->update($pod_data);
+        }
         return $awb->history()->create($data);
     }
 

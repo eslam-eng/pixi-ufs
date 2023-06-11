@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\AwbController;
+use App\Http\Controllers\Api\AwbHistoryController;
+use App\Http\Controllers\Api\AwbStatusController;
 use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\PhoneVerifyController;
 use App\Http\Controllers\Api\ReceiverController;
@@ -41,11 +43,17 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('/change-password', [AuthController::class, 'changePassword']);
 
     });
+
+
     Route::group(['prefix' => 'awbs'], function () {
         Route::get('/', [AwbController::class, 'index']);
+        Route::get('/all-status', [AwbStatusController::class, 'index']);
         Route::get('/details/{id}', [AwbController::class, 'awbDetails']);
-        Route::post('/pod/{id}', [AwbController::class, 'pod']);
 
+    });
+
+    Route::group(['prefix' => 'awb-history'],function (){
+        Route::post('{awb_id}',[AwbHistoryController::class,'changeStatus']);
     });
 
     Route::post('update-device-token', [UsersController::class, 'updateDeviceToken']);

@@ -23,8 +23,9 @@ $(document).ready(function () {
     });
 
     $('#shipment_type_id').on('change', function () {
-        var selectedOption = $(this).val();
-        if (selectedOption == 1)
+        var selectedOption = $(this).find('option:selected');
+        var has_dimension = selectedOption.data('has_dimension');
+        if (has_dimension > 0)
             $("#awb_details").css('display', 'block');
         else
             $("#awb_details").css('display', 'none');
@@ -35,9 +36,9 @@ $(document).ready(function () {
     $('#pieces').on('change', function () {
         // Get the number of fields to generate
         var numFields = $(this).val();
-
-        var shipment_type = $('#shipment_type_id').val();
-        if (shipment_type == 1 && numFields) {
+        var selectedOption = $('#shipment_type_id option:selected');
+        var has_dimension = selectedOption.data('has_dimension');
+        if (has_dimension > 0 && numFields) {
             // Clear the fields container
             $('#awb_details').empty();
 
@@ -57,7 +58,6 @@ $(document).ready(function () {
                     '<input class="form-control" type="number" name="height[]"/>\n' +
                     '</div>'
                 );
-
                 // Add the input field to the container
                 $('#awb_details').append(input);
             }

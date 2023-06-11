@@ -41,18 +41,26 @@ class AwbsDataTable extends DataTable
                     ['name' => "awbs[]",'value'=>$awb->id]
                 );
             })
+            ->editColumn('user_id', function (Awb $awb) {
+                return $awb->user->name;
+            })
             ->editColumn('company_id', function (Awb $awb) {
                 return $awb->company->name;
             })
             ->editColumn('branch_id', function (Awb $awb) {
                 return $awb->branch->name;
             })
-            ->editColumn('created_at', function (Awb $awb) {
-                return $awb->created_at->format('Y-m-d');
+            ->editColumn('department_id', function (Awb $awb) {
+                return $awb->department->name;
             })
             ->addColumn('receiver', function (Awb $awb) {
                 return Arr::get($awb->receiver_data, 'name');
             })
+
+            ->editColumn('created_at', function (Awb $awb) {
+                return $awb->created_at->format('Y-m-d');
+            })
+
             ->addColumn('address', function (Awb $awb) {
                 return Str::limit(Arr::get($awb->receiver_data, 'address1'), 30);
             })
@@ -95,9 +103,10 @@ class AwbsDataTable extends DataTable
         return [
             Column::make('check_box')->title('#')->searchable(false)->orderable(false),
             Column::make('code')->title(trans('app.awb_code')),
-            Column::make('user_id')->title(trans('app.company'))->searchable(false)->orderable(false),
+            Column::make('user_id')->title(trans('app.user'))->searchable(false)->orderable(false),
             Column::make('company_id')->title(trans('app.company'))->searchable(false)->orderable(false),
             Column::make('branch_id')->title(trans('app.branch'))->searchable(false)->orderable(false),
+            Column::make('department_id')->title(trans('app.department'))->searchable(false)->orderable(false),
             Column::make('receiver')->title(trans('app.awb_receiver'))->searchable(false)->orderable(false),
             Column::make('address')->title(trans('app.address'))->searchable(false)->orderable(false),
             Column::make('status')->title(trans('app.status'))->searchable(false)->orderable(false),

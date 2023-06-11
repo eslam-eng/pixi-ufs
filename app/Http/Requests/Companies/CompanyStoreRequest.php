@@ -32,7 +32,7 @@ class CompanyStoreRequest extends BaseRequest
             'notes'=> 'nullable|string',
             'status'=> 'nullable|boolean',
             'num_custom_fields'=>'required|integer',
-            'importation_type'=>'nullable|integer|in:'.ImportTypeEnum::AWBWITHREFERENCE->value.','.ImportTypeEnum::AWBWITHOUTREFERENCE->value,
+            'importation_type'=>'required|integer|in:'.ImportTypeEnum::AWBWITHREFERENCE->value.','.ImportTypeEnum::AWBWITHOUTREFERENCE->value,
             'city_id' => 'required|integer|exists:locations,id',
             'area_id' => 'required|integer|exists:locations,id',
             'address' => 'required|string',

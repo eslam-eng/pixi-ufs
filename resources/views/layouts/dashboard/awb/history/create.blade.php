@@ -12,7 +12,7 @@
             <div class="card custom-card">
                 <div class="card-header  d-flex custom-card-header border-bottom-0 ">
                     <h5 class="card-title">
-                        @lang('app.awb_info')
+                        @lang('app.awb_history')
                     </h5>
                 </div>
                 <div class="container">
@@ -32,39 +32,39 @@
                         @csrf
                         <div class="col mb-4">
                             <label class="form-label">@lang('app.status')</label>
-                            <select id="awb_status" name="status_id" class="form-control form-select" data-bs-placeholder="Select Status">
+                            <select id="awb_status" name="awb_status_id" class="form-control form-select" data-bs-placeholder="Select Status">
                                 <option selected>@lang('app.select_status')</option>
                                 @foreach($statuses as $status)
-                                    <option data-code="{{$status->code}}" value="{{$status->id}}" {{$status->id == old("status_id")?'selected':''}}>{{$status->name}}</option>
+                                    <option data-code="{{$status->code}}" value="{{$status->id}}">{{$status->name}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col mb-4">
                             <label class="form-label">@lang('app.comment')</label>
-                            <input type="text" name="comment" class="form-control">
+                            <input type="text" name="comment" value="{{old('comment')}}" class="form-control">
                         </div>
                         <div id="pod_section">
                             <h4 class="text-primary text-center">POD Data</h4>
                             <div class="col mb-4">
                                 <div class="form-group">
                                     <label class="form-label">@lang('app.actual_receipt')</label>
-                                    <input type="text" name="actual_recipient" class="form-control">
+                                    <input type="text" value="{{old('actual_recipient')}}" name="actual_recipient" class="form-control">
                                 </div>
                             </div>
 
                             <div class="col mb-4">
                                 <label class="form-label">@lang('app.title')</label>
-                                <input type="text" name="title" class="form-control">
+                                <input type="text" value="{{old('title')}}" name="title" class="form-control">
                             </div>
 
                             <div class="col mb-4">
                                 <label class="form-label">@lang('app.card_number')</label>
-                                <input type="text" name="card_number" class="form-control">
+                                <input type="text" value="{{old('card_number')}}" name="card_number" class="form-control">
                             </div>
 
                             <div class="col mb-4">
                                 <label class="form-label">@lang('app.images')</label>
-                                <input type="file" name="images" class="form-control">
+                                <input type="file" name="images[]" multiple class="form-control">
                             </div>
 
                         </div>
@@ -72,10 +72,10 @@
                         <div class="mt-4">
                             <div class="form-group mb-0 mt-3 justify-content-end">
                                 <div>
-                                    <button type="submit" class="btn btn-success"><i
+                                    <button type="submit" class="btn btn-rounded btn-success"><i
                                             class="fa fa-save pe-2"></i>@lang('app.save')</button>
 
-                                    <a role="button" href="{{route('receivers.index')}}" class="btn btn-danger"><i
+                                    <a role="button" href="{{route('receivers.index')}}" class="btn btn-rounded btn-danger"><i
                                             class="fa fa-backward pe-2"></i>@lang('app.back')</a>
                                 </div>
                             </div>

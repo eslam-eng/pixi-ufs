@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Awb\AwbChangeStatusRequest;
+use App\Http\Resources\Awb\AwbStatusResource;
+use App\Models\AwbStatus;
 use App\Services\AwbHistoryService;
 use App\Services\AwbService;
-use Exception;
 
-class AwbHistoryController extends Controller
+class AwbStatusController extends Controller
 {
     public function __construct(private AwbHistoryService $awbHistoryService,public AwbService $awbService)
     {
@@ -16,13 +17,12 @@ class AwbHistoryController extends Controller
     }
 
 
-    public function changeStatus(AwbChangeStatusRequest $request, $id)
+//todo make service to handel awb status crud
+    public function index()
     {
         try {
-            $data = $request->validated();
-            $awb = $this->awbService->findById(id: $id);
-            $this->awbHistoryService->changeStatus($awb ,$data);
-            return apiResponse(message: trans('app.success_operation'));
+            $statues = AwbStatus::all();
+            return AwbStatusResource::collection($statues);
         }catch (\Exception $exception)
         {
             return apiResponse(message: $exception->getMessage(),code: 500);

@@ -108,5 +108,14 @@ return [
     'back'=>'back',
     'add_new_branch'=>'Add New Branch',
     'add_new_department'=>'Add New Department',
+    'address1'=>'address1',
+    'address2'=>'address2',
+    'map_url'=>'Map Url',
+    'lat'=>'Lat',
+    'lng'=>'Lng',
+    'receiving_branch'=>'Receiving Branch',
+    'first_download_awb_template'=>'First Download Template',
+    'upload_excel_with_properties'=>'Upload Excel with Properties',
+    'history'=>'history',
 
 ];

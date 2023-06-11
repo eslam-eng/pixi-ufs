@@ -100,18 +100,21 @@ class AwbService extends BaseService
             $awb->additionalInfo()->create($awb_additional_infos_data);
 
         $awb_shipment_dimension = array_filter($awbDTO->shipmentDimensions());
-        $length = Arr::get($awb_shipment_dimension,'length');
-        foreach ($length as $index => $dimension)
+        if (count($awb_shipment_dimension))
         {
-            $awb_dimension[] = [
-              'awb_id'=>$awb->id,
-                'height'=>$awb_shipment_dimension['height'][$index],
-                'width'=>$awb_shipment_dimension['width'][$index],
-                'length'=>$dimension,
+            $length = Arr::get($awb_shipment_dimension,'length');
+            foreach ($length as $index => $dimension)
+            {
+                $awb_dimension[] = [
+                    'awb_id'=>$awb->id,
+                    'height'=>$awb_shipment_dimension['height'][$index],
+                    'width'=>$awb_shipment_dimension['width'][$index],
+                    'length'=>$dimension,
 
-            ];
+                ];
+            }
+            $awb->dimension()->createMany($awb_dimension);
         }
-        $awb->dimension()->createMany($awb_dimension);
         return $awb;
     }
     public function pod(int $id, array $data): bool

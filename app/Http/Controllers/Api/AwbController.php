@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Enums\AwbStatuses;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Awb\Api\AwbChangeStatusRequest;
+use App\Http\Requests\Awb\AwbChangeStatusRequest;
 use App\Http\Requests\Awb\AwbPodRequest;
 use App\Http\Resources\Awb\AwbDetailsResource;
 use App\Http\Resources\Awb\AwbResource;

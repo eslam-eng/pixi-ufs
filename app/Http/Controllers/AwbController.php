@@ -10,7 +10,7 @@ use App\Enums\UsersType;
 use App\Exceptions\NotFoundException;
 use App\Exports\AwbsWithoutReferenceExport;
 use App\Exports\AwbsWithReferenceExport;
-use App\Http\Requests\Awb\AwbChangeStatusRequest;
+use App\Http\Requests\Awb\AwbBulkChangeStatusRequest;
 use App\Http\Requests\Awb\AwbFileUploadExcelRequest;
 use App\Http\Requests\Awb\AwbStoreRequest;
 use App\Imports\Awbs\AwbsImport;
@@ -36,7 +36,7 @@ class AwbController extends Controller
             $filters['company_id'] = $user->company_id;
         if ($user->type == UsersType::EMPLOYEE())
             $filters['branch_id'] = $user->branch_id;
-        $withRelations = ['branch:id,name', 'company:id,name', 'user:id,name', 'latestStatus.status'];
+        $withRelations = ['branch:id,name', 'company:id,name','department:id,name', 'user:id,name', 'latestStatus.status'];
         $awb_statuses = AwbStatus::all();
         return $dataTable->with(['filters' => $filters, 'withRelations' => $withRelations])->render('layouts.dashboard.awb.index',compact('awb_statuses'));
     }
@@ -206,7 +206,7 @@ class AwbController extends Controller
         }
     }
 
-    public function changeStatusForMultipleAwbs(AwbChangeStatusRequest $request,AwbHistoryService $awbHistoryService)
+    public function changeStatusForMultipleAwbs(AwbBulkChangeStatusRequest $request,AwbHistoryService $awbHistoryService)
     {
         try {
             $result = $awbHistoryService->changeMultipleAwbStatus(status: $request->status,awb_ids: $request->ids);

@@ -12,6 +12,7 @@ use App\Exceptions\NotFoundException;
 use App\Exports\ReceiversExport;
 use App\Http\Requests\FileUploadRequest;
 use App\Http\Requests\PriceTable\PriceTableStoreRequest;
+use App\Http\Requests\PriceTable\PriceTableUpdateRequest;
 use App\Http\Requests\Receivers\ReceiverStoreRequest;
 use App\Http\Requests\Receivers\ReceiverUpdateRequest;
 use App\Http\Resources\Receiver\ReceiverEditResource;
@@ -96,7 +97,7 @@ class PriceTableController extends Controller
         }
     }
 
-     public function update(ReceiverUpdateRequest $request, int $id)
+     public function update(PriceTableUpdateRequest $request, int $id)
     {
         try {
             $priceTableDto = ReceiverDTO::fromRequest($request);

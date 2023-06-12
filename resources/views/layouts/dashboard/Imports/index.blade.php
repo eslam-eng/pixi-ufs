@@ -33,3 +33,20 @@
 @section('scripts')
     @include('layouts.components.datatable-scripts')
 @endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+$(document).ready(function()
+{
+    // $('#myModal').click(function(){
+    //     $.ajax({
+    //         url: '{{ route('import-logs.errors', 3) }}',
+    //         method:'get',
+    //         success: function( response ) {
+                
+    //         }
+    //     });
+    // });
+    
+    
+});
+</script>

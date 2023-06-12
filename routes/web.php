@@ -76,6 +76,7 @@ Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
     });
 
     Route::get('import-logs',[ImportLogsController::class,'index'])->name('import-logs.index');
+    Route::get('import-logs/{id}',[ImportLogsController::class,'showErrors'])->name('import-logs.errors');
 
     Route::resource('prices', PriceTableController::class)->except('show');
 

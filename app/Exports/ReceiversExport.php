@@ -2,10 +2,9 @@
 
 namespace App\Exports;
 
-use App\Exports\Sheets\Receiver\AreaDropDownSheet;
+use App\Exports\Sheets\general\AreaDropDownSheet;
+use App\Exports\Sheets\general\CityDropDownSheet;
 use App\Exports\Sheets\Receiver\BranchesDropDownSheet;
-use App\Exports\Sheets\Receiver\CityDropDownSheet;
-use App\Exports\Sheets\Receiver\AwbsSheet;
 use App\Exports\Sheets\Receiver\ReceiversSheet;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\RegistersEventListeners;

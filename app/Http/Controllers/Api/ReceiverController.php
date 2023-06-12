@@ -8,10 +8,10 @@ use App\Exceptions\NotFoundException;
 use App\Exports\ReceiversExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FileUploadRequest;
-use App\Http\Requests\Receivers\ReceiverUpdateAddress;
+use App\Http\Requests\Receivers\PriceTableUpdateRequest;
 use App\Http\Requests\Receivers\ReceiverUpdateAddressAndPhone;
 use App\Http\Requests\Receivers\ReceiverUpdatePhone;
-use App\Imports\Receivers\ReceiversImport;
+use App\Imports\Receivers\PricesImport;
 use App\Services\BranchService;
 use App\Services\ReceiverService;
 use Exception;
@@ -38,7 +38,7 @@ class ReceiverController extends Controller
         }
     }
 
-    public function updateReceiverAddress(ReceiverUpdateAddress $request, $id)
+    public function updateReceiverAddress(PriceTableUpdateRequest $request, $id)
     {
         try {
             $status = $this->receiverService->updateReceiverAddress(id: $id, data: $request->validated());
@@ -100,7 +100,7 @@ class ReceiverController extends Controller
             DB::beginTransaction();
             $user = getAuthUser();
             $file = $request->file('file');
-            $importObject = new ReceiversImport(
+            $importObject = new PricesImport(
                 creator: $user,
                 importation_type: ImportTypeEnum::RECEIVERS(),
             );

@@ -103,4 +103,17 @@ class PriceTableService extends BaseService
         }
         return $priceTable;
     }
+
+    public function increaseCompanyPrice(int $company_id,float $increase_percentage): bool
+    {
+        $pricesForCompany = $this->getQuery()->where('company_id',$company_id)->get();
+        foreach ($pricesForCompany as $model)
+        {
+            $new_price = $model->price * (1 + ($increase_percentage / 100));
+            $new_additional_price = $model->additional_kg_price * (1 + ($increase_percentage / 100));
+            $model->update(['price'=>$new_price,'additional_kg_price'=>$new_additional_price]);
+        }
+        return true ;
+
+    }
 }

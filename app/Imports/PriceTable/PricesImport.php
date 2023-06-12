@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Imports\Receivers;
+namespace App\Imports\PriceTable;
 
 use App\Enums\ImportStatusEnum;
-use App\Imports\Receivers\sheets\ReceiversImportSheet;
+use App\Imports\PriceTable\sheets\PricesImportSheet;
 use App\Models\ImportLog;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Arr;
@@ -22,7 +22,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Events\BeforeImport;
 use Maatwebsite\Excel\Events\ImportFailed;
 
-class ReceiversImport implements WithMultipleSheets,
+class PricesImport implements  WithMultipleSheets,
     ShouldQueue,
     WithChunkReading,
     WithEvents,
@@ -33,14 +33,14 @@ class ReceiversImport implements WithMultipleSheets,
 
     use Importable, SkipsErrors, SkipsFailures, RegistersEventListeners;
 
-    public $importObject;
     protected $totalRows = 0;
     protected $successCount = 0;
     protected $total_failures = 0;
-
+    public $importObject;
     public function __construct(
-        public $creator,
-        public $importation_type
+        public $creator ,
+        public $importation_type,
+        public int $company_id
     )
     {
     }
@@ -49,9 +49,10 @@ class ReceiversImport implements WithMultipleSheets,
     public function sheets(): array
     {
         return [
-            'receivers' => new ReceiversImportSheet(
+            'prices' => new PricesImportSheet(
                 importObject: $this->importObject,
                 creator: $this->creator,
+                company_id: $this->company_id
             ),
         ];
     }
@@ -94,14 +95,19 @@ class ReceiversImport implements WithMultipleSheets,
                     'success_count' => $success_count,
                     'status_id' => $status_id
                 ];
-                $importObject->update($importData);
-            },
+                $importObject->update($importData);},
             ImportFailed::class => function (ImportFailed $event) {
                 $this->importObject->update([
                     'status_id' => ImportStatusEnum::FAILED(),
                 ]);
             },
         ];
+    }
+
+
+    public function getQueueName(): string
+    {
+        return 'default';
     }
 
     public function getImportStatus(int $success_count): int
@@ -113,11 +119,6 @@ class ReceiversImport implements WithMultipleSheets,
             return ImportStatusEnum::PARTIALLY();
         }
         return ImportStatusEnum::FAILED();
-    }
-
-    public function getQueueName(): string
-    {
-        return 'default';
     }
 
     public function limit(): int

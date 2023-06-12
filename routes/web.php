@@ -77,7 +77,14 @@ Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
 
     Route::get('import-logs',[ImportLogsController::class,'index'])->name('import-logs.index');
 
-    Route::resource('prices', PriceTableController::class);
+    Route::resource('prices', PriceTableController::class)->except('show');
+
+    Route::get('increase-prices', [PriceTableController::class,'increaseCompanyPriceForm'])->name('increase-prices.form');
+    Route::post('increase-prices', [PriceTableController::class,'increasePrice'])->name('increase-prices.store');
+
+    Route::get('prices-download-template-form',[PriceTableController::class,'importForm'])->name('prices-download-template-form');
+    Route::get('prices-download-template',[PriceTableController::class,'downloadPriceTableTemplate'])->name('prices-download-template');
+    Route::post('prices-import',[PriceTableController::class,'import'])->name('prices-import');
 
     Route::get('switcherpage', Switcherpage::class)->name('switcherpage');
 

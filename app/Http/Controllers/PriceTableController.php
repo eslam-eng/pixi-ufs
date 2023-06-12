@@ -3,23 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\PriceTableDataTable;
-use App\DataTables\ReceiversDatatable;
-use App\DTO\PriceTable\PriceTableDTO;
-use App\DTO\Receiver\ReceiverDTO;
 use App\Enums\ImportTypeEnum;
-use App\Enums\UsersType;
 use App\Exceptions\NotFoundException;
-use App\Exports\ReceiversExport;
-use App\Http\Requests\FileUploadRequest;
+use App\Exports\PriceTableExport;
+use App\Http\Requests\PriceTable\ImportPricesRequest;
+use App\Http\Requests\PriceTable\IncreaseCompanyPriceRequest;
 use App\Http\Requests\PriceTable\PriceTableStoreRequest;
 use App\Http\Requests\PriceTable\PriceTableUpdateRequest;
-use App\Http\Requests\Receivers\ReceiverStoreRequest;
-use App\Http\Requests\Receivers\ReceiverUpdateRequest;
-use App\Http\Resources\Receiver\ReceiverEditResource;
-use App\Imports\Receivers\ReceiversImport;
-use App\Services\BranchService;
+use App\Imports\PriceTable\PricesImport;
 use App\Services\PriceTableService;
-use App\Services\ReceiverService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -35,21 +27,21 @@ class PriceTableController extends Controller
     /**
      * get all receivers
      */
-    public function index(PriceTableDataTable $priceTableDataTable , Request $request)
+    public function index(PriceTableDataTable $priceTableDataTable, Request $request)
     {
         try {
             $filters = array_filter($request->get('filters', []), function ($value) {
                 return ($value !== null && $value !== false && $value !== '');
             });
-            $withRelations = ['locationFrom','locationTo','company:id,name'];
-            return $priceTableDataTable->with(['filters'=>$filters,'withRelations'=>$withRelations])->render('layouts.dashboard.price-table.index');
+            $withRelations = ['locationFrom', 'locationTo', 'company:id,name'];
+            return $priceTableDataTable->with(['filters' => $filters, 'withRelations' => $withRelations])->render('layouts.dashboard.price-table.index');
         } catch (Exception $e) {
             $toast = [
                 'type' => 'error',
                 'title' => 'error',
                 'message' => $e->getMessage()
             ];
-            return back()->with('toast',$toast);
+            return back()->with('toast', $toast);
         }
     }
 
@@ -68,14 +60,14 @@ class PriceTableController extends Controller
                 'title' => 'success',
                 'message' => trans('app.price_created_successfully')
             ];
-            return redirect()->route('prices.index')->with('toast',$toast);
+            return redirect()->route('prices.index')->with('toast', $toast);
         } catch (Exception $e) {
             $toast = [
                 'type' => 'error',
                 'title' => 'error',
                 'message' => $e->getMessage()
             ];
-            return back()->with('toast',$toast);
+            return back()->with('toast', $toast);
         }
     }
 
@@ -83,35 +75,45 @@ class PriceTableController extends Controller
     public function edit(int $id)
     {
         try {
-            $withRelations = ['company:id,name','locationFrom', 'locationTo'];
+            $withRelations = ['company:id,name', 'locationFrom', 'locationTo'];
             $priceTable = $this->priceTableService->findById(id: $id, withRelations: $withRelations);
-            return view('layouts.dashboard.price-table.edit',['priceTable'=>$priceTable]);
+            return view('layouts.dashboard.price-table.edit', ['priceTable' => $priceTable]);
         } catch (Exception|NotFoundException $exception) {
             $toast = [
                 'type' => 'error',
                 'title' => 'error',
                 'message' => $exception->getMessage()
             ];
-            return back()->with('toast',$toast);
-        }
-    }
-    public function show(int $id)
-    {
-        try {
-            $withRelations = ['company:id,name','locationFrom', 'locationTo'];
-            $priceTable = $this->priceTableService->findById(id: $id, withRelations: $withRelations);
-            return view('layouts.dashboard.price-table.show',['priceTable'=>$priceTable]);
-        } catch (Exception|NotFoundException $exception) {
-            $toast = [
-                'type' => 'error',
-                'title' => 'error',
-                'message' => $exception->getMessage()
-            ];
-            return back()->with('toast',$toast);
+            return back()->with('toast', $toast);
         }
     }
 
-     public function update(PriceTableUpdateRequest $request, int $id)
+    public function increaseCompanyPriceForm()
+    {
+        return view('layouts.dashboard.price-table.increase-company-price');
+    }
+
+    public function increasePrice(IncreaseCompanyPriceRequest $request)
+    {
+        try {
+            $this->priceTableService->increaseCompanyPrice(company_id: $request->company_id, increase_percentage: $request->increase_percentage);
+            $toast = [
+                'type' => 'success',
+                'title' => 'success',
+                'message' => "prices updated Successfully"
+            ];
+            return to_route('prices.index')->with('toast', $toast);
+        } catch (Exception $exception) {
+            $toast = [
+                'type' => 'error',
+                'title' => 'error',
+                'message' => $exception->getMessage()
+            ];
+            return back()->with('toast', $toast);
+        }
+    }
+
+    public function update(PriceTableUpdateRequest $request, int $id)
     {
         try {
             $priceTableDto = $request->toPriceTableDTO();
@@ -121,14 +123,14 @@ class PriceTableController extends Controller
                 'title' => 'success',
                 'message' => trans('app.success_operation')
             ];
-            return redirect()->route('prices.index')->with('toast',$toast);
+            return redirect()->route('prices.index')->with('toast', $toast);
         } catch (Exception|NotFoundException $e) {
             $toast = [
                 'type' => 'error',
                 'title' => 'error',
                 'message' => $e->getMessage()
             ];
-            return back()->with('toast',$toast);
+            return back()->with('toast', $toast);
         }
     }
 
@@ -150,34 +152,27 @@ class PriceTableController extends Controller
 
     public function importForm()
     {
-        return view('layouts.dashboard.receivers.importation.form');
+        return view('layouts.dashboard.price-table.importation.form');
     }
 
     /**
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
      */
-    // public function downloadPriceTableTemplate(Excel $excel)
-    // {
-    //     $user = getAuthUser();
-    //     $filters = [];
-    //     if ($user->type == UsersType::ADMIN())
-    //         $filters['company_id'] = $user->company_id;
-    //     if ($user->type == UsersType::EMPLOYEE)
-    //         $filters['id'] = $user->branch_id ;
-    //     $withRelations = ['company:id,name'];
-    //     $branches = $this->branchService->getAll(filters: $filters,withRelations: $withRelations);
-    //     return $excel->download(new ReceiversExport($branches), 'receivers' . time() . '.xlsx');
-    // }
+    public function downloadPriceTableTemplate(Excel $excel)
+    {
+        return $excel->download(new PriceTableExport(), 'prices' . time() . '.xlsx');
+    }
 
-    public function import(FileUploadRequest $request)
+    public function import(ImportPricesRequest $request)
     {
         try {
             DB::beginTransaction();
             $user = getAuthUser();
-            $importation_type = ImportTypeEnum::RECEIVERS;
+            $importation_type = ImportTypeEnum::PRICE_TABLE->value;
+            $company_id = $request->company_id ;
             $file = $request->file('file');
-            $importObject = new ReceiversImport( creator: $user,importation_type: $importation_type);
+            $importObject = new PricesImport(creator: $user, importation_type: $importation_type,company_id: $company_id);
             $importObject->import($file)->onQueue('default');
             DB::commit();
             $toast = [
@@ -185,16 +180,15 @@ class PriceTableController extends Controller
                 'title' => 'success',
                 'message' => trans('app.import_success_message')
             ];
-            return to_route('import-logs.index')->with('toast',$toast);
-        }catch (Exception $exception)
-        {
+            return to_route('import-logs.index')->with('toast', $toast);
+        } catch (Exception $exception) {
             DB::rollBack();
             $toast = [
                 'type' => 'success',
                 'title' => 'success',
                 'message' => $exception->getMessage()
             ];
-            return back()->with('toast',$toast);
+            return back()->with('toast', $toast);
         }
     }
 

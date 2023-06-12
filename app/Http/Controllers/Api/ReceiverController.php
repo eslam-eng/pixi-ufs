@@ -11,7 +11,7 @@ use App\Http\Requests\FileUploadRequest;
 use App\Http\Requests\Receivers\PriceTableUpdateRequest;
 use App\Http\Requests\Receivers\ReceiverUpdateAddressAndPhone;
 use App\Http\Requests\Receivers\ReceiverUpdatePhone;
-use App\Imports\Receivers\ReceiversImport;
+use App\Imports\Receivers\PricesImport;
 use App\Services\BranchService;
 use App\Services\ReceiverService;
 use Exception;
@@ -100,7 +100,7 @@ class ReceiverController extends Controller
             DB::beginTransaction();
             $user = getAuthUser();
             $file = $request->file('file');
-            $importObject = new ReceiversImport(
+            $importObject = new PricesImport(
                 creator: $user,
                 importation_type: ImportTypeEnum::RECEIVERS(),
             );

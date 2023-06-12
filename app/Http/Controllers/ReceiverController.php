@@ -157,7 +157,7 @@ class ReceiverController extends Controller
         try {
             DB::beginTransaction();
             $user = getAuthUser();
-            $importation_type = ImportTypeEnum::RECEIVERS;
+            $importation_type = ImportTypeEnum::RECEIVERS->value;
             $file = $request->file('file');
             $importObject = new ReceiversImport( creator: $user,importation_type: $importation_type);
             $importObject->import($file)->onQueue('default');
@@ -171,7 +171,6 @@ class ReceiverController extends Controller
         }catch (Exception $exception)
         {
             DB::rollBack();
-            dd($exception);
             $toast = [
                 'type' => 'success',
                 'title' => 'success',

@@ -7,6 +7,7 @@ use App\Exceptions\NotFoundException;
 use App\Models\Location;
 use App\Models\PriceTable;
 use App\QueryFilters\DepartmentsFilters;
+use App\QueryFilters\PriceTablesFilters;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,10 +23,15 @@ class PriceTableService extends BaseService
         return $this->model;
     }
 
+    public function listing(array $filters = [], array $withRelations = [], $perPage = 10): \Illuminate\Contracts\Pagination\CursorPaginator
+    {
+        return $this->priceTableQueryBuilder(filters: $filters, withRelations: $withRelations)->cursorPaginate($perPage);
+    }
+
     public function priceTableQueryBuilder(array $filters = [], array $withRelations = []): Builder
     {
-        $departments = $this->getQuery()->with($withRelations);
-        return $departments->filter(new DepartmentsFilters($filters));
+        $priceTables = $this->getQuery()->with($withRelations);
+        return $priceTables->filter(new PriceTablesFilters($filters));
     }
 
     /**

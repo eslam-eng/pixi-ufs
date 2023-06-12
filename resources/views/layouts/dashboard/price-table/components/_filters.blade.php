@@ -16,37 +16,16 @@
                                 <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
                                     <div class="row row-sm">
                                         <div class="col-lg">
-                                            <livewire:location.cities/>
-                                                @error('city_id')
-                                                <div class="text-danger"> {{$message}}</div>
-                                                @enderror
+                                            @livewire('location.cities', ['field_name'=>'location_from'])
                                         </div>
                                         <div class="col-lg">
-                                            <livewire:location.areas/>
-                                            @error('area_id')
-                                            <div class="text-danger"> {{$message}}</div>
-                                            @enderror
+                                            @livewire('location.cities', ['field_name'=>'location_to'])
                                         </div>
                                     </div>
 
                                     <div class="row row-sm">
                                         <div class="col-lg">
                                             <livewire:company/>
-                                            @error('company_id')
-                                            <div class="text-danger"> {{$message}}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="col-lg">
-                                            <livewire:branch/>
-                                            @error('branch_id')
-                                            <div class="text-danger"> {{$message}}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="col-lg">
-                                            <livewire:department/>
-                                            @error('department_id')
-                                            <div class="text-danger"> {{$message}}</div>
-                                            @enderror
                                         </div>
                                     </div>
 

@@ -3,7 +3,7 @@
 @section('content')
 
     {{--    breadcrumb --}}
-    @include('layouts.components.breadcrumb',['title' => trans('receivers_page_title'),'first_list_item' => trans('app.receivers'),'last_list_item' => trans('app.add_receiver')])
+    @include('layouts.components.breadcrumb',['title' => trans('prices_page_title'),'first_list_item' => trans('app.prices'),'last_list_item' => trans('app.add_price')])
     {{--    end breadcrumb --}}
 
     <!-- Row -->
@@ -11,66 +11,8 @@
         <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
             <div class="card">
                 <div class="card-body">
-                    <form action="{{route('receivers.store')}}" method="post">
+                    <form action="{{route('prices.store')}}" method="post">
                         @csrf
-                        <div class="row row-sm mb-4">
-                            <div class="col-lg">
-                                <livewire:location.cities/>
-                                @error('city_id')
-                                    <div  class="text-danger"> {{$message}} </div>
-                                @enderror
-                            </div>
-
-                            <div class="col-lg">
-                                <livewire:location.areas/>
-                                @error('area_id')
-                                    <div class="text-danger"> {{$message}}</div>
-                                @enderror
-                            </div>
-
-                            <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.price')</div>
-                                <input class="form-control" value="{{old('price')}}" name="price" placeholder="@lang('app.receiver_phone')"
-                                       type="text">
-                                @error('phone2')
-                                <div class="text-danger"> {{$message}}</div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row row-sm mb-4">
-                            <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.receiving_company')</div>
-                                <input class="form-control" value="{{old('receiving_company')}}" name="receiving_company"
-                                       placeholder="@lang('app.receiving_company')" type="text">
-
-                                @error('receiving_company')
-                                <div class="text-danger"> {{$message}}</div>
-                                @enderror
-                            </div>
-
-                            <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.receiving_branch')</div>
-                                <input class="form-control" value="{{old('receiving_branch')}}" name="receiving_branch"
-                                       placeholder="@lang('app.receiving_branch')" type="text">
-
-                                @error('receiving_branch')
-                                <div class="text-danger"> {{$message}}</div>
-                                @enderror
-                            </div>
-
-                            <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.reference')</div>
-                                <input class="form-control" value="{{old('reference')}}" name="reference" placeholder="@lang('app.reference')"
-                                       type="text">
-
-                                @error('reference')
-                                <div class="text-danger"> {{$message}}</div>
-                                @enderror
-                            </div>
-                        </div>
-
-
                         <div class="row row-sm mb-4">
                             <div class="col-lg">
                                 <livewire:company/>
@@ -78,76 +20,72 @@
                                 <div class="text-danger"> {{$message}}</div>
                                 @enderror
                             </div>
+                        </div>
+                        <div class="row row-sm mb-4">
+                            <div class="col-lg">
+                                @livewire('location.cities', ['field_name'=>'location_from'])
+                                @error('location_from')
+                                    <div  class="text-danger"> {{$message}} </div>
+                                @enderror
+                            </div>
 
                             <div class="col-lg">
-                               <livewire:branch/>
-                                @error('branch')
-                                    <div class="text-danger"> {{$message}}</div>
+                                @livewire('location.cities', ['field_name'=>'location_to'])
+                                @error('location_to')
+                                    <div  class="text-danger"> {{$message}} </div>
+                                @enderror
+                            </div>
+
+                        </div>
+
+                        <div class="row row-sm mb-4">
+                            <div class="col-lg">
+                                <div class="main-content-label mg-b-5">@lang('app.price')</div>
+                                <input class="form-control" value="{{old('price')}}" name="price" placeholder="@lang('app.price')"
+                                       type="number" required>
+                                @error('price')
+                                <div class="text-danger"> {{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-lg">
+                                <div class="main-content-label mg-b-5">@lang('app.basic_kg')</div>
+                                <input class="form-control" value="{{old('basic_kg')}}" name="basic_kg"
+                                       placeholder="@lang('app.basic_kg')" type="number" required>
+
+                                @error('basic_kg')
+                                <div class="text-danger"> {{$message}}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-lg">
+                                <div class="main-content-label mg-b-5">@lang('app.additional_kg_price')</div>
+                                <input class="form-control" value="{{old('additional_kg_price')}}" name="additional_kg_price"
+                                       placeholder="@lang('app.additional_kg_price')" type="number" required>
+
+                                @error('additional_kg_price')
+                                <div class="text-danger"> {{$message}}</div>
                                 @enderror
                             </div>
                         </div>
 
-                        <div class="card card-success mt-4">
-                            <div class="card-header pb-2"><h5 class="card-title mb-0 pb-0">Address Info</h5></div>
-                            <div class="card-body text-success">
-                                <div class="row row-sm mb-4">
-                                    <div class="col-lg">
-                                        <div class="main-content-label mg-b-5">@lang('app.address1')</div>
-                                        <input class="form-control" name="address1" value="{{old('address1')}}"  placeholder="@lang('app.address')"
-                                               type="text" required>
+                        <div class="row row-sm mb-4">
+                            <div class="col-lg">
+                                <div class="main-content-label mg-b-5">@lang('app.return_price')</div>
+                                <input class="form-control" value="{{old('return_price')}}" name="return_price" placeholder="@lang('app.return_price')"
+                                       type="number">
 
-                                        @error('address1')
-                                        <div class="text-danger"> {{$message}}</div>
-                                        @enderror
-                                    </div>
+                                @error('return_price')
+                                <div class="text-danger"> {{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-lg">
+                                <div class="main-content-label mg-b-5">@lang('app.special_price')</div>
+                                <input class="form-control" value="{{old('special_price')}}" name="special_price" placeholder="@lang('app.special_price')"
+                                       type="number">
 
-                                    <div class="col-lg">
-                                        <div class="main-content-label mg-b-5">@lang('app.address2')</div>
-                                        <input class="form-control" name="address2" value="{{old('address2')}}"  placeholder="@lang('app.address')"
-                                               type="text">
-
-                                        @error('address2')
-                                        <div class="text-danger"> {{$message}}</div>
-                                        @enderror
-                                    </div>
-
-
-                                </div>
-
-                                <div class="row row-sm mb-4">
-                                    <div class="col-lg">
-                                        <div class="main-content-label mg-b-5">@lang('app.lat')</div>
-                                        <input class="form-control" value="{{old('lat')}}" name="lat" placeholder="@lang('app.lat')"
-                                               type="text">
-                                    </div>
-                                    <div class="col-lg">
-                                        <div class="main-content-label mg-b-5">@lang('app.lng')</div>
-                                        <input class="form-control" value="{{old('lng')}}" name="lng" placeholder="@lang('app.lng')"
-                                               type="text">
-                                    </div>
-
-                                    <div class="col-lg">
-                                        <div class="main-content-label mg-b-5">@lang('app.map_url')</div>
-                                        <input class="form-control" value="{{old('map_url')}}" name="map_url" placeholder="@lang('app.map_url')"
-                                               type="text">
-                                    </div>
-                                </div>
-
-                                <div class="row row-sm mb-4">
-                                    <div class="col-lg">
-                                      @livewire("location.cities",['selected_city' => old('city_id')])
-                                        @error('city_id')
-                                        <div class="text-danger"> {{$message}}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="col-lg">
-                                        @livewire("location.areas",["areas_for_city_id" => old('city_id'),"selected_area" => old('area_id')])
-                                    </div>
-                                    @error('area_id')
-                                    <div class="text-danger"> {{$message}}</div>
-                                    @enderror
-
-                                </div>
+                                @error('special_price')
+                                <div class="text-danger"> {{$message}}</div>
+                                @enderror
                             </div>
                         </div>
 
@@ -157,7 +95,7 @@
                                     <button type="submit" class="btn btn-success"><i
                                             class="fa fa-save pe-2"></i>@lang('app.submit')</button>
 
-                                    <a role="button" href="{{route('receivers.index')}}" class="btn btn-danger"><i
+                                    <a role="button" href="{{route('prices.index')}}" class="btn btn-danger"><i
                                             class="fa fa-backward pe-2"></i>@lang('app.back')</a>
                                 </div>
                             </div>

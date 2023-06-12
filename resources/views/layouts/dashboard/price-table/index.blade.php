@@ -12,7 +12,7 @@
 
 
     <!--start filters section -->
-        @include('layouts.dashboard.receivers.components._filters')
+        @include('layouts.dashboard.price-table.components._filters')
     <!--end filterd section -->
     <!--Row-->
     <!-- Row -->
@@ -22,7 +22,7 @@
                 <div class="card-header">
                     <div class="breadcrumb-header justify-content-between">
                         <div class="left-content">
-                            <a class="btn btn-rounded btn-primary" href="{{route('receivers.create')}}"><i class="fe fe-plus me-2"></i>{{ trans('app.new') }}</a>
+                            <a class="btn btn-rounded btn-primary" href="{{route('prices.create')}}"><i class="fe fe-plus me-2"></i>{{ trans('app.new') }}</a>
                             <a role="button" href="{{route('receivers-download-template.form')}}" class="btn btn-rounded btn-success"><i class="fa fa-upload pe-2"></i>@lang('app.import')</a>
 
                         </div>

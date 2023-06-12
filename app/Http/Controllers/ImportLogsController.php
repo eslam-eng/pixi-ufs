@@ -6,6 +6,7 @@ use App\DataTables\ImportLogsDatatable;
 use App\Services\ImportLogsService;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\LazyCollection;
 
 class ImportLogsController extends Controller
 {
@@ -30,8 +31,9 @@ class ImportLogsController extends Controller
     {
         try{
             $data = $this->importLogsService->findById($id, ['errors']);
-            $errors = $data->errors;
-            return view('layouts.dashboard.Imports.components.errors',compact('errors'))->render();
+            $errors = LazyCollection::make($data->errors);
+            $response =  view('layouts.dashboard.Imports.components.errors',compact('errors'))->render();
+            return apiResponse(data: $response, message: trans('app.success_operation'));
         }catch(Exception $e){
             return apiResponse(message: $e->getMessage(), code: 422);
         }

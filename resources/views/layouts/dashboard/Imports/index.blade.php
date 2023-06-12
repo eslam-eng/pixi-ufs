@@ -26,6 +26,7 @@
             </div>
         </div>
     </div>
+    <div id="show_import_errors">error apear here</div>
     <!-- End Row -->
 @endsection
 
@@ -34,18 +35,26 @@
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script>
-$(document).ready(function()
-{
-    $('div').on('click', '#import_errors',function(){
+$(document).ready(function () {
+    $(document).on('click', '.import_errors', function () {
+        var href = $(this).data('href');
         $.ajax({
-            url: '{{ route('import-logs.errors', 3) }}',
-            method:'get',
-            success: function( response ) {
-                $('mytable').html(response);
+            url: href,
+            type: 'get',
+            dataType: 'JSON',
+            success: function (data) {
+                
+                $('#show_import_errors').html(data.data);
+            },
+            error: function (xhr) {
+                // Handle error response
+                Swal.fire(
+                    '' + xhr.statusText + '',
+                    '' + xhr.responseJSON.message + '',
+                    'error'
+                );
             }
         });
     });
-    
-    
 });
 </script>

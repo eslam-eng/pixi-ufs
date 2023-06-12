@@ -42,9 +42,9 @@ class ImportLogsDatatable extends DataTable
             ->editColumn('created_by', function (ImportLog $model) {
                 return $model->user->name;
             })
-            ->editColumn('created_at', function (ImportLog $model) {
-                return $model->created_at->format("Y-m-d");
-            })
+            // ->editColumn('created_at', function (ImportLog $model) {
+            //     return $model->created_at->format("Y-m-d");
+            // })
             ->addColumn('company', function (ImportLog $model) {
                 return $model->user?->company?->name;
 

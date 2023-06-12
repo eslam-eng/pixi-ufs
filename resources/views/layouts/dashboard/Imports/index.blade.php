@@ -27,7 +27,6 @@
         </div>
     </div>
     <!-- End Row -->
-
 @endsection
 
 @section('scripts')
@@ -37,15 +36,15 @@
 <script>
 $(document).ready(function()
 {
-    // $('#myModal').click(function(){
-    //     $.ajax({
-    //         url: '{{ route('import-logs.errors', 3) }}',
-    //         method:'get',
-    //         success: function( response ) {
-                
-    //         }
-    //     });
-    // });
+    $('div').on('click', '#import_errors',function(){
+        $.ajax({
+            url: '{{ route('import-logs.errors', 3) }}',
+            method:'get',
+            success: function( response ) {
+                $('mytable').html(response);
+            }
+        });
+    });
     
     
 });

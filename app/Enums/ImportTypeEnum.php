@@ -13,5 +13,6 @@ enum ImportTypeEnum: int
     case RECEIVERS = 1;
     case AWBWITHREFERENCE = 2;
     case AWBWITHOUTREFERENCE = 3;
+    case PRICE_TABLE = 4;
 
 }

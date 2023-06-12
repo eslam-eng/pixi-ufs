@@ -117,5 +117,16 @@ return [
     'first_download_awb_template'=>'First Download Template',
     'upload_excel_with_properties'=>'Upload Excel with Properties',
     'history'=>'history',
+    'from'=>'From',
+    'to'=>'To',
+    'price'=>'Price',
+    'basic_kg'=>'Basic Kg',
+    'return_price'=>'Return Price',
+    'special_price'=>'Special Price',
+    'increase_price'=>'Increase price',
+    'increase_percentage'=>'Increase percentage',
+    'new_price_table'=>'Add New',
+    'price_tables'=>'All Prices',
+    'price_table'=>'Price Table',
 
 ];

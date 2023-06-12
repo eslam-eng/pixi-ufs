@@ -23,6 +23,7 @@ return new class extends Migration
             $table->float('additional_kg_price')->default(0);
             $table->float('return_price')->nullable();
             $table->float('special_price')->nullable();
+            $table->unique(['company_id','location_from','location_to'],'unique_company_location_price');
             $table->timestamps();
         });
     }

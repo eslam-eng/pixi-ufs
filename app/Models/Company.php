@@ -10,12 +10,19 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Models\Activity;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Company extends Model
 {
-    use HasFactory, Filterable;
+    use HasFactory, Filterable,LogsActivity;
 
-    protected $fillable = ['name', 'email','ceo', 'phone', 'show_dashboard','num_custom_fields', 'notes', 'status','importation_type','address','city_id','area_id'];
+    protected $fillable = [
+        'name', 'email','ceo', 'phone', 'show_dashboard',
+        'num_custom_fields', 'notes', 'status',
+        'importation_type','address','city_id','area_id'
+    ];
 
 
     public function branches(): HasMany
@@ -41,4 +48,16 @@ class Company extends Model
         return $builder->where('name', 'LIKE', $term)->orWhere('phone', 'LIKE', $term);
     }
 
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->useLogName('companies')
+            ->logOnly([
+                'name', 'email','ceo', 'phone', 'show_dashboard',
+                'num_custom_fields', 'notes', 'status',
+                'importation_type','address','city_id','area_id','city.title','area.title'
+            ])
+            ->logOnlyDirty()
+            ->setDescriptionForEvent(fn(string $eventName) => "You have {$eventName} company");
+    }
 }

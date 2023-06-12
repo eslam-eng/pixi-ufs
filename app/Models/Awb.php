@@ -15,10 +15,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Awb extends Model
 {
-    use HasFactory, Filterable, EscapeUnicodeJson, SoftDeletes, HasAttachment;
+    use HasFactory, Filterable, EscapeUnicodeJson, SoftDeletes, HasAttachment,LogsActivity;
 
     protected $fillable = [
         'code', 'user_id','company_id' ,'branch_id','receiver_city_id', 'receiver_area_id',
@@ -92,6 +94,19 @@ class Awb extends Model
             return $builder;
         return $builder->whereIn('area_id',$auth_user->area_id)->whereHas('latestStatus',fn($query)=>$query->where('awb_status_id',AwbStatuses::CREATE_SHIPMENT()));
 
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->useLogName('awbs')
+            ->logOnly([
+                'user.id','user.name', 'payment_type', 'service_type', 'is_return', 'shipment_type',
+                'zone_price', 'additional_kg_price', 'collection', 'weight',
+                'pieces', 'actual_recipient','card_number','title'
+            ])
+            ->logOnlyDirty()
+            ->setDescriptionForEvent(fn(string $eventName) => "You have {$eventName} Awb");
     }
 
     protected static function boot()

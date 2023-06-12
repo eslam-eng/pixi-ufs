@@ -26,7 +26,7 @@ class PriceTableUpdateRequest extends BaseRequest
                 Rule::unique('price_tables')->where(function ($query) {
                     return $query->where('location_from', $this->location_from)
                         ->where('location_to', $this->location_to);
-                })->ignore($this->price)
+                })->ignore($this->company_id,'company_id')
             ],
             'location_from' => 'required|exists:locations,id',
             'location_to' => 'required|exists:locations,id',

@@ -31,8 +31,7 @@ class ImportLogsController extends Controller
         try{
             $data = $this->importLogsService->findById($id, ['errors']);
             $errors = $data->errors;
-            // dd($importLogErrors);
-            return $errors;
+            return view('layouts.dashboard.Imports.components.errors',compact('errors'))->render();
         }catch(Exception $e){
             return apiResponse(message: $e->getMessage(), code: 422);
         }

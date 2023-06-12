@@ -26,15 +26,22 @@ class PriceTableUpdateRequest extends BaseRequest
                 Rule::unique('price_tables')->where(function ($query) {
                     return $query->where('location_from', $this->location_from)
                         ->where('location_to', $this->location_to);
-                })->ignore($this->company_id)
+                })->ignore($this->price)
             ],
             'location_from' => 'required|exists:locations,id',
             'location_to' => 'required|exists:locations,id',
             'price' => 'required|integer',
-            'basic_kg' => 'required|numeric',
-            'additional_kg_price' => 'required|numeric',
-            'return_price' => 'nullable|numeric',
-            'special_price' => 'nullable|numeric',
+            'basic_kg' => 'required',
+            'additional_kg_price' => 'required',
+            'return_price' => 'nullable',
+            'special_price' => 'nullable',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'company_id.unique'=>"selected company with selected location (from and to) already exists"
         ];
     }
 

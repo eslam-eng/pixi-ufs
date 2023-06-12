@@ -23,8 +23,8 @@
                     <div class="breadcrumb-header justify-content-between">
                         <div class="left-content">
                             <a class="btn btn-rounded btn-primary" href="{{route('prices.create')}}"><i class="fe fe-plus me-2"></i>{{ trans('app.new') }}</a>
-                            <a role="button" href="{{route('prices-download-template-form')}}" class="btn btn-rounded btn-success"><i class="fa fa-upload pe-2"></i>@lang('app.import')</a>
-                            <a role="button" href="{{route('increase-prices.form')}}" class="btn btn-rounded btn-primary"><i class="fa fa-money-bill pe-2"></i>@lang('app.increase_price')</a>
+                            <a role="button" href="{{route('prices-download-template-form')}}" class="btn btn-rounded btn-info"><i class="fa fa-upload pe-2"></i>@lang('app.import')</a>
+                            <a role="button" href="{{route('increase-prices.form')}}" class="btn btn-rounded btn-dark-gradient"><i class="fa fa-money-bill pe-2"></i>@lang('app.increase_price')</a>
 
                         </div>
 {{--                        <div class="justify-content-center">--}}

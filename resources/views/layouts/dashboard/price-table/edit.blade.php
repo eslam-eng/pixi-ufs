@@ -42,15 +42,14 @@
                         <div class="row row-sm mb-4">
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.price')</div>
-                                <input class="form-control" value="{{old('price') ?? $priceTable->price }}" name="price" placeholder="@lang('app.price')"
-                                       type="number" required>
+                                <input class="form-control" value="{{$priceTable->price}}" name="price" placeholder="@lang('app.price')" type="number">
                                 @error('price')
                                 <div class="text-danger"> {{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.basic_kg')</div>
-                                <input class="form-control" value="{{old('basic_kg') ?? $priceTable->basic_kg}}" name="basic_kg"
+                                <input class="form-control" value="{{$priceTable->basic_kg}}" name="basic_kg"
                                        placeholder="@lang('app.basic_kg')" type="number" required>
 
                                 @error('basic_kg')
@@ -60,7 +59,7 @@
 
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.additional_kg_price')</div>
-                                <input class="form-control" value="{{old('additional_kg_price') ?? $priceTable->additional_kg_price }}" name="additional_kg_price"
+                                <input class="form-control" value="{{$priceTable->additional_kg_price }}" name="additional_kg_price"
                                        placeholder="@lang('app.additional_kg_price')" type="number" required>
 
                                 @error('additional_kg_price')
@@ -72,7 +71,7 @@
                         <div class="row row-sm mb-4">
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.return_price')</div>
-                                <input class="form-control" value="{{old('return_price') ?? $priceTable->return_price }}" name="return_price" placeholder="@lang('app.return_price')"
+                                <input class="form-control" value="{{$priceTable->return_price }}" name="return_price" placeholder="@lang('app.return_price')"
                                        type="number">
 
                                 @error('return_price')
@@ -81,7 +80,7 @@
                             </div>
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.special_price')</div>
-                                <input class="form-control" value="{{old('special_price') ?? $priceTable->special_price }}" name="special_price" placeholder="@lang('app.special_price')"
+                                <input class="form-control" value="{{ $priceTable->special_price }}" name="special_price" placeholder="@lang('app.special_price')"
                                        type="number">
 
                                 @error('special_price')
@@ -102,7 +101,6 @@
                             </div>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>

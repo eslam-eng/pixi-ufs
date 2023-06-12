@@ -17,7 +17,7 @@ class PriceTableDTO extends BaseDTO
         public int $company_id,
         public int $location_from,
         public int $location_to,
-        public float $price,
+        public float|int $price,
         public float $basic_kg,
         public float $additional_kg_price,
         public ?float $return_price,

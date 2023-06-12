@@ -38,11 +38,10 @@ class PriceTableController extends Controller
     public function index(PriceTableDataTable $priceTableDataTable , Request $request)
     {
         try {
-            $user = auth()->user();
-            $filters = array_filter($request->get('filters',[]));
-            if ($user->type != UsersType::SUPERADMIN())
-                $filters['company_id'] = $user->company_id ;
-            $withRelations = ['city','area','company:id,name'];
+            $filters = array_filter($request->get('filters', []), function ($value) {
+                return ($value !== null && $value !== false && $value !== '');
+            });
+            $withRelations = ['locationFrom','locationTo','company:id,name'];
             return $priceTableDataTable->with(['filters'=>$filters,'withRelations'=>$withRelations])->render('layouts.dashboard.price-table.index');
         } catch (Exception $e) {
             $toast = [
@@ -62,14 +61,14 @@ class PriceTableController extends Controller
     public function store(PriceTableStoreRequest $request)
     {
         try {
-            $priceTableDto = PriceTableDTO::fromRequest($request);
+            $priceTableDto = $request->toPriceTableDTO();
             $this->priceTableService->store($priceTableDto);
             $toast = [
                 'type' => 'success',
                 'title' => 'success',
                 'message' => trans('app.price_created_successfully')
             ];
-            return back()->with('toast',$toast);
+            return redirect()->route('prices.index')->with('toast',$toast);
         } catch (Exception $e) {
             $toast = [
                 'type' => 'error',
@@ -84,9 +83,24 @@ class PriceTableController extends Controller
     public function edit(int $id)
     {
         try {
-            $withRelations = ['company:id,name','city', 'area'];
+            $withRelations = ['company:id,name','locationFrom', 'locationTo'];
             $priceTable = $this->priceTableService->findById(id: $id, withRelations: $withRelations);
             return view('layouts.dashboard.price-table.edit',['priceTable'=>$priceTable]);
+        } catch (Exception|NotFoundException $exception) {
+            $toast = [
+                'type' => 'error',
+                'title' => 'error',
+                'message' => $exception->getMessage()
+            ];
+            return back()->with('toast',$toast);
+        }
+    }
+    public function show(int $id)
+    {
+        try {
+            $withRelations = ['company:id,name','locationFrom', 'locationTo'];
+            $priceTable = $this->priceTableService->findById(id: $id, withRelations: $withRelations);
+            return view('layouts.dashboard.price-table.show',['priceTable'=>$priceTable]);
         } catch (Exception|NotFoundException $exception) {
             $toast = [
                 'type' => 'error',
@@ -100,11 +114,21 @@ class PriceTableController extends Controller
      public function update(PriceTableUpdateRequest $request, int $id)
     {
         try {
-            $priceTableDto = ReceiverDTO::fromRequest($request);
+            $priceTableDto = $request->toPriceTableDTO();
             $this->priceTableService->update($id, $priceTableDto);
-            return apiResponse(message: trans('lang.success_operation'));
+            $toast = [
+                'type' => 'success',
+                'title' => 'success',
+                'message' => trans('app.success_operation')
+            ];
+            return redirect()->route('prices.index')->with('toast',$toast);
         } catch (Exception|NotFoundException $e) {
-            return apiResponse(message: trans('lang.something_went_wrong'), code: 422);
+            $toast = [
+                'type' => 'error',
+                'title' => 'error',
+                'message' => $e->getMessage()
+            ];
+            return back()->with('toast',$toast);
         }
     }
 
@@ -133,18 +157,18 @@ class PriceTableController extends Controller
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
      */
-    public function downloadPriceTableTemplate(Excel $excel)
-    {
-        $user = getAuthUser();
-        $filters = [];
-        if ($user->type == UsersType::ADMIN())
-            $filters['company_id'] = $user->company_id;
-        if ($user->type == UsersType::EMPLOYEE)
-            $filters['id'] = $user->branch_id ;
-        $withRelations = ['company:id,name'];
-        $branches = $this->branchService->getAll(filters: $filters,withRelations: $withRelations);
-        return $excel->download(new ReceiversExport($branches), 'receivers' . time() . '.xlsx');
-    }
+    // public function downloadPriceTableTemplate(Excel $excel)
+    // {
+    //     $user = getAuthUser();
+    //     $filters = [];
+    //     if ($user->type == UsersType::ADMIN())
+    //         $filters['company_id'] = $user->company_id;
+    //     if ($user->type == UsersType::EMPLOYEE)
+    //         $filters['id'] = $user->branch_id ;
+    //     $withRelations = ['company:id,name'];
+    //     $branches = $this->branchService->getAll(filters: $filters,withRelations: $withRelations);
+    //     return $excel->download(new ReceiversExport($branches), 'receivers' . time() . '.xlsx');
+    // }
 
     public function import(FileUploadRequest $request)
     {

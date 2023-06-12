@@ -3,11 +3,9 @@
 namespace App\DataTables;
 
 use App\Models\PriceTable;
-use App\Models\Receiver;
 use App\Services\PriceTableService;
 use App\Services\ReceiverService;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Illuminate\Support\Str;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -30,10 +28,10 @@ class PriceTableDataTable extends DataTable
                 return $priceTable->company->name;
             })
             ->editColumn('location_from', function (PriceTable $priceTable) {
-                return $priceTable->city->title;
+                return $priceTable->locationFrom->title;
             })
             ->editColumn('location_to', function (PriceTable $priceTable) {
-                return $priceTable->area->title;
+                return $priceTable->locationTo->title;
             })
             ->addColumn('action', function (PriceTable $priceTable) {
                 return view(

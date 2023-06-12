@@ -3,7 +3,7 @@
 @section('content')
 
     {{--    breadcrumb --}}
-    @include('layouts.components.breadcrumb',['title' => trans('receivers_page_title'),'first_list_item' => trans('app.receivers'),'last_list_item' => trans('app.add_receiver')])
+    @include('layouts.components.breadcrumb',['title' => trans('prices_page_title'),'first_list_item' => trans('app.prices'),'last_list_item' => trans('app.edit_price')])
     {{--    end breadcrumb --}}
 
     <!-- Row -->
@@ -11,23 +11,59 @@
         <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
             <div class="card">
                 <div class="card-body">
-                    <form action="{{route('receivers.update',$receiver->id)}}" method="post">
+                    <form action="{{route('prices.update', $priceTable->id)}}" method="post">
                         @csrf
+                        @method('put')
+                        <div class="row row-sm">
+                            <div class="col-lg">
+                                @livewire('company', ['selected_company'=>$priceTable->company_id])
+                                @error('company_id')
+                                <div class="text-danger"> {{$message}}</div>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="row row-sm mb-4">
                             <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.receiver_name')</div>
-                                <input class="form-control" name="name" value="{{$receiver->name}}" placeholder="@lang('app.receiver_name')"
-                                       type="text" required>
-                                @error('name')
+                                @livewire('location.cities', ['field_name'=>'location_from', 'selected_city'=>$priceTable->location_from])
+                                @error('location_from')
+                                    <div  class="text-danger"> {{$message}} </div>
+                                @enderror
+                            </div>
+
+                            <div class="col-lg">
+                                @livewire('location.cities', ['field_name'=>'location_to', 'selected_city'=>$priceTable->location_to])
+                                @error('location_to')
+                                    <div  class="text-danger"> {{$message}} </div>
+                                @enderror
+                            </div>
+
+                        </div>
+
+                        <div class="row row-sm mb-4">
+                            <div class="col-lg">
+                                <div class="main-content-label mg-b-5">@lang('app.price')</div>
+                                <input class="form-control" value="{{old('price') ?? $priceTable->price }}" name="price" placeholder="@lang('app.price')"
+                                       type="number" required>
+                                @error('price')
+                                <div class="text-danger"> {{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-lg">
+                                <div class="main-content-label mg-b-5">@lang('app.basic_kg')</div>
+                                <input class="form-control" value="{{old('basic_kg') ?? $priceTable->basic_kg}}" name="basic_kg"
+                                       placeholder="@lang('app.basic_kg')" type="number" required>
+
+                                @error('basic_kg')
                                 <div class="text-danger"> {{$message}}</div>
                                 @enderror
                             </div>
 
                             <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.receiver_phone')</div>
-                                <input class="form-control" value="{{$receiver->phone}}" name="phone" placeholder="@lang('app.receiver_phone')"
-                                       type="text" required>
-                                @error('phone')
+                                <div class="main-content-label mg-b-5">@lang('app.additional_kg_price')</div>
+                                <input class="form-control" value="{{old('additional_kg_price') ?? $priceTable->additional_kg_price }}" name="additional_kg_price"
+                                       placeholder="@lang('app.additional_kg_price')" type="number" required>
+
+                                @error('additional_kg_price')
                                 <div class="text-danger"> {{$message}}</div>
                                 @enderror
                             </div>
@@ -35,93 +71,38 @@
 
                         <div class="row row-sm mb-4">
                             <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.receiving_company')</div>
-                                <input class="form-control" value="{{$receiver->receiving_company}}" name="receiving_company"
-                                       placeholder="@lang('app.receiving_company')" type="text" required>
+                                <div class="main-content-label mg-b-5">@lang('app.return_price')</div>
+                                <input class="form-control" value="{{old('return_price') ?? $priceTable->return_price }}" name="return_price" placeholder="@lang('app.return_price')"
+                                       type="number">
 
-                                @error('receiving_company')
+                                @error('return_price')
                                 <div class="text-danger"> {{$message}}</div>
                                 @enderror
                             </div>
-
                             <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.reference')</div>
-                                <input class="form-control" value="{{$receiver->reference}}" name="reference" placeholder="@lang('app.reference')"
-                                       type="text">
+                                <div class="main-content-label mg-b-5">@lang('app.special_price')</div>
+                                <input class="form-control" value="{{old('special_price') ?? $priceTable->special_price }}" name="special_price" placeholder="@lang('app.special_price')"
+                                       type="number">
 
-                                @error('reference')
+                                @error('special_price')
                                 <div class="text-danger"> {{$message}}</div>
                                 @enderror
                             </div>
-                        </div>
-
-                        <div>
-                            @livewire('company-with-branch-and-departments',['company_name' =>'company_id','branch_name' =>  'branch_id','selected_company' => $receiver->branch->company_id , 'selected_branch' => $receiver->branch_id])
-                            @error('branch_id')
-                            <div class="text-danger"> {{$message}}</div>
-                            @enderror
                         </div>
 
                         <div class="card-footer mt-4">
                             <div class="form-group mb-0 mt-3 justify-content-end">
                                 <div>
                                     <button type="submit" class="btn btn-success"><i
-                                            class="fa fa-save pe-2"></i>@lang('app.save')</button>
+                                            class="fa fa-save pe-2"></i>@lang('app.submit')</button>
 
-                                    <a role="button" href="{{route('receivers.index')}}" class="btn btn-danger"><i
+                                    <a role="button" href="{{route('prices.index')}}" class="btn btn-danger"><i
                                             class="fa fa-backward pe-2"></i>@lang('app.back')</a>
                                 </div>
                             </div>
                         </div>
                     </form>
-                    <hr>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <div class="breadcrumb-header justify-content-between">
-                        <div class="left-content">
-                            <a class="btn ripple btn-primary" href="{{route('addresses.create',['id'=>$receiver->id ,'type'=>\App\Enums\AddressTypes::RECEIVER])}}"><i class="fe fe-plus me-2"></i>Add New User</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <td>@lang('app.address')</td>
-                            <td>@lang('app.city')</td>
-                            <td>@lang('app.area')</td>
-                            <td>@lang('app.is_default')</td>
-                            <td>@lang('app.actions')</td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($receiver->addresses as $address)
-                            <tr>
-                                <td>{{$address->address}}</td>
-                                <td>{{$address->city?->title}}</td>
-                                <td>{{$address->area?->title}}</td>
-                                <td>{{$address->is_default ? trans('app.yes') : trans('app.no')}}</td>
-                                <td>
-                                    <div>
-                                        <button data-bs-toggle="dropdown" class="btn btn-primary btn-block" aria-expanded="false">@lang('app.actions')
-                                            <i class="icon ion-ios-arrow-down tx-11 mg-l-3"></i>
-                                        </button>
-                                        <div class="dropdown-menu" style="">
-                                            @if(!$address->is_default)
-                                                <livewire:set-address-default address_id="{{$address->id}}"/>
-                                            @endif
-                                           <a href="{{route('address.edit', $address)}}" class="dropdown-item">@lang('app.edit')</a>
-                                            <button role="button"  class="dropdown-item">@lang('app.delete')</button>
-                                        </div>
-                                        <!-- dropdown-menu -->
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+
                 </div>
             </div>
         </div>

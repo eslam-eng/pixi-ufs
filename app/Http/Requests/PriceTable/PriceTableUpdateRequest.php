@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\PriceTable;
 
+use App\DTO\PriceTable\PriceTableDTO;
 use App\Http\Requests\BaseRequest;
 use Illuminate\Validation\Rule;
 
@@ -32,9 +33,14 @@ class PriceTableUpdateRequest extends BaseRequest
             'price' => 'required|integer',
             'basic_kg' => 'required|numeric',
             'additional_kg_price' => 'required|numeric',
-            'return_price' => 'required|numeric',
-            'special_price' => 'required|numeric',
+            'return_price' => 'nullable|numeric',
+            'special_price' => 'nullable|numeric',
         ];
+    }
+
+    public function toPriceTableDTO(): \App\DTO\BaseDTO|PriceTableDTO
+    {
+        return PriceTableDTO::fromRequest($this);
     }
 
 }

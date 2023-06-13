@@ -152,14 +152,28 @@
 
                                 <div class="row row-sm mb-4">
                                     <div class="col-lg">
-                                        <livewire:location.cities/>
+                                        <div class="main-content-label mg-b-5">@lang('app.cities')</div>
+                                        <select class="company_city form-control" name="city_id">
+                                            <option value="">{{ trans('app.select_city') }}</option>
+                                            @foreach ($cities as $city)
+                                                <option value="{{ $city->id }}">{{ $city->title }}</option>
+                                            @endforeach
+                                        </select>
                                         @error('city_id')
                                         <div class="text-danger"> {{$message}}</div>
                                         @enderror
                                     </div>
 
                                     <div class="col-lg">
-                                        <livewire:location.areas />
+                                        <div class="col-lg">
+                                            <div class="main-content-label mg-b-5">@lang('app.areas')</div>
+                                            <select class="company_area form-control" name="area_id">
+                                                <option value="">...</option>
+                                            </select>
+                                            @error('area_id')
+                                            <div class="text-danger"> {{$message}}</div>
+                                            @enderror
+                                        </div>
                                         @error('area_id')
                                         <div class="text-danger"> {{$message}}</div>
                                         @enderror
@@ -346,6 +360,35 @@
 
         });
 
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(document).on('change', '.company_city', function () {
+                var city = $(this).val();
+                var href = '/dashboard/city-area/' + city;
+                $.ajax({
+                    url: href,
+                    type: 'get',
+                    dataType: 'JSON',
+                    success: function (data) {
+                        
+                        var selectOptions ='<option value="" selected>...</option>';
+                        data.forEach(element => {
+                            selectOptions += '<option value="'+element['id']+'">'+element['title']+'</option>'
+                        });
+                        $('.company_area').html(selectOptions);
+                    },
+                    error: function (xhr) {
+                        // Handle error response
+                        Swal.fire(
+                            '' + xhr.statusText + '',
+                            '' + xhr.responseJSON.message + '',
+                            'error'
+                        );
+                    }
+                });
+            });
+        });
     </script>
 @endsection
 

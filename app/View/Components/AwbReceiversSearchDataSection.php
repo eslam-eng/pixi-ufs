@@ -15,7 +15,7 @@ class AwbReceiversSearchDataSection extends Component
     public $receivers ;
     public function __construct()
     {
-        $this->receivers = Receiver::query()->with('addresses')->limit(10)->get();
+        $this->receivers = Receiver::query()->with(['city', 'area'])->limit(10)->get();
     }
 
     /**

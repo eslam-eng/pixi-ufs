@@ -32,29 +32,28 @@
 
 @section('scripts')
     @include('layouts.components.datatable-scripts')
-@endsection
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script>
-$(document).ready(function () {
-    $(document).on('click', '.import_errors', function () {
-        var href = $(this).data('href');
-        $.ajax({
-            url: href,
-            type: 'get',
-            dataType: 'JSON',
-            success: function (data) {
-                
-                $('#show_import_errors').html(data.data);
-            },
-            error: function (xhr) {
-                // Handle error response
-                Swal.fire(
-                    '' + xhr.statusText + '',
-                    '' + xhr.responseJSON.message + '',
-                    'error'
-                );
-            }
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '.import_errors', function () {
+                var href = $(this).data('href');
+                $.ajax({
+                    url: href,
+                    type: 'get',
+                    dataType: 'JSON',
+                    success: function (data) {
+
+                        $('#show_import_errors').html(data.data);
+                    },
+                    error: function (xhr) {
+                        // Handle error response
+                        Swal.fire(
+                            '' + xhr.statusText + '',
+                            '' + xhr.responseJSON.message + '',
+                            'error'
+                        );
+                    }
+                });
+            });
         });
-    });
-});
-</script>
+    </script>
+@endsection

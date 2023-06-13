@@ -23,7 +23,7 @@ class AwbController extends Controller
         try {
             $filters = $request->all();
             $filters['status'] = $request->get('status',AwbStatuses::CREATE_SHIPMENT());
-            $withRelations = [];
+            $withRelations = ['receiverCity', 'receiverArea'];
             $awbs = $this->awbService->listing($filters, $withRelations, $request->perPage ?? 5);
             return AwbResource::collection($awbs);
         } catch (Exception $e) {

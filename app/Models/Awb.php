@@ -60,6 +60,15 @@ class Awb extends Model
         return $this->belongsTo(Receiver::class);
     }
 
+    public function receiverArea()
+    {
+        return $this->belongsTo(Location::class, 'receiver_area_id');
+    }
+    public function receiverCity()
+    {
+        return $this->belongsTo(Location::class, 'receiver_city_id');
+    }
+
     public function history()
     {
         return $this->hasMany(AwbHistory::class, 'awb_id');

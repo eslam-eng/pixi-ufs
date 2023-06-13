@@ -18,7 +18,7 @@ class PhoneVerifyController extends Controller
             $passwordResetCode->where('identifier', $request->identifier)->delete();
             // Create a new code
             $codeData = $passwordResetCode->create($request->data());
-            $token = User::query()->where('email',$request->identifier)->pluck('device_token')->toArray();
+            $token = User::query()->where('email',$request->identifier)->orWhere('phone',$request->identifier)->pluck('device_token')->toArray();
             if($codeData)
             {
                 $title = 'Your OTP Code';

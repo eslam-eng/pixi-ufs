@@ -18,7 +18,7 @@ class PhoneVerifyController extends Controller
             $passwordResetCode->where('identifier', $request->identifier)->delete();
             // Create a new code
             $codeData = $passwordResetCode->create($request->data());
-            $token = User::query()->where('phone',$request->identifier)->pluck('device_token')->toArray();
+            $token = User::query()->where('email',$request->identifier)->pluck('device_token')->toArray();
             if($codeData)
             {
                 $title = 'Your OTP Code';
@@ -27,7 +27,7 @@ class PhoneVerifyController extends Controller
             }
                 return apiResponse(message: __('lang.code_send_successfully'));
         } catch (\Exception $exception) {
-            return apiResponse(message: $exception->getMessage());
+            return apiResponse(message: $exception->getMessage(), code: 422);
         }
 
     }

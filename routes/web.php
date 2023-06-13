@@ -7,6 +7,7 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\AwbHistoryController;
+use App\Http\Controllers\AwbStatusController;
 use App\Http\Controllers\ImportLogsController;
 use App\Http\Controllers\PriceTableController;
 use App\Http\Livewire\Emptypage;
@@ -59,6 +60,7 @@ Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
 //        Route::put('{id}',[AddressController::class,'update'])->name('address.update');
 //    });
     Route::resource('awbs',AwbController::class);
+    Route::resource('awb-status',AwbStatusController::class);
 
     Route::delete('awbs-delete-multiple',[AwbController::class,'deleteMultiple'])->name('awb.delete-multiple');
 

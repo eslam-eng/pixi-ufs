@@ -13,7 +13,7 @@ class ImportLogsController extends Controller
 
     public function __construct(private ImportLogsService $importLogsService)
     {
-        
+
     }
     /**
      * get all addresses
@@ -30,7 +30,7 @@ class ImportLogsController extends Controller
     public function showErrors(int $id)
     {
         try{
-            $data = $this->importLogsService->findById($id, ['errors']);
+            $data = $this->importLogsService->findById(id: $id,columns: ['errors']);
             $errors = LazyCollection::make($data->errors);
             $response =  view('layouts.dashboard.Imports.components.errors',compact('errors'))->render();
             return apiResponse(data: $response, message: trans('app.success_operation'));

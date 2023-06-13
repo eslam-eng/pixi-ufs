@@ -95,9 +95,9 @@
 
                         <tr>
                             <td>city:</td>
-                            <td>{!!Arr::get($awb->receiver_data,'city')!!}</td>
+                            <td>{{$awb->receiverCity?->title}}</td>
                             <td>area:</td>
-                            <td>{!!Arr::get($awb->receiver_data,'area')!!}</td>
+                            <td>{{$awb->receiverArea?->title}}</td>
                         </tr>
 
                         <tr>

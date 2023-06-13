@@ -85,6 +85,7 @@ class AwbService extends BaseService
         $awbDTO->additional_kg_price = 0 ;
         if ($awbDTO->weight > $priceTable->basic_kg)
             $awbDTO->additional_kg_price = ($awbDTO->weight - $priceTable->basic_kg) * $priceTable->additional_kg_price;
+
         $awbDTO->receiver_data = $receiver->toArray();
 
         $awb_data = $awbDTO->toArray();

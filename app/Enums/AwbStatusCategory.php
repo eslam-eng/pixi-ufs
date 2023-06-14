@@ -12,5 +12,6 @@ enum AwbStatusCategory: int
 
     case AWB = 1;
     case PICKUP = 2;
+    case CANCEL_REASON = 3;
 
 }

@@ -11,6 +11,7 @@ use App\Http\Requests\Companies\CompanyUpdateRequest;
 use App\Http\Resources\Company\CompanyDropDownResource;
 use App\Http\Resources\Company\CompanyResource;
 use App\Services\CompanyService;
+use App\Services\LocationsService;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -35,7 +36,8 @@ class CompanyController extends Controller
 
     public function create()
     {
-        return view('layouts.dashboard.companies.create');
+        $cities = app()->make(LocationsService::class)->getAll(filters: ['depth' => 1]);
+        return view('layouts.dashboard.companies.create', compact('cities'));
     }
 
     public function store(CompanyStoreRequest $request)

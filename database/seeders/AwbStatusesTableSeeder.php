@@ -15,7 +15,7 @@ class AwbStatusesTableSeeder extends Seeder
     public function run(): void
     {
         AwbStatus::create(['name'=>'prepare shipment','code'=>1,'description'=>'Description create shipemnt']);
-        AwbStatus::create(['name'=>'Calling Receiver','code'=>9 , 'description'=>'courier calling receiver']);
-        AwbStatus::create(['name'=>'delivered','code'=>10,'description'=>'shipment delivered to receiver']);
+        AwbStatus::create(['name'=>'Calling Receiver','code'=>1 , 'description'=>'courier calling receiver']);
+        AwbStatus::create(['name'=>'delivered','code'=>1,'description'=>'shipment delivered to receiver']);
     }
 }

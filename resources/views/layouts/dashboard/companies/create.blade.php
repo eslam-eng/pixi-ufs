@@ -151,33 +151,21 @@
                                 </div>
 
                                 <div class="row row-sm mb-4">
+                                    
                                     <div class="col-lg">
-                                        <div class="main-content-label mg-b-5">@lang('app.cities')</div>
-                                        <select class="company_city form-control" name="city_id">
-                                            <option value="">{{ trans('app.select_city') }}</option>
-                                            @foreach ($cities as $city)
-                                                <option value="{{ $city->id }}">{{ $city->title }}</option>
-                                            @endforeach
-                                        </select>
+                                        <livewire:location.cities/>
                                         @error('city_id')
                                         <div class="text-danger"> {{$message}}</div>
                                         @enderror
                                     </div>
-
+                                    {{-- start company area --}}
                                     <div class="col-lg">
-                                        <div class="col-lg">
-                                            <div class="main-content-label mg-b-5">@lang('app.areas')</div>
-                                            <select class="company_area form-control" name="area_id">
-                                                <option value="">...</option>
-                                            </select>
-                                            @error('area_id')
-                                            <div class="text-danger"> {{$message}}</div>
-                                            @enderror
-                                        </div>
+                                        <livewire:location.areas/>
                                         @error('area_id')
                                         <div class="text-danger"> {{$message}}</div>
                                         @enderror
                                     </div>
+                                    {{-- end company area --}}
                                 </div>
 
                             </div>
@@ -241,18 +229,24 @@
                                             </div>
 
                                             <hr>
-                                            <div class="row row-sm mb-4">
-
+                                            <div class="locations row row-sm mb-4">
                                                 <div class="col-lg">
-                                                    @livewire("location.cities",['field_name'=>'branches_city_id[]'])
-
+                                                    <div class="main-content-label mg-b-5">@lang('app.cities')</div>
+                                                    <select class="company_city form-control" name="branches_city_id[]">
+                                                        <option value="">{{ trans('app.select_city') }}</option>
+                                                        @foreach ($cities as $city)
+                                                            <option value="{{ $city->id }}">{{ $city->title }}</option>
+                                                        @endforeach
+                                                    </select>
                                                     @error('branches_city_id.*')
                                                     <div class="text-danger"> {{$message}}</div>
                                                     @enderror
                                                 </div>
-
                                                 <div class="col-lg">
-                                                    @livewire("location.areas",['field_name'=>'branches_area_id[]'])
+                                                    <div class="main-content-label mg-b-5">@lang('app.areas')</div>
+                                                    <select class="form-control" name="branches_area_id[]">
+                                                        <option value="">...</option>
+                                                    </select>
                                                     @error('branches_area_id.*')
                                                     <div class="text-danger"> {{$message}}</div>
                                                     @enderror
@@ -363,9 +357,10 @@
     </script>
     <script>
         $(document).ready(function () {
-            $(document).on('change', '.company_city', function () {
+            $('body').on('change', 'select[name="branches_city_id[]"]', function () {
                 var city = $(this).val();
                 var href = '/dashboard/city-area/' + city;
+                var areasInput = $(this).parents('.locations').children().last().find('select');
                 $.ajax({
                     url: href,
                     type: 'get',
@@ -376,7 +371,7 @@
                         data.forEach(element => {
                             selectOptions += '<option value="'+element['id']+'">'+element['title']+'</option>'
                         });
-                        $('.company_area').html(selectOptions);
+                        areasInput.html(selectOptions);
                     },
                     error: function (xhr) {
                         // Handle error response

@@ -52,5 +52,4 @@ class AwbController extends Controller
             return apiResponse(message: $e->getMessage(), code: 422);
         }
     }
-
 }

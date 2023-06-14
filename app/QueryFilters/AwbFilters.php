@@ -19,6 +19,11 @@ class AwbFilters extends QueryFilter
         return $this->builder->where('id', $term);
     }
 
+    public function code($term)
+    {
+        return $this->builder->where('code', $term);
+    }
+
     public function keyword($term)
     {
         return $this->builder->where('code', 'LIKE', "%{$term}%")->orWhere('receiver_reference', 'LIKE', "%{$term}%");

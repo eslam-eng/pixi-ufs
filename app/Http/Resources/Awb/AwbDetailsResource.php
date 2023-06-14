@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Awb;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Arr;
 
 class AwbDetailsResource extends JsonResource
 {
@@ -28,6 +29,7 @@ class AwbDetailsResource extends JsonResource
             'note1' => $this->note1,
             'note2' => $this->note2,
             'collection' => $this->collection,
+            'receiver_id' =>  Arr::get($this->receiver_data,'id'),
             'receiver_name' => $this->receiver_data['name'],
             'receiver_phone' => $this->receiver_data['phone1'],
             'receiver_city' => $this->receiverCity?->title,

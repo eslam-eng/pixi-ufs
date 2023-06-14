@@ -43,7 +43,7 @@ class BranchController extends Controller
                 'title' => 'success',
                 'message' => trans('app.success_operation')
             ];
-            return to_route('companies.edit', Arr::get($branchDTO->toArray(), 'company_id'))->with('toast',$toast);
+            return to_route('companies.edit', $request->company_id)->with('toast',$toast);
         } catch (Exception $e) {
             DB::rollBack();
             $toast = [
@@ -51,7 +51,7 @@ class BranchController extends Controller
                 'title' => 'success',
                 'message' => trans('app.success_operation')
             ];
-            return to_route('companies.edit', Arr::get($branchDTO->toArray(), 'company_id'))->with('toast',$toast);
+            return to_route('companies.edit', $request->company_id)->with('toast',$toast);
         }
     }
 
@@ -86,7 +86,7 @@ class BranchController extends Controller
             $branchDTO = $request->toBranchDTO();
             $this->branchService->update($id, $branchDTO);
             DB::commit();
-            return redirect()->route('companies.edit', Arr::get($branchDTO->toArray(), 'company_id'));
+            return redirect()->route('companies.edit', $request->company_id);
         }catch (Exception $e) {
             DB::rollBack();
             return apiResponse(message: $e->getMessage(), code: 422);

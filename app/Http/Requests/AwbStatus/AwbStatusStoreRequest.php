@@ -26,7 +26,7 @@ class AwbStatusStoreRequest extends BaseRequest
     {
         return [
             'name' => 'required|string',
-            'code' => ['required',Rule::in(AwbStatuses::values())],
+//            'code' => ['required',Rule::in(AwbStatuses::values())],
             'is_final' => 'required|integer',
             'stepper' => ['required',Rule::in(Stepper::values())],
             'type' => ['required',Rule::in(AwbStatusCategory::values())],

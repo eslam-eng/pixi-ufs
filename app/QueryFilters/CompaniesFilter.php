@@ -17,11 +17,6 @@ class CompaniesFilter extends QueryFilter
         return $this->builder->where('status',$term);
     }
 
-    public function email($term)
-    {
-        return $this->builder->where('email',$term);
-    }
-
     public function city_id($term)
     {
         return $this->builder->where('city_id',$term);

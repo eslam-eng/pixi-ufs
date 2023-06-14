@@ -24,11 +24,6 @@
 
                                 <div class="row row-sm mt-4 mb-4">
                                     <div class="col-lg">
-                                        <div class="main-content-label mg-b-5">@lang('app.email')</div>
-                                        <input class="form-control" name="email" placeholder="@lang('app.email')"
-                                                type="email">
-                                    </div>
-                                    <div class="col-lg">
                                         <div class="main-content-label mg-b-5">@lang('app.phone')</div>
                                         <input class="form-control" name="phone"
                                                placeholder="@lang('app.phone')"

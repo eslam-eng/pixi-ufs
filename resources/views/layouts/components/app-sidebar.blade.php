@@ -56,6 +56,17 @@
 
                                 <li class="slide">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24">
+                                            <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/> <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"/>
+                                        </svg><span class="side-menu__label">@lang('app.awb_status')</span><i class="angle fe fe-chevron-right"></i></a>
+                                    <ul class="slide-menu">
+                                        <li><a class="slide-item" href="{{route('awb-status.create')}}">@lang('app.new_awb_status')</a></li>
+                                        <li><a class="slide-item" href="{{route('awb-status.index')}}">@lang('app.awb_status')</a></li>
+                                    </ul>
+                                </li>
+
+                                <li class="slide">
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24"><path d="M19.937 8.68c-.011-.032-.02-.063-.033-.094a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.99.99 0 0 0-.05-.258zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path></svg><span class="side-menu__label">@lang('app.imports_logs')</span><i class="angle fe fe-chevron-right"></i></a>
                                     <ul class="slide-menu">
                                         <li><a class="slide-item" href="{{route('import-logs.index')}}">@lang('app.imports_logs')</a></li>

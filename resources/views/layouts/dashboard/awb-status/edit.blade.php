@@ -33,17 +33,6 @@
                                 @enderror
                             </div>
                             <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.code')</div>
-                                <select class="form-control" name="code">
-                                    @foreach (App\Enums\AwbStatuses::options() as $name=>$value)
-                                    <option value="{{ $value }}" {{ $value == $awbStatus->code ? "selected":""  }}>{{ $name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('code')
-                                <div class="text-danger"> {{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.is_final')</div>
                                 <select class="form-control" name="is_final">
                                        <option value="1" {{ $awbStatus->is_final ? "selected":""  }}>{{ trans('app.yes') }}</option>

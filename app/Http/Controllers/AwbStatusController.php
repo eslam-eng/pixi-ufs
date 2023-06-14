@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTables\AwbStatusDataTable;
 use App\Exceptions\NotFoundException;
 use App\Http\Requests\AwbStatus\AwbStatusStoreRequest;
-use App\Http\Requests\AwbStatus\AwbStatusUpdateRequest;
+use App\Http\Requests\AwbStatus\AwbStatusStoreRequest as AwbStatusUpdateRequest;
 use App\Services\AwbStatusService;
 use Exception;
 use Illuminate\Http\Request;

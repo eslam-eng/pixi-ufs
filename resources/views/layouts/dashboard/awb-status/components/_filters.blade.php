@@ -16,21 +16,9 @@
                                 <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
                                     <div class="row row-sm mb-4">
                                         <div class="col-lg">
-                                            <div class="main-content-label mg-b-5">@lang('app.code')</div>
-                                            <select class="form-control" name="code">
-                                                <option value="" selected>...</option>
-                                                @foreach (App\Enums\AwbStatuses::options() as $name=>$value)
-                                                <option value="{{ $value }}">{{ $name }}</option>
-                                                @endforeach
-                                            </select>
-                                            @error('code')
-                                            <div class="text-danger"> {{$message}}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="col-lg">
                                             <div class="main-content-label mg-b-5">@lang('app.is_final')</div>
                                             <select class="form-control" name="is_final">
-                                                <option value="" selected>...</option>
+                                                <option value="" selected>choose...</option>
                                                 <option value="1">{{ trans('app.yes') }}</option>
                                                 <option value="0">{{ trans('app.no') }}</option>
                                             </select>
@@ -43,7 +31,7 @@
                                         <div class="col-lg">
                                             <div class="main-content-label mg-b-5">@lang('app.stepper')</div>
                                             <select class="form-control" name="stepper">
-                                                <option value="" selected>...</option>
+                                                <option value="" selected>choose..</option>
                                                 @foreach (App\Enums\Stepper::options() as $name=>$value)
                                                 <option value="{{ $value }}">{{ $name }}</option>
                                                 @endforeach
@@ -55,7 +43,7 @@
                                         <div class="col-lg">
                                             <div class="main-content-label mg-b-5">@lang('app.type')</div>
                                             <select class="form-control" name="type">
-                                                <option value="" selected>...</option>
+                                                <option value="" selected>choose....</option>
                                                 @foreach (App\Enums\AwbStatusCategory::options() as $name=>$value)
                                                 <option value="{{ $value }}">{{ $name }}</option>
                                                 @endforeach

@@ -7,6 +7,7 @@ use App\Enums\AwbStatuses;
 use App\Enums\AwbStatusCategory;
 use App\DTO\AwbStatus\AwbStatusDTO;
 use App\Http\Requests\BaseRequest;
+use Illuminate\Validation\Rule;
 
 class AwbStatusStoreRequest extends BaseRequest
 {
@@ -25,10 +26,10 @@ class AwbStatusStoreRequest extends BaseRequest
     {
         return [
             'name' => 'required|string',
-            'code' => 'required|integer|in:'.AwbStatuses::CREATE_SHIPMENT->value.','.AwbStatuses::CALLING_RECEIVER->value.','.AwbStatuses::DELIVERED->value,
+            'code' => ['required',Rule::in(AwbStatuses::values())],
             'is_final' => 'required|integer',
-            'stepper' => 'required|integer|in:'.Stepper::INCOMPANY->value.','.Stepper::PROCESSING->value.','.Stepper::HOLD->value.','.Stepper::DELIVERED->value,
-            'type' => 'required|integer||in:'.AwbStatusCategory::AWB->value.','.AwbStatusCategory::PICKUP->value.','.AwbStatusCategory::CANCEL_REASON->value,
+            'stepper' => ['required',Rule::in(Stepper::values())],
+            'type' => ['required',Rule::in(AwbStatusCategory::values())],
             'sms' => 'nullable|string',
             'description' => 'nullable|string',
         ];

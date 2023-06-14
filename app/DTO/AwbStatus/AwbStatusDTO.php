@@ -19,7 +19,7 @@ class AwbStatusDTO extends BaseDTO
      */
     public function __construct(
         protected string $name,
-        protected int $code,
+        protected ?int $code,
         protected int $is_final,
         protected int $stepper,
         protected int $type,

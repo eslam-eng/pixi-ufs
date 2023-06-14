@@ -22,11 +22,6 @@ class AwbStatusService extends BaseService
         return $this->model;
     }
 
-    public function listing(array $filters = [], array $withRelations = [], $perPage = 10): \Illuminate\Contracts\Pagination\CursorPaginator
-    {
-        return $this->AwbStatusQueryBuilder(filters: $filters, withRelations: $withRelations)->cursorPaginate($perPage);
-    }
-
     public function AwbStatusQueryBuilder(array $filters = [], array $withRelations = []): Builder
     {
         $awbStatus = $this->getQuery()->with($withRelations);

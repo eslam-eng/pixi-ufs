@@ -29,9 +29,6 @@ class AwbStatusDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->setRowId('id')
-            ->editColumn('code', function (AwbStatus $awbStatus) {
-                return AwbStatuses::from($awbStatus->code)->name;
-            })
             ->editColumn('is_final', function (AwbStatus $awbStatus) {
                 return $awbStatus->is_final ? trans('app.yes'):trans('app.no');
             })
@@ -39,7 +36,7 @@ class AwbStatusDataTable extends DataTable
                 return Stepper::from($awbStatus->stepper)->name;
             })
             ->editColumn('type', function (AwbStatus $awbStatus) {
-                return AwbStatusCategory::from($awbStatus->type)->name;
+                return $awbStatus->status_type;
             })
             ->addColumn('action', function (AwbStatus $awbStatus) {
                 return view(
@@ -87,7 +84,6 @@ class AwbStatusDataTable extends DataTable
         return [
             Column::make('id')->title("#"),
             Column::make('name')->title(trans('app.name'))->orderable(false),
-            Column::make('code')->title(trans('app.code'))->searchable(false)->orderable(false),
             Column::make('is_final')->title(trans('app.is_final'))->searchable(false)->orderable(false),
             Column::make('stepper')->title(trans('app.stepper'))->orderable(false),
             Column::make('type')->title(trans('app.type'))->orderable(false)->searchable(false),

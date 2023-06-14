@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('awb_statuses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('code',\App\Enums\AwbStatuses::values());
+            $table->integer('code')->nullable()->unique();
             $table->tinyInteger('is_final')->default(\App\Enums\ActivationStatus::INACTIVE());
             $table->enum('stepper',\App\Enums\Stepper::values())->default(\App\Enums\Stepper::INCOMPANY());
             $table->enum('type',\App\Enums\AwbStatusCategory::values())->default(\App\Enums\AwbStatusCategory::AWB());

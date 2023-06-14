@@ -71,3 +71,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
 
 });
+
+Route::fallback(function () {
+    return apiResponse(message: 'Invalid Route', code: 404);
+});

@@ -26,7 +26,7 @@ class AwbStatusController extends Controller
             if (isset($request->type)){
                 $filter['type'] = $request->type;
             }
-            $statues = $this->awbStatusService->AwbStatusQueryBuilder(filters: $filter);
+            $statues = $this->awbStatusService->AwbStatusQueryBuilder(filters: $filter)->get();
             return AwbStatusResource::collection($statues);
         } catch (\Exception $exception) {
             return apiResponse(message: $exception->getMessage(), code: 500);

@@ -62,7 +62,7 @@ class AwbService extends BaseService
         $awb_status_id = AwbStatus::query()->where('code', AwbStatuses::CREATE_SHIPMENT->value)->first()?->id;
 
 //      get receiver object info
-        $receiver = $this->receiverService->findById(id: $awbDTO->receiver_id);
+        $receiver = $this->receiverService->findById(id: $awbDTO->receiver_id,withRelations: ['city','area']);
 
         //get branch address city and area
         $branch = $this->branchService->findById($awbDTO->branch_id);
@@ -76,6 +76,9 @@ class AwbService extends BaseService
 
         $awbDTO->shipment_type = $shipment_type->name;
         $awbDTO->service_type = $service_type->name;
+
+        $awbDTO->receiver_city_id = $receiver->city->id;
+        $awbDTO->receiver_area_id = $receiver->area->id;
 
         $awbDTO->zone_price = $priceTable->price;
         //check on weight if there is additional kg price or not

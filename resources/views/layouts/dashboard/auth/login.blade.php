@@ -5,7 +5,7 @@
 @endsection
 
 @section('class')
-    <div class="bg-primary">
+    <div style="background: #171f4e">
 @endsection
 
 @section('content')
@@ -20,13 +20,16 @@
                                 <div class="main-card-signin d-md-flex">
                                     <div class="wd-100p">
                                         <div class="d-flex mb-4"><a href="{{route('home')}}"><img
-                                                    src="{{asset('assets/img/brand/favicon.png')}}"
-                                                    class="sign-favicon ht-40" alt="logo"></a></div>
+                                                    src="{{asset('assets/img/logo.jpeg')}}"
+                                                    class="sign-favicon" alt="logo"></a></div>
                                         <div class="">
                                             <div class="main-signup-header">
                                                 <h2>Welcome back!</h2>
                                                 <h6 class="font-weight-semibold mb-4">Please sign in to continue.</h6>
                                                 <div class="panel panel-primary">
+                                                    @if(session()->has('error'))
+                                                        <div class="alert alert-danger">{{session('error')}}</div>
+                                                    @endif
                                                     <div class="panel-body tabs-menu-body border-0 p-3">
                                                         <div class="tab-content">
                                                             <div class="tab-pane active" id="tab5">
@@ -37,11 +40,18 @@
                                                                         <input class="form-control" name="identifier"
                                                                                placeholder="@lang('app.email_or_phone')"
                                                                                type="text">
+                                                                        @error('identifier')
+                                                                        <div class="text-danger fw-bold">{{$message}}</div>
+                                                                        @enderror
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label>@lang('app.password')</label> <input
                                                                             name="password" class="form-control"
                                                                             placeholder="********" type="password">
+
+                                                                        @error('password')
+                                                                        <div class="text-danger fw-bold">{{$message}}</div>
+                                                                        @enderror
                                                                     </div>
                                                                     <button type="submit"
                                                                             class="btn btn-primary btn-block">@lang('app.sign_in')</button>
@@ -63,5 +73,6 @@
                     </div>
                 </div>
             </div>
-
 @endsection
+
+

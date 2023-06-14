@@ -23,7 +23,8 @@ class AwbResource extends JsonResource
             'status'=>$this->latestStatus->status->name,
             'receiver_name'=>$this->receiver_data['name'],
             'receiver_phone'=>$this->receiver_data['phone1'],
-            'receiver_area'=>$this->receiver_data['area'],
+            'receiver_city'=>$this->receiverCity->title,
+            'receiver_area'=>$this->receiverArea->title,
             'receiver_address'=>$this->receiver_data['address1'],
         ];
     }

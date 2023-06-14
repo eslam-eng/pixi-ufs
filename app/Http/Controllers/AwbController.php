@@ -52,7 +52,7 @@ class AwbController extends Controller
             $user = auth()->user();
 
             $withRelations = [
-                'company:id,name', 'branch:id,name', 'department:id,name',
+                'company:id,name', 'branch:id,name', 'department:id,name','receiverCity','receiverArea',
                 'additionalInfo','history'=>fn($query)=>$query->orderByDesc('id')->with('status')
             ];
 

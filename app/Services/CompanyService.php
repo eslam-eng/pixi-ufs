@@ -73,7 +73,7 @@ class CompanyService extends BaseService
                 $company->branches()->createMany($branches);
         }
 
-        $departmentsData = $companyDTO->branchesData();
+        $departmentsData = $companyDTO->departmentsData();
         if (array_filter($departmentsData['name']))
         {
             foreach($departmentsData['name'] as $index=>$value)

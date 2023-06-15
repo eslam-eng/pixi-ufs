@@ -61,7 +61,7 @@
                                         </svg><span class="side-menu__label">@lang('app.awb_status')</span><i class="angle fe fe-chevron-right"></i></a>
                                     <ul class="slide-menu">
                                         <li><a class="slide-item" href="{{route('awb-status.create')}}">@lang('app.new_awb_status')</a></li>
-                                        <li><a class="slide-item" href="{{route('awb-status.index')}}">@lang('app.awb_status')</a></li>
+                                        <li><a class="slide-item" href="{{route('awb-status.index')}}">@lang('app.all_status')</a></li>
                                     </ul>
                                 </li>
 

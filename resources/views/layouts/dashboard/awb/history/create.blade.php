@@ -105,7 +105,7 @@
                                     <p class="mb-2 font-weight-semibold text-dark tx-13">{{$history->status->name}}</p>
                                     <p class="text-muted mt-0 mb-0">{{$history->status->description}}</p>
                                     @isset($history->lat,$history->lng)
-                                        <a href="https://www.google.com/maps?q=' . {{$history->lat}} . ',' . {{$history->lng}}" class="tx-12 text-dark text-end">
+                                        <a href="https://www.google.com/maps@' . {{$history->lat}} . ',' . {{$history->lng}} ?entry=ttu" class="tx-12 text-dark text-end">
                                             <p class="mb-1 font-weight-semibold text-dark tx-13 pull-right"><i class="fa fa-map-marker fa-2x"></i> map</p>
                                         </a>
                                     @endisset

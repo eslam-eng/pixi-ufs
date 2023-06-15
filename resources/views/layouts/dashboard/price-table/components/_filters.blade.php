@@ -16,10 +16,10 @@
                                 <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
                                     <div class="row row-sm">
                                         <div class="col-lg">
-                                            @livewire('location.cities', ['field_name'=>'location_from'])
+                                            @livewire('location.cities', ['field_name'=>'location_from','title' => 'location from'])
                                         </div>
                                         <div class="col-lg">
-                                            @livewire('location.cities', ['field_name'=>'location_to'])
+                                            @livewire('location.cities', ['field_name'=>'location_to','title' => 'location to'])
                                         </div>
                                     </div>
 

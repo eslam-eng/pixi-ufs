@@ -29,7 +29,7 @@ class AuthService extends BaseService
         if (!auth()->attempt($credential))
             return throw new NotFoundException(__('lang.login_failed'));
         logger('user exists');
-        return $this->model->where($identifierField, $identifier)->first();
+        return $this->model->with('attachments')->where($identifierField, $identifier)->first();
     }
 
 

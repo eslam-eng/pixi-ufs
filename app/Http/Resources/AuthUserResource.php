@@ -15,7 +15,6 @@ class AuthUserResource extends JsonResource
      */
     public function toArray($request)
     {
-
         return [
             'name'=>$this->name,
             'email'=>$this->email,
@@ -23,6 +22,14 @@ class AuthUserResource extends JsonResource
             'phone'=>$this->phone,
             'type'=>$this->type,
             'status'=>$this->status,
+            'profile_image'=>$this->whenLoaded('attachments',
+                $this->attachments()->where('type', \App\Enums\AttachmentsType::PRIMARYIMAGE->value)->count() ?
+                new AttachmentsResource(
+                    $this->attachments->where('type', \App\Enums\AttachmentsType::PRIMARYIMAGE->value)->first()
+                ):
+                array('path'=>asset('assets/images/default-image.jpg')),
+                
+            ),
             'permissions'=>$this->when($this->type != UsersType::SUPERADMIN() , $this->getPermissionNames())
         ];
     }

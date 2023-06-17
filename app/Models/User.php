@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Traits\Filterable;
 use App\Traits\HasAddresses;
+use App\Traits\HasAttachment;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -16,7 +17,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use SoftDeletes, Filterable, HasApiTokens, HasFactory, Notifiable,HasRoles, HasAddresses;
+    use SoftDeletes, Filterable, HasApiTokens, HasFactory, Notifiable,HasRoles, HasAddresses, HasAttachment;
 
     /**
      * The attributes that are mass assignable.

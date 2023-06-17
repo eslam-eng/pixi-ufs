@@ -20,7 +20,7 @@
         <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
             <div class="card">
                 <div class="card-body">
-                    <form action="{{route('users.update', $user)}}" method="post">
+                    <form action="{{route('users.update', $user)}}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('put')
                         <div class="row row-sm mb-4">
@@ -71,6 +71,15 @@
                                 @enderror
                             </div>
                             <div class="col-lg">
+                                <div class="main-content-label mg-b-5">@lang('app.profile_image')</div>
+                                <input class="form-control" value="{{old('profile_image') ?? $user->profile_image}}" name="profile_image"
+                                        type="file">
+
+                                @error('profile_image')
+                                <div class="text-danger"> {{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.type')</div>
                                 <select class="form-control" name="type">
                                     @foreach (App\Enums\UsersType::options() as $name=>$value)
@@ -89,7 +98,7 @@
 
                         <div class="row row-sm mb-4">
                             <div class="col-lg">
-                                @livewire('company')
+                                @livewire('company', ['selected_company'=>$user->company_id])
                                 @error('company_id')
                                 <div class="text-danger"> {{$message}}</div>
                                 @enderror
@@ -111,7 +120,7 @@
                         <div class="row row-sm mb-4">
                             <div class="col-lg">
                                 <div class="col-lg">
-                                    <livewire:location.cities/>
+                                    @livewire('location.cities', ['selected_city'=>$user->city_id])
                                     @error('city_id')
                                         <div class="text-danger"> {{$message}}</div>
                                     @enderror

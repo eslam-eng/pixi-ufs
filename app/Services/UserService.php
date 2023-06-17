@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\DTO\User\UserDTO;
+use App\Enums\AttachmentsType;
 use App\Models\User;
 use App\QueryFilters\UsersFilters;
 use App\Services\BaseService;
@@ -48,7 +49,14 @@ class UserService extends BaseService
      */
     public function store(UserDTO $userDTO)
     {
-        $user = $this->getModel()->create($userDTO->toArray());
+        $data = $userDTO->toArray();
+        $user = $this->getModel()->create(Arr::except($data, 'profile_image'));
+        if (isset($data['profile_image']))
+        {
+            $fileData = FileService::saveImage(file: $data['profile_image'],path: 'uploads/users', field_name: 'profile_image');
+            $fileData['type'] = AttachmentsType::PRIMARYIMAGE;
+            $user->storeAttachment($fileData);
+        }
         if($user)
             $user->givePermissionTo(Arr::get($userDTO->toArray(), 'permissions'));
 
@@ -64,7 +72,15 @@ class UserService extends BaseService
     public function update(UserDTO $userDTO, $id)
     {
         $user = $this->findById($id);
-        $user->update($userDTO->toArray());
+        $data = $userDTO->toArray();
+        $user->update(Arr::except($data, 'profile_image'));
+        if (isset($data['profile_image']))
+        {
+            $user->deleteAttachmentsLogo();
+            $fileData = FileService::saveImage(file: $data['profile_image'],path: 'uploads/users', field_name: 'profile_image');
+            $fileData['type'] = AttachmentsType::PRIMARYIMAGE;
+            $user->storeAttachment($fileData);
+        }
         $user->syncPermissions(Arr::get($userDTO->toArray(), 'permissions'));
         return true;
     }
@@ -78,6 +94,7 @@ class UserService extends BaseService
     public function destroy($id)
     {
         $user = $this->findById($id);
+        $user->deleteAttachments();
         $user->delete();
         return true;
     }

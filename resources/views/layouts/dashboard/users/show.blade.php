@@ -12,6 +12,17 @@
             <div class="card">
                 <div class="card-body">
                         <div class="row row-sm mb-4">
+                            @foreach ($user->attachments->where('type', App\Enums\AttachmentsType::PRIMARYIMAGE->value) as $attachment)
+                            <div class="col-lg">
+                                <div class="text-wrap">
+                                    <div class="example">
+                                        <img alt="Responsive image" class="img-thumbnail wd-100p wd-sm-200" src="{{ asset($attachment->path."/".$attachment->file_name) }}">
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                        <div class="row row-sm mb-4">
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.name')</div>
                                 <label class="form-control">{{ $user->name }}</label>

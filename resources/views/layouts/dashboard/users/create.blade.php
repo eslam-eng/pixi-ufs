@@ -20,7 +20,7 @@
         <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
             <div class="card">
                 <div class="card-body">
-                    <form action="{{route('users.store')}}" method="post">
+                    <form action="{{route('users.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row row-sm mb-4">
                             <div class="col-lg">
@@ -66,6 +66,15 @@
                                        placeholder="@lang('app.phone')" type="text">
 
                                 @error('phone')
+                                <div class="text-danger"> {{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-lg">
+                                <div class="main-content-label mg-b-5">@lang('app.profile_image')</div>
+                                <input class="form-control" value="{{old('profile_image')}}" name="profile_image"
+                                       placeholder="@lang('app.profile_image')" type="file">
+
+                                @error('profile_image')
                                 <div class="text-danger"> {{$message}}</div>
                                 @enderror
                             </div>

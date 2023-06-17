@@ -23,6 +23,7 @@ class UserDTO extends BaseDTO
      * @param ?int $area_id'
      * @param ?string $address'
      * @param array $permissions'
+     * @param  $profile_image'
      */
     public function __construct(
         protected string $name,
@@ -39,6 +40,7 @@ class UserDTO extends BaseDTO
         protected ?int $area_id,
         protected ?string $address,
         protected array $permissions,
+        protected $profile_image,
     )
     {
     }
@@ -60,6 +62,7 @@ class UserDTO extends BaseDTO
             area_id: $request->area_id,
             address: $request->address,
             permissions: $request->permissions,
+            profile_image: $request->profile_image,
         );
     }
 
@@ -85,6 +88,7 @@ class UserDTO extends BaseDTO
             area_id: Arr::get($data,'area_id'),
             address: Arr::get($data,'address'),
             permissions: Arr::get($data,'permissions'),
+            profile_image: Arr::get($data,'profile_image'),
         );
     }
 
@@ -108,6 +112,7 @@ class UserDTO extends BaseDTO
             'area_id' => $this->area_id,
             'address' => $this->address,
             'permissions' => $this->permissions,
+            'profile_image' => $this->profile_image,
         ];
     }
 

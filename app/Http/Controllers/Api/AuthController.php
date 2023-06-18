@@ -32,8 +32,10 @@ class AuthController extends Controller
                 'user'=>new AuthUserResource($user)
             ];
             return apiResponse(data: $data);
-        } catch (Exception|NotFoundException $e) {
-            return apiResponse($e->getMessage(), 'Unauthorized', code: 422);
+        } catch (NotFoundException $e) {
+            return apiResponse($e->getMessage(), $e->getMessage(), code: 422);
+        } catch (Exception $e) {
+            return apiResponse($e->getMessage(), 'there is an error please try again later', code: 422);
         }
     }
 

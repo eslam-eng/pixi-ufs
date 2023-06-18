@@ -30,8 +30,10 @@ class AuthController extends Controller
                 'message' => trans('app.login_successfully')
             ];
             return to_route('home')->with('toast', $toast);
-        } catch (Exception|NotFoundException $e) {
+        } catch (NotFoundException $e) {
             return back()->with('error', "email or password incorrect please try again");
+        }catch (Exception $e) {
+            return back()->with('error', $e->getMessage());
         }
     }
 

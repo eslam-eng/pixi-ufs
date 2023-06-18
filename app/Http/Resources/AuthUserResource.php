@@ -22,14 +22,7 @@ class AuthUserResource extends JsonResource
             'phone'=>$this->phone,
             'type'=>$this->type,
             'status'=>$this->status,
-            'profile_image'=>$this->whenLoaded('attachments',
-                $this->attachments()->where('type', \App\Enums\AttachmentsType::PRIMARYIMAGE->value)->count() ?
-                new AttachmentsResource(
-                    $this->attachments->where('type', \App\Enums\AttachmentsType::PRIMARYIMAGE->value)->first()
-                ):
-                array('path'=>asset('assets/images/default-image.jpg')),
-                
-            ),
+            'profile_image'=>$this->whenLoaded('attachments',asset($this->attachments->path."/".$this->attachments->filename,asset('assets/images/default-image.jpg'))),
             'permissions'=>$this->when($this->type != UsersType::SUPERADMIN() , $this->getPermissionNames())
         ];
     }

@@ -72,4 +72,9 @@ class User extends Authenticatable
         return $this->relationLoaded('company') && $this->company->show_dashboard;
     }
 
+    public function attachments()
+    {
+        return $this->morphOne(Attachment::class,'attachmentable');
+    }
+
 }

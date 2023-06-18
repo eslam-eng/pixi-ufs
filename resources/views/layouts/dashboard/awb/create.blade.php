@@ -85,19 +85,16 @@
                                 <div class="main-content-label mg-b-5">@lang('app.awb_info')</div>
                                 <div class="pd-30 pd-sm-20">
                                     <div class="row row-xs">
-                                        <div class="col-md-4">
+                                        <div class="col-md-5">
                                             <x-service-types/>
                                         </div>
-                                        <div class="col-md-4 mg-t-10 mg-md-t-0">
+                                        <div class="col-md-5 mg-t-10 mg-md-t-0">
                                             <x-payment-types/>
-                                        </div>
-                                        <div class="col-md-4 mg-t-10 mg-md-t-0">
-                                            <livewire:company-shipment-type/>
                                         </div>
                                     </div>
 
                                     <div class="row row-xs">
-                                        <div class="col-md-3">
+                                        <div class="col-md-3" id="collection">
                                             <label class="form-label">@lang('app.collection')</label>
                                             <input class="form-control" type="number" name="collection"/>
                                         </div>
@@ -108,6 +105,12 @@
                                                     class="font-weight-bold text-dark">@lang('app.awb_is_reverse')
                                                 </span>
                                             </label>
+                                        </div>
+
+                                    </div>
+                                    <div class="row row-xs mt-3">
+                                        <div class="col-md-4 mg-t-10 mg-md-t-0">
+                                            <livewire:company-shipment-type/>
                                         </div>
 
                                         <div class="col-md-3">

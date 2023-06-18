@@ -3,12 +3,8 @@
 namespace App\Imports\Receivers;
 
 use App\Enums\ImportStatusEnum;
-use App\Imports\Awbs\sheets\AwbsImportSheet;
 use App\Imports\Receivers\sheets\ReceiversImportSheet;
-use App\Models\AwbServiceType;
-use App\Models\CompanyShipmentType;
 use App\Models\ImportLog;
-use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Arr;
 use Maatwebsite\Excel\Concerns\Importable;
@@ -26,7 +22,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Events\BeforeImport;
 use Maatwebsite\Excel\Events\ImportFailed;
 
-class ReceiversImport implements  WithMultipleSheets,
+class ReceiversImport implements WithMultipleSheets,
     ShouldQueue,
     WithChunkReading,
     WithEvents,
@@ -37,12 +33,13 @@ class ReceiversImport implements  WithMultipleSheets,
 
     use Importable, SkipsErrors, SkipsFailures, RegistersEventListeners;
 
+    public $importObject;
     protected $totalRows = 0;
     protected $successCount = 0;
     protected $total_failures = 0;
-    public $importObject;
+
     public function __construct(
-        public $creator ,
+        public $creator,
         public $importation_type
     )
     {
@@ -97,19 +94,14 @@ class ReceiversImport implements  WithMultipleSheets,
                     'success_count' => $success_count,
                     'status_id' => $status_id
                 ];
-                $importObject->update($importData);},
+                $importObject->update($importData);
+            },
             ImportFailed::class => function (ImportFailed $event) {
                 $this->importObject->update([
                     'status_id' => ImportStatusEnum::FAILED(),
                 ]);
             },
         ];
-    }
-
-
-    public function getQueueName(): string
-    {
-        return 'default';
     }
 
     public function getImportStatus(int $success_count): int
@@ -121,6 +113,11 @@ class ReceiversImport implements  WithMultipleSheets,
             return ImportStatusEnum::PARTIALLY();
         }
         return ImportStatusEnum::FAILED();
+    }
+
+    public function getQueueName(): string
+    {
+        return 'default';
     }
 
     public function limit(): int

@@ -16,11 +16,10 @@ class BranchService extends BaseService
     {
     }
 
-    public function getModel(): Branch
+    public function getModel(): Model
     {
         return $this->model;
     }
-
     //method for api with pagination
     public function listing(array $filters = [], array $withRelations = [], $perPage = 10): \Illuminate\Contracts\Pagination\CursorPaginator
     {
@@ -45,7 +44,7 @@ class BranchService extends BaseService
      */
     public function store(BranchDTO $branchDTO): bool
     {
-        $branch = $this->model->create($branchDTO->toArray());
+        $this->model->create($branchDTO->toArray());
         return true;
     }
 
@@ -58,9 +57,7 @@ class BranchService extends BaseService
      */
     public function update(int $id, BranchDTO $branchDTO): bool
     {
-        $branch = $this->find($id);
-        if (!$branch)
-            throw new NotFoundException(trans('lang.not_found'));
+        $branch = $this->findById($id);
         $branch->update($branchDTO->toArray());
         return true;
     }
@@ -73,19 +70,10 @@ class BranchService extends BaseService
      */
     public function destroy(int $id): bool
     {
-        $branch = Branch::find($id);
+        $branch = $this->findById($id);
         $branch->delete();
         return true;
     }
-
-    public function find(int $id): Model
-    {
-        $branch = Branch::find($id);
-        if (!$branch)
-            throw new NotFoundException(trans('lang.not_found'));
-        return $branch;
-    }
-
     public function getBranchesForSelectDropDown(array $filters = []): \Illuminate\Database\Eloquent\Collection|array
     {
         return $this->branchQueryBuilder(filters: $filters)->select(['id','name'])->get();

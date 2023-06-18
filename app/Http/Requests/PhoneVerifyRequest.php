@@ -38,7 +38,7 @@ class PhoneVerifyRequest extends BaseRequest
     {
         return [
             'identifier' => request()->identifier,
-            'code' => Hash::make(time().uniqid()),
+            'code' => mt_rand(100000, 999999),
             'created_at' => now(),
             'updated_at' => now()
         ];

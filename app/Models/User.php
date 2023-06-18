@@ -17,7 +17,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use SoftDeletes, Filterable, HasApiTokens, HasFactory, Notifiable,HasRoles, HasAddresses, HasAttachment;
+    use SoftDeletes, Filterable,HasApiTokens, HasFactory, Notifiable,HasRoles, HasAddresses, HasAttachment;
 
     /**
      * The attributes that are mass assignable.
@@ -71,6 +71,11 @@ class User extends Authenticatable
     public function getShowDashboardAttribute(): bool
     {
         return $this->relationLoaded('company') && $this->company->show_dashboard;
+    }
+
+    public function attachments()
+    {
+        return $this->morphOne(Attachment::class,'attachmentable');
     }
 
     public function city()

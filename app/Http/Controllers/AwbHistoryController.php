@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Awb\Api\AwbChangeStatusRequest;
+use App\Http\Requests\Awb\AwbChangeStatusRequest;
 use App\Models\AwbStatus;
 use App\Services\AwbHistoryService;
 use App\Services\AwbService;
@@ -38,12 +38,11 @@ class AwbHistoryController extends Controller
     {
         try {
             $data = $request->validated();
-            dd($data);
             $awb = $this->awbService->findById(id: $awb_id);
-            $status = $this->awbHistoryService->status($awb ,$data);
+            $this->awbHistoryService->changeStatus($awb ,$data);
             $toast = [
-                'type' => 'error',
-                'title' => 'Error',
+                'type' => 'success',
+                'title' => 'success',
                 'message' =>"status Changed Successfully"
             ];
             return back()->with('toast', $toast);

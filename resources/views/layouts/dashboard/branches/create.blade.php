@@ -8,6 +8,15 @@
 
     <!-- Row -->
     <div class="row">
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         {{-- start branches --}}
         <div class="col-lg-12 col-md-12">
             <div class="card custom-card">
@@ -25,50 +34,59 @@
                                         <div class="col-lg">
                                             <div class="main-content-label mg-b-5">@lang('app.name')</div>
                                             <input class="form-control" name='name' value="{{old('name')}}" placeholder="@lang('app.name')"
-                                                type="text">
+                                                type="text" required>
                                             @error('name')
-                                                <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
+                                                <div class="text-danger"> {{$message}}</div>
                                             @enderror
                                         </div>
-        
+
                                         <div class="col-lg">
                                             <div class="main-content-label mg-b-5">@lang('app.phone')</div>
                                             <input class="form-control" value="{{old('phone')}}" name="phone" placeholder="@lang('app.phone')"
-                                                type="text">
+                                                type="text" required>
                                             @error('phone')
                                                 <div class="text-danger"> {{$message}}</div>
                                             @enderror
                                         </div>
                                     </div>
-        
+
                                     <div class="row row-sm mb-4">
                                         <div class="col-lg">
                                             <div class="main-content-label mg-b-5">@lang('app.status')</div>
                                             <input name="status" value="1"
                                                 placeholder="@lang('app.status')" type="checkbox" checked>
-        
+
                                             @error('status')
                                             <div class="text-danger"> {{$message}}</div>
                                             @enderror
                                         </div>
                                     </div>
-        
+
                                     <hr>
                                     <div class="row row-sm mb-4">
                                         <div class="col-lg">
                                             <div class="main-content-label mg-b-5">@lang('app.address')</div>
                                             <input class="form-control" name="address" value="{{old('address')}}"  placeholder="@lang('app.address')"
-                                                type="text">
-        
+                                                type="text" required>
+
                                             @error('address')
                                             <div class="text-danger"> {{$message}}</div>
                                             @enderror
                                         </div>
+
+                                    </div>
+
+                                    <div class="row row-sm mb-4">
                                         <div class="col-lg">
-                                            <livewire:locations-drop-down/>
+                                            <livewire:location.cities/>
                                             @error('city_id')
                                             <div class="text-danger"> {{$message}}</div>
                                             @enderror
+                                        </div>
+
+
+                                        <div class="col-lg">
+                                            <livewire:location.areas/>
                                             @error('area_id')
                                             <div class="text-danger"> {{$message}}</div>
                                             @enderror
@@ -80,7 +98,7 @@
                         <div class="mt-4">
                             <div class="form-group mb-0 mt-3 justify-content-end">
                                 <div>
-                                    <button type="submit" class="btn btn-success"><i
+                                    <button type="submit" class="btn btn-rounded btn-success"><i
                                             class="fa fa-save pe-2"></i>@lang('app.submit')</button>
                                 </div>
                             </div>

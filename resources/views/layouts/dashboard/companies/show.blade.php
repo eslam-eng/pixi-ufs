@@ -94,9 +94,12 @@
                     <div class="card-header">
                         <div class="form-group mb-0 mt-3 justify-content-end">
                             <div>
-                                <h4 class="pe-4">Branches
-                                    <a role="button" href="{{route('branches.create')}}" class="btn btn-rounded btn-success"><i class="fa fa-plus-square pe-2"></i>@lang('app.add')</a>
-                                </h4>
+                                <form method="get" action="{{ route('branches.create') }}">
+                                    <h4 class="pe-4">
+                                        <input type="hidden" name="company_id" value="{{ $company->id }}">
+                                        <button class="btn ripple btn-primary" type="submit">@lang('app.add_new_branch')</button>
+                                    </h4>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -130,10 +133,11 @@
                                             <i class="icon ion-ios-arrow-down tx-11 mg-l-3"></i>
                                         </button>
                                         <div class="dropdown-menu" style="">
-                                            <a href="{{route('branches.destroy', $branch->id)}}"
-                                               class="dropdown-item">@lang('app.show')</a>
                                             <a href="{{route('branches.edit', $branch->id)}}"
-                                               class="dropdown-item">@lang('app.show')</a>
+                                               class="dropdown-item">@lang('app.edit')</a>
+                                            <div>
+                                                <button role="button" onclick="destroy('{{route('branches.destroy', $branch->id)}}')" class="dropdown-item">@lang('app.delete')</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </td>
@@ -151,9 +155,12 @@
                 <div class="card-header">
                     <div class="form-group mb-0 mt-3 justify-content-end">
                         <div>
-                            <h4 class="pe-4">Departments
-                                <a role="button" href="{{route('departments.create')}}" class="btn btn-rounded btn-success"><i class="fa fa-plus-square pe-2"></i>@lang('app.add')</a>
-                            </h4>
+                            <form method="get" action="{{ route('departments.create') }}">
+                                <h4 class="pe-4">
+                                    <input type="hidden" name="company_id" value="{{ $company->id }}">
+                                    <button class="btn ripple btn-primary" type="submit">@lang('app.add_new_department')</button>
+                                </h4>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -162,7 +169,7 @@
                         <thead>
                         <tr>
                             <td>@lang('app.name')</td>
-                            <td>@lang('app.actions')</td>
+                            <td width="250px">@lang('app.actions')</td>
                         </tr>
                         </thead>
                         <tbody>
@@ -177,7 +184,10 @@
                                         </button>
                                         <div class="dropdown-menu" style="">
                                             <a href="{{route('departments.edit', $department->id)}}"
-                                               class="dropdown-item">@lang('app.show')</a>
+                                               class="dropdown-item">@lang('app.edit')</a>
+                                            <div>
+                                                <button role="button" onclick="destroy('{{route('departments.destroy', $department->id)}}')" class="dropdown-item">@lang('app.delete')</button>
+                                            </div>
                                         </div>
                                         <!-- dropdown-menu -->
                                     </div>

@@ -8,6 +8,7 @@ use App\Enums\ImportStatusEnum;
 use App\Imports\Awbs\sheets\AwbsSyncWithReferenceSheet;
 use App\Imports\Tenant\Interfaces\ImportInterface;
 use App\Imports\Tenant\ProductImportClasses\sheets\MarketProviderProductsImportSheet;
+use App\Models\Awb;
 use App\Models\AwbServiceType;
 use App\Models\AwbStatus;
 use App\Models\CompanyShipmentType;
@@ -118,11 +119,18 @@ class AwbsSyncByReferenceImport implements
                     'success_count' => $success_count,
                     'status_id' => $status_id
                 ];
-                $importObject->update($importData);},
+                $importObject->update($importData);
+                activity('awbs')->causedBy($this->creator)
+                    ->performedOn((new Awb()))
+                    ->log('import Awbs without reference type');
+                },
             ImportFailed::class => function (ImportFailed $event) {
                 $this->importObject->update([
                     'status_id' => ImportStatusEnum::FAILED(),
                 ]);
+                activity('awbs')->causedBy($this->creator)
+                    ->performedOn((new Awb()))
+                    ->log('try to import Awbs with reference type but failed');
             },
         ];
     }

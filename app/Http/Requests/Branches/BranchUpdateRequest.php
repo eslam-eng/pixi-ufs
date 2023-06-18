@@ -29,11 +29,12 @@ class BranchUpdateRequest extends BaseRequest
             'city_id' => 'required|integer|exists:locations,id',
             'area_id' => 'required|integer|exists:locations,id',
             'address' => 'required|string',
+            'status' => 'nullable|boolean',
         ];
     }
 
     public function toBranchDTO(): \App\DTO\BaseDTO|BranchDTO
     {
-        return BranchDTO::fromArray($this->all());
+        return BranchDTO::fromRequest($this);
     }
 }

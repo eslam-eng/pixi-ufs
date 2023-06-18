@@ -3,8 +3,8 @@
 namespace App\Exports;
 
 use App\Exports\Sheets\Awbs\AwbsWithoutReferenceSheet;
-use App\Exports\Sheets\Receiver\AreaDropDownSheet;
-use App\Exports\Sheets\Receiver\CityDropDownSheet;
+use App\Exports\Sheets\general\AreaDropDownSheet;
+use App\Exports\Sheets\general\CityDropDownSheet;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 use Maatwebsite\Excel\Concerns\WithEvents;

@@ -11,8 +11,8 @@
             <div class="card custom-card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <div class="text-dark mb-4">@lang('app.first_download_awb_template')</div>
-                        <a role="button" class="btn btn-info btn-block" href="{{route('awb.download-template')}}">download
+                        <h4 class="text-dark mb-4">@lang('app.first_download_awb_template')</h4>
+                        <a role="button" class="btn btn-rounded btn-dark-gradient btn-block" href="{{route('awb.download-template')}}">download
                             template</a>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                 <div class="card custom-card">
                     <div class="card-body">
                         <div class="card-header">
-                            <div class="text-dark">@lang('app.first_upload_excel')</div>
+                            <h4 class="text-dark">@lang('app.upload_excel_with_properties')</h4>
                         </div>
                         <div class="card-body">
                             <x-payment-types/>

@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\LocationsResource;
-use App\Services\LocationService;
 use App\Services\LocationsService;
 
 class LocationsController extends Controller
@@ -25,9 +24,9 @@ class LocationsController extends Controller
         return LocationsResource::collection($governorates);
     }
 
-    public function getLocationByParentId($id): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    public function getLocationByParentId($id)
     {
         $locations = $this->locationService->getLocationDescendants(location_id: $id);
-        return LocationsResource::collection($locations);
+        return $locations;
     }
 }

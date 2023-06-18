@@ -13,6 +13,7 @@
 
     <div class="row row-sm">
         <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+
             <div class="card custom-card">
                 <div class="card-header  d-flex custom-card-header border-bottom-0 ">
                     <h5 class="card-title">
@@ -20,7 +21,8 @@
                     </h5>
                     <div class="card-options">
 
-                        <a role="button" href="{{route('awb-history.create',$awb->id)}}" class="btn btn-rounded btn-secondary">
+                        <a role="button" href="{{route('awb-history.create',$awb->id)}}"
+                           class="btn btn-secondary" style="background-color: #171f4e">
                             <i class="fa fa-history"></i> change status
                         </a>
                     </div>
@@ -28,7 +30,7 @@
                 <div class="card-body">
                     <table class="table table-striped">
                         <tbody>
-                        <tr class="bg-info">
+                        <tr class="fw-bold">
                             <td colspan="2">@lang('app.status'):</td>
                             <td colspan="2">{{$awb->latestStatus?->status?->name}}</td>
                         </tr>
@@ -67,12 +69,22 @@
                             <td colspan="2">{{$awb->additional_kg_price}}</td>
                         </tr>
                         {{--                       @endif--}}
-                        {{--                       @if($user->can('show_awb_pod_attachment'))--}}
-                        <tr>
-                            <td colspan="4" class="text-center bg-info">@lang('app.awb_receiver_info') </td>
-                        </tr>
 
-                        <tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card custom-card">
+                <div class="card-header  d-flex custom-card-header border-bottom-0 ">
+                    <h5 class="card-title">
+                        @lang('app.awb_receiver_info')
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr class="fw-bold">
                             <td colspan="2">receiver:</td>
                             <td colspan="2">{!!Arr::get($awb->receiver_data,'name')!!}</td>
                         </tr>
@@ -95,9 +107,9 @@
 
                         <tr>
                             <td>city:</td>
-                            <td>{!!Arr::get($awb->receiver_data,'city')!!}</td>
+                            <td>{{$awb->receiverCity?->title}}</td>
                             <td>area:</td>
-                            <td>{!!Arr::get($awb->receiver_data,'area')!!}</td>
+                            <td>{{$awb->receiverArea?->title}}</td>
                         </tr>
 
                         <tr>
@@ -107,9 +119,21 @@
                             <td>{!!Arr::get($awb->receiver_data,'receiving_company')!!}</td>
                         </tr>
 
-                        <tr>
-                            <td colspan="4" class="text-center bg-info">@lang('app.POD') </td>
-                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            <div class="card custom-card">
+                <div class="card-header  d-flex custom-card-header border-bottom-0 ">
+                    <h5 class="card-title">
+                        @lang('app.awb_pod')
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <tbody>
                         <tr>
                             <td colspan="2">@lang('app.actual-receipt') </td>
                             <td colspan="2">{{$awb->actual_recipient}}</td>
@@ -125,14 +149,26 @@
                         <tr>
                             <td colspan="2">@lang('app.pod')</td>
                             <td colspan="2">
-                                <button class="btn btn-sm btn-info btn-rounded">show Attachments</button>
+                                <button class="btn btn-sm btn-info">show Attachments</button>
                             </td>
                         </tr>
                         {{--                       @endif--}}
 
-                        <tr>
-                            <td colspan="4" class="text-center bg-info">@lang('app.awb_additional_info') </td>
-                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            <div class="card custom-card">
+                <div class="card-header  d-flex custom-card-header border-bottom-0 ">
+                    <h5 class="card-title">
+                        @lang('app.awb_additional_info')
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <tbody>
                         <tr>
                             <td colspan="2">note1:</td>
                             <td colspan="2">{{$awb->additionalInfo?->custome_field1}}</td>
@@ -159,7 +195,6 @@
                             <td colspan="2">{{$awb->additionalInfo?->custome_field5}}</td>
                         </tr>
 
-
                         </tbody>
                     </table>
                 </div>
@@ -168,35 +203,39 @@
 
         <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
 
-                <div class="card">
-                    <div class="card-header bg-transparent pb-0">
-                        <div><h3 class="card-title mb-2">History</h3></div>
-                    </div>
-                    <div class="card-body mt-0">
-                        <div class="latest-timeline mt-4">
-                            <ul class="timeline mb-0">
-                                @foreach($awb->history as $history)
-                                    <li>
-                                        <div class="featured_icon1"></div>
-                                    </li>
-                                    <li class="mt-0 activity border br-5 p-2">
-                                        <div><span class="text-dark float-end">{{isset($history->created_at)?$history->created_at->format('Y-m-d h:i A'):$history->created_at}}</span></div>
+            <div class="card">
+                <div class="card-header bg-transparent pb-0">
+                    <div><h3 class="card-title mb-2">History</h3></div>
+                </div>
+                <div class="card-body mt-0">
+                    <div class="latest-timeline mt-4">
+                        <ul class="timeline mb-0">
+                            @foreach($awb->history as $history)
+                                <li>
+                                    <div class="featured_icon1"></div>
+                                </li>
+                                <li class="mt-0 activity border br-5 p-2">
+                                    <div><span
+                                            class="text-dark float-end">{{isset($history->created_at)?$history->created_at->format('Y-m-d h:i A'):$history?->created_at}}</span>
+                                    </div>
 
-                                        <p class="mb-2 font-weight-semibold text-dark tx-13">{{$history->status->name}}</p>
-                                        <p class="text-muted mt-0 mb-0">{{$history->status->description}}</p>
-                                        @isset($history->lat,$history->lng)
-                                            <a href="https://www.google.com/maps?q=' . {{$history->lat}} . ',' . {{$history->lng}}" class="tx-12 text-dark text-end">
-                                                <p class="mb-1 font-weight-semibold text-dark tx-13 pull-right"><i class="fa fa-map-marker fa-2x"></i> map</p>
-                                            </a>
-                                        @endisset
+                                    <p class="mb-2 font-weight-semibold text-dark tx-13">{{$history->status->name}} <span class="pd-12 text-danger"><strong>changed By({{$history->user->name}})</strong></span></p>
+                                    <p class="text-muted mt-0 mb-0">{{$history->status->description}}</p>
+                                    @isset($history->lat,$history->lng)
+                                        <a href="https://www.google.com/maps@' . {{$history->lat}} . ',' . {{$history->lng}} ?entry=ttu"
+                                           class="tx-12 text-dark text-end">
+                                            <p class="mb-1 font-weight-semibold text-dark tx-13 pull-right"><i
+                                                    class="fa fa-map-marker fa-2x"></i> map</p>
+                                        </a>
+                                    @endisset
 
-                                    </li>
-                                @endforeach
+                                </li>
+                            @endforeach
 
-                            </ul>
-                        </div>
+                        </ul>
                     </div>
                 </div>
+            </div>
 
         </div>
 

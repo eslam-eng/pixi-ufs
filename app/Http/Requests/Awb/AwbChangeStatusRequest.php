@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests\Awb;
 
+use App\Enums\AwbStatuses;
 use App\Http\Requests\BaseRequest;
+use App\Models\AwbStatus;
+use Illuminate\Validation\Rule;
 
 class AwbChangeStatusRequest extends BaseRequest
 {
@@ -15,16 +18,38 @@ class AwbChangeStatusRequest extends BaseRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
+     * @return string[]
      */
     public function rules(): array
     {
         return [
-            'ids'=>'required|array',
-            'status'=>'required|exists:awb_statuses,id',
+            'awb_status_id' => 'required|exists:awb_statuses,id',
+            'lat' => 'nullable|string',
+            'lng' => 'nullable|string',
+            'comment' => 'nullable|string',
+
+            'actual_recipient' => ['nullable', Rule::requiredIf(function () {
+                return   !isset($this->images) && $this->status?->code == AwbStatuses::DELIVERED->value;
+            })
+            ],
+            'title' => 'nullable|string',
+            'card_number' => ['nullable', Rule::requiredIf(function () {
+                return !isset($this->images)  && $this->status?->code == AwbStatuses::DELIVERED->value;
+            })
+            ],
+            'images' => 'nullable|array',
+            'images.*' => 'nullable|image|mimes:png,jpg',
+            'status' => 'required',
+            'user_id' => 'required',
         ];
+    }
+
+    public function prepareForValidation()
+    {
+        $this->merge([
+            'status' => AwbStatus::query()->find($this->awb_status_id),
+            'user_id'=>auth()->id()
+        ]);
     }
 
 }

@@ -12,7 +12,7 @@
 
 		<!-- P-scroll bar css-->
 		<link href="{{asset('assets/plugins/perfect-scrollbar/p-scrollbar.css')}}" rel="stylesheet" />
-        <link src="{{asset('assets/plugins/toastr/css/toastr.min.css')}}"/>
+        <link href="{{asset('assets/plugins/toastr/toastr.min.css')}}" rel="stylesheet">
 
 
         @yield('styles')

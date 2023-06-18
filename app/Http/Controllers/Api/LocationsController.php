@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\LocationsResource;
-use App\Services\LocationService;
 use App\Services\LocationsService;
 
 class LocationsController extends Controller

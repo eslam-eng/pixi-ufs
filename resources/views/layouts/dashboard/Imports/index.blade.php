@@ -26,10 +26,39 @@
             </div>
         </div>
     </div>
+@include('layouts.dashboard.Imports.components._import_errors_modal')
     <!-- End Row -->
-
 @endsection
 
 @section('scripts')
     @include('layouts.components.datatable-scripts')
+    <script>
+        $(document).ready(function () {
+            $(document).ready(function () {
+                $(document).on('click', '.show_import_errors', function () {
+                    var href = $(this).data('href');
+                    var csrf = "{{csrf_token()}}";
+                    $.ajax({
+                        url: href,
+                        type: 'get',
+                        dataType: 'JSON',
+                        headers: {'X-CSRF-TOKEN': csrf},
+                        success: function (data) {
+                            console.log(data);
+                            $('#imports_modal_body').html(data.data);
+                            $('#imports_modal').modal('toggle');
+                        },
+                        error: function (xhr) {
+                            // Handle error response
+                            Swal.fire(
+                                '' + xhr.statusText + '',
+                                '' + xhr.responseJSON.message + '',
+                                'error'
+                            );
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 @endsection

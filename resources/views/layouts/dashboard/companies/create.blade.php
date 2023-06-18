@@ -47,7 +47,7 @@
                                         <div class="main-content-label mg-b-5">@lang('app.ceo')</div>
                                         <input class="form-control" name="ceo" value="{{old('ceo')}}"
                                                placeholder="@lang('app.ceo')"
-                                               type="text" required>
+                                               type="text">
                                         @error('ceo')
                                         <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
                                         @enderror

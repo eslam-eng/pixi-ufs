@@ -57,7 +57,7 @@ class BranchService extends BaseService
      */
     public function update(int $id, BranchDTO $branchDTO): bool
     {
-        $branch = $this->find($id);
+        $branch = $this->findById($id);
         if (!$branch)
             throw new NotFoundException(trans('lang.not_found'));
         $branch->update($branchDTO->toArray());

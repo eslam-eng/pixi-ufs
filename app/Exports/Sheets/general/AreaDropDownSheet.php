@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Exports\Sheets\Awbs;
+namespace App\Exports\Sheets\general;
 
 use App\Services\LocationsService;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\RegistersEventListeners;
@@ -12,24 +13,25 @@ use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Cell\DataValidation;
 
-class CityDropDownSheet implements FromCollection, WithTitle, WithEvents, WithMapping
+class AreaDropDownSheet implements FromCollection, WithTitle, WithEvents, WithMapping
 {
 
     use RegistersEventListeners;
+    public Collection $areas;
 
-    public Collection $cities;
-
+    /**
+     * @throws BindingResolutionException
+     */
     public function __construct()
     {
-        $this->cities = app()->make(LocationsService::class)->getAll(['depth'=>1]);
-
+        $this->areas = app()->make(LocationsService::class)->getAll(['depth'=>2]);
     }
 
     public static function afterSheet(AfterSheet $event)
     {
         $sheet = $event->sheet;
         for ($row = 2; $row < 4; $row++) {
-            $objValidation = $sheet->getParent()->getSheet(0)->getCell("D" . $row)->getDataValidation();
+            $objValidation = $sheet->getParent()->getSheet(0)->getCell("E" . $row)->getDataValidation();
             $objValidation->setType(DataValidation::TYPE_LIST);
             $objValidation->setErrorStyle(DataValidation::STYLE_INFORMATION);
             $objValidation->setAllowBlank(false);
@@ -40,13 +42,13 @@ class CityDropDownSheet implements FromCollection, WithTitle, WithEvents, WithMa
             $objValidation->setError('Value is not in list.');
             $objValidation->setPromptTitle('Pick from list');
             $objValidation->setPrompt('Please pick a value from list.');
-            $objValidation->setFormula1('cities!$A$1:$A$50');
+            $objValidation->setFormula1('areas!$A$1:$A$50');
         }
     }
 
     public function collection()
     {
-        return $this->cities;
+        return $this->areas;
     }
 
 
@@ -55,7 +57,7 @@ class CityDropDownSheet implements FromCollection, WithTitle, WithEvents, WithMa
      */
     public function title(): string
     {
-        return 'cities';
+        return 'areas';
     }
 
 

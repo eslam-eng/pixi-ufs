@@ -19,9 +19,16 @@ class LoginRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'identifier' => 'string|nullable',
-            'password'   => 'string|nullable',
+            'identifier' => 'required|string',
+            'password'   => 'required|string',
             'fcm_token'  => 'string|nullable'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+          'identifier.required'=>"email or phone required"
         ];
     }
 }

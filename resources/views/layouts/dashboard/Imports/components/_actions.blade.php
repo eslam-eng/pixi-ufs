@@ -1,7 +1,10 @@
 <td class="text-end">
-    @if(isset($model->errors))
-        <div>
-            <button href="{{route('receivers.show',$model->id)}}" class="btn btn-sm btn-danger">@lang('app.imports errors')</button>
-        </div>
+
+    @if($model->check_errors)
+        <button data-href="{{route('import-logs.errors', $model->id)}}"
+                class="btn btn-sm btn-danger show_import_errors">
+            @lang('admin.imports.errors')
+        </button>
     @endif
+
 </td>

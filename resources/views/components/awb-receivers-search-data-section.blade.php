@@ -93,13 +93,12 @@
                     },
                     cache: true
                 },
-                minimumInputLength: 3,
+                minimumInputLength: 2,
                 allowClear: true,
                 closeOnSelect: true,
                 selectOnClose: true,
             }).on('select2:select', function (e) {
                 var data = e.params.data;
-                console.log(data);
                 $('#receiving_company').val(data.receiving_company);
                 $('#branch_name').val(data.branch);
                 $('#phone').val(data.phone);
@@ -107,7 +106,6 @@
                 $('#receiver_city').val(data.city);
                 $('#receiver_area').val(data.area);
             });
-
         });
     </script>
 @endsection

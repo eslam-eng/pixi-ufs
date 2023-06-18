@@ -31,4 +31,4 @@
 		<!-- exported JS -->
 		<script src="{{asset('assets/js/exported.js')}}"></script>
 
-        <script src="{{asset('assets/plugins/toastr/js/toastr.min.js')}}"></script>
+        <script src="{{asset('assets/plugins/toastr/toastr.min.js')}}"></script>

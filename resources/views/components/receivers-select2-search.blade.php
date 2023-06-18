@@ -49,10 +49,12 @@
                     },
                     cache: true
                 },
-                minimumInputLength: 3,
                 allowClear: true,
                 closeOnSelect: true,
                 selectOnClose: true,
+            });
+            $('#receivers_search').on('select2:open', function() {
+                $('.select2-search__field').focus();
             });
         });
     </script>

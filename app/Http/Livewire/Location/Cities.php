@@ -11,6 +11,8 @@ class Cities extends Component
     public $selected_city = null;
     public $field_name = 'city_id';
 
+    public $title = "cities";
+
     public function mount()
     {
         $this->cities = app()->make(LocationsService::class)->getAll(filters: ['depth' => 1]);

@@ -31,12 +31,7 @@ class AuthController extends Controller
             ];
             return to_route('home')->with('toast', $toast);
         } catch (Exception|NotFoundException $e) {
-            $toast = [
-                'type' => 'error',
-                'title' => 'error',
-                'message' => $e->getMessage()
-            ];
-            return to_route('login')->with('toast', $toast);
+            return back()->with('error', "email or password incorrect please try again");
         }
     }
 

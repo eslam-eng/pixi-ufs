@@ -151,19 +151,21 @@
                                 </div>
 
                                 <div class="row row-sm mb-4">
+
                                     <div class="col-lg">
                                         <livewire:location.cities/>
                                         @error('city_id')
                                         <div class="text-danger"> {{$message}}</div>
                                         @enderror
                                     </div>
-
+                                    {{-- start company area --}}
                                     <div class="col-lg">
                                         <livewire:location.areas/>
                                         @error('area_id')
                                         <div class="text-danger"> {{$message}}</div>
                                         @enderror
                                     </div>
+                                    {{-- end company area --}}
                                 </div>
 
                             </div>
@@ -227,22 +229,25 @@
                                             </div>
 
                                             <hr>
-                                            <div class="row row-sm mb-4">
-
+                                            <div class="locations row row-sm mb-4">
                                                 <div class="col-lg">
-                                                    @livewire("location.cities",['field_name'=>'branches_city_id[]'])
-
-                                                    @error('branches_city_id[]')
-                                                    <div class="text-danger"> {{$message}}</div>
-                                                    @enderror
-                                                    @error('branches_area_id[]')
+                                                    <div class="main-content-label mg-b-5">@lang('app.cities')</div>
+                                                    <select class="company_city form-control" name="branches_city_id[]">
+                                                        <option value="">{{ trans('app.select_city') }}</option>
+                                                        @foreach ($cities as $city)
+                                                            <option value="{{ $city->id }}">{{ $city->title }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('branches_city_id.*')
                                                     <div class="text-danger"> {{$message}}</div>
                                                     @enderror
                                                 </div>
-
                                                 <div class="col-lg">
-                                                    @livewire("location.areas",['field_name'=>'branches_area_id[]'])
-                                                    @error('branches_area_id[]')
+                                                    <div class="main-content-label mg-b-5">@lang('app.areas')</div>
+                                                    <select class="form-control" name="branches_area_id[]">
+                                                        <option value="">...</option>
+                                                    </select>
+                                                    @error('branches_area_id.*')
                                                     <div class="text-danger"> {{$message}}</div>
                                                     @enderror
                                                 </div>
@@ -254,7 +259,7 @@
                                 <div class="mt-4">
                                     <div class="form-group mb-0 mt-3 justify-content-end">
                                         <div>
-                                            <button type="button" class="btn btn-success btn-rounded append-branch"><i
+                                            <button type="button" class="btn btn-success append-branch"><i
                                                     class="fa fa-plus pe-2"></i></button>
                                         </div>
                                     </div>
@@ -290,8 +295,8 @@
                                 <div class="mt-4">
                                     <div class="form-group mb-0 mt-3 justify-content-end">
                                         <div>
-                                            <button type="button" class="btn btn-success btn-rounded append-department"><i
-                                                    class="fa fa-plus pe-2"></i></button>
+                                            <button type="button" class="btn btn-success append-department"><i
+                                                    class="fa fa-plus pe-2"></i>add</button>
                                         </div>
                                     </div>
                                 </div>
@@ -310,10 +315,10 @@
                         <div class="card-body">
                             <div class="form-group mb-0 mt-3 justify-content-end">
                                 <div>
-                                    <button type="submit" class="btn btn-success btn-rounded"><i
+                                    <button type="submit" class="btn btn-success"><i
                                             class="fa fa-save pe-2"></i>@lang('app.submit')</button>
 
-                                    <a role="button" href="{{route('companies.index')}}" class="btn btn-rounded btn-danger"><i
+                                    <a role="button" href="{{route('companies.index')}}" class="btn btn-danger"><i
                                             class="fa fa-backward pe-2"></i>@lang('app.back')</a>
                                 </div>
                             </div>
@@ -334,14 +339,14 @@
             $('.append-branch').on('click', function () {
 
                 var item = $('.branches-items .item').first().html();
-                $('.branches-items').append('<div class="item mt-4">' + item + '<button class="btn btn-danger btn-rounded remove-item">X</button></div>');
+                $('.branches-items').append('<div class="item mt-4">' + item + '<button class="btn btn-danger remove-item"><i class="fa fa-close"></i>remove</button></div>');
             });
 
             $('.append-department').on('click', function () {
 
                 var item = $('.departments-items .item').first().html();
 
-                $('.departments-items').append('<div class="item mt-4">' + item + '<button class="btn btn-danger remove-item">X</button></div>');
+                $('.departments-items').append('<div class="item mt-4">' + item + '<button class="btn btn-danger remove-item"><i class="fa fa-close"></i>remove</button></div>');
             });
             $('.items').on('click', '.remove-item', function () {
                 $(this).parent().remove();
@@ -349,6 +354,36 @@
 
         });
 
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('body').on('change', 'select[name="branches_city_id[]"]', function () {
+                var city = $(this).val();
+                var href = '/dashboard/city-area/' + city;
+                var areasInput = $(this).parents('.locations').children().last().find('select');
+                $.ajax({
+                    url: href,
+                    type: 'get',
+                    dataType: 'JSON',
+                    success: function (data) {
+
+                        var selectOptions ='<option value="" selected>...</option>';
+                        data.forEach(element => {
+                            selectOptions += '<option value="'+element['id']+'">'+element['title']+'</option>'
+                        });
+                        areasInput.html(selectOptions);
+                    },
+                    error: function (xhr) {
+                        // Handle error response
+                        Swal.fire(
+                            '' + xhr.statusText + '',
+                            '' + xhr.responseJSON.message + '',
+                            'error'
+                        );
+                    }
+                });
+            });
+        });
     </script>
 @endsection
 

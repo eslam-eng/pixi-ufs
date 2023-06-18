@@ -7,7 +7,10 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\AwbHistoryController;
+use App\Http\Controllers\AwbStatusController;
 use App\Http\Controllers\ImportLogsController;
+use App\Http\Controllers\LocationsController;
+use App\Http\Controllers\PriceTableController;
 use App\Http\Livewire\Emptypage;
 use \App\Http\Livewire\Switcherpage;
 use App\Http\Controllers\ReceiverController;
@@ -46,6 +49,7 @@ Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
     });
     Route::resource('receivers',ReceiverController::class);
     Route::resource('companies',CompanyController::class);
+    Route::get('/city-area/{id}',[LocationsController::class, 'getLocationByParentId']);
     Route::resource('branches',BranchController::class)->except('show');
     Route::resource('departments',DepartmentController::class)->except('show');
     Route::get('receivers-download-template/form',[ReceiverController::class,'importForm'])->name('receivers-download-template.form');
@@ -58,6 +62,7 @@ Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
 //        Route::put('{id}',[AddressController::class,'update'])->name('address.update');
 //    });
     Route::resource('awbs',AwbController::class);
+    Route::resource('awb-status',AwbStatusController::class);
 
     Route::delete('awbs-delete-multiple',[AwbController::class,'deleteMultiple'])->name('awb.delete-multiple');
 
@@ -75,6 +80,16 @@ Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
     });
 
     Route::get('import-logs',[ImportLogsController::class,'index'])->name('import-logs.index');
+    Route::get('import-logs/{id}',[ImportLogsController::class,'showErrors'])->name('import-logs.errors');
+
+    Route::resource('prices', PriceTableController::class)->except('show');
+
+    Route::get('increase-prices', [PriceTableController::class,'increaseCompanyPriceForm'])->name('increase-prices.form');
+    Route::post('increase-prices', [PriceTableController::class,'increasePrice'])->name('increase-prices.store');
+
+    Route::get('prices-download-template-form',[PriceTableController::class,'importForm'])->name('prices-download-template-form');
+    Route::get('prices-download-template',[PriceTableController::class,'downloadPriceTableTemplate'])->name('prices-download-template');
+    Route::post('prices-import',[PriceTableController::class,'import'])->name('prices-import');
 
     Route::get('switcherpage', Switcherpage::class)->name('switcherpage');
 

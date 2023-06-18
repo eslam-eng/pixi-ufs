@@ -169,7 +169,7 @@
                         <thead>
                         <tr>
                             <td>@lang('app.name')</td>
-                            <td>@lang('app.actions')</td>
+                            <td width="250px">@lang('app.actions')</td>
                         </tr>
                         </thead>
                         <tbody>

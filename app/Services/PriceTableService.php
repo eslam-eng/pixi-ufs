@@ -7,6 +7,7 @@ use App\Exceptions\NotFoundException;
 use App\Models\Location;
 use App\Models\PriceTable;
 use App\QueryFilters\DepartmentsFilters;
+use App\QueryFilters\PriceTablesFilters;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,10 +23,15 @@ class PriceTableService extends BaseService
         return $this->model;
     }
 
+    public function listing(array $filters = [], array $withRelations = [], $perPage = 10): \Illuminate\Contracts\Pagination\CursorPaginator
+    {
+        return $this->priceTableQueryBuilder(filters: $filters, withRelations: $withRelations)->cursorPaginate($perPage);
+    }
+
     public function priceTableQueryBuilder(array $filters = [], array $withRelations = []): Builder
     {
-        $departments = $this->getQuery()->with($withRelations);
-        return $departments->filter(new DepartmentsFilters($filters));
+        $priceTables = $this->getQuery()->with($withRelations);
+        return $priceTables->filter(new PriceTablesFilters($filters));
     }
 
     /**
@@ -48,8 +54,6 @@ class PriceTableService extends BaseService
     public function update(int $id, PriceTableDTO $priceTableDTO): bool
     {
         $price_table = $this->findById($id);
-        if (!$price_table)
-            throw new NotFoundException(trans('lang.not_found'));
         $price_table->update($priceTableDTO->toArray());
         return true;
     }
@@ -63,8 +67,6 @@ class PriceTableService extends BaseService
     public function destroy(int $id): bool
     {
         $price_table = $this->findById($id);
-        if (!$price_table)
-            throw new NotFoundException(trans('lang.not_found'));
         $price_table->delete();
         return true;
     }
@@ -100,5 +102,18 @@ class PriceTableService extends BaseService
                 ->where('location_from',$base_city_id)->where('location_to',$base_distination)->first();
         }
         return $priceTable;
+    }
+
+    public function increaseCompanyPrice(int $company_id,float $increase_percentage): bool
+    {
+        $pricesForCompany = $this->getQuery()->where('company_id',$company_id)->get();
+        foreach ($pricesForCompany as $model)
+        {
+            $new_price = ceil($model->price * (1 + ($increase_percentage / 100)));
+            $new_additional_price = ceil($model->additional_kg_price * (1 + ($increase_percentage / 100)));
+            $model->update(['price'=>$new_price,'additional_kg_price'=>$new_additional_price]);
+        }
+        return true ;
+
     }
 }

@@ -149,8 +149,6 @@ class ReceiverController extends Controller
             $filters['id'] = $user->branch_id ;
         $withRelations = ['company:id,name'];
         $branches = $this->branchService->getAll(filters: $filters,withRelations: $withRelations);
-        ob_end_clean();
-        ob_start();
         return $excel->download(new ReceiversExport($branches), 'receivers' . time() . '.xlsx');
     }
 
@@ -159,7 +157,7 @@ class ReceiverController extends Controller
         try {
             DB::beginTransaction();
             $user = getAuthUser();
-            $importation_type = ImportTypeEnum::RECEIVERS;
+            $importation_type = ImportTypeEnum::RECEIVERS->value;
             $file = $request->file('file');
             $importObject = new ReceiversImport( creator: $user,importation_type: $importation_type);
             $importObject->import($file)->onQueue('default');
@@ -173,7 +171,6 @@ class ReceiverController extends Controller
         }catch (Exception $exception)
         {
             DB::rollBack();
-            dd($exception);
             $toast = [
                 'type' => 'success',
                 'title' => 'success',

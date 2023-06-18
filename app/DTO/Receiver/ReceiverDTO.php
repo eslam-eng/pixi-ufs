@@ -11,7 +11,7 @@ class ReceiverDTO extends BaseDTO
     public function __construct(
         protected string $name,
         protected string $phone1,
-        protected string $phone2,
+        protected ?string $phone2,
         protected ?string $receiving_company,
         protected ?string $receiving_branch,
         protected int    $company_id,

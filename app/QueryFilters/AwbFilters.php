@@ -21,7 +21,7 @@ class AwbFilters extends QueryFilter
 
     public function code($term)
     {
-        return $this->builder->where('code', $term);
+        return $this->builder->where('code',"LIKE","% $term%");
     }
 
     public function keyword($term)

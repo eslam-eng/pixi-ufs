@@ -129,6 +129,7 @@ return [
     'new_price_table'=>'Add New',
     'price_tables'=>'All Prices',
     'price_table'=>'Price Table',
+    'login_failed'=>'Login failed email/phone and password incorrect',
     'awb_status'=>'Awb Status',
     'new_awb_status'=>'Add New',
     'all_status'=>'All Statues',

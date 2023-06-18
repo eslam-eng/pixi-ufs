@@ -32,8 +32,10 @@ class AuthController extends Controller
                 'user'=>new AuthUserResource($user)
             ];
             return apiResponse(data: $data);
-        } catch (Exception|NotFoundException $e) {
-            return apiResponse($e->getMessage(), 'Unauthorized', $e->getCode());
+        } catch (NotFoundException $e) {
+            return apiResponse($e->getMessage(), $e->getMessage(), code: 422);
+        } catch (Exception $e) {
+            return apiResponse($e->getMessage(), 'there is an error please try again later', code: 422);
         }
     }
 
@@ -53,7 +55,7 @@ class AuthController extends Controller
     public function getProfileDetails()
     {
         try {
-            $user = auth('sanctum')->user();
+            $user = auth('sanctum')->user()->load('attachments');
             if(!$user)
                 throw new Exception(trans('app.unauthorized'));
             return apiResponse(data: AuthUserResource::make($user), message: trans('app.success_operation'));

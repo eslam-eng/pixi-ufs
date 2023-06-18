@@ -7,14 +7,15 @@ use App\Enums\UsersType;
 use App\Exceptions\NotFoundException;
 use App\Exports\ReceiversExport;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Awb\AddressUpdateRequest;
 use App\Http\Requests\FileUploadRequest;
-use App\Http\Requests\Receivers\PriceTableUpdateRequest;
 use App\Http\Requests\Receivers\ReceiverUpdateAddressAndPhone;
 use App\Http\Requests\Receivers\ReceiverUpdatePhone;
 use App\Imports\Receivers\PricesImport;
 use App\Services\BranchService;
 use App\Services\ReceiverService;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Excel;
 
@@ -38,10 +39,10 @@ class ReceiverController extends Controller
         }
     }
 
-    public function updateReceiverAddress(PriceTableUpdateRequest $request, $id)
+    public function updateReceiverAddress(AddressUpdateRequest $request, $id)
     {
         try {
-            $status = $this->receiverService->updateReceiverAddress(id: $id, data: $request->validated());
+            $status = $this->receiverService->updateReceiverAddress(id: $id, data: $request->toAddressDTO()->toArray());
             if (!$status)
                 return apiResponse(message: trans('app.something_went_wrong'), code: 422);
             return apiResponse(message: trans('app.success_operation'));

@@ -31,7 +31,9 @@ class AwbController extends Controller
     public function index(AwbsDataTable $dataTable, Request $request)
     {
         $user = auth()->user();
-        $filters = array_filter($request->get('filters', []));
+        $filters = array_filter($request->get('filters', []), function ($value) {
+            return ($value !== null && $value !== false && $value !== '');
+        });
         if ($user->type != UsersType::SUPERADMIN())
             $filters['company_id'] = $user->company_id;
         if ($user->type == UsersType::EMPLOYEE())

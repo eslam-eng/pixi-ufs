@@ -10,7 +10,7 @@
             <select id="receivers_search" name="receiver_id"
                     class="form-control form-select select2 js-example-basic-single"
                     data-bs-placeholder="Select receiver" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                <option selected disabled>@lang('app.search_receivers')</option>
+                <option value="" selected disabled>@lang('app.search_receivers')</option>
             </select>
         </div>
     </div>

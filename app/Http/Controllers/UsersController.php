@@ -49,7 +49,7 @@ class UsersController extends Controller
     {
         try{
             $permissions = Permission::all();
-            $permissions = $permissions->groupBy('category');
+            $permissions = $permissions->groupBy('group_name');
             return view('layouts.dashboard.users.create', compact('permissions'));
         }catch(Exception $e){
             return redirect()->back();
@@ -81,9 +81,9 @@ class UsersController extends Controller
     public function show($id)
     {
         try{
-            $user = $this->userService->findById(id: $id);
+            $user = $this->userService->findById(id: $id, withRelations: ['attachments']);
             $permissions = Permission::all();
-            $permissions = $permissions->groupBy('category');
+            $permissions = $permissions->groupBy('group_name');
             return view('layouts.dashboard.users.show', compact('user', 'permissions'));
         }catch(Exception $e){
             return redirect()->back();
@@ -101,7 +101,7 @@ class UsersController extends Controller
         try{
             $user = $this->userService->findById(id: $id);
             $permissions = Permission::all();
-            $permissions = $permissions->groupBy('category');
+            $permissions = $permissions->groupBy('group_name');
             return view('layouts.dashboard.users.edit', compact('user', 'permissions'));
         }catch(Exception $e){
             return redirect()->back();

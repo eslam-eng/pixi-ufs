@@ -24,6 +24,7 @@ class BranchController extends Controller
 {
     public function __construct(protected BranchService $branchService)
     {
+        $this->middleware(['permission:view_branches|edit_branches|create_branches']);
     }
 
     public function create(Request $request)

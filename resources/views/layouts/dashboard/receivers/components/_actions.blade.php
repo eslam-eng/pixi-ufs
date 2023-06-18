@@ -7,7 +7,9 @@
             <a href="{{route('awbs.show',$model->id)}}" class="dropdown-item">@lang('app.show')</a>
             <a href="{{route('awb-history.create',$model->id)}}" class="dropdown-item">@lang('app.history')</a>
 {{--            <a href="{{route('awbs.edit',$model->id)}}" class="dropdown-item">@lang('app.edit')</a>--}}
+            @can('delete_receiver')
             <button role="button" onclick="destroy('{{$url}}')" class="dropdown-item">@lang('app.delete')</button>
+            @endcan
         </div>
         <!-- dropdown-menu -->
     </div>

@@ -42,7 +42,7 @@ class BranchController extends Controller
             $toast = [
                 'type' => 'success',
                 'title' => 'success',
-                'message' => trans('app.receiver_created_successfully')
+                'message' => trans('app.success_operation')
             ];
             return to_route('companies.edit', $branchDTO->company_id)->with('toast',$toast);
         } catch (Exception $e) {
@@ -50,7 +50,7 @@ class BranchController extends Controller
             $toast = [
                 'type' => 'error',
                 'title' => 'success',
-                'message' => trans('app.receiver_created_successfully')
+                'message' => trans('app.faield_operation')
             ];
             return to_route('companies.edit', $branchDTO->company_id)->with('toast',$toast);
         }
@@ -66,7 +66,7 @@ class BranchController extends Controller
             $toast = [
                 'type' => 'error',
                 'title' => 'success',
-                'message' => trans('app.receiver_created_successfully')
+                'message' => $exception->getMessage()
             ];
             return back()->with('toast',$toast);
         }
@@ -87,7 +87,7 @@ class BranchController extends Controller
             $branchDTO = $request->toBranchDTO();
             $this->branchService->update($id, $branchDTO);
             DB::commit();
-            return redirect()->route('companies.edit', Arr::get($branchDTO->toArray(), 'company_id'));
+            return redirect()->route('companies.edit', $request->company_id);
         }catch (Exception $e) {
             DB::rollBack();
             return apiResponse(message: $e->getMessage(), code: 422);

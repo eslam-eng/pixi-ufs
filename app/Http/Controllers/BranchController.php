@@ -43,7 +43,7 @@ class BranchController extends Controller
                 'title' => 'success',
                 'message' => trans('app.success_operation')
             ];
-            return to_route('companies.edit', $request->company_id)->with('toast',$toast);
+            return to_route('companies.edit', $branchDTO->company_id)->with('toast',$toast);
         } catch (Exception $e) {
             DB::rollBack();
             $toast = [
@@ -51,7 +51,7 @@ class BranchController extends Controller
                 'title' => 'success',
                 'message' => trans('app.success_operation')
             ];
-            return to_route('companies.edit', $request->company_id)->with('toast',$toast);
+            return to_route('companies.edit', $branchDTO->company_id)->with('toast',$toast);
         }
     }
 

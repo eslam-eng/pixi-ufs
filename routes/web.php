@@ -51,7 +51,7 @@ Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
     Route::resource('companies',CompanyController::class);
     Route::get('/city-area/{id}',[LocationsController::class, 'getLocationByParentId']);
     Route::resource('branches',BranchController::class)->except('show');
-    Route::resource('departments',DepartmentController::class);
+    Route::resource('departments',DepartmentController::class)->except('show');
     Route::get('receivers-download-template/form',[ReceiverController::class,'importForm'])->name('receivers-download-template.form');
     Route::get('receivers-download-template',[ReceiverController::class,'downloadReceiversTemplate'])->name('receivers-download-template');
     Route::post('receivers-import',[ReceiverController::class,'import'])->name('receivers-import');

@@ -37,7 +37,7 @@
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.ceo')</div>
                                 <input class="form-control" name="ceo" value="{{old('ceo') ?? $company->ceo}}"
-                                       type="text" required>
+                                       type="text">
                                 @error('ceo')
                                 <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
                                 @enderror
@@ -226,7 +226,7 @@
                                             <a href="{{route('branches.edit', $branch->id)}}"
                                                class="dropdown-item">@lang('app.edit')</a>
                                             <div>
-                                                <button role="button" onclick="destroy('{{route('branches.destroy',$branch->id)}}')" class="dropdown-item">@lang('app.delete')</button>
+                                                <button role="button" onclick="destroy('{{route('branches.destroy', $branch->id)}}')" class="dropdown-item">@lang('app.delete')</button>
                                             </div>
                                         </div>
                                         <!-- dropdown-menu -->
@@ -278,7 +278,7 @@
                                             <a href="{{route('departments.edit', $department->id)}}"
                                                class="dropdown-item">@lang('app.edit')</a>
                                             <div>
-                                                <button role="button" onclick="destroy('{{route('departments.destroy',$department->id)}}')" class="dropdown-item">@lang('app.delete')</button>
+                                                <button role="button" onclick="destroy('{{route('departments.destroy', $department->id)}}')" class="dropdown-item">@lang('app.delete')</button>
                                             </div>
                                         </div>
                                         <!-- dropdown-menu -->

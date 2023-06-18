@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\AwbController;
 use App\Http\Controllers\Api\AwbHistoryController;
 use App\Http\Controllers\Api\AwbStatusController;
+use App\Http\Controllers\Api\LocationsController;
 use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\PhoneVerifyController;
 use App\Http\Controllers\Api\ReceiverController;
@@ -37,7 +38,7 @@ Route::group(['prefix' => 'auth'], function () {
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
 
-    Route::group(['prefix'=>'user'],function (){
+    Route::group(['prefix' => 'user'], function () {
         Route::get('profile', [AuthController::class, 'getProfileDetails']);
         Route::get('/destroy', [AuthController::class, 'destroy']);
         Route::post('/change-password', [AuthController::class, 'changePassword']);
@@ -52,8 +53,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     });
 
-    Route::group(['prefix' => 'awb-history'],function (){
-        Route::post('{awb_id}',[AwbHistoryController::class,'changeStatus']);
+    Route::group(['prefix' => 'awb-history'], function () {
+        Route::post('{awb_id}', [AwbHistoryController::class, 'changeStatus']);
     });
 
     Route::post('update-device-token', [UsersController::class, 'updateDeviceToken']);
@@ -70,6 +71,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('/update-phone-and-address/{id}', [ReceiverController::class, 'AddPhoneAndAddress']);
     });
 
+    Route::group(['prefix' => 'locations'], function () {
+        Route::get('cities', [LocationsController::class, 'getAllCities']);
+        Route::get('{parent_id}', [LocationsController::class, 'getLocationByParentId']);
+    });
 });
 
 Route::fallback(function () {

@@ -17,23 +17,17 @@ class PermissionsTableSeeder extends Seeder
     {
         $permissions = [
 
-            //start country permissions
+            //start locations permissions
            'locations'=>[
-               'create_country',
-               'edit_country',
-               'delete_country',
-               'view_country',
                'create_city',
                'edit_city',
                'delete_city',
                'view_city',
-               'create_governorate',
-               'edit_governorate',
-               'delete_governorate',
-               'view_governorate'
+               'create_area',
+               'edit_area',
+               'delete_area',
+               'view_area'
            ],
-            //end country permissions
-
 
             //start settings permissions
             'settings'=>[

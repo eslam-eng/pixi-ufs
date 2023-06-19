@@ -12,7 +12,9 @@
             <div class="card">
                 <div class="card-body">
                         <div class="row row-sm mb-4">
-                            @foreach ($user->attachments->where('type', App\Enums\AttachmentsType::PRIMARYIMAGE->value) as $attachment)
+                            @if($user->attachments()->count())
+                            @foreach ($user->attachments as $attachment)
+                            @if($attachment->type == App\Enums\AttachmentsType::PRIMARYIMAGE->value)
                             <div class="col-lg">
                                 <div class="text-wrap">
                                     <div class="example">
@@ -20,7 +22,9 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
                             @endforeach
+                            @endif
                         </div>
                         <div class="row row-sm mb-4">
                             <div class="col-lg">
@@ -94,38 +98,42 @@
                         <div class="row row-sm mb-4">
                             <div class="col-lg">
                                 <div class="col-lg">
-                                    <div class="main-content-label mg-b-5">@lang('app.status')</div>
-                                    <input disabled type="checkbox" {{ $user->status ? "checked":"" }}>
+                                    <label class="custom-control custom-checkbox custom-control-lg"> <input
+                                        type="checkbox" class="custom-control-input" name="status"
+                                        {{ $user->status ? "checked":"" }} @disabled(true)> <span
+                                        class="custom-control-label custom-control-label-lg  tx-20">@lang('app.status')</span>
+                                    </label>
                                 </div>
                             </div>
                         </div>
                         <div class="row row-sm mb-4">
-                            <div class="col-lg">
-                                {{-- permissions --}}
-                                @foreach($permissions as $key =>$permission)
+                            {{-- permissions --}}
+                            @foreach($permissions as $key =>$permission)
 
-                                    <div class="col-sm-4 col-xl-4 border-5">
-                                        <div class="card card-absolute">
-                                            <div class="card-header bg-primary">
-                                                <h5 class="text-white">{{trans('app.'.$key)}}</h5>
+                                <div class="col-sm-4 col-xl-4 border-5">
+                                    <div class="card card-absolute">
+                                        <div class="card-header bg-primary">
+                                            <h5 class="text-white">{{trans('app.'.$key)}}</h5>
+                                        </div>
+
+                                            <div class="card-body">
+                                                @foreach($permission as $item)
+                                                    <div class="mb-3 m-t-15">
+                                                        <div class="form-check checkbox checkbox-primary mb-0">                                                                
+                                                            <label class="custom-control custom-checkbox custom-control-lg"> <input
+                                                                type="checkbox" class="custom-control-input" name="status"
+                                                                {{ $user->can($item->name) ? "checked":""}} @disabled(true)> <span
+                                                                class="custom-control-label custom-control-label-lg  tx-20">@lang('app.'.$item->name)</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
                                             </div>
 
-                                                <div class="card-body">
-                                                    @foreach($permission as $item)
-                                                        <div class="mb-3 m-t-15">
-                                                            <div class="form-check checkbox checkbox-primary mb-0">
-                                                                <input class="form-check-input" name="permissions[]" value="{{$item->name}}" id="checkbox-primary-{{$item->id}}" type="checkbox" data-bs-original-title="" title="{{$item->name}}" {{ $user->can($item->name) ? "checked":""}} @disabled(true)>
-                                                                <label class="form-check-label" for="checkbox-primary-{{$item->id}}">{{$item->name}}</label>
-                                                            </div>
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-
-                                        </div>
                                     </div>
+                                </div>
 
-                                @endforeach
-                            </div>
+                            @endforeach
                         </div>
 
                         <div class="card-footer mt-4">

@@ -156,23 +156,19 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="row row-sm mb-4">
-                            <div class="col-lg">
-                                <div class="col-lg">
-                                    <div class="main-content-label mg-b-5">@lang('app.status')</div>
-                                    <input name="status" value="1"
-                                        placeholder="@lang('app.status')" type="checkbox" checked>
-
-                                    @error('status')
-                                    <div class="text-danger"> {{$message}}</div>
-                                    @enderror
-                                </div>
-                            </div>
+                        <div class="col-lg mt-2 mb-4">
+                            <label class="custom-control custom-checkbox custom-control-lg"> <input
+                                    type="checkbox" class="custom-control-input" name="status"
+                                    value="1" checked> <span
+                                    class="custom-control-label custom-control-label-lg  tx-20">@lang('app.status')</span>
+                            </label>
+                            @error('status')
+                            <div class="text-danger"> {{$message}}</div>
+                            @enderror
                         </div>
                         <div class="row row-sm mb-4">
-                            <div class="col-lg">
-                               {{-- permissions --}}
-                               @foreach($permissions as $key =>$permission)
+                            {{-- permissions --}}
+                            @foreach($permissions as $key =>$permission)
 
                                     <div class="col-sm-4 col-xl-4 border-5">
                                         <div class="card card-absolute">
@@ -184,8 +180,11 @@
                                                     @foreach($permission as $item)
                                                         <div class="mb-3 m-t-15">
                                                             <div class="form-check checkbox checkbox-primary mb-0">
-                                                                <input class="form-check-input" name="permissions[]" value="{{$item->name}}" id="checkbox-primary-{{$item->id}}" type="checkbox" data-bs-original-title="" title="{{$item->name}}">
-                                                                <label class="form-check-label" for="checkbox-primary-{{$item->id}}">{{$item->name}}</label>
+                                                                <label class="custom-control custom-checkbox custom-control-lg"> <input
+                                                                    type="checkbox" class="custom-control-input" name="permissions[]"
+                                                                    value="{{$item->name}}"> <span
+                                                                    class="custom-control-label custom-control-label-lg  tx-20">@lang('app.'.$item->name)</span>
+                                                                </label>
                                                             </div>
                                                         </div>
                                                     @endforeach
@@ -195,7 +194,6 @@
                                     </div>
 
                                 @endforeach
-                            </div>
                         </div>
 
                         <div class="card-footer mt-4">

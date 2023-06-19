@@ -21,6 +21,7 @@ class CompanyController extends Controller
 {
     public function __construct(protected CompanyService $companyService)
     {
+        $this->middleware(['permission:view_companies|edit_companies|create_companies']);
     }
 
     public function index(CompaniesDatatable $companiesDatatable, Request $request)

@@ -25,7 +25,9 @@
                             <a role="button" href="{{route('awb.import-form')}}" class="btn btn-success"><i class="fa fa-upload pe-2"></i>@lang('app.import')</a>
                             <a class="btn btn-dark" data-bs-target="#changeAwbsStatus" data-bs-toggle="modal" href="">@lang('app.change_status')</a>
                             <button class="btn btn-primary" data-bs-target="#print_awbs_modal" data-bs-toggle="modal"><i class="fa fa-print pe-2"></i>@lang('app.print')</button>
+                            @can('delete_shipment')
                             <button data-url="{{route('awb.delete-multiple')}}" data-csrf="{{csrf_token()}}" class="btn btn-danger delete-selected-btn"><i class="fa fa-trash pe-2"></i>@lang('app.delete_selected')</button>
+                            @endcan
                         </div>
                     </div>
                 </div>

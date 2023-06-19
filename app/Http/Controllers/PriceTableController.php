@@ -21,7 +21,7 @@ class PriceTableController extends Controller
 {
     public function __construct(protected PriceTableService $priceTableService)
     {
-
+        $this->middleware(['permission:view_price_tables|edit_price_tables|create_price_tables']);
     }
 
     /**

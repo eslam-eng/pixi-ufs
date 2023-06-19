@@ -156,45 +156,47 @@
                             </div>
                         </div>
                         <div class="row row-sm mb-4">
-                            <div class="col-lg">
-                                <div class="col-lg">
-                                    <div class="main-content-label mg-b-5">@lang('app.status')</div>
-                                    <input name="status" value="1"
-                                        placeholder="@lang('app.status')" type="checkbox" {{ $user->status ? "checked":"" }}>
-
-                                    @error('status')
-                                    <div class="text-danger"> {{$message}}</div>
-                                    @enderror
-                                </div>
+                            <div class="col-lg mt-2 mb-4">
+                                <label class="custom-control custom-checkbox custom-control-lg"> <input
+                                        type="checkbox" class="custom-control-input" name="status"
+                                        value="1" {{ $user->status ? "checked":"" }}> <span
+                                        class="custom-control-label custom-control-label-lg  tx-20">@lang('app.status')</span>
+                                </label>
+                                @error('status')
+                                <div class="text-danger"> {{$message}}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="row row-sm mb-4">
-                            <div class="col-lg">
-                                {{-- permissions --}}
-                                @foreach($permissions as $key =>$permission)
+                            {{-- permissions --}}
+                            @foreach($permissions as $key =>$permission)
 
-                                    <div class="col-sm-4 col-xl-4 border-5">
-                                        <div class="card card-absolute">
-                                            <div class="card-header bg-primary">
-                                                <h5 class="text-white">{{trans('app.'.$key)}}</h5>
+                                <div class="col-sm-4 col-xl-4 border-5">
+                                    <div class="card card-absolute">
+                                        <div class="card-header bg-primary">
+                                            <h5 class="text-white">{{trans('app.'.$key)}}</h5>
+                                        </div>
+
+                                            <div class="card-body">
+                                                @foreach($permission as $item)
+                                                    <div class="mb-3 m-t-15">
+                                                        <div class="form-check checkbox checkbox-primary mb-0">
+                                                            <label class="custom-control custom-checkbox custom-control-lg">
+                                                                <input
+                                                                type="checkbox" class="custom-control-input" name="permissions[]"
+                                                                value="{{$item->name}}"  {{ $user->can($item->name) ? "checked":""}}>
+                                                                <span class="custom-control-label custom-control-label-lg  tx-20">@lang('app.'.$item->name)</span>
+                                                            </label>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                @endforeach
                                             </div>
 
-                                                <div class="card-body">
-                                                    @foreach($permission as $item)
-                                                        <div class="mb-3 m-t-15">
-                                                            <div class="form-check checkbox checkbox-primary mb-0">
-                                                                <input class="form-check-input" name="permissions[]" value="{{$item->name}}" id="checkbox-primary-{{$item->id}}" type="checkbox" data-bs-original-title="" title="{{$item->name}}" {{ $user->can($item->name) ? "checked":""}}>
-                                                                <label class="form-check-label" for="checkbox-primary-{{$item->id}}">{{$item->name}}</label>
-                                                            </div>
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-
-                                        </div>
                                     </div>
+                                </div>
 
-                                @endforeach
-                            </div>
+                            @endforeach
                         </div>
 
                         <div class="card-footer mt-4">

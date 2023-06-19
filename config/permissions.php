@@ -9,8 +9,6 @@ return [
     |
     */
     'super_admin'=>[
-
-
             //start locations permissions
             'locations'=>[
                 'create_city',

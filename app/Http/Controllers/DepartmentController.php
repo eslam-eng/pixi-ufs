@@ -17,7 +17,9 @@ class DepartmentController extends Controller
 {
     public function __construct(protected DepartmentService $departmentService)
     {
-        $this->middleware(['permission:view_departments|edit_departments|create_departments']);
+        $this->middleware('permission:view_departments', ['only' => ['index']]);
+        $this->middleware('permission:edit_departments', ['only' => ['edit','update']]);
+        $this->middleware('permission:create_departments', ['only' => ['create','store']]);
     }
 
     /**

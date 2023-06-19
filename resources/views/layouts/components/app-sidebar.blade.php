@@ -22,65 +22,67 @@
 								</li> --}}
 
 								<li class="side-item side-item-category">@lang('app.menu')</li>
+                                @can('view_shipment')
+                                    <li class="slide">
+                                        <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24"><path d="M19.937 8.68c-.011-.032-.02-.063-.033-.094a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.99.99 0 0 0-.05-.258zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path></svg><span class="side-menu__label">@lang('app.awb')</span><i class="angle fe fe-chevron-right"></i></a>
+                                        <ul class="slide-menu">
+                                            <li class="side-menu__label1"><a href="javascript:void(0);">Utilities</a></li>
+                                            @can('create_shipment')
+                                                <li><a class="slide-item" href="{{route('awbs.create')}}">@lang('app.new_shipment')</a></li>
+                                            @endcan
+                                            <li><a class="slide-item" href="{{route('awbs.index')}}">@lang('app.prepare_shipment')</a></li>
+                                        </ul>
+                                    </li>
+                                @endcan
 
-                                <li class="slide">
-                                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24"><path d="M19.937 8.68c-.011-.032-.02-.063-.033-.094a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.99.99 0 0 0-.05-.258zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path></svg><span class="side-menu__label">@lang('app.awb')</span><i class="angle fe fe-chevron-right"></i></a>
-                                    <ul class="slide-menu">
-                                        <li class="side-menu__label1"><a href="javascript:void(0);">Utilities</a></li>
-                                        @can('create_shipment')
-                                        <li><a class="slide-item" href="{{route('awbs.create')}}">@lang('app.new_shipment')</a></li>
-                                        @endcan
-                                        @can('view_shipment')
-                                        <li><a class="slide-item" href="{{route('awbs.index')}}">@lang('app.prepare_shipment')</a></li>
-                                        @endcan
-                                    </ul>
-                                </li>
 
-                                <li class="side-item side-item-category">@lang('app.companies_receivers')</li>
+                                @can('view_companies')
+                                    <li class="side-item side-item-category">@lang('app.companies_receivers')</li>
 
-                                <li class="slide">
-                                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24"><path d="M10 3H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM9 9H5V5h4v4zm11-6h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zm-1 6h-4V5h4v4zm-9 4H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1zm-1 6H5v-4h4v4zm8-6c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4zm0 6c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2z"></path></svg><span class="side-menu__label" style="font-size: 11px">@lang('app.companies_receivers')</span><i class="angle fe fe-chevron-right"></i></a>
-                                    <ul class="slide-menu">
-                                        @can('view_receivers')
-                                        <li><a class="slide-item" href="{{route('receivers.index')}}">@lang('app.receivers')</a></li>
-                                        @endcan
-                                        @can('view_companies')
-										<li><a class="slide-item" href="{{route('companies.index')}}">@lang('app.companies')</a></li>
-                                        @endcan
-                                    </ul>
-                                </li>
+                                    <li class="slide">
+                                        <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24"><path d="M10 3H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM9 9H5V5h4v4zm11-6h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zm-1 6h-4V5h4v4zm-9 4H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1zm-1 6H5v-4h4v4zm8-6c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4zm0 6c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2z"></path></svg><span class="side-menu__label" style="font-size: 11px">@lang('app.companies_receivers')</span><i class="angle fe fe-chevron-right"></i></a>
+                                        <ul class="slide-menu">
+                                            @can('view_receivers')
+                                                <li><a class="slide-item" href="{{route('receivers.index')}}">@lang('app.receivers')</a></li>
+                                            @endcan
+                                            <li><a class="slide-item" href="{{route('companies.index')}}">@lang('app.companies')</a></li>
+                                        </ul>
+                                    </li>
+                                @endcan
 
-                                <li class="slide">
-                                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24">
-                                            <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/> <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"/>
-                                        </svg><span class="side-menu__label">@lang('app.price_table')</span><i class="angle fe fe-chevron-right"></i></a>
-                                    <ul class="slide-menu">
-                                        @can('create_price_tables')
-                                        <li><a class="slide-item" href="{{route('prices.create')}}">@lang('app.new_price_table')</a></li>
-                                        @endcan
-                                        @can('view_price_tables')
-                                        <li><a class="slide-item" href="{{route('prices.index')}}">@lang('app.price_tables')</a></li>
-                                        @endcan
-                                    </ul>
-                                </li>
 
-                                <li class="slide">
-                                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24">
-                                            <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/> <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"/>
-                                        </svg><span class="side-menu__label">@lang('app.awb_status')</span><i class="angle fe fe-chevron-right"></i></a>
-                                    <ul class="slide-menu">
-                                        @can('create_shipment_status')
-                                        <li><a class="slide-item" href="{{route('awb-status.create')}}">@lang('app.new_awb_status')</a></li>
-                                        @endcan
-                                        @can('view_shipment_status')
-                                        <li><a class="slide-item" href="{{route('awb-status.index')}}">@lang('app.all_status')</a></li>
-                                        @endcan
-                                    </ul>
-                                </li>
+                                @can('view_price_tables')
+                                    <li class="slide">
+                                        <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24">
+                                                <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/> <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"/>
+                                            </svg><span class="side-menu__label">@lang('app.price_table')</span><i class="angle fe fe-chevron-right"></i></a>
+                                        <ul class="slide-menu">
+                                            @can('create_price_tables')
+                                                <li><a class="slide-item" href="{{route('prices.create')}}">@lang('app.new_price_table')</a></li>
+                                            @endcan
+                                            <li><a class="slide-item" href="{{route('prices.index')}}">@lang('app.price_tables')</a></li>
+                                        </ul>
+                                    </li>
+                                @endcan
+
+
+                                @can('view_shipment_status')
+                                    <li class="slide">
+                                        <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24">
+                                                <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/> <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"/>
+                                            </svg><span class="side-menu__label">@lang('app.awb_status')</span><i class="angle fe fe-chevron-right"></i></a>
+                                        <ul class="slide-menu">
+                                            @can('create_shipment_status')
+                                                <li><a class="slide-item" href="{{route('awb-status.create')}}">@lang('app.new_awb_status')</a></li>
+                                            @endcan
+                                            <li><a class="slide-item" href="{{route('awb-status.index')}}">@lang('app.all_status')</a></li>
+                                        </ul>
+                                    </li>
+                                @endcan
 
                                 <li class="slide">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
@@ -92,22 +94,23 @@
 
                                 <li class="side-item side-item-category">@lang('app.users')</li>
 
-                                <li class="slide">
-                                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24"><path d="M19.937 8.68c-.011-.032-.02-.063-.033-.094a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.99.99 0 0 0-.05-.258zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path></svg><span class="side-menu__label">@lang('app.users')</span><i class="angle fe fe-chevron-right"></i></a>
-                                    <ul class="slide-menu">
-                                        <li class="side-menu__label1"><a href="javascript:void(0);">Utilities</a></li>
-                                        @can('create_users')
-                                        <li><a class="slide-item" href="{{route('users.create')}}">@lang('app.new_user')</a></li>
-                                        @endcan
-                                        @can('view_users')
-                                        <li><a class="slide-item" href="{{route('users.index')}}">@lang('app.users')</a></li>
-                                        @endcan
-                                    </ul>
-                                </li>
+                                @can('view_users')
+                                    <li class="slide">
+                                        <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24"><path d="M19.937 8.68c-.011-.032-.02-.063-.033-.094a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.99.99 0 0 0-.05-.258zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path></svg><span class="side-menu__label">@lang('app.users')</span><i class="angle fe fe-chevron-right"></i></a>
+                                        <ul class="slide-menu">
+                                            <li class="side-menu__label1"><a href="javascript:void(0);">Utilities</a></li>
+                                            @can('create_users')
+                                                <li><a class="slide-item" href="{{route('users.create')}}">@lang('app.new_user')</a></li>
+                                            @endcan
+                                            <li><a class="slide-item" href="{{route('users.index')}}">@lang('app.users')</a></li>
+                                        </ul>
+                                    </li>
+                                @endcan
+
 
                                 {{--                                dashboard settings--}}
-                                
+
                                 @can('view_settings')
                                 <li class="slide">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">

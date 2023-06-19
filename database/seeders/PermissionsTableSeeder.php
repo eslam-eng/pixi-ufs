@@ -36,7 +36,7 @@ class PermissionsTableSeeder extends Seeder
                 ],
             //end settings permissions
 
-            
+
             //start shipment permissions
             'shipment'=>[
                 'create_shipment',
@@ -79,6 +79,7 @@ class PermissionsTableSeeder extends Seeder
                 'edit_receivers',
                 'delete_receivers',
                 'view_receivers',
+                'receivers_details',
             ],
             //end receivers permissions
 
@@ -106,6 +107,7 @@ class PermissionsTableSeeder extends Seeder
                 'edit_users',
                 'delete_users',
                 'view_users',
+                'view_users_details',
             ],
             //end users permissions
 
@@ -114,7 +116,7 @@ class PermissionsTableSeeder extends Seeder
         foreach($permissions as $key=>$permission)
         {
             foreach ($permission as $item){
-                Permission::create(['guard_name'=>'web','group_name'=>$key,'name'=>$item]);
+                Permission::create(['group_name'=>$key,'name'=>$item]);
                 $user->givePermissionTo($item);
             }
         }

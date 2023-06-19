@@ -9,7 +9,6 @@ use App\Traits\EscapeUnicodeJson;
 use App\Traits\Filterable;
 use App\Traits\HasAttachment;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -20,14 +19,14 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class Awb extends Model
 {
-    use HasFactory, Filterable, EscapeUnicodeJson, SoftDeletes, HasAttachment,LogsActivity;
+    use HasFactory, Filterable, EscapeUnicodeJson, SoftDeletes, HasAttachment, LogsActivity;
 
     protected $fillable = [
-        'code', 'user_id','company_id' ,'branch_id','receiver_city_id', 'receiver_area_id',
-        'department_id', 'receiver_id','receiver_reference',
+        'code', 'user_id', 'company_id', 'branch_id', 'receiver_city_id', 'receiver_area_id',
+        'department_id', 'receiver_id', 'receiver_reference',
         'receiver_data', 'payment_type', 'service_type', 'is_return', 'shipment_type',
         'zone_price', 'additional_kg_price', 'collection', 'weight',
-        'pieces', 'actual_recipient','card_number','title'
+        'pieces', 'actual_recipient', 'card_number', 'title'
     ];
 
     protected $casts = [
@@ -64,6 +63,7 @@ class Awb extends Model
     {
         return $this->belongsTo(Location::class, 'receiver_area_id');
     }
+
     public function receiverCity()
     {
         return $this->belongsTo(Location::class, 'receiver_city_id');
@@ -91,7 +91,7 @@ class Awb extends Model
 
     public function getReceiverAddressAttribute(): string
     {
-        return Str::limit(Arr::get($this->receiver_data,'address1'),90);
+        return Str::limit(Arr::get($this->receiver_data, 'address1'), 90);
     }
 
 
@@ -101,7 +101,7 @@ class Awb extends Model
             $auth_user = auth()->user();
         if ($auth_user->type != UsersType::COURIER->value)
             return $builder;
-        return $builder->whereIn('area_id',$auth_user->area_id)->whereHas('latestStatus',fn($query)=>$query->where('awb_status_id',AwbStatuses::CREATE_SHIPMENT()));
+        return $builder->whereIn('area_id', $auth_user->area_id)->whereHas('latestStatus', fn($query) => $query->where('awb_status_id', AwbStatuses::CREATE_SHIPMENT()));
 
     }
 
@@ -110,9 +110,9 @@ class Awb extends Model
         return LogOptions::defaults()
             ->useLogName('awbs')
             ->logOnly([
-                'user.id','user.name', 'payment_type', 'service_type', 'is_return', 'shipment_type',
+                'user.id', 'user.name', 'payment_type', 'service_type', 'is_return', 'shipment_type',
                 'zone_price', 'additional_kg_price', 'collection', 'weight',
-                'pieces', 'actual_recipient','card_number','title'
+                'pieces', 'actual_recipient', 'card_number', 'title'
             ])
             ->logOnlyDirty()
             ->setDescriptionForEvent(fn(string $eventName) => "You have {$eventName} Awb");

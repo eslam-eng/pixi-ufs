@@ -4,11 +4,14 @@
             <i class="icon ion-ios-arrow-down tx-11 mg-l-3"></i>
         </button>
         <div class="dropdown-menu" style="">
-            <a href="{{route('awbs.show',$model->id)}}" class="dropdown-item">@lang('app.show')</a>
-            <a href="{{route('awb-history.create',$model->id)}}" class="dropdown-item">@lang('app.history')</a>
-{{--            <a href="{{route('awbs.edit',$model->id)}}" class="dropdown-item">@lang('app.edit')</a>--}}
-            @can('delete_receiver')
-            <button role="button" onclick="destroy('{{$url}}')" class="dropdown-item">@lang('app.delete')</button>
+            @can('receivers_details')
+                <a href="{{route('receivers.show',$model->id)}}" class="dropdown-item">@lang('app.show')</a>
+            @endcan
+            @can('edit_receivers')
+                <a href="{{route('receivers.edit',$model->id)}}" class="dropdown-item">@lang('app.edit')</a>
+            @endcan
+            @can('delete_receivers')
+                <button role="button" onclick="destroy('{{$url}}')" class="dropdown-item">@lang('app.delete')</button>
             @endcan
         </div>
         <!-- dropdown-menu -->

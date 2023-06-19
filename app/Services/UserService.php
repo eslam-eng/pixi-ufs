@@ -73,7 +73,11 @@ class UserService extends BaseService
     {
         $user = $this->findById($id);
         $data = $userDTO->toArray();
-        $user->update(Arr::except($data, 'profile_image'));
+        if(!isset($data['password']))
+            $user->update(Arr::except($data, ['profile_image', 'password']));
+        else
+            $user->update(Arr::except($data, 'profile_image'));
+
         if (isset($data['profile_image']))
         {
             $user->deleteAttachmentsLogo();

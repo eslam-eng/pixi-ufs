@@ -45,7 +45,7 @@
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.password')</div>
                                 <input class="form-control" value="{{old('password')}}" name="password" placeholder="@lang('app.password')"
-                                       type="password" required>
+                                       type="password">
                                 @error('password')
                                 <div class="text-danger"> {{$message}}</div>
                                 @enderror
@@ -53,7 +53,7 @@
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.password_confirmation')</div>
                                 <input class="form-control" value="{{old('password_confirmation')}}" name="password_confirmation" placeholder="@lang('app.password_confirmation')"
-                                       type="password" required>
+                                       type="password">
                                 @error('password_confirmation')
                                 <div class="text-danger"> {{$message}}</div>
                                 @enderror

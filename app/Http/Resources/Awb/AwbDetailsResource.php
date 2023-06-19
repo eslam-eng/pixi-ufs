@@ -26,6 +26,8 @@ class AwbDetailsResource extends JsonResource
             'shipment_type' => $this->shipment_type,
             'payment_type' => $this->payment_typ,
             'service_type' => $this->service_type,
+            'lat'=> Arr::get($this->receiver_data,'lat'),
+            'lng'=> Arr::get($this->receiver_data,'lng'),
             'note1' => $this->note1,
             'note2' => $this->note2,
             'collection' => $this->collection,

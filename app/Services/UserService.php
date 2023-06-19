@@ -16,7 +16,7 @@ class UserService extends BaseService
 
     public function __construct(private User $model)
     {
-        
+
     }
 
     public function getModel(): Model
@@ -29,7 +29,7 @@ class UserService extends BaseService
      {
          return $this->queryGet(filters: $filters, withRelations: $withRelations)->cursorPaginate($perPage);
      }
- 
+
      public function queryGet(array $filters = [], array $withRelations = []): builder
      {
          $users = $this->getQuery()->with($withRelations);
@@ -58,7 +58,7 @@ class UserService extends BaseService
             $user->storeAttachment($fileData);
         }
         if($user)
-            $user->givePermissionTo(Arr::get($userDTO->toArray(), 'permissions'));
+            $user->givePermissionTo(Arr::get($data, 'permissions'));
 
     }
 
@@ -67,7 +67,7 @@ class UserService extends BaseService
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return true
      */
     public function update(UserDTO $userDTO, $id)
     {
@@ -81,7 +81,7 @@ class UserService extends BaseService
             $fileData['type'] = AttachmentsType::PRIMARYIMAGE;
             $user->storeAttachment($fileData);
         }
-        $user->syncPermissions(Arr::get($userDTO->toArray(), 'permissions'));
+        $user->syncPermissions(Arr::get($data, 'permissions'));
         return true;
     }
 

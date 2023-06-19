@@ -91,7 +91,7 @@
                                 @enderror
                             </div>
 
-                            
+
                         </div>
 
 
@@ -167,8 +167,9 @@
                             @enderror
                         </div>
                         <div class="row row-sm mb-4">
-                            {{-- permissions --}}
-                            @foreach($permissions as $key =>$permission)
+                            @if(count($permissions))
+                                {{-- permissions --}}
+                                @foreach($permissions as $key =>$permission)
 
                                     <div class="col-sm-4 col-xl-4 border-5">
                                         <div class="card card-absolute">
@@ -176,24 +177,24 @@
                                                 <h5 class="text-white">{{trans('app.'.$key)}}</h5>
                                             </div>
 
-                                                <div class="card-body">
-                                                    @foreach($permission as $item)
-                                                        <div class="mb-3 m-t-15">
-                                                            <div class="form-check checkbox checkbox-primary mb-0">
-                                                                <label class="custom-control custom-checkbox custom-control-lg"> <input
+                                            <div class="card-body">
+                                                @foreach($permission as $item)
+                                                    <div class="mb-3 m-t-15">
+                                                        <div class="form-check checkbox checkbox-primary mb-0">
+                                                            <label class="custom-control custom-checkbox custom-control-lg"> <input
                                                                     type="checkbox" class="custom-control-input" name="permissions[]"
-                                                                    value="{{$item->name}}"> <span
-                                                                    class="custom-control-label custom-control-label-lg  tx-20">@lang('app.'.$item->name)</span>
-                                                                </label>
-                                                            </div>
+                                                                    value="{{$item}}"> <span
+                                                                    class="custom-control-label custom-control-label-lg  tx-20">@lang('app.'.$item)</span>
+                                                            </label>
                                                         </div>
-                                                    @endforeach
-                                                </div>
-
+                                                    </div>
+                                                @endforeach
+                                            </div>
                                         </div>
                                     </div>
-
                                 @endforeach
+                            @endif
+
                         </div>
 
                         <div class="card-footer mt-4">

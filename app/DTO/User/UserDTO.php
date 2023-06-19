@@ -100,7 +100,7 @@ class UserDTO extends BaseDTO
         return [
             'name' => $this->name,
             'email' => $this->email,
-            'password' => $this->password,
+            'password' => bcrypt($this->password),
             'phone' => $this->phone,
             'type' => $this->type,
             'status' => $this->status,

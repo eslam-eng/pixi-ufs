@@ -96,8 +96,8 @@ class UsersDatatable extends DataTable
         return [
             Column::make('id')->title("#"),
             Column::make('name')->title(trans('app.name'))->orderable(false),
-            Column::make('email')->title(trans('app.email'))->searchable(false)->orderable(false),
-            Column::make('phone')->title(trans('app.phone'))->searchable(false)->orderable(false),
+            Column::make('email')->title(trans('app.email'))->orderable(false),
+            Column::make('phone')->title(trans('app.phone'))->orderable(false),
             Column::make('status')->title(trans('app.status'))->orderable(false),
             Column::make('type')->title(trans('app.type'))->orderable(false)->searchable(false),
             Column::make('company_id')->title(trans('app.company'))->searchable(false)->orderable(false),

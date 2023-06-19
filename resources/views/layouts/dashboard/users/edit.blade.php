@@ -92,7 +92,7 @@
                                 @enderror
                             </div>
 
-                            
+
                         </div>
 
 
@@ -169,13 +169,14 @@
                         </div>
                         <div class="row row-sm mb-4">
                             {{-- permissions --}}
-                            @foreach($permissions as $key =>$permission)
+                            @if(count($permissions))
+                                @foreach($permissions as $key =>$permission)
 
-                                <div class="col-sm-4 col-xl-4 border-5">
-                                    <div class="card card-absolute">
-                                        <div class="card-header bg-primary">
-                                            <h5 class="text-white">{{trans('app.'.$key)}}</h5>
-                                        </div>
+                                    <div class="col-sm-4 col-xl-4 border-5">
+                                        <div class="card card-absolute">
+                                            <div class="card-header bg-primary">
+                                                <h5 class="text-white">{{trans('app.'.$key)}}</h5>
+                                            </div>
 
                                             <div class="card-body">
                                                 @foreach($permission as $item)
@@ -183,20 +184,22 @@
                                                         <div class="form-check checkbox checkbox-primary mb-0">
                                                             <label class="custom-control custom-checkbox custom-control-lg">
                                                                 <input
-                                                                type="checkbox" class="custom-control-input" name="permissions[]"
-                                                                value="{{$item->name}}"  {{ $user->can($item->name) ? "checked":""}}>
-                                                                <span class="custom-control-label custom-control-label-lg  tx-20">@lang('app.'.$item->name)</span>
+                                                                    type="checkbox" class="custom-control-input" name="permissions[]"
+                                                                    value="{{$item}}"  {{ $user->can($item) ? "checked":""}}>
+                                                                <span class="custom-control-label custom-control-label-lg  tx-20">@lang('app.'.$item)</span>
                                                             </label>
                                                         </div>
-                                                        
+
                                                     </div>
                                                 @endforeach
                                             </div>
 
+                                        </div>
                                     </div>
-                                </div>
 
-                            @endforeach
+                                @endforeach
+                            @endif
+
                         </div>
 
                         <div class="card-footer mt-4">

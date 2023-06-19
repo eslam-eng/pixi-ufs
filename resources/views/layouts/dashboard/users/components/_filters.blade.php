@@ -10,7 +10,7 @@
                 </div>
                 <div>
 
-                    <div class="collapse show" id="collapseExample" style="">
+                    <div class="collapse" id="collapseExample" style="">
                         <div class="mt-4">
                             <form class="datatables_parameters">
                                 <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
@@ -43,18 +43,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row row-sm mb-4">
-                                        <div class="col-lg">
-                                            <div class="main-content-label mg-b-5">@lang('app.email')</div>
-                                            <input class="form-control" value="{{old('email')}}" name="email"
-                                                   placeholder="@lang('app.email')" type="email">
-                                        </div>
-                                        <div class="col-lg">
-                                            <div class="main-content-label mg-b-5">@lang('app.phone')</div>
-                                            <input class="form-control" value="{{old('phone')}}" name="phone"
-                                                   placeholder="@lang('app.phone')" type="text">
-                                        </div>
-                                    </div>
+
                                     <div class="row row-sm mb-4">
                                         <div class="col-lg">
                                             <div class="main-content-label mg-b-5">@lang('app.status')</div>
@@ -72,7 +61,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
 
                                 <div class="card-footer">
@@ -83,7 +72,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </form>
                         </div>
                     </div>

@@ -16,7 +16,9 @@ class PermissionsTableSeeder extends Seeder
     public function run()
     {
         $user = User::find(1);
+
         $permissions = config('permissions.super_admin');
+
         foreach($permissions as $key=>$permission)
         {
             foreach ($permission as $item){

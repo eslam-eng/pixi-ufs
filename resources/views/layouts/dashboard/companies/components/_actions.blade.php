@@ -5,8 +5,12 @@
         </button>
         <div class="dropdown-menu" style="">
             <a href="{{route('companies.show',$model->id)}}" class="dropdown-item">@lang('app.show')</a>
+            @can('edit_companies')
             <a href="{{route('companies.edit',$model->id)}}" class="dropdown-item">@lang('app.edit')</a>
+            @endcan
+            @can('delete_companies')
             <button role="button" onclick="destroy('{{$url}}')" class="dropdown-item">@lang('app.delete')</button>
+            @endcan
         </div>
         <!-- dropdown-menu -->
     </div>

@@ -90,20 +90,20 @@
             </div>
             {{-- start branches --}}
             <div class="card">
+                @can('create_branches')
                 <div class="card-header">
-                    <div class="card-header">
-                        <div class="form-group mb-0 mt-3 justify-content-end">
-                            <div>
-                                <form method="get" action="{{ route('branches.create') }}">
-                                    <h4 class="pe-4">
-                                        <input type="hidden" name="company_id" value="{{ $company->id }}">
-                                        <button class="btn ripple btn-primary" type="submit">@lang('app.add_new_branch')</button>
-                                    </h4>
-                                </form>
-                            </div>
+                    <div class="form-group mb-0 mt-3 justify-content-end">
+                        <div>
+                            <form method="get" action="{{ route('branches.create') }}">
+                                <h4 class="pe-4">
+                                    <input type="hidden" name="company_id" value="{{ $company->id }}">
+                                    <button class="btn ripple btn-primary" type="submit">@lang('app.add_new_branch')</button>
+                                </h4>
+                            </form>
                         </div>
                     </div>
                 </div>
+                @endcan
                 <div class="card-body">
                     <table class="table table-bordered table-striped">
                         <thead>
@@ -133,11 +133,15 @@
                                             <i class="icon ion-ios-arrow-down tx-11 mg-l-3"></i>
                                         </button>
                                         <div class="dropdown-menu" style="">
+                                            @can('edit_branches')
                                             <a href="{{route('branches.edit', $branch->id)}}"
-                                               class="dropdown-item">@lang('app.edit')</a>
+                                                class="dropdown-item">@lang('app.edit')</a>
+                                            @endcan
+                                            @can('delete_branches')
                                             <div>
                                                 <button role="button" onclick="destroy('{{route('branches.destroy', $branch->id)}}')" class="dropdown-item">@lang('app.delete')</button>
                                             </div>
+                                            @endcan
                                         </div>
                                     </div>
                                 </td>
@@ -152,6 +156,7 @@
             {{-- start departments --}}
 
             <div class="card">
+                @can('create_departments')
                 <div class="card-header">
                     <div class="form-group mb-0 mt-3 justify-content-end">
                         <div>
@@ -164,6 +169,7 @@
                         </div>
                     </div>
                 </div>
+                @endcan
                 <div class="card-body">
                     <table class="table table-bordered table-striped">
                         <thead>
@@ -183,11 +189,15 @@
                                             <i class="icon ion-ios-arrow-down tx-11 mg-l-3"></i>
                                         </button>
                                         <div class="dropdown-menu" style="">
+                                            @can('edit_departments')
                                             <a href="{{route('departments.edit', $department->id)}}"
-                                               class="dropdown-item">@lang('app.edit')</a>
+                                                class="dropdown-item">@lang('app.edit')</a>
+                                            @endcan
+                                            @can('delete_departments')
                                             <div>
                                                 <button role="button" onclick="destroy('{{route('departments.destroy', $department->id)}}')" class="dropdown-item">@lang('app.delete')</button>
                                             </div>
+                                            @endcan
                                         </div>
                                         <!-- dropdown-menu -->
                                     </div>

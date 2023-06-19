@@ -11,7 +11,7 @@ enum UsersType: int
     use Options, Values, InvokableCases;
 
     case SUPERADMIN = 1;
-    case ADMIN = 2;
+    case ADMIN = 2; //company
     case EMPLOYEE = 3;
     case COURIER = 4;
 }

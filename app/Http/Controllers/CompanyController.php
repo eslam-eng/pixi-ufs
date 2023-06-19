@@ -5,11 +5,9 @@ namespace App\Http\Controllers;
 use App\DataTables\CompaniesDatatable;
 use App\Enums\UsersType;
 use App\Exceptions\NotFoundException;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Companies\CompanyStoreRequest;
 use App\Http\Requests\Companies\CompanyUpdateRequest;
 use App\Http\Resources\Company\CompanyDropDownResource;
-use App\Http\Resources\Company\CompanyResource;
 use App\Services\CompanyService;
 use App\Services\LocationsService;
 use Exception;
@@ -21,6 +19,9 @@ class CompanyController extends Controller
 {
     public function __construct(protected CompanyService $companyService)
     {
+        $this->middleware('permission:view_companies', ['only' => ['index']]);
+        $this->middleware('permission:edit_companies', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:create_companies', ['only' => ['create', 'store']]);
     }
 
     public function index(CompaniesDatatable $companiesDatatable, Request $request)
@@ -30,7 +31,7 @@ class CompanyController extends Controller
                 return ($value !== null && $value !== false && $value !== '');
             });
             $withRelations = [];
-            return $companiesDatatable->with(['filters'=>$filters,'withRelations'=>$withRelations])->render('layouts.dashboard.companies.index');
+            return $companiesDatatable->with(['filters' => $filters, 'withRelations' => $withRelations])->render('layouts.dashboard.companies.index');
         } catch (Exception $e) {
             return apiResponse(message: trans('lang.something_went_wrong'), code: $e->getCode());
         }
@@ -54,7 +55,7 @@ class CompanyController extends Controller
                 'title' => 'success',
                 'message' => trans('app.success_operation')
             ];
-            return redirect()->route('companies.index')->with(['toast' =>$toast]);
+            return redirect()->route('companies.index')->with(['toast' => $toast]);
         } catch (Exception $e) {
             DB::rollBack();
             $toast = [
@@ -62,7 +63,7 @@ class CompanyController extends Controller
                 'title' => 'error',
                 'message' => trans('app.receiver_created_successfully')
             ];
-            return back()->with('toast',$toast);
+            return back()->with('toast', $toast);
         }
     }
 
@@ -71,18 +72,18 @@ class CompanyController extends Controller
         $filters = [];
         $auth_user = getAuthUser();
         if ($auth_user->type != UsersType::SUPERADMIN)
-            $filters['id'] = $auth_user->id ;
-        $companies =  $this->companyService->getCompaniesForSelectDropDown($filters);
+            $filters['id'] = $auth_user->id;
+        $companies = $this->companyService->getCompaniesForSelectDropDown($filters);
         return CompanyDropDownResource::collection($companies);
     }
 
     public function edit(int $id)
     {
-        try{
+        try {
             $withRelations = ['branches', 'departments'];
             $company = $this->companyService->findById(id: $id, withRelations: $withRelations);
             return view('layouts.dashboard.companies.edit', compact('company'));
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return redirect()->back();
         }
     }
@@ -93,7 +94,7 @@ class CompanyController extends Controller
             $withRelations = [];
             $company = $this->companyService->findById(id: $id, withRelations: $withRelations);
             return view('layouts.dashboard.companies.show', compact('company'));
-        }catch (Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             return apiResponse(message: $e->getMessage(), code: 422);
         }
@@ -111,8 +112,8 @@ class CompanyController extends Controller
                 'title' => 'success',
                 'message' => trans('app.success_operation')
             ];
-            return redirect()->route('companies.index')->with(['toast' =>$toast]);
-        }catch (Exception $e) {
+            return redirect()->route('companies.index')->with(['toast' => $toast]);
+        } catch (Exception $e) {
             DB::rollBack();
             return apiResponse(message: $e->getMessage(), code: 422);
         }
@@ -123,7 +124,7 @@ class CompanyController extends Controller
         try {
             $this->companyService->destroy(id: $id);
             return apiResponse(message: trans('lang.success_operation'));
-        }catch (QueryException $e) {
+        } catch (QueryException $e) {
             // Exception was thrown, do something to handle the error
             $errorCode = $e->errorInfo[1];
             if ($errorCode == 1451) {

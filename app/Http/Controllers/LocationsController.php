@@ -10,6 +10,7 @@ class LocationsController extends Controller
 {
     public function __construct(private LocationsService $locationService)
     {
+        
     }
 
     public function getAllCities(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection

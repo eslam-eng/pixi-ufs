@@ -22,7 +22,7 @@
                 <div class="card-header">
                     <div class="breadcrumb-header justify-content-between">
                         <div class="left-content">
-                            <a class="btn btn-rounded btn-primary" href="{{route('companies.create')}}"><i class="fe fe-plus me-2"></i>{{ trans('app.new') }}</a>
+                            <a class="btn btn-primary" href="{{route('companies.create')}}"><i class="fe fe-plus me-2"></i>{{ trans('app.new') }}</a>
                         </div>
 {{--                        <div class="justify-content-center">--}}
 {{--                            <button type="button" class="btn btn-secondary">--}}

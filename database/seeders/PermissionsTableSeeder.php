@@ -13,11 +13,17 @@ class PermissionsTableSeeder extends Seeder
      *
      * @return void
      */
+    public $permisions ;
+    public function __construct()
+    {
+        $this->permisions = config('permissions.super_admin');
+    }
+
     public function run()
     {
-        $permissions =config('permissions.super_admin');
         $user = User::find(1);
-        foreach($permissions as $key=>$permission)
+
+        foreach($this->permisions as $key=>$permission)
         {
             foreach ($permission as $item){
                 Permission::create(['group_name'=>$key,'name'=>$item]);

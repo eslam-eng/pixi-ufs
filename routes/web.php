@@ -14,6 +14,7 @@ use App\Http\Controllers\PriceTableController;
 use App\Http\Livewire\Emptypage;
 use \App\Http\Livewire\Switcherpage;
 use App\Http\Controllers\ReceiverController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,9 +50,10 @@ Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
     });
     Route::resource('receivers',ReceiverController::class);
     Route::resource('companies',CompanyController::class);
+    Route::resource('branches',BranchController::class);
+    Route::resource('departments',DepartmentController::class);
+    Route::resource('users',UsersController::class);
     Route::get('/city-area/{id}',[LocationsController::class, 'getLocationByParentId']);
-    Route::resource('branches',BranchController::class)->except('show');
-    Route::resource('departments',DepartmentController::class)->except('show');
     Route::get('receivers-download-template/form',[ReceiverController::class,'importForm'])->name('receivers-download-template.form');
     Route::get('receivers-download-template',[ReceiverController::class,'downloadReceiversTemplate'])->name('receivers-download-template');
     Route::post('receivers-import',[ReceiverController::class,'import'])->name('receivers-import');

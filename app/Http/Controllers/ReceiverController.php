@@ -24,7 +24,7 @@ class ReceiverController extends Controller
 {
     public function __construct(protected ReceiverService $receiverService, protected BranchService $branchService)
     {
-
+        $this->middleware(['permission:view_receivers|edit_receivers|create_receivers']);
     }
 
     /**

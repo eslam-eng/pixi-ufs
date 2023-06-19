@@ -26,6 +26,9 @@ class AwbController extends Controller
 {
     public function __construct(public AwbService $awbService)
     {
+        $this->middleware('permission:view_shipment', ['only' => ['index']]);
+        $this->middleware('permission:edit_shipment', ['only' => ['edit','update']]);
+        $this->middleware('permission:create_shipment', ['only' => ['create','store']]);
     }
 
     public function index(AwbsDataTable $dataTable, Request $request)

@@ -72,7 +72,7 @@ class AwbsDataTable extends DataTable
             })
             ->addColumn('action', function (Awb $awb) {
                 return view(
-                    'layouts.dashboard.receivers.components._actions',
+                    'layouts.dashboard.awb.components._actions',
                     ['model' => $awb, 'url' => route('awbs.destroy', $awb->id)]
                 );
             });

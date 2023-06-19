@@ -11,7 +11,7 @@ class UserDTO extends BaseDTO
     /**
      * @param string $name',
      * @param string $email',
-     * @param string $password',
+     * @param ?string $password',
      * @param string $phone',
      * @param int $type',
      * @param ?bool $status',
@@ -28,7 +28,7 @@ class UserDTO extends BaseDTO
     public function __construct(
         protected string $name,
         protected string $email,
-        protected string $password,
+        protected ?string $password,
         protected string $phone,
         protected int $type,
         protected ?int $status,

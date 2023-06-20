@@ -25,18 +25,21 @@ class ReceiverUpdateRequest extends BaseRequest
     {
         return [
             'name' => 'required|string',
-            'phone' => 'required|string|unique:receivers,phone',
+            'phone1' => ['required','string',Rule::unique('receivers','phone1')->where('company_id',$this->company_id)->ignore($this->receiver)],
+            'phone2' => 'nullable|string',
             'receiving_company' => 'nullable|string',
+            'receiving_branch' => 'nullable|string',
+            'company_id' => 'required|numeric|exists:companies,id',
             'branch_id' => 'required|numeric|exists:branches,id',
             'city_id' => 'required|integer|exists:locations,id',
             'area_id' => 'required|integer|exists:locations,id',
-            'reference' => ['nullable','string',Rule::unique('receivers','reference')->where('company_id',$this->user->company_id)->ignore($this->receiver)],
+            'reference' => ['nullable','string',Rule::unique('receivers','reference')->where('company_id',$this->company_id)->ignore($this->receiver)],
             'title' => 'nullable|string',
             'notes' => 'nullable|string',
-            'address' => 'required|string',
+            'address1' => 'required|string',
+            'address2' => 'nullable|string',
             'lat' => 'string|nullable',
             'lng' => 'string|nullable',
-            'postal_code' => 'string|nullable',
             'map_url' => 'string|nullable',
         ];
     }

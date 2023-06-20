@@ -9,6 +9,7 @@ use App\Services\BranchService;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class BranchController extends Controller
@@ -38,7 +39,7 @@ class BranchController extends Controller
                 'title' => 'success',
                 'message' => trans('app.success_operation')
             ];
-            return to_route('companies.edit', $branchDTO->company_id)->with('toast', $toast);
+            return to_route('companies.edit', Arr::get($branchDTO->toArray(), 'company_id'))->with('toast', $toast);
         } catch (Exception $e) {
             DB::rollBack();
             $toast = [
@@ -46,7 +47,7 @@ class BranchController extends Controller
                 'title' => 'success',
                 'message' => trans('app.failed_operation')
             ];
-            return to_route('companies.edit', $branchDTO->company_id)->with('toast', $toast);
+            return to_route('companies.edit', Arr::get($branchDTO->toArray(), 'company_id'))->with('toast', $toast);
         }
     }
 

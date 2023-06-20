@@ -65,7 +65,7 @@ class ReceiverController extends Controller
                 'title' => 'success',
                 'message' => trans('app.receiver_created_successfully')
             ];
-            return back()->with('toast',$toast);
+            return redirect()->route('receivers.index')->with('toast',$toast);
         } catch (Exception $e) {
             $toast = [
                 'type' => 'error',
@@ -83,7 +83,7 @@ class ReceiverController extends Controller
         try {
             $withRelations = ['branch.company:id,name','addresses'=>fn($query)=>$query->with(['city','area'])];
             $receiver = $this->receiverService->findById(id: $id, withRelations: $withRelations);
-            return ReceiverEditResource::make($receiver);
+            return view('layouts.dashboard.receivers.show',['receiver'=>$receiver]);
 
         }catch (Exception|NotFoundException $exception)
         {
@@ -108,9 +108,19 @@ class ReceiverController extends Controller
         try {
             $receiverDTO = ReceiverDTO::fromRequest($request);
             $this->receiverService->update($id, $receiverDTO);
-            return apiResponse(message: trans('lang.success_operation'));
-        } catch (Exception|NotFoundException $e) {
-            return apiResponse(message: trans('lang.something_went_wrong'), code: 422);
+            $toast = [
+                'type' => 'success',
+                'title' => 'success',
+                'message' => trans('app.success_operation')
+            ];
+            return redirect()->route('receivers.index')->with('toast',$toast);
+        } catch (Exception $e) {
+            $toast = [
+                'type' => 'error',
+                'title' => 'error',
+                'message' => $e->getMessage()
+            ];
+            return back()->with('toast',$toast);
         }
     }
 

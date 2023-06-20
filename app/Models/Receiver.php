@@ -18,7 +18,7 @@ class Receiver extends Model
     protected $guarded = 'id';
     protected $fillable = [
         'name', 'phone1','phone2',
-        'receiving_company', 'company_id', 'branch_id',
+        'receiving_company', 'receiving_branch', 'company_id', 'branch_id',
         'address1', 'address2', 'city_id', 'area_id','lat','lng','map_url',
         'reference', 'title', 'status', 'notes'
     ];

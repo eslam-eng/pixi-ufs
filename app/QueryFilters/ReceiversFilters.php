@@ -19,7 +19,7 @@ class ReceiversFilters extends QueryFilter
 
     public function company_id($term)
     {
-        return $this->builder->whereRelation('branch.company','id',$term);
+        return $this->builder->where('company_id',$term);
     }
 
     public function branch_id($term)
@@ -35,12 +35,12 @@ class ReceiversFilters extends QueryFilter
 
     public function city_id($term)
     {
-        return $this->builder->whereHas('addresses',fn($address)=>$address->where('city_id',$term));
+        return $this->builder->where('city_id',$term);
     }
 
     public function area_id($term)
     {
-        return $this->builder->whereHas('addresses',fn($address)=>$address->where('area_id',$term));
+        return $this->builder->where('area_id',$term);
 
     }
 

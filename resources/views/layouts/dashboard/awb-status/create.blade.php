@@ -31,16 +31,6 @@
                                 <div class="text-danger"> {{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.is_final')</div>
-                                <select class="form-control" name="is_final">
-                                       <option value="1">{{ trans('app.yes') }}</option>
-                                       <option value="0">{{ trans('app.no') }}</option>
-                                </select>
-                                @error('is_final')
-                                <div class="text-danger"> {{$message}}</div>
-                                @enderror
-                            </div>
                         </div>
                         <div class="row row-sm mb-4">
                             <div class="col-lg">

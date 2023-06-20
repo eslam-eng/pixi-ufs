@@ -16,19 +16,6 @@
                                 <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
                                     <div class="row row-sm mb-4">
                                         <div class="col-lg">
-                                            <div class="main-content-label mg-b-5">@lang('app.is_final')</div>
-                                            <select class="form-control" name="is_final">
-                                                <option value="" selected>choose...</option>
-                                                <option value="1">{{ trans('app.yes') }}</option>
-                                                <option value="0">{{ trans('app.no') }}</option>
-                                            </select>
-                                            @error('is_final')
-                                            <div class="text-danger"> {{$message}}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="row row-sm mb-4">
-                                        <div class="col-lg">
                                             <div class="main-content-label mg-b-5">@lang('app.stepper')</div>
                                             <select class="form-control" name="stepper">
                                                 <option value="" selected>choose..</option>

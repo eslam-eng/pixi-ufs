@@ -13,7 +13,7 @@
                 <div class="card-body">
                         <div class="row row-sm mb-4">
                             @if($user->attachments()->count())
-                            @foreach ($user->attachments as $attachment)
+                            @foreach (array($user->attachments) as $attachment)
                             @if($attachment->type == App\Enums\AttachmentsType::PRIMARYIMAGE->value)
                             <div class="col-lg">
                                 <div class="text-wrap">

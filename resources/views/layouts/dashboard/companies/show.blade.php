@@ -97,7 +97,7 @@
                             <form method="get" action="{{ route('branches.create') }}">
                                 <h4 class="pe-4">
                                     <input type="hidden" name="company_id" value="{{ $company->id }}">
-                                    <button class="btn ripple btn-primary" type="submit">@lang('app.add_new_branch')</button>
+                                    <button class="btn ripple btn-primary" type="submit"><i class="fa fa-plus"></i>@lang('app.add_new_branch')</button>
                                 </h4>
                             </form>
                         </div>
@@ -163,7 +163,7 @@
                             <form method="get" action="{{ route('departments.create') }}">
                                 <h4 class="pe-4">
                                     <input type="hidden" name="company_id" value="{{ $company->id }}">
-                                    <button class="btn ripple btn-primary" type="submit">@lang('app.add_new_department')</button>
+                                    <button class="btn ripple btn-primary" type="submit"><i class="fa fa-plus"></i>@lang('app.add_new_department')</button>
                                 </h4>
                             </form>
                         </div>

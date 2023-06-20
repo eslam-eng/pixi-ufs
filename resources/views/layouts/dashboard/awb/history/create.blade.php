@@ -100,9 +100,10 @@
                                     <div class="featured_icon1"></div>
                                 </li>
                                 <li class="mt-0 activity border br-5 p-2">
-                                    <div><span class="text-dark float-end">{{isset($history->created_at)?$history->created_at->format('Y-m-d h:i A'):"-"}}</span></div>
+                                    <div>
+                                        <span class="text-dark float-end">{{isset($history->created_at)?$history->created_at->format('Y-m-d h:i A'):"-"}}</span></div>
 
-                                    <p class="mb-2 font-weight-semibold text-dark tx-13">{{$history->status->name}}</p>
+                                    <p class="mb-2 font-weight-semibold text-dark tx-13">{{$history->status->name}} <span class="pd-12 text-danger"><strong>changed By({{$history->user->name}})</strong></span></p>
                                     <p class="text-muted mt-0 mb-0">{{$history->status->description}}</p>
                                     @isset($history->lat,$history->lng)
                                         <a href="https://www.google.com/maps@' . {{$history->lat}} . ',' . {{$history->lng}} ?entry=ttu" class="tx-12 text-dark text-end">

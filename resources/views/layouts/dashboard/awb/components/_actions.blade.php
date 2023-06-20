@@ -4,7 +4,7 @@
             <i class="icon ion-ios-arrow-down tx-11 mg-l-3"></i>
         </button>
         <div class="dropdown-menu" style="">
-            @can('shipment_details')
+            @can('view_shipment')
                 <a href="{{route('awbs.show',$model->id)}}" class="dropdown-item">@lang('app.show')</a>
             @endcan
             @can('edit_shipment')

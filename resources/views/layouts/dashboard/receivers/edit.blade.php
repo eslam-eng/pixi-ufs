@@ -119,7 +119,7 @@
                                 <div class="row row-sm mb-4">
                                     <div class="col-lg">
                                         <div class="main-content-label mg-b-5">@lang('app.address1')</div>
-                                        <input class="form-control" name="address1" value="{{old('address1') ?? $receiver->address1}}"  placeholder="@lang('app.address')"
+                                        <input class="form-control" name="address1" value="{{$receiver->address1}}"  placeholder="@lang('app.address')"
                                                type="text" required>
 
                                         @error('address1')
@@ -129,7 +129,7 @@
 
                                     <div class="col-lg">
                                         <div class="main-content-label mg-b-5">@lang('app.address2')</div>
-                                        <input class="form-control" name="address2" value="{{old('address2') ?? $receiver->address2}}"  placeholder="@lang('app.address')"
+                                        <input class="form-control" name="address2" value="{{$receiver->address2}}"  placeholder="@lang('app.address')"
                                                type="text">
 
                                         @error('address2')
@@ -143,18 +143,18 @@
                                 <div class="row row-sm mb-4">
                                     <div class="col-lg">
                                         <div class="main-content-label mg-b-5">@lang('app.lat')</div>
-                                        <input class="form-control" value="{{old('lat') ?? $receiver->lat}}" name="lat" placeholder="@lang('app.lat')"
+                                        <input class="form-control" value="{{$receiver->lat}}" name="lat" placeholder="@lang('app.lat')"
                                                type="text">
                                     </div>
                                     <div class="col-lg">
                                         <div class="main-content-label mg-b-5">@lang('app.lng')</div>
-                                        <input class="form-control" value="{{old('lng') ?? $receiver->lng}}" name="lng" placeholder="@lang('app.lng')"
+                                        <input class="form-control" value="{{ $receiver->lng}}" name="lng" placeholder="@lang('app.lng')"
                                                type="text">
                                     </div>
 
                                     <div class="col-lg">
                                         <div class="main-content-label mg-b-5">@lang('app.map_url')</div>
-                                        <input class="form-control" value="{{old('map_url') ?? $receiver->map_url}}" name="map_url" placeholder="@lang('app.map_url')"
+                                        <input class="form-control" value="{{$receiver->map_url}}" name="map_url" placeholder="@lang('app.map_url')"
                                                type="text">
                                     </div>
                                 </div>

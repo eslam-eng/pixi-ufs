@@ -189,7 +189,7 @@
                                 <form method="get" action="{{ route('branches.create') }}">
                                     <input type="hidden" name="company_id" value="{{ $company->id }}">
                                     <button class="btn btn-primary"
-                                            type="submit">@lang('app.add_new_branch')</button>
+                                            type="submit"><i class="fa fa-plus py-2"></i>@lang('app.add_new_branch')</button>
                                 </form>
                             </div>
                         </div>
@@ -257,7 +257,7 @@
                                 <form method="get" action="{{ route('departments.create') }}">
                                     <input type="hidden" name="company_id" value="{{ $company->id }}">
                                     <button class="btn btn-primary"
-                                            type="submit">@lang('app.add_new_department')</button>
+                                            type="submit"><i class="fa fa-plus py-2"></i>@lang('app.add_new_department')</button>
                                 </form>
                             </div>
                         </div>

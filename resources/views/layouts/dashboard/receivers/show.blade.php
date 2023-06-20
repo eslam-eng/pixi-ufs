@@ -53,7 +53,8 @@
                             </div>
 
                             <div class="col-lg">
-                               <livewire:branch/>
+                                <div class="main-content-label mg-b-5">@lang('app.branch')</div>
+                                <label class="form-control">{{$receiver->branch->name}}</label>
                             </div>
                         </div>
 

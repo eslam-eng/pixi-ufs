@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('code')->nullable()->unique();
-            $table->tinyInteger('is_final')->default(\App\Enums\ActivationStatus::INACTIVE());
             $table->enum('stepper',\App\Enums\Stepper::values())->default(\App\Enums\Stepper::INCOMPANY());
             $table->enum('type',\App\Enums\AwbStatusCategory::values())->default(\App\Enums\AwbStatusCategory::AWB());
             $table->string('sms')->nullable();

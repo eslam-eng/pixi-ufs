@@ -11,7 +11,7 @@ class AwbStatus extends Model
 {
     use HasFactory, Filterable;
 
-    protected $fillable = ['name', 'is_final', 'stepper', 'code','description','type', 'sms'];
+    protected $fillable = ['name', 'stepper', 'code','description','type', 'sms'];
 
     public function getStatusTypeAttribute(): string
     {

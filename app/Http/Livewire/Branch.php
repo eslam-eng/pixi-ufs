@@ -23,7 +23,10 @@ class Branch extends Component
     {
         $user = getAuthUser();
         switch ($user->type){
-            case UsersType::SUPERADMIN():
+            case UsersType::SUPERADMIN() && isset($this->branches_for_company_id):
+                $this->branches  = app()->make(BranchService::class)->getAll(filters:['company_id'=>$this->branches_for_company_id],withRelations: ['city','area']);
+                break;
+            case UsersType::SUPERADMIN() && is_null($this->branches_for_company_id):
                 $this->branches  = collect();
                 break;
             case UsersType::ADMIN() && isset($this->branches_for_company_id) :

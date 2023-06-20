@@ -38,7 +38,7 @@ class ReceiverController extends Controller
             if ($user->type != UsersType::SUPERADMIN())
                 $filters['company_id'] = $user->company_id ;
 
-            $withRelations = ['city','area','branch:id,name,company_id','branch.company:id,name'];
+            $withRelations = ['city','area','branch:id,name,company_id','company:id,name'];
             return $receiversDatatable->with(['filters'=>$filters,'withRelations'=>$withRelations])->render('layouts.dashboard.receivers.index');
         } catch (Exception $e) {
             $toast = [

@@ -18,7 +18,7 @@
                         <div class="row row-sm mb-4">
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.name')</div>
-                                <input class="form-control" name="name" value="{{old('name') ?? $company->name}}"
+                                <input class="form-control" name="name" value="{{ $company->name}}"
                                        type="text" required>
                                 @error('name')
                                 <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
@@ -27,7 +27,7 @@
 
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.email')</div>
-                                <input class="form-control" name="email" value="{{old('email') ?? $company->email}}"
+                                <input class="form-control" name="email" value="{{$company->email}}"
                                        type="email" required>
                                 @error('email')
                                 <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
@@ -36,7 +36,7 @@
 
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.ceo')</div>
-                                <input class="form-control" name="ceo" value="{{old('ceo') ?? $company->ceo}}"
+                                <input class="form-control" name="ceo" value="{{$company->ceo}}"
                                        type="text">
                                 @error('ceo')
                                 <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
@@ -45,7 +45,7 @@
 
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.phone')</div>
-                                <input class="form-control" value="{{old('phone') ?? $company->phone}}" name="phone"
+                                <input class="form-control" value="{{$company->phone}}" name="phone"
                                        type="text" required>
                                 @error('phone')
                                 <div class="text-danger"> {{$message}}</div>
@@ -90,7 +90,7 @@
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.num_custom_fields')</div>
                                 <input class="form-control"
-                                       value="{{old('num_custom_fields') ?? $company->num_custom_fields}}"
+                                       value="{{$company->num_custom_fields}}"
                                        name="num_custom_fields"
                                        type="number">
 
@@ -120,7 +120,7 @@
                         <div class="row row-sm mb-4">
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.notes')</div>
-                                <input class="form-control" value="{{old('notes') ?? $company->notes}}" name="notes"
+                                <input class="form-control" value="{{$company->notes}}" name="notes"
                                        type="text">
 
                                 @error('notes')
@@ -134,7 +134,7 @@
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.address')</div>
                                 <input class="form-control" name="address"
-                                       value="{{old('address') ?? $company->address}}"
+                                       value="{{$company->address}}"
                                        type="text" required>
 
                                 @error('address')
@@ -167,11 +167,11 @@
                         <div class="card-footer mt-4">
                             <div class="form-group mb-0 mt-3 justify-content-end">
                                 <div>
-                                    <button type="submit" class="btn btn-rounded btn-success"><i
+                                    <button type="submit" class="btn btn-success"><i
                                             class="fa fa-save pe-2"></i>@lang('app.submit')</button>
 
                                     <a role="button" href="{{route('companies.index')}}"
-                                       class="btn btn-rounded btn-danger"><i
+                                       class="btn btn-danger"><i
                                             class="fa fa-backward pe-2"></i>@lang('app.back')</a>
                                 </div>
                             </div>
@@ -188,7 +188,7 @@
                             <div>
                                 <form method="get" action="{{ route('branches.create') }}">
                                     <input type="hidden" name="company_id" value="{{ $company->id }}">
-                                    <button class="btn btn-rounded btn-primary"
+                                    <button class="btn btn-primary"
                                             type="submit">@lang('app.add_new_branch')</button>
                                 </form>
                             </div>
@@ -220,7 +220,7 @@
                                 <td>{{$branch->area?->title}}</td>
                                 <td>
                                     <div>
-                                        <button data-bs-toggle="dropdown" class="btn btn-rounded btn-primary btn-block"
+                                        <button data-bs-toggle="dropdown" class="btn btn-primary btn-block"
                                                 aria-expanded="false">@lang('app.actions')
                                             <i class="icon ion-ios-arrow-down tx-11 mg-l-3"></i>
                                         </button>
@@ -256,7 +256,7 @@
                             <div>
                                 <form method="get" action="{{ route('departments.create') }}">
                                     <input type="hidden" name="company_id" value="{{ $company->id }}">
-                                    <button class="btn btn-rounded btn-primary"
+                                    <button class="btn btn-primary"
                                             type="submit">@lang('app.add_new_department')</button>
                                 </form>
                             </div>
@@ -278,7 +278,7 @@
                                 <td>{{$department->name}}</td>
                                 <td>
                                     <div>
-                                        <button data-bs-toggle="dropdown" class="btn btn-rounded btn-primary btn-block"
+                                        <button data-bs-toggle="dropdown" class="btn btn-primary btn-block"
                                                 aria-expanded="false">@lang('app.actions')
                                             <i class="icon ion-ios-arrow-down tx-11 mg-l-3"></i>
                                         </button>
@@ -287,7 +287,7 @@
                                             <a href="{{route('departments.edit', $department->id)}}"
                                                 class="dropdown-item">@lang('app.edit')</a>
                                             @endcan
-                                            
+
                                             @can('delete_departments')
                                             <div>
                                                 <button role="button" onclick="destroy('{{route('departments.destroy', $department->id)}}')" class="dropdown-item">@lang('app.delete')</button>

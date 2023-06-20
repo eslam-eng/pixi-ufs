@@ -86,7 +86,7 @@ class UsersController extends Controller
                 'title' => 'success',
                 'message' => trans('app.user_created_successfully')
             ];
-            return back()->with('toast',$toast);
+            return redirect()->route('users.index')->with('toast',$toast);
         } catch (Exception $e) {
             $toast = [
                 'type' => 'error',

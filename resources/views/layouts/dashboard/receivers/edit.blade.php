@@ -24,7 +24,7 @@
                         <div class="row row-sm mb-4">
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.receiver_name')</div>
-                                <input class="form-control" name="name" value="{{old('name') ?? $receiver->name}}" placeholder="@lang('app.receiver_name')"
+                                <input class="form-control" name="name" value="{{$receiver->name}}" placeholder="@lang('app.receiver_name')"
                                        type="text" required>
                                 @error('name')
                                     <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
@@ -33,7 +33,7 @@
 
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.phone1')</div>
-                                <input class="form-control" value="{{old('phone1') ?? $receiver->phone1}}" name="phone1" placeholder="@lang('app.receiver_phone')"
+                                <input class="form-control" value="{{$receiver->phone1}}" name="phone1" placeholder="@lang('app.receiver_phone')"
                                        type="text" required>
                                 @error('phone1')
                                     <div class="text-danger"> {{$message}}</div>
@@ -42,7 +42,7 @@
 
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.phone2')</div>
-                                <input class="form-control" value="{{old('phone2') ?? $receiver->phone2}}" name="phone2" placeholder="@lang('app.receiver_phone')"
+                                <input class="form-control" value="{{$receiver->phone2}}" name="phone2" placeholder="@lang('app.receiver_phone')"
                                        type="text">
                                 @error('phone2')
                                 <div class="text-danger"> {{$message}}</div>
@@ -53,7 +53,7 @@
                         <div class="row row-sm mb-4">
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.receiving_company')</div>
-                                <input class="form-control" value="{{old('receiving_company') ?? $receiver->receiving_company}}" name="receiving_company"
+                                <input class="form-control" value="{{$receiver->receiving_company}}" name="receiving_company"
                                        placeholder="@lang('app.receiving_company')" type="text">
 
                                 @error('receiving_company')
@@ -63,7 +63,7 @@
 
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.receiving_branch')</div>
-                                <input class="form-control" value="{{old('receiving_branch') ?? $receiver->receiving_branch}}" name="receiving_branch"
+                                <input class="form-control" value="{{$receiver->receiving_branch}}" name="receiving_branch"
                                        placeholder="@lang('app.receiving_branch')" type="text">
 
                                 @error('receiving_branch')
@@ -71,12 +71,26 @@
                                 @enderror
                             </div>
 
+                        </div>
+
+                        <div class="row row-sm mb-4">
+
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.reference')</div>
-                                <input class="form-control" value="{{old('reference') ?? $receiver->reference}}" name="reference" placeholder="@lang('app.reference')"
+                                <input class="form-control" value="{{$receiver->reference}}" name="reference" placeholder="@lang('app.reference')"
                                        type="text">
 
                                 @error('reference')
+                                <div class="text-danger"> {{$message}}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-lg">
+                                <div class="main-content-label mg-b-5">@lang('app.title')</div>
+                                <input class="form-control" value="{{$receiver->title}}" name="title" placeholder="@lang('app.title')"
+                                       type="text">
+
+                                @error('title')
                                 <div class="text-danger"> {{$message}}</div>
                                 @enderror
                             </div>

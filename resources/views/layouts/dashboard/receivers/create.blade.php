@@ -74,6 +74,30 @@
                             </div>
                         </div>
 
+                        <div class="row row-sm mb-4">
+
+
+                            <div class="col-lg">
+                                <div class="main-content-label mg-b-5">@lang('app.reference')</div>
+                                <input class="form-control" value="{{old('reference')}}" name="reference" placeholder="@lang('app.reference')"
+                                       type="text">
+
+                                @error('reference')
+                                <div class="text-danger"> {{$message}}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-lg">
+                                <div class="main-content-label mg-b-5">@lang('app.title')</div>
+                                <input class="form-control" value="{{old('title')}}" name="title" placeholder="@lang('app.title')"
+                                       type="text">
+
+                                @error('title')
+                                <div class="text-danger"> {{$message}}</div>
+                                @enderror
+                            </div>
+                        </div>
+
 
                         <div class="row row-sm mb-4">
                             <div class="col-lg">

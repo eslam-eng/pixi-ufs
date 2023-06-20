@@ -92,7 +92,7 @@
                             </div>
 
                             <div class="col-lg">
-                               <livewire:branch/>
+                               @livewire('branch',['branches_for_company_id' => $receiver->company_id,'selected_branch' => $receiver->branch_id])
                                 @error('branch')
                                     <div class="text-danger"> {{$message}}</div>
                                 @enderror
@@ -153,7 +153,7 @@
                                         @enderror
                                     </div>
                                     <div class="col-lg">
-                                        @livewire("location.areas",["areas_for_city_id" => old('city_id'),"selected_area" => old('area_id')])
+                                        @livewire("location.areas",["areas_for_city_id" =>  $receiver->city_id,"selected_area" => $receiver->area_id])
                                     </div>
                                     @error('area_id')
                                     <div class="text-danger"> {{$message}}</div>

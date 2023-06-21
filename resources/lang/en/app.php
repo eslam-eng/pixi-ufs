@@ -84,7 +84,6 @@ return [
     'department_data'=>'Department Data',
     'importation_type'=>'Importation Type',
     'add_company'=>'Add-Company',
-    'companies_page_title'=>'Companies',
     'filter'=>'Filter',
     'print'=>'print',
     'change_status'=>'Change Status',
@@ -141,7 +140,11 @@ return [
     'sms'=>'SMS',
     'description'=>'Description',
     'settings'=>'Settings',
-    'dashboard_settings'=>'Dashboard-Settings',
+    'dashboard_settings'=>'Dashboard Settings',
+    'yes'=>'yes',
+    'no'=>'no',
+    'success_operation'=>'success operation',
+
     //start permissions translations
     'create_city'=>'create city',
     'edit_city'=>'edit city',
@@ -201,7 +204,7 @@ return [
     'add_user'=>'add user',
     'all_users'=>'all users',
     'users_filter'=>'users filter',
-    'users_page_title'=>'users page title',
+    'users_page_title'=>'users',
     'edit_user'=>'edit user',
     'new_user'=>'new user',
     'are_you_sure'=>'are you sure',
@@ -217,10 +220,10 @@ return [
     //end awb status
     
     //start price tables
-    'price_table_page_title'=>'price table page title',
+    'price_table_page_title'=>'price table',
     'all_prices'=>'all prices',
     'edit_price'=>'edit price',
-    'prices_page_title'=>'prices page title',
+    'prices_page_title'=>'prices',
     
     //end price tables
     
@@ -229,19 +232,19 @@ return [
     'companies'=>'companies',
     'company_name'=>'Company name',
     'edit_company'=>'edit company',
-    'companies_page_title'=>'companies page title',
+    'companies_page_title'=>'companies',
     
     //end companies
     
     //start branches
     'edit_branch'=>'edit branch',
-    'branches_page_title'=>'branches page title',
+    'branches_page_title'=>'branches',
     
     
     //end branches
     
     //start departments
-    'departments_page_title'=>'departments page title',
+    'departments_page_title'=>'departments',
     'edit_department'=>'edit department',
     
     //end departments

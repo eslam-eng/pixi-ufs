@@ -3,7 +3,7 @@
 @section('content')
 
     {{--    breadcrumb --}}
-    @include('layouts.components.breadcrumb',['title' => trans('users_page_title'),'first_list_item' => trans('app.users'),'last_list_item' => trans('app.add_user')])
+    @include('layouts.components.breadcrumb',['title' => trans('app.users_page_title'),'first_list_item' => trans('app.users'),'last_list_item' => trans('app.add_user')])
     {{--    end breadcrumb --}}
 
     <!-- Row -->

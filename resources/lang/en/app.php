@@ -205,6 +205,65 @@ return [
     'edit_user'=>'edit user',
     'new_user'=>'new user',
     'are_you_sure'=>'are you sure',
+    'login_successfully'=>'login successfully',
+    'sign_in'=>'sign in',
+    
     //end users
     
+    //start awb status
+    'prices'=>'prices',
+    'add_price'=>'add price',
+    
+    //end awb status
+    
+    //start price tables
+    'price_table_page_title'=>'price table page title',
+    'all_prices'=>'all prices',
+    'edit_price'=>'edit price',
+    'prices_page_title'=>'prices page title',
+    
+    //end price tables
+    
+    
+    //start companies
+    'companies'=>'companies',
+    'company_name'=>'Company name',
+    'edit_company'=>'edit company',
+    'companies_page_title'=>'companies page title',
+    
+    //end companies
+    
+    //start branches
+    'edit_branch'=>'edit branch',
+    'branches_page_title'=>'branches page title',
+    
+    
+    //end branches
+    
+    //start departments
+    'departments_page_title'=>'departments page title',
+    'edit_department'=>'edit department',
+    
+    //end departments
+    
+    //start receivers
+    'add_receiver'=>'add receiver',
+    'edit_receiver'=>'edit receiver',
+    'show_receiver'=>'show receiver',
+    
+    //end receivers
+    
+    
+    //start awb
+    'create_new_awb_title'=>'create new awb',
+    'add_awb'=>'add awb',
+    'awb_pod'=>'awb pod',
+    'actual_receipt'=>'actual receipt',
+    'additional_kg_price'=>'additional kg price',
+    'wight'=>'wight',
+    'code'=>'code',
+    'pod'=>'pod',
+
+
+    //end awb
 ];

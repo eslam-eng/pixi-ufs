@@ -17,7 +17,9 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use SoftDeletes, Filterable,HasApiTokens, HasFactory, Notifiable,HasRoles, HasAddresses, HasAttachment;
+    use SoftDeletes, Filterable,HasApiTokens,
+        HasFactory, Notifiable,HasRoles,
+        HasAddresses, HasAttachment;
 
     /**
      * The attributes that are mass assignable.

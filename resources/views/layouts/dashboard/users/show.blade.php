@@ -12,19 +12,15 @@
             <div class="card">
                 <div class="card-body">
                         <div class="row row-sm mb-4">
-                            @if($user->attachments()->count())
-                            @foreach (array($user->attachments) as $attachment)
-                            @if($attachment->type == App\Enums\AttachmentsType::PRIMARYIMAGE->value)
-                            <div class="col-lg">
-                                <div class="text-wrap">
-                                    <div class="example">
-                                        <img alt="Responsive image" class="img-thumbnail wd-100p wd-sm-200" src="{{ asset($attachment->path."/".$attachment->file_name) }}">
+                            @isset($user->attachments)
+                                <div class="col-lg">
+                                    <div class="text-wrap">
+                                        <div class="example">
+                                            <img alt="Responsive image" class="img-thumbnail wd-100p wd-sm-200" src="{{ asset($user->attachments->path."/".$user->attachments->file_name) }}">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            @endif
-                            @endforeach
-                            @endif
+                            @endisset
                         </div>
                         <div class="row row-sm mb-4">
                             <div class="col-lg">
@@ -50,7 +46,7 @@
                                 <label class="form-control">{{ App\Enums\UsersType::from($user->type)->name }}</label>
                             </div>
 
-                            
+
                         </div>
 
 
@@ -119,7 +115,7 @@
                                             <div class="card-body">
                                                 @foreach($permission as $item)
                                                     <div class="mb-3 m-t-15">
-                                                        <div class="form-check checkbox checkbox-primary mb-0">                                                                
+                                                        <div class="form-check checkbox checkbox-primary mb-0">
                                                             <label class="custom-control custom-checkbox custom-control-lg"> <input
                                                                 type="checkbox" class="custom-control-input" name="status"
                                                                 {{ $user->can($item->name) ? "checked":""}} @disabled(true)> <span

@@ -24,7 +24,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/ 	
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -38,14 +38,14 @@ var __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
-/******/ 	
+/******/
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/ 	
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/ 	
+/******/
 /************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
@@ -65,7 +65,7 @@ function chartCircle() {
       var $this = $(this);
       $this.circleProgress({
         fill: {
-          color: myVarVal || "#38cab3"
+          color: myVarVal || "#f95b06"
         },
         size: $this.height(),
         startAngle: -Math.PI / 4 * 2,
@@ -93,7 +93,7 @@ function statistics1() {
     grid: {
       borderColor: '#f2f6f7'
     },
-    colors: [myVarVal || "#38cab3", "#e4e7ed"],
+    colors: [myVarVal || "#f95b06", "#e4e7ed"],
     plotOptions: {
       bar: {
         colors: {
@@ -191,7 +191,7 @@ function viewers() {
       grid: {
         borderColor: '#f2f6f7'
       },
-      colors: [myVarVal || "#38cab3", "#e4e7ed"],
+      colors: [myVarVal || "#f95b06", "#e4e7ed"],
       background: 'transparent',
       dataLabels: {
         enabled: false
@@ -353,7 +353,7 @@ function budget() {
       grid: {
         borderColor: '#f2f6f7'
       },
-      colors: [myVarVal || "#38cab3", "#e4e7ed"],
+      colors: [myVarVal || "#f95b06", "#e4e7ed"],
       plotOptions: {
         bar: {
           endingShape: 'rounded',
@@ -522,7 +522,7 @@ function statistics3() {
       grid: {
         borderColor: '#f2f6f7'
       },
-      colors: [myVarVal || "#38cab3", "#e4e7ed"],
+      colors: [myVarVal || "#f95b06", "#e4e7ed"],
       plotOptions: {
         bar: {
           endingShape: 'rounded',
@@ -613,7 +613,7 @@ function viewers2() {
       grid: {
         borderColor: '#eff2f6'
       },
-      colors: [myVarVal || "#38cab3", "#e4e7ed"],
+      colors: [myVarVal || "#f95b06", "#e4e7ed"],
       plotOptions: {
         bar: {
           horizontal: false,

@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
     start: '2021-10-13T11:00:00',
     constraint: 'availableForMeeting',
     // defined below
-    color: '#38cab3'
+    color: '#f95b06'
   }, {
     title: 'Conference',
     start: '2021-10-18',

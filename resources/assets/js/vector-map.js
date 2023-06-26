@@ -12,7 +12,7 @@ $(function() {
 		selectedColor: '#666666',
 		enableZoom: true,
 		showTooltip: true,
-		scaleColors: ['#673ab6', '#38cab3'],
+		scaleColors: ['#673ab6', '#f95b06'],
 		values: sample_data,
 		normalizeFunction: 'polynomial'
 	});
@@ -20,12 +20,12 @@ $(function() {
 		map: 'usa_en',
 		showTooltip: true,
 		backgroundColor: 'transparent',
-		hoverColor: '#38cab3',
-		color: '#38cab3',
+		hoverColor: '#f95b06',
+		color: '#f95b06',
 	});
 	$('#vmap3').vectorMap({
 		map: 'canada_en',
-		color: '#38cab3',
+		color: '#f95b06',
 		borderColor: '#fff',
 		backgroundColor: 'transparent',
 		hoverColor: '#673ab5',
@@ -33,28 +33,28 @@ $(function() {
 	});
 	$('#vmap7').vectorMap({
 		map: 'germany_en',
-		color: '#38cab3',
+		color: '#f95b06',
 		borderColor: '#fff',
 		backgroundColor: 'transparent',
-		hoverColor: '#38cab3',
+		hoverColor: '#f95b06',
 		showLabels: true
 	});
 
 	$('#vmap8').vectorMap({
 		map: 'russia_en',
-		color: '#38cab3',
+		color: '#f95b06',
 		borderColor: '#fff',
 		backgroundColor: 'transparent',
-		hoverColor: '#38cab3',
+		hoverColor: '#f95b06',
 		showLabels: true
 	});
 
 	$('#vmap9').vectorMap({
 		map: 'france_fr',
-		color: '#38cab3',
+		color: '#f95b06',
 		borderColor: '#fff',
 		backgroundColor: 'transparent',
-		hoverColor: '#38cab3',
+		hoverColor: '#f95b06',
 		showLabels: true
 	});
 });

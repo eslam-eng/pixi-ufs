@@ -4,7 +4,7 @@
 
 Project        :   NOWA - HTML5 Bootstrap Admin Template
 Version        :   V.1
-Copyright      :   Spruko Technologies Private Limited 
+Copyright      :   Spruko Technologies Private Limited
 Author         :   SprukoSoft
 Author URL     :   https://themeforest.net/user/sprukosoft
 Support	       :   support@spruko.com
@@ -16223,14 +16223,14 @@ a.tag-addon:hover {
 }
 
 :root {
-  --primary-bg-color: #38cab3;
-  --primary-bg-hover: #5cd3b9;
-  --primary-bg-border: #38cab3;
+  --primary-bg-color: #f95b06;
+  --primary-bg-hover: #e28743;
+  --primary-bg-border: #e28743;
   --primary02: rgba(28, 213, 174, 0.2);
   --primary05: rgba(28, 213, 174, 0.5);
   --primary-transparentcolor: rgba(28, 213, 174, 0.2);
   --transparentprimary-transparentcolor: rgba(255, 255, 255, 0.05);
-  --transparent-body: #38cab3;
+  --transparent-body: #f95b06;
   --transparent-theme: rgba(0, 0, 0, 0.1);
   --blue: $primary;
   --indigo: $primary;
@@ -25477,7 +25477,19 @@ pre {
   line-height: 100px;
   color: var(--primary-bg-color);
   font-weight: 700;
-  font-family: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: "Archivo",
+ -apple-system,
+ BlinkMacSystemFont,
+ "Segoe UI",
+ Roboto,
+ "Helvetica Neue",
+ Arial,
+ "Noto Sans",
+ sans-serif,
+ "Apple Color Emoji",
+ "Segoe UI Emoji",
+ "Segoe UI Symbol",
+ "Noto Color Emoji";
   font-size: 32px;
 }
 
@@ -39621,12 +39633,12 @@ slide is-expanded side-menu__item {
 
 .rtl .popover-primary.bs-popover-start .popover-arrow::after,
 .rtl .popover-primary.bs-popover-auto[data-popper-placement^="start"] .popover-arrow::after {
-  border-left-color: #38cab3;
+  border-left-color: #f95b06;
 }
 
 .rtl .popover-primary.bs-popover-end .popover-arrow::after,
 .rtl .popover-primary.bs-popover-auto[data-popper-placement^="end"] .popover-arrow::after {
-  border-right-color: #38cab3;
+  border-right-color: #f95b06;
 }
 
 .rtl .popover-secondary .popover-header {
@@ -39635,12 +39647,12 @@ slide is-expanded side-menu__item {
 
 .rtl .popover-secondary.bs-popover-start .popover-arrow::after,
 .rtl .popover-secondary.bs-popover-auto[data-popper-placement^="start"] .popover-arrow::after {
-  border-left-color: #38cab3;
+  border-left-color: #f95b06;
 }
 
 .rtl .popover-secondary.bs-popover-end .popover-arrow::after,
 .rtl .popover-secondary.bs-popover-auto[data-popper-placement^="end"] .popover-arrow::after {
-  border-right-color: #38cab3;
+  border-right-color: #f95b06;
 }
 
 .rtl .popover {
@@ -39740,42 +39752,42 @@ slide is-expanded side-menu__item {
 
 .rtl .tooltip-primary.bs-tooltip-start .tooltip-arrow::before,
 .rtl .tooltip-primary.bs-tooltip-auto[data-popper-placement^="start"] .tooltip-arrow::before {
-  border-left-color: #38cab3;
+  border-left-color: #f95b06;
 }
 
 .rtl .tooltip-primary.bs-tooltip-end .tooltip-arrow::before,
 .rtl .tooltip-primary.bs-tooltip-auto[data-popper-placement^="end"] .tooltip-arrow::before {
-  border-right-color: #38cab3;
+  border-right-color: #f95b06;
 }
 
 .rtl .tooltip-primary1.bs-tooltip-start .tooltip-arrow::before,
 .rtl .tooltip-primary1.bs-tooltip-auto[data-popper-placement^="start"] .tooltip-arrow::before {
-  border-left-color: #38cab3;
+  border-left-color: #f95b06;
 }
 
 .rtl .tooltip-primary1.bs-tooltip-end .tooltip-arrow::before,
 .rtl .tooltip-primary1.bs-tooltip-auto[data-popper-placement^="end"] .tooltip-arrow::before {
-  border-right-color: #38cab3;
+  border-right-color: #f95b06;
 }
 
 .rtl .tooltip-secondary.bs-tooltip-start .tooltip-arrow::before,
 .rtl .tooltip-secondary.bs-tooltip-auto[data-popper-placement^="start"] .tooltip-arrow::before {
-  border-left-color: #38cab3;
+  border-left-color: #f95b06;
 }
 
 .rtl .tooltip-secondary.bs-tooltip-end .tooltip-arrow::before,
 .rtl .tooltip-secondary.bs-tooltip-auto[data-popper-placement^="end"] .tooltip-arrow::before {
-  border-right-color: #38cab3;
+  border-right-color: #f95b06;
 }
 
 .rtl .tooltip-secondary1.bs-tooltip-start .tooltip-arrow::before,
 .rtl .tooltip-secondary1.bs-tooltip-auto[data-popper-placement^="start"] .tooltip-arrow::before {
-  border-left-color: #38cab3;
+  border-left-color: #f95b06;
 }
 
 .rtl .tooltip-secondary1.bs-tooltip-end .tooltip-arrow::before,
 .rtl .tooltip-secondary1.bs-tooltip-auto[data-popper-placement^="end"] .tooltip-arrow::before {
-  border-right-color: #38cab3;
+  border-right-color: #f95b06;
 }
 
 .rtl .tooltip {
@@ -44737,8 +44749,8 @@ slide is-expanded side-menu__item {
 }
 
 .rtl .irs-modern .irs-slider::before {
-  border-right: 1px solid #38cab3;
-  border-left: 1px solid #38cab3;
+  border-right: 1px solid #f95b06;
+  border-left: 1px solid #f95b06;
   margin-right: -2px;
 }
 
@@ -45056,7 +45068,7 @@ slide is-expanded side-menu__item {
 }
 
 .rtl .main-chat-list .media.selected {
-  border-right: 1px solid #38cab3;
+  border-right: 1px solid #f95b06;
   border-left: inherit;
 }
 
@@ -45221,7 +45233,7 @@ slide is-expanded side-menu__item {
 }
 
 .rtl .main-msg-wrapper.left:nth-child(1):before {
-  border-left-color: #38cab3;
+  border-left-color: #f95b06;
 }
 
 .rtl .main-msg-wrapper.left:nth-child(1):after {
@@ -45281,7 +45293,7 @@ slide is-expanded side-menu__item {
 }
 
 .rtl .main-contact-item.selected {
-  border-left-color: #38cab3;
+  border-left-color: #f95b06;
 }
 
 .rtl .main-contact-body {
@@ -45442,7 +45454,7 @@ slide is-expanded side-menu__item {
 }
 
 .rtl .main-invoice-list .selected {
-  border-left-color: #38cab3;
+  border-left-color: #f95b06;
 }
 
 .rtl .main-content-mail .container,
@@ -45791,7 +45803,7 @@ slide is-expanded side-menu__item {
 }
 
 .rtl .border-start-primary {
-  border-left-color: #38cab3 !important;
+  border-left-color: #f95b06 !important;
 }
 
 .rtl .border-start-success {

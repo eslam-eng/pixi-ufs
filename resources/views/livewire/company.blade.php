@@ -1,7 +1,7 @@
 <div>
     {{-- Be like water. --}}
     <div class="form-group">
-        <label class="form-label">@lang('app.companies')</label>
+        <label class="main-content-label mg-b-5">@lang('app.companies')</label>
         <select name="{{$field_name}}" wire:model="selected_company" class="form-control form-select" data-bs-placeholder="Select company">
             @if(!isset($selected_company))
                 <option value="" selected>@lang('app.select_company')</option>

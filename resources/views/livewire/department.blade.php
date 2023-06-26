@@ -1,7 +1,7 @@
 <div>
     {{-- Be like water. --}}
     <div class="form-group">
-        <label class="form-label">@lang('app.departments')</label>
+        <label class="main-content-label mg-b-5">@lang('app.departments')</label>
         <select name="{{$field_name}}" class="form-control form-select" data-bs-placeholder="Select department">
             @if(!isset($departments_for_company_id))
                 <option value="" selected>@lang('app.select_department')</option>

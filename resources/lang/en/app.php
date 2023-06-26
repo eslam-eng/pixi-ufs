@@ -210,16 +210,19 @@ return [
     'are_you_sure'=>'are you sure',
     'login_successfully'=>'login successfully',
     'sign_in'=>'sign in',
+    '.user_created_successfully'=>'.user created successfully',
     
     //end users
     
     //start awb status
-    'prices'=>'prices',
-    'add_price'=>'add price',
+    'awb_status_title'=>'new status',
+    'add_status'=>'add status',
     
     //end awb status
     
     //start price tables
+    'prices'=>'prices',
+    'add_price'=>'add price',
     'price_table_page_title'=>'price table',
     'all_prices'=>'all prices',
     'edit_price'=>'edit price',

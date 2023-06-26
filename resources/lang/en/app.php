@@ -83,7 +83,7 @@ return [
     'branch_data'=>'Branch Data',
     'department_data'=>'Department Data',
     'importation_type'=>'Importation Type',
-    'add_company'=>'Add-Company',
+    'add_company'=>'add company',
     'filter'=>'Filter',
     'print'=>'print',
     'change_status'=>'Change Status',
@@ -253,6 +253,11 @@ return [
     'add_receiver'=>'add receiver',
     'edit_receiver'=>'edit receiver',
     'show_receiver'=>'show receiver',
+    'receivers_title'=>'receivers',
+    'first_download_receivers_template'=>'first download receivers template',
+    'second_step_upload_excel'=>'second step upload excel',
+    'imports'=>'imports',
+    'send'=>'send',
     
     //end receivers
     
@@ -266,6 +271,8 @@ return [
     'wight'=>'wight',
     'code'=>'code',
     'pod'=>'pod',
+    'awbs_status_changed_successfully'=>'awbs status changed successfully',
+    'there_is_an_error_in_change_awbs_status'=>'there is an error in change awbs status',
 
 
     //end awb

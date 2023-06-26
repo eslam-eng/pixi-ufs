@@ -6,6 +6,7 @@ use App\Enums\AwbStatuses;
 use App\Enums\ImageTypeEnum;
 use App\Models\Awb;
 use App\Models\AwbHistory;
+use Exception;
 use Illuminate\Support\Arr;
 
 class AwbHistoryService extends BaseService
@@ -25,11 +26,13 @@ class AwbHistoryService extends BaseService
         $inserted_data = [];
         $user_id = auth()->id();
         foreach ($awb_ids as $id) {
-            $inserted_data [] = [
-                'awb_id' => $id,
-                'user_id' => $user_id,
-                'awb_status_id' => $status
-            ];
+            $awb = Awb::find($id);
+            if($awb->latestStatus->awb_status_id != $status)
+                $inserted_data [] = [
+                    'awb_id' => $id,
+                    'user_id' => $user_id,
+                    'awb_status_id' => $status
+                ];
         }
 
         return $this->model->insert($inserted_data);
@@ -47,12 +50,16 @@ class AwbHistoryService extends BaseService
             ];
             $awb->update($pod_data);
         }
-        $history =  $awb->history()->create($data);
-        if ($history && isset($data['images']) && is_array($data['images'])){
-            foreach ($data['images'] as $image) {
-                $fileData = FileService::saveImage(file: $image, path: 'uploads/pod/awbs', field_name: 'images');
-                $fileData['type'] = ImageTypeEnum::CARD;
-                $history->storeAttachment($fileData);
+
+        if($awb->latestStatus->awb_status_id != Arr::get($data, 'awb_status_id'))
+        {
+            $history =  $awb->history()->create($data);
+            if ($history && isset($data['images']) && is_array($data['images'])){
+                foreach ($data['images'] as $image) {
+                    $fileData = FileService::saveImage(file: $image, path: 'uploads/pod/awbs', field_name: 'images');
+                    $fileData['type'] = ImageTypeEnum::CARD;
+                    $history->storeAttachment($fileData);
+                }
             }
         }
     }

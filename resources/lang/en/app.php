@@ -273,6 +273,7 @@ return [
     'pod'=>'pod',
     'awbs_status_changed_successfully'=>'awbs status changed successfully',
     'there_is_an_error_in_change_awbs_status'=>'there is an error in change awbs status',
+    'save'=>'save',
 
 
     //end awb

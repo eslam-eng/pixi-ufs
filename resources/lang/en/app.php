@@ -83,8 +83,7 @@ return [
     'branch_data'=>'Branch Data',
     'department_data'=>'Department Data',
     'importation_type'=>'Importation Type',
-    'add_company'=>'Add-Company',
-    'companies_page_title'=>'Companies',
+    'add_company'=>'add company',
     'filter'=>'Filter',
     'print'=>'print',
     'change_status'=>'Change Status',
@@ -141,7 +140,11 @@ return [
     'sms'=>'SMS',
     'description'=>'Description',
     'settings'=>'Settings',
-    'dashboard_settings'=>'Dashboard-Settings',
+    'dashboard_settings'=>'Dashboard Settings',
+    'yes'=>'yes',
+    'no'=>'no',
+    'success_operation'=>'success operation',
+
     //start permissions translations
     'create_city'=>'create city',
     'edit_city'=>'edit city',
@@ -201,26 +204,29 @@ return [
     'add_user'=>'add user',
     'all_users'=>'all users',
     'users_filter'=>'users filter',
-    'users_page_title'=>'users page title',
+    'users_page_title'=>'users',
     'edit_user'=>'edit user',
     'new_user'=>'new user',
     'are_you_sure'=>'are you sure',
     'login_successfully'=>'login successfully',
     'sign_in'=>'sign in',
+    '.user_created_successfully'=>'.user created successfully',
     
     //end users
     
     //start awb status
-    'prices'=>'prices',
-    'add_price'=>'add price',
+    'awb_status_title'=>'new status',
+    'add_status'=>'add status',
     
     //end awb status
     
     //start price tables
-    'price_table_page_title'=>'price table page title',
+    'prices'=>'prices',
+    'add_price'=>'add price',
+    'price_table_page_title'=>'price table',
     'all_prices'=>'all prices',
     'edit_price'=>'edit price',
-    'prices_page_title'=>'prices page title',
+    'prices_page_title'=>'prices',
     
     //end price tables
     
@@ -229,19 +235,19 @@ return [
     'companies'=>'companies',
     'company_name'=>'Company name',
     'edit_company'=>'edit company',
-    'companies_page_title'=>'companies page title',
+    'companies_page_title'=>'companies',
     
     //end companies
     
     //start branches
     'edit_branch'=>'edit branch',
-    'branches_page_title'=>'branches page title',
+    'branches_page_title'=>'branches',
     
     
     //end branches
     
     //start departments
-    'departments_page_title'=>'departments page title',
+    'departments_page_title'=>'departments',
     'edit_department'=>'edit department',
     
     //end departments
@@ -250,6 +256,11 @@ return [
     'add_receiver'=>'add receiver',
     'edit_receiver'=>'edit receiver',
     'show_receiver'=>'show receiver',
+    'receivers_title'=>'receivers',
+    'first_download_receivers_template'=>'first download receivers template',
+    'second_step_upload_excel'=>'second step upload excel',
+    'imports'=>'imports',
+    'send'=>'send',
     
     //end receivers
     
@@ -263,6 +274,9 @@ return [
     'wight'=>'wight',
     'code'=>'code',
     'pod'=>'pod',
+    'awbs_status_changed_successfully'=>'awbs status changed successfully',
+    'there_is_an_error_in_change_awbs_status'=>'there is an error in change awbs status',
+    'save'=>'save',
 
 
     //end awb

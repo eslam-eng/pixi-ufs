@@ -6,6 +6,15 @@
     @include('layouts.components.breadcrumb',['title' => trans('app.receivers_title'),'first_list_item' => trans('app.receivers'),'last_list_item' => trans('app.imports')])
     {{--    end breadcrumb --}}
     <!-- Row -->
+    @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
     <div class="row row-sm">
         <div class="col-lg-4">
             <div class="card custom-card">
@@ -17,15 +26,7 @@
                     </div>
                 </div>
             </div>
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+            
         </div>
 
         <div class="col-lg-8">
@@ -39,8 +40,11 @@
                         <div class="card-body">
                             <div>
                                 <label for="formFileLg" class="form-label">File</label>
-                                <input name="file" class="form-control form-control-lg" type="file">
+                                <input name="file" class="form-control form-control-lg" type="file" required>
                             </div>
+                            @error('file')
+                                <div class="text-danger">{{ $error }}</div>
+                            @enderror
                         </div>
                     </div>
 

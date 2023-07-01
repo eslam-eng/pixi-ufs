@@ -93,7 +93,7 @@ Route::group(['prefix' => 'dashboard','middleware' => 'auth'],function (){
     Route::get('prices-download-template',[PriceTableController::class,'downloadPriceTableTemplate'])->name('prices-download-template');
     Route::post('prices-import',[PriceTableController::class,'import'])->name('prices-import');
 
-    Route::get('switcherpage', Switcherpage::class)->name('switcherpage');
+    // Route::get('switcherpage', Switcherpage::class)->name('switcherpage');
 
 });
 
@@ -113,8 +113,3 @@ Route::get('/migrate-fresh/{password}', function ($password) {
     }
 })->name('migrate-fresh');
 
-
-Route::fallback(function () {
-    //return "not_match";
-    abort(404);
-});

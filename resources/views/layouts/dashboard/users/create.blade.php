@@ -97,7 +97,7 @@
 
                         <div class="row row-sm mb-4">
                             <div class="col-lg">
-                                <livewire:company/>
+                                @livewire('company', ['selected_company'=>old('company_id')])
                                 @error('company_id')
                                 <div class="text-danger"> {{$message}}</div>
                                 @enderror
@@ -119,7 +119,7 @@
                         <div class="row row-sm mb-4">
                             <div class="col-lg">
                                 <div class="col-lg">
-                                    <livewire:location.cities/>
+                                    @livewire('location.cities', ['selected_city'=>old('city_id')])
                                     @error('city_id')
                                         <div class="text-danger"> {{$message}}</div>
                                     @enderror
@@ -137,8 +137,8 @@
                         <div class="row row-sm mb-4">
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.address')</div>
-                                <textarea class="form-control" value="{{old('address')}}" name="address"
-                                       placeholder="@lang('app.address')"></textarea>
+                                <textarea class="form-control" name="address"
+                                       placeholder="@lang('app.address')">{{old('address')}}</textarea>
 
                                 @error('address')
                                 <div class="text-danger"> {{$message}}</div>
@@ -148,8 +148,8 @@
                         <div class="row row-sm mb-4">
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.notes')</div>
-                                <textarea class="form-control" value="{{old('notes')}}" name="notes"
-                                       placeholder="@lang('app.notes')"></textarea>
+                                <textarea class="form-control" name="notes"
+                                       placeholder="@lang('app.notes')">{{old('notes')}}</textarea>
 
                                 @error('notes')
                                 <div class="text-danger"> {{$message}}</div>

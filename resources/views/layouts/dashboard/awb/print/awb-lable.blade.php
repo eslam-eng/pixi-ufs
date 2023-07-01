@@ -58,7 +58,7 @@
 
             <tr>
                 <td colspan="2"><b class="w3-left">Ref : </b> <span class="w3-right"> {{ $resource->receiver_reference }}</span></td>
-                <td colspan="2"><b class="w3-left">province : </b><span class="w3-right">{!! Arr::get($resource->receiver_data,'area') !!}</span></td>
+                <td colspan="2"><b class="w3-left">province : </b><span class="w3-right">{!! $resource->receiver->area->title !!}</span></td>
             </tr>
 
             <tr>

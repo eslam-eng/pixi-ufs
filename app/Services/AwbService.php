@@ -10,9 +10,11 @@ use App\Models\Awb;
 use App\Models\AwbServiceType;
 use App\Models\AwbStatus;
 use App\Models\CompanyShipmentType;
+use App\Models\Receiver;
 use App\QueryFilters\AwbFilters;
 use App\QueryFilters\AwbsFilter;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 
 
@@ -86,7 +88,7 @@ class AwbService extends BaseService
         if ($awbDTO->weight > $priceTable->basic_kg)
             $awbDTO->additional_kg_price = ($awbDTO->weight - $priceTable->basic_kg) * $priceTable->additional_kg_price;
 
-        $awbDTO->receiver_data = $receiver->toArray();
+        $awbDTO->receiver_data = $this->getReceiverDataForAwb($receiver);
 
         $awb_data = $awbDTO->toArray();
 
@@ -159,6 +161,23 @@ class AwbService extends BaseService
     {
         $awb = $this->findById($id);
         return $awb->history()->create($awb_status_data);
+    }
+
+    private function getReceiverDataForAwb(Receiver|Model $receiver): array
+    {
+        return [
+            [
+                'city' => $receiver->city->title,
+                'area' => $receiver->area->title,
+                'address1' => $receiver->address1,
+                'phone1' => $receiver->phone1,
+                'phone2' =>  $receiver->phone2,
+                'name' =>  $receiver->name,
+                'receiving_company' =>  $receiver->receiving_company,
+                'receiving_branch' => $receiver->receiving_branch,
+                'title' => $receiver->title,
+            ],
+        ];
     }
 
 }

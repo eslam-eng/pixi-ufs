@@ -86,7 +86,7 @@ $(function () {
     xkey: 'y',
     ykeys: ['a', 'b'],
     labels: ['Series A', 'Series B'],
-    barColors: ['#38cab3', '#f74f75'],
+    barColors: ['#f95b06', '#f74f75'],
     gridTextSize: 11,
     hideHover: 'auto',
     resize: true
@@ -97,7 +97,7 @@ $(function () {
     xkey: 'y',
     ykeys: ['a', 'b', 'c'],
     labels: ['Series A', 'Series B', 'Series C'],
-    barColors: ['#38cab3', '#f74f75', '#4ec2f0'],
+    barColors: ['#f95b06', '#f74f75', '#4ec2f0'],
     gridTextSize: 11,
     hideHover: 'auto',
     resize: true
@@ -108,7 +108,7 @@ $(function () {
     xkey: 'y',
     ykeys: ['a', 'b'],
     labels: ['Series A', 'Series B'],
-    barColors: ['#38cab3', '#f74f75'],
+    barColors: ['#f95b06', '#f74f75'],
     stacked: true,
     gridTextSize: 11,
     hideHover: 'auto',
@@ -120,7 +120,7 @@ $(function () {
     xkey: 'y',
     ykeys: ['a', 'b', 'c'],
     labels: ['Series A', 'Series B', 'Series C'],
-    barColors: ['#38cab3', '#f74f75', '#4ec2f0'],
+    barColors: ['#f95b06', '#f74f75', '#4ec2f0'],
     stacked: true,
     gridTextSize: 11,
     hideHover: 'auto',
@@ -160,7 +160,7 @@ $(function () {
     xkey: 'y',
     ykeys: ['a', 'b'],
     labels: ['Series A', 'Series B'],
-    lineColors: ['#38cab3 ', '#f74f75'],
+    lineColors: ['#f95b06 ', '#f74f75'],
     lineWidth: 3,
     ymax: 'auto 100',
     gridTextSize: 11,
@@ -208,7 +208,7 @@ $(function () {
     xkey: 'y',
     ykeys: ['a', 'b', 'c'],
     labels: ['Series A', 'Series B', 'Series C'],
-    lineColors: ['#38cab3', '#f74f75', '#4ec2f0'],
+    lineColors: ['#f95b06', '#f74f75', '#4ec2f0'],
     lineWidth: 3,
     ymax: 'auto 100',
     gridTextSize: 11,
@@ -249,7 +249,7 @@ $(function () {
     xkey: 'y',
     ykeys: ['a', 'b'],
     labels: ['Series A', 'Series B'],
-    lineColors: ['#38cab3', '#f74f75'],
+    lineColors: ['#f95b06', '#f74f75'],
     lineWidth: 1,
     fillOpacity: 0.9,
     gridTextSize: 11,
@@ -297,7 +297,7 @@ $(function () {
     xkey: 'y',
     ykeys: ['a', 'b', 'c'],
     labels: ['Series A', 'Series B', 'Series C'],
-    lineColors: ['#38cab3', '#f74f75', '#4ec2f0'],
+    lineColors: ['#f95b06', '#f74f75', '#4ec2f0'],
     lineWidth: 1,
     fillOpacity: 0.9,
     gridTextSize: 7,
@@ -316,7 +316,7 @@ $(function () {
       label: 'Kids',
       value: 20
     }],
-    colors: ['#38cab3', '#f74f75', '#4ec2f0'],
+    colors: ['#f95b06', '#f74f75', '#4ec2f0'],
     resize: true,
     labelColor: "#77778e"
   });
@@ -335,7 +335,7 @@ $(function () {
       label: 'Infant',
       value: 25
     }],
-    colors: ['#38cab3', '#f74f75', '#4ec2f0', '#74DE00'],
+    colors: ['#f95b06', '#f74f75', '#4ec2f0', '#74DE00'],
     resize: true,
     labelColor: "#77778e"
   });

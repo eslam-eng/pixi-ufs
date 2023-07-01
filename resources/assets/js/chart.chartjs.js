@@ -8,7 +8,7 @@ $(function() {
 			datasets: [{
 				label: '# of Votes',
 				data: [12, 39, 20, 10, 25, 18],
-				backgroundColor: '#38cab3'
+				backgroundColor: '#f95b06'
 			}]
 		},
 		options: {
@@ -103,7 +103,7 @@ $(function() {
 	var ctx3 = document.getElementById('chartBar3').getContext('2d');
 	var gradient = ctx3.createLinearGradient(0, 0, 0, 250);
 	gradient.addColorStop(0, '#6d26be');
-	gradient.addColorStop(1, '#38cab3');
+	gradient.addColorStop(1, '#f95b06');
 	new Chart(ctx3, {
 		type: 'bar',
 		data: {
@@ -162,7 +162,7 @@ $(function() {
 			datasets: [{
 				label: '# of Votes',
 				data: [12, 39, 20, 10, 25, 18],
-				backgroundColor: ['#6d26be', '#ffbd5a', '#38cab3', '#673ab7', '#ffc107', '#1a9c86']
+				backgroundColor: ['#6d26be', '#ffbd5a', '#f95b06', '#673ab7', '#ffc107', '#1a9c86']
 			}]
 		},
 		options: {
@@ -382,7 +382,7 @@ $(function() {
 			labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
 			datasets: [{
 				data: [12, 15, 18, 40, 35, 38, 32, 20, 25, 15, 25, 30],
-				borderColor: '#38cab3 ',
+				borderColor: '#f95b06 ',
 				borderWidth: 1,
 				fill: false
 			}, {
@@ -448,7 +448,7 @@ $(function() {
 				backgroundColor: gradient1
 			}, {
 				data: [10, 20, 25, 55, 50, 45, 35, 37, 45, 35, 55, 40],
-				borderColor: '#38cab3',
+				borderColor: '#f95b06',
 				borderWidth: 1,
 				backgroundColor: gradient2
 			}]

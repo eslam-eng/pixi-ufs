@@ -83,7 +83,7 @@ $(function (e) {
       }
     },
     series: chartdata,
-    color: ['#38cab3', '#f74f75']
+    color: ['#f95b06', '#f74f75']
   };
   barChart.setOption(option);
   /*----Echart2----*/
@@ -93,7 +93,7 @@ $(function (e) {
     type: 'line',
     smooth: true,
     data: [10, 15, 9, 18, 10, 15],
-    color: ['#38cab3']
+    color: ['#f95b06']
   }, {
     name: 'Profit',
     type: 'line',
@@ -149,7 +149,7 @@ $(function (e) {
       }
     },
     series: chartdata2,
-    color: ['#38cab3', '#f74f75']
+    color: ['#f95b06', '#f74f75']
   };
   barChart2.setOption(option2);
   /*----Echart3----*/
@@ -201,7 +201,7 @@ $(function (e) {
       }
     },
     series: chartdata,
-    color: ['#38cab3', '#f74f75']
+    color: ['#f95b06', '#f74f75']
   };
   var chart3 = document.getElementById('echart3');
   var barChart3 = echarts.init(chart3);
@@ -255,7 +255,7 @@ $(function (e) {
       }
     },
     series: chartdata2,
-    color: ['#f74f75', '#38cab3', '#43d7ef']
+    color: ['#f74f75', '#f95b06', '#43d7ef']
   };
   var chart4 = document.getElementById('echart4');
   var barChart4 = echarts.init(chart4);
@@ -315,7 +315,7 @@ $(function (e) {
       }
     },
     series: chartdata3,
-    color: ['#f74f75', '#38cab3']
+    color: ['#f74f75', '#f95b06']
   };
   var chart5 = document.getElementById('echart5');
   var barChart5 = echarts.init(chart5);
@@ -364,7 +364,7 @@ $(function (e) {
       }
     },
     series: chartdata3,
-    color: ['#f74f75', '#38cab3']
+    color: ['#f74f75', '#f95b06']
   };
   var chart6 = document.getElementById('echart6');
   var barChart6 = echarts.init(chart6);
@@ -469,7 +469,7 @@ $(function (e) {
       }
     },
     series: chartdata5,
-    color: ['#38cab3']
+    color: ['#f95b06']
   };
   var chart8 = document.getElementById('echart8');
   var lineChart2 = echarts.init(chart8);
@@ -477,7 +477,7 @@ $(function (e) {
   /*----BarChartEchart----*/
 
   var echartBar = echarts.init(document.getElementById('index'), {
-    color: ['#38cab3', '#f74f75'],
+    color: ['#f95b06', '#f74f75'],
     categoryAxis: {
       axisLine: {
         lineStyle: {

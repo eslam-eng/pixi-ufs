@@ -93,7 +93,7 @@
                                                                 <div class="switch-toggle d-flex">
                                                                     <span class="me-auto">Light Primary</span>
                                                                     <div class="">
-                                                                        <input class="wd-25 ht-25 input-color-picker color-primary-light" value="#38cab3" id="colorID" type="color" data-id="bg-color" data-id1="bg-hover" data-id2="bg-border"  data-id7="transparentcolor"  name="lightPrimary">
+                                                                        <input class="wd-25 ht-25 input-color-picker color-primary-light" value="#f95b06" id="colorID" type="color" data-id="bg-color" data-id1="bg-hover" data-id2="bg-border"  data-id7="transparentcolor"  name="lightPrimary">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -112,7 +112,7 @@
                                                                 <div class="switch-toggle d-flex mt-2">
                                                                     <span class="me-auto">Dark Primary</span>
                                                                     <div class="">
-                                                                        <input class="wd-25 ht-25 input-dark-color-picker color-primary-dark" value="#38cab3" id="darkPrimaryColorID" type="color" data-id="bg-color" data-id1="bg-hover" data-id2="bg-border" data-id3="primary"  data-id8="transparentcolor" name="darkPrimary">
+                                                                        <input class="wd-25 ht-25 input-dark-color-picker color-primary-dark" value="#f95b06" id="darkPrimaryColorID" type="color" data-id="bg-color" data-id1="bg-hover" data-id2="bg-border" data-id3="primary"  data-id8="transparentcolor" name="darkPrimary">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -131,13 +131,13 @@
 																<div class="switch-toggle d-flex">
 																	<span class="me-auto">Transparent Primary</span>
 																	<div class="">
-																		<input class="wd-30 ht-30 input-transparent-color-picker color-primary-transparent" value="#38cab3" id="transparentPrimaryColorID" type="color" data-id="bg-color" data-id1="bg-hover" data-id2="bg-border" data-id3="primary" data-id4="primary"  data-id9="transparentcolor" name="tranparentPrimary">
+																		<input class="wd-30 ht-30 input-transparent-color-picker color-primary-transparent" value="#f95b06" id="transparentPrimaryColorID" type="color" data-id="bg-color" data-id1="bg-hover" data-id2="bg-border" data-id3="primary" data-id4="primary"  data-id9="transparentcolor" name="tranparentPrimary">
 																	</div>
 																</div>
 																<div class="switch-toggle d-flex mt-2">
 																	<span class="me-auto">Transparent Background</span>
 																	<div class="">
-																		<input class="wd-30 ht-30 input-transparent-color-picker color-bg-transparent" value="#38cab3" id="transparentBgColorID" type="color" data-id5="body" data-id6="theme"  data-id9="transparentcolor" name="transparentBackground">
+																		<input class="wd-30 ht-30 input-transparent-color-picker color-bg-transparent" value="#f95b06" id="transparentBgColorID" type="color" data-id5="body" data-id6="theme"  data-id9="transparentcolor" name="transparentBackground">
 																	</div>
 																</div>
 															</div>
@@ -150,7 +150,7 @@
                                                                 <div class="switch-toggle d-flex">
                                                                     <span class="me-auto">BG-Image Primary</span>
                                                                     <div class="">
-                                                                        <input class="wd-30 ht-30 input-transparent-color-picker color-bgImg-transparent" value="#38cab3" id="transparentBgImgPrimaryColorID" type="color" data-id="bg-color" data-id1="bg-hover" data-id2="bg-border" data-id3="primary" data-id4="primary"  data-id9="transparentcolor" name="tranparentPrimary">
+                                                                        <input class="wd-30 ht-30 input-transparent-color-picker color-bgImg-transparent" value="#f95b06" id="transparentBgImgPrimaryColorID" type="color" data-id="bg-color" data-id1="bg-hover" data-id2="bg-border" data-id3="primary" data-id4="primary"  data-id9="transparentcolor" name="tranparentPrimary">
                                                                     </div>
                                                                 </div>
                                                                 <div class="switch-toggle">

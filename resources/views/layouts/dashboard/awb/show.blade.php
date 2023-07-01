@@ -86,23 +86,23 @@
                         <tbody>
                         <tr class="fw-bold">
                             <td colspan="2">receiver:</td>
-                            <td colspan="2">{!!Arr::get($awb->receiver_data,'name')!!}</td>
+                            <td colspan="2">{!!Arr::get($awb->awb_receiver_data,'name')!!}</td>
                         </tr>
                         <tr>
                             <td>phone1:</td>
-                            <td>{!!Arr::get($awb->receiver_data,'phone1')!!}</td>
+                            <td>{!!Arr::get($awb->awb_receiver_data,'phone1')!!}</td>
                             <td>phone2:</td>
-                            <td>{!!Arr::get($awb->receiver_data,'phone2')!!}</td>
+                            <td>{!!Arr::get($awb->awb_receiver_data,'phone2')!!}</td>
                         </tr>
 
                         <tr>
                             <td>address:</td>
-                            <td colspan="3">{!!Arr::get($awb->receiver_data,'address1')!!}</td>
+                            <td colspan="3">{!!Arr::get($awb->awb_receiver_data,'address1')!!}</td>
                         </tr>
 
                         <tr>
                             <td>address2:</td>
-                            <td colspan="3">{!!Arr::get($awb->receiver_data,'address2')!!}</td>
+                            <td colspan="3">{!!Arr::get($awb->awb_receiver_data,'address2')!!}</td>
                         </tr>
 
                         <tr>
@@ -114,9 +114,9 @@
 
                         <tr>
                             <td>title:</td>
-                            <td>{!!Arr::get($awb->receiver_data,'title')!!}</td>
+                            <td>{!!Arr::get($awb->awb_receiver_data,'title')!!}</td>
                             <td>receiving_company:</td>
-                            <td>{!!Arr::get($awb->receiver_data,'receiving_company')!!}</td>
+                            <td>{!!Arr::get($awb->awb_receiver_data,'receiving_company')!!}</td>
                         </tr>
 
                         </tbody>

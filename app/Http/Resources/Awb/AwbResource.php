@@ -22,12 +22,12 @@ class AwbResource extends JsonResource
             'code'=>$this->code,
             'company'=>$this->company->name,
             'status'=>$this->latestStatus->status->name,
-            'receiver_id'=>Arr::get($this->receiver_data,'id'),
-            'receiver_name'=>$this->receiver_data['name'],
-            'receiver_phone'=>$this->receiver_data['phone1'],
+            'receiver_id'=>Arr::get($this->awb_receiver_data,'id'),
+            'receiver_name'=>Arr::get($this->awb_receiver_data,'name'),
+            'receiver_phone'=>Arr::get($this->awb_receiver_data,'phone1'),
             'receiver_city'=>$this->receiverCity?->title,
             'receiver_area'=>$this->receiverArea?->title,
-            'receiver_address'=>$this->receiver_data['address1'],
+            'receiver_address'=>Arr::get($this->awb_receiver_data,'address1'),
         ];
     }
 }

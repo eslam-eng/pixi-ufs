@@ -271,7 +271,6 @@
     @include('layouts.dashboard.awb.print.awb-lable', ["resource" => $awb , 'is_print_duplicated'=>$is_print_duplicated])
     @if($is_print_duplicated)
         @include('layouts.dashboard.awb.print.awb-lable', ["resource" => $awb , 'is_print_duplicated'=>$is_print_duplicated])
-        @include('layouts.dashboard.awb.print.awb-lable', ["resource" => $awb , 'is_print_duplicated'=>$is_print_duplicated])
     @endif
 @endforeach
 <script>

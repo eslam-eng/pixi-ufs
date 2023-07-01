@@ -21,13 +21,13 @@ class ReceiverUpdateAddressAndPhone extends BaseRequest
     public function rules(): array
     {
         return [
-            'lat'=>'nullable|string',
-            'lng'=>'nullable|string',
+            'lat'=>'nullable|numeric',
+            'lng'=>'nullable|numeric',
             'address'=>'required|string',
             'map_url'=>'nullable|url',
             'city_id'=>'required|integer|exists:locations,id',
             'area_id'=>'required|integer|exists:locations,id',
-            'phone'=>'required|string',
+            'phone'=>'required|numeric',
         ];
     }
 

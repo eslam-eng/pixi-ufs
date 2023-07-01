@@ -23,8 +23,8 @@ class ReceiverStoreRequest extends BaseRequest
     {
         return [
             'name' => 'required|string',
-            'phone1' => ['required','string',Rule::unique('receivers','phone1')->where('company_id',$this->user->company_id)],
-            'phone2' => 'nullable|string',
+            'phone1' => ['required','numeric',Rule::unique('receivers','phone1')->where('company_id',$this->user->company_id)],
+            'phone2' => 'nullable|numeric',
             'receiving_company' => 'nullable|string',
             'receiving_branch' => 'nullable|string',
             'company_id' => 'required|numeric|exists:companies,id',

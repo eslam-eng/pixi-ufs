@@ -249,21 +249,6 @@
             {{-- start departments --}}
 
             <div class="card">
-                @can('create_departments')
-                <div class="card-header">
-                    <div class="breadcrumb-header justify-content-between">
-                        <div class="left-content">
-                            <div>
-                                <form method="get" action="{{ route('departments.create') }}">
-                                    <input type="hidden" name="company_id" value="{{ $company->id }}">
-                                    <button class="btn btn-primary"
-                                            type="submit"><i class="fa fa-plus py-2"></i>@lang('app.add_new_department')</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endcan
                 <div class="card-body">
                     <table class="table table-bordered table-striped">
                         <thead>

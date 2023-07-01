@@ -83,7 +83,7 @@ class AwbController extends Controller
             $toast = [
                 'type' => 'success',
                 'title' => 'success',
-                'message' => "$awb->code " . trans('app.aw_created_successfully')
+                'message' => "$awb->code " . trans('app.awb_created_successfully')
             ];
             DB::commit();
             return to_route('awbs.index')->with('toast', $toast);

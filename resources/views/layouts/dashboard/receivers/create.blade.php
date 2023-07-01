@@ -63,15 +63,6 @@
                                 @enderror
                             </div>
 
-                            <div class="col-lg">
-                                <div class="main-content-label mg-b-5">@lang('app.reference')</div>
-                                <input class="form-control" value="{{old('reference')}}" name="reference" placeholder="@lang('app.reference')"
-                                       type="text">
-
-                                @error('reference')
-                                <div class="text-danger"> {{$message}}</div>
-                                @enderror
-                            </div>
                         </div>
 
                         <div class="row row-sm mb-4">
@@ -147,17 +138,26 @@
                                         <div class="main-content-label mg-b-5">@lang('app.lat')</div>
                                         <input class="form-control" value="{{old('lat')}}" name="lat" placeholder="@lang('app.lat')"
                                                type="text">
+                                        @error('lat')
+                                        <div class="text-danger"> {{$message}}</div>
+                                        @enderror
                                     </div>
                                     <div class="col-lg">
                                         <div class="main-content-label mg-b-5">@lang('app.lng')</div>
                                         <input class="form-control" value="{{old('lng')}}" name="lng" placeholder="@lang('app.lng')"
                                                type="text">
+                                        @error('lng')
+                                        <div class="text-danger"> {{$message}}</div>
+                                        @enderror
                                     </div>
 
                                     <div class="col-lg">
                                         <div class="main-content-label mg-b-5">@lang('app.map_url')</div>
                                         <input class="form-control" value="{{old('map_url')}}" name="map_url" placeholder="@lang('app.map_url')"
                                                type="text">
+                                        @error('map_url')
+                                        <div class="text-danger"> {{$message}}</div>
+                                        @enderror
                                     </div>
                                 </div>
 

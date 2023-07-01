@@ -171,28 +171,28 @@
                         <tbody>
                         <tr>
                             <td colspan="2">note1:</td>
-                            <td colspan="2">{{$awb->additionalInfo?->custome_field1}}</td>
+                            <td colspan="2">{{$awb->additionalInfo?->custom_field1}}</td>
                         </tr>
 
                         <tr>
                             <td colspan="2">note2:</td>
-                            <td colspan="2">{{$awb->additionalInfo?->custome_field2}}</td>
+                            <td colspan="2">{{$awb->additionalInfo?->custom_field2}}</td>
                         </tr>
 
 
                         <tr>
                             <td colspan="2">note3:</td>
-                            <td colspan="2">{{$awb->additionalInfo?->custome_field3}}</td>
+                            <td colspan="2">{{$awb->additionalInfo?->custom_field3}}</td>
                         </tr>
 
                         <tr>
                             <td colspan="2">note4:</td>
-                            <td colspan="2">{{$awb->additionalInfo?->custome_field4}}</td>
+                            <td colspan="2">{{$awb->additionalInfo?->custom_field4}}</td>
                         </tr>
 
                         <tr>
                             <td colspan="2">note5:</td>
-                            <td colspan="2">{{$awb->additionalInfo?->custome_field5}}</td>
+                            <td colspan="2">{{$awb->additionalInfo?->custom_field5}}</td>
                         </tr>
 
                         </tbody>

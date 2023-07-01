@@ -31,12 +31,21 @@
                                     <div class="row row-xs">
                                         <div class="col-md-4 col-lg-4 col-sm-12">
                                             <livewire:company/>
+                                            @error('company_id')
+                                            <div class="text-danger"> {{$message}}</div>
+                                            @enderror
                                         </div>
                                         <div class="col-md-4 col-lg-4 col-sm-12 mg-t-5 mg-md-t-0">
                                             <livewire:branch/>
+                                            @error('branch_id')
+                                            <div class="text-danger"> {{$message}}</div>
+                                            @enderror
                                         </div>
                                         <div class="col-md-4 col-lg-4 col-sm-12 mg-t-5 mg-md-t-0">
                                             <livewire:department/>
+                                            @error('department_id')
+                                            <div class="text-danger"> {{$message}}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -96,7 +105,10 @@
                                     <div class="row row-xs">
                                         <div class="col-md-3" id="collection">
                                             <label class="form-label">@lang('app.collection')</label>
-                                            <input class="form-control" type="number" name="collection"/>
+                                            <input class="form-control" type="number" name="collection" value="{{ old('collection') }}">
+                                            @error('collection')
+                                            <div class="text-danger"> {{$message}}</div>
+                                            @enderror
                                         </div>
                                         <div class="col-md-2 mt-5 ms-3">
                                             <label class="ckbox">
@@ -115,12 +127,18 @@
 
                                         <div class="col-md-3">
                                             <label class="form-label">@lang('app.pieces')</label>
-                                            <input class="form-control" value="1" id="pieces" type="number" name="pieces"/>
+                                            <input class="form-control" value="{{ old('pieces') ?? 1 }}" id="pieces" type="number" name="pieces"/>
+                                            @error('pieces')
+                                            <div class="text-danger"> {{$message}}</div>
+                                            @enderror
                                         </div>
 
                                         <div class="col-md-3">
                                             <label class="form-label">@lang('app.weight')</label>
-                                            <input class="form-control" value="1" type="number" name="weight"/>
+                                            <input class="form-control" value="{{ old('weight') ?? 1 }}" type="number" name="weight"/>
+                                            @error('weight')
+                                            <div class="text-danger"> {{$message}}</div>
+                                            @enderror
                                         </div>
                                     </div>
 
@@ -138,19 +156,31 @@
                                     <div class="row row-xs">
                                         <div class="col-md-3 col-lg-3">
                                             <label class="form-label">@lang('app.custom_field1')</label>
-                                            <input class="form-control" type="text" name="custom_field1"/>
+                                            <input class="form-control" type="text" name="custom_field1" value="{{ old('custom_field1') }}">
+                                            @error('custom_field1')
+                                            <div class="text-danger"> {{$message}}</div>
+                                            @enderror
                                         </div>
                                         <div class="col-md-3 col-lg-3">
                                             <label class="form-label">@lang('app.custom_field2')</label>
-                                            <input class="form-control" type="text" name="custom_field1"/>
+                                            <input class="form-control" type="text" name="custom_field2" value="{{ old('custom_field2') }}"/>
+                                            @error('custom_field2')
+                                            <div class="text-danger"> {{$message}}</div>
+                                            @enderror
                                         </div>
                                         <div class="col-md-3 col-lg-3">
                                             <label class="form-label">@lang('app.custom_field3')</label>
-                                            <input class="form-control" type="text" name="custom_field1"/>
+                                            <input class="form-control" type="text" name="custom_field3" value="{{ old('custom_field3') }}"/>
+                                            @error('custom_field3')
+                                            <div class="text-danger"> {{$message}}</div>
+                                            @enderror
                                         </div>
                                         <div class="col-md-3 col-lg-3">
                                             <label class="form-label">@lang('app.custom_field4')</label>
-                                            <input class="form-control" type="text" name="custom_field1"/>
+                                            <input class="form-control" type="text" name="custom_field4" value="{{ old('custom_field4') }}"/>
+                                            @error('custom_field4')
+                                            <div class="text-danger"> {{$message}}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>

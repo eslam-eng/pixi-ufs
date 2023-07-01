@@ -166,7 +166,6 @@ class AwbService extends BaseService
     private function getReceiverDataForAwb(Receiver|Model $receiver): array
     {
         return [
-            [
                 'city' => $receiver->city->title,
                 'area' => $receiver->area->title,
                 'address1' => $receiver->address1,
@@ -176,7 +175,6 @@ class AwbService extends BaseService
                 'receiving_company' =>  $receiver->receiving_company,
                 'receiving_branch' => $receiver->receiving_branch,
                 'title' => $receiver->title,
-            ],
         ];
     }
 

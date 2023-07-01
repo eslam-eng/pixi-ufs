@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 <head>
 
     <meta charset="UTF-8">
@@ -69,7 +69,7 @@
 <script>
     function destroy(url) {
         swal({
-            title: "{{__('lang.are_you_sure')}}",
+            title: "{{__('app.are_you_sure')}}",
             icon: "warning",
             buttons: true,
             dangerMode: true,

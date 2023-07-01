@@ -3,7 +3,7 @@
 @section('content')
 
     {{--    breadcrumb --}}
-    @include('layouts.components.breadcrumb',['title' => trans('branches_page_title'),'first_list_item' => trans('app.branches'),'last_list_item' => trans('app.edit_branch')])
+    @include('layouts.components.breadcrumb',['title' => trans('app.branches_page_title'),'first_list_item' => trans('app.branches'),'last_list_item' => trans('app.edit_branch')])
     {{--    end breadcrumb --}}
 
     <!-- Row -->

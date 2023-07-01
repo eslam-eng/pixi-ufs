@@ -2,7 +2,7 @@
 				<div class="sticky">
 					<aside class="app-sidebar">
 						<div class="main-sidebar-header active">
-							<a class="header-logo active" href="{{url('index')}}">
+							<a class="header-logo active" href="{{url('/')}}">
 								{{-- <img src="{{asset('assets/img/brand/logo.png')}}" class="main-logo  desktop-logo" alt="logo"> --}}
 								<p class="text-center p-2 tx-17">{{auth()->user()->company?->name}}</p>
 							</a>
@@ -111,7 +111,7 @@
 
                                 {{--                                dashboard settings--}}
 
-                                @can('view_settings')
+                                {{-- @can('view_settings')
                                 <li class="slide">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" width="24"
@@ -132,7 +132,7 @@
                                                href="{{route('switcherpage')}}">@lang('app.dashboard_settings')</a></li>
                                     </ul>
                                 </li>
-                                @endcan
+                                @endcan --}}
 
 
 							</ul>

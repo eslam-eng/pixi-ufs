@@ -47,14 +47,16 @@ class AwbHistoryService extends BaseService
             ];
             $awb->update($pod_data);
         }
-        $history =  $awb->history()->create($data);
-        if ($history && isset($data['images']) && is_array($data['images'])){
+
+        $history = $awb->history()->create($data);
+        if ($history && isset($data['images']) && is_array($data['images'])) {
             foreach ($data['images'] as $image) {
                 $fileData = FileService::saveImage(file: $image, path: 'uploads/pod/awbs', field_name: 'images');
                 $fileData['type'] = ImageTypeEnum::CARD;
                 $history->storeAttachment($fileData);
             }
         }
+
     }
 
 }

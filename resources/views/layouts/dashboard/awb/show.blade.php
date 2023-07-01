@@ -65,7 +65,7 @@
 
                         {{--                       @if($user->can('show_awbs_pod'))--}}
                         <tr>
-                            <td colspan="2">@lang('app.additional kg price')</td>
+                            <td colspan="2">@lang('app.additional_kg_price')</td>
                             <td colspan="2">{{$awb->additional_kg_price}}</td>
                         </tr>
                         {{--                       @endif--}}
@@ -135,7 +135,7 @@
                     <table class="table table-striped">
                         <tbody>
                         <tr>
-                            <td colspan="2">@lang('app.actual-receipt') </td>
+                            <td colspan="2">@lang('app.actual_receipt') </td>
                             <td colspan="2">{{$awb->actual_recipient}}</td>
                         </tr>
                         <tr>

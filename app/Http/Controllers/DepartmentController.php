@@ -56,7 +56,7 @@ class DepartmentController extends Controller
     public function edit(int $id)
     {
         $withRelations = [];
-        $department = $this->departmentService->find(id: $id);
+        $department = $this->departmentService->findById(id: $id);
         return view('layouts.dashboard.departments.edit', compact('department'));
     }
 

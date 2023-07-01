@@ -20,7 +20,7 @@ class FileUploadRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'file' => 'file|mimes:xls,xlsx',
+            'file' => 'required|file|mimes:xls,xlsx',
         ];
     }
 }

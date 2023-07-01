@@ -182,8 +182,8 @@ class ReceiverController extends Controller
         {
             DB::rollBack();
             $toast = [
-                'type' => 'success',
-                'title' => 'success',
+                'type' => 'error',
+                'title' => 'error',
                 'message' => $exception->getMessage()
             ];
             return back()->with('toast',$toast);

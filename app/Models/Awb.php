@@ -91,7 +91,7 @@ class Awb extends Model
 
     public function getReceiverAddressAttribute(): string
     {
-        return Str::limit(Arr::get($this->receiver_data, 'address1'), 90);
+        return Str::limit(Arr::get(Arr::first($this->receiver_data), 'address1'), 90);
     }
 
 

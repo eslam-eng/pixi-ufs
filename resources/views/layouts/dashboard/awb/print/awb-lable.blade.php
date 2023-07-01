@@ -58,8 +58,7 @@
 
             <tr>
                 <td colspan="2"><b class="w3-left">Ref : </b> <span class="w3-right"> {{ $resource->receiver_reference }}</span></td>
-                <td colspan="2"><b class="w3-left">province : </b><span class="w3-right">{!! $resource->receiver->area->title !!}</span></td>
-            </tr>
+                <td colspan="2"><b class="w3-left">province : </b><span class="w3-right">{!! Arr::get($resource->receiver_data,'area') !!}</span></td>            </tr>
 
             <tr>
                 <td colspan="2"><b class="w3-left">note1 : </b> <span>  {{ Str::limit($resource->additionalInfo?->custom_field1,45) }}</span></td>

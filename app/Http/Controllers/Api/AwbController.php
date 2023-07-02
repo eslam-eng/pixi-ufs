@@ -33,7 +33,7 @@ class AwbController extends Controller
     public function awbDetails($id)
     {
         try {
-            $withRelations = ['company:id,name','latestStatus.status','receiverCity','receiverArea'];
+            $withRelations = ['company:id,name','latestStatus.status','latestStatus.attachments','receiverCity','receiverArea'];
             $awb = $this->awbService->findById(id: $id, withRelations: $withRelations);
             return apiResponse(data: new AwbDetailsResource($awb), message: trans('app.success_operation'));
         } catch (Exception $e) {

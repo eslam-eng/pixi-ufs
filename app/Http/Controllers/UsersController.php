@@ -6,6 +6,7 @@ use App\DataTables\UsersDatatable;
 use App\Enums\UsersType;
 use App\Exceptions\NotFoundException;
 use App\Http\Requests\Users\UserStoreRequest;
+use App\Http\Requests\Users\UserUpdateProfileRequest;
 use App\Http\Requests\Users\UserUpdateRequest;
 use App\Services\UserService;
 use Exception;
@@ -153,6 +154,25 @@ class UsersController extends Controller
                 'message' => trans('app.user_created_successfully')
             ];
             return to_route('users.index')->with('toast',$toast);
+        } catch (Exception $e) {
+            $toast = [
+                'type' => 'error',
+                'title' => 'error',
+                'message' => trans('app.there_is_an_error')
+            ];
+            return back()->with('toast',$toast);
+        }
+    }
+    public function updateProfile(UserUpdateProfileRequest $request, $id)
+    {
+        try {
+            $this->userService->updateProfile($request->validated(), $id);
+            $toast = [
+                'type' => 'success',
+                'title' => 'success',
+                'message' => trans('app.success_operation')
+            ];
+            return to_route('home')->with('toast',$toast);
         } catch (Exception $e) {
             $toast = [
                 'type' => 'error',

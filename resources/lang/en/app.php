@@ -282,4 +282,11 @@ return [
 
 
     //end awb
+
+    //start awb history
+    'comment'=>'comment',
+    'awb_history'=>'awb history',
+    'select_status'=>'select status',
+
+    //end awb history
 ];

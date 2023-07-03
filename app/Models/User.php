@@ -93,7 +93,10 @@ class User extends Authenticatable
 
     public function getProfileImageAttribute()
     {
-        return $this->attachments()->where('field_name', 'profile_image')->first()->path.'/'.$this->attachments()->where('field_name', 'profile_image')->first()->file_name;
+        return isset($this->attachments) ?
+             $this->attachments()->where('field_name', 'profile_image')->first()->path.'/'.$this->attachments()->where('field_name', 'profile_image')->first()->file_name
+        : 'assets/images/default-image.jpg';
+        
     }
 
 }

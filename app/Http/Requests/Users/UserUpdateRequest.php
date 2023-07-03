@@ -26,7 +26,7 @@ class UserUpdateRequest extends BaseRequest
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email,'.$this->user,
             'password' => 'nullable|string|min:6|confirmed',
-            'phone' => 'required|string|unique:users,phone,'.$this->user,
+            'phone' => 'required|numeric|unique:users,phone,'.$this->user,
             'profile_image' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg',
             'status' => 'nullable|boolean',
             'type' => 'required|integer',

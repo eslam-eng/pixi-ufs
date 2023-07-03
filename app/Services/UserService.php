@@ -89,6 +89,26 @@ class UserService extends BaseService
         return true;
     }
 
+    public function updateProfile(array $data = [], $id)
+    {
+        $user = $this->findById($id);
+        if(!isset($data['password']))
+            $user->update(Arr::except($data, ['profile_image', 'password']));
+        else{
+            $data['password'] = bcrypt($data['password']);
+            $user->update(Arr::except($data, 'profile_image'));
+        }
+
+        if (isset($data['profile_image']))
+        {
+            $user->deleteAttachmentsLogo();
+            $fileData = FileService::saveImage(file: $data['profile_image'],path: 'uploads/users', field_name: 'profile_image');
+            $fileData['type'] = AttachmentsType::PRIMARYIMAGE;
+            $user->storeAttachment($fileData);
+        }
+        return true;
+    }
+
     /**
      * Remove the specified resource from storage.
      *

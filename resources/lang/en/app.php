@@ -227,6 +227,7 @@ return [
     'all_prices'=>'all prices',
     'edit_price'=>'edit price',
     'prices_page_title'=>'prices',
+    'price_created_successfully'=>'price created successfully',
     
     //end price tables
     
@@ -277,7 +278,15 @@ return [
     'awbs_status_changed_successfully'=>'awbs status changed successfully',
     'there_is_an_error_in_change_awbs_status'=>'there is an error in change awbs status',
     'save'=>'save',
+    'awb_created_successfully'=>'awb created successfully',
 
 
     //end awb
+
+    //start awb history
+    'comment'=>'comment',
+    'awb_history'=>'awb history',
+    'select_status'=>'select status',
+
+    //end awb history
 ];

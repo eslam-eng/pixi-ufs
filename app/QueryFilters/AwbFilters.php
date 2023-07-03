@@ -72,6 +72,11 @@ class AwbFilters extends QueryFilter
         return $this->builder->where('department_id',$term);
     }
 
+    public function receiver_id($term)
+    {
+        return $this->builder->where('receiver_id',$term);
+    }
+
     public function created_at($term)
     {
         return $this->builder ->whereBetween(DB::raw('DATE(created_at)'),$term);

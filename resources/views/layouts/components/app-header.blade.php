@@ -55,11 +55,11 @@
 											</form>
 										</li>
 										<li class="dropdown main-profile-menu nav nav-item nav-link ps-lg-2">
-											<a class="new nav-link profile-user d-flex" href="" data-bs-toggle="dropdown"><img alt="" src="{{asset('assets/img/faces/2.jpg')}}" class=""></a>
+											<a class="new nav-link profile-user d-flex" href="" data-bs-toggle="dropdown"><img alt="" src="{{ asset(Auth::user()->profileImage) }}" class=""></a>
 											<div class="dropdown-menu">
 												<div class="menu-header-content p-3 border-bottom">
 													<div class="d-flex wd-100p">
-														<div class="main-img-user"><img alt="" src="{{asset('assets/img/faces/2.jpg')}}" class=""></div>
+														<div class="main-img-user"><img alt="" src="{{ asset(Auth::user()->profileImage) }}" class=""></div>
 														<div class="ms-3 my-auto">
 															<h6 class="tx-15 font-weight-semibold mb-0">{{auth()->user()->name}}</h6>
 														</div>

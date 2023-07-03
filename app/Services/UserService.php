@@ -94,8 +94,10 @@ class UserService extends BaseService
         $user = $this->findById($id);
         if(!isset($data['password']))
             $user->update(Arr::except($data, ['profile_image', 'password']));
-        else
+        else{
+            $data['password'] = bcrypt($data['password']);
             $user->update(Arr::except($data, 'profile_image'));
+        }
 
         if (isset($data['profile_image']))
         {

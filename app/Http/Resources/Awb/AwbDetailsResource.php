@@ -28,18 +28,18 @@ class AwbDetailsResource extends JsonResource
             'shipment_type' => $this->shipment_type,
             'payment_type' => $this->payment_typ,
             'service_type' => $this->service_type,
-            'lat'=> Arr::get($this->receiver_data,'lat'),
+            'lat'=> Arr::get($this->awb_receiver_data,'lat'),
             'lng'=> Arr::get($this->receiver_data,'lng'),
             'note1' => $this->note1,
             'note2' => $this->note2,
             'collection' => $this->collection,
-            'receiver_id' =>  Arr::get($this->receiver_data,'id'),
-            'receiver_name' => $this->receiver_data['name'],
-            'receiver_phone' => $this->receiver_data['phone1'],
+            'receiver_id' =>  Arr::get($this->awb_receiver_data,'id'),
+            'receiver_name' => Arr::get($this->awb_receiver_data,'name'),
+            'receiver_phone' => Arr::get($this->awb_receiver_data,'phone1'),
             'receiver_city' => $this->receiverCity?->title,
             'receiver_area' => $this->receiverArea?->title,
-            'receiver_address' => $this->receiver_data['address1'],
             'profile_image'=>$this->whenLoaded('latestStatus.attachments',new AttachmentsResource($this->latestStatus->attachments),asset('assets/images/default-image.jpg')),
+            'receiver_address' => Arr::get($this->awb_receiver_data,'address1'),
         ];
     }
 }

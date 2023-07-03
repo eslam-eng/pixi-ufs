@@ -43,12 +43,12 @@
             </tr>
 
             <tr>
-                <td colspan="2"><b class="w3-left">Name : </b> <span class="w3-right"> {!! Arr::get($resource->receiver_data,'name') !!}</span></td>
-                <td colspan="2"><b class="w3-left">Phone : </b><span class="w3-right">{!! Arr::get($resource->receiver_data,'phone1') . " | " . Arr::get($resource->receiver_data,'phone2') !!}</span></td>
+                <td colspan="2"><b class="w3-left">Name : </b> <span class="w3-right"> {!! Arr::get($resource->awb_receiver_data,'name') !!}</span></td>
+                <td colspan="2"><b class="w3-left">Phone : </b><span class="w3-right">{!! Arr::get($resource->awb_receiver_data,'phone1') . " | " . Arr::get($resource->receiver_data,'phone2') !!}</span></td>
             </tr>
 
             <tr>
-                <td colspan="2"><b class="w3-left">Company : </b> <span class="w3-right"> {!! Arr::get($resource->receiver_data,'receiving_company') !!}</span></td>
+                <td colspan="2"><b class="w3-left">Company : </b> <span class="w3-right"> {!! Arr::get($resource->awb_receiver_data,'receiving_company') !!}</span></td>
                 <td colspan="2"><b>weight : </b><span class="w3-padding">{{$resource->weight}}</span> <b>pieces : </b><span class="w3-padding">{{$resource->pieces}}</span></td>
             </tr>
 
@@ -58,7 +58,7 @@
 
             <tr>
                 <td colspan="2"><b class="w3-left">Ref : </b> <span class="w3-right"> {{ $resource->receiver_reference }}</span></td>
-                <td colspan="2"><b class="w3-left">province : </b><span class="w3-right">{!! Arr::get($resource->receiver_data,'area') !!}</span></td>            </tr>
+                <td colspan="2"><b class="w3-left">province : </b><span class="w3-right">{!! Arr::get($resource->awb_receiver_data,'area') !!}</span></td>            </tr>
 
             <tr>
                 <td colspan="2"><b class="w3-left">note1 : </b> <span>  {{ Str::limit($resource->additionalInfo?->custom_field1,45) }}</span></td>

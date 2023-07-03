@@ -89,9 +89,13 @@ class Awb extends Model
         return $this->hasOne(AwbHistory::class, 'awb_id')->latestOfMany();
     }
 
+    public function getAwbReceiverDataAttribute(){
+        return Arr::first($this->receiver_data);
+    }
+
     public function getReceiverAddressAttribute(): string
     {
-        return Str::limit(Arr::get($this->receiver_data, 'address1'), 90);
+        return Str::limit(Arr::get($this->awb_receiver_data, 'address1'), 90);
     }
 
 

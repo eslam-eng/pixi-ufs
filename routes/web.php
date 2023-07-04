@@ -48,7 +48,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
     Route::resource('receivers', ReceiverController::class);
     Route::resource('companies', CompanyController::class);
     Route::resource('branches', BranchController::class);
-    Route::resource('departments', DepartmentController::class)->except('create');
+    Route::resource('departments', DepartmentController::class);
     Route::resource('users', UsersController::class);
     Route::put('profile/{id}', [UsersController::class, 'updateProfile'])->name('profile.update');
     Route::get('profile', function(){

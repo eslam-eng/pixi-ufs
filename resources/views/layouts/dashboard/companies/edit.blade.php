@@ -249,7 +249,7 @@
             {{-- start departments --}}
 
             <div class="card">
-                @can('create_branches')
+                @can('create_departments')
                 <div class="card-header">
                     <div class="breadcrumb-header justify-content-between">
                         <div class="left-content">

@@ -46,8 +46,8 @@
                                 <div class="card-footer">
                                     <div class="form-group mb-0 mt-3 justify-content-end">
                                         <div>
-                                            <button type="submit" class="search_datatable btn btn-success"><i class="fa fa-search pe-2"></i>@lang('app.search')</button>
-                                            <button type="reset" class="reset_form_data btn btn-secondary ms-4">@lang('app.reset')</button>
+                                            <button type="submit" class="search_datatable btn btn-primary"><i class="fa fa-search pe-2"></i>@lang('app.search')</button>
+                                            <button type="reset" class="reset_form_data btn btn-primary">@lang('app.reset')</button>
                                         </div>
                                     </div>
                                 </div>

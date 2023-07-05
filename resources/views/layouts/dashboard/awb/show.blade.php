@@ -22,7 +22,7 @@
                     <div class="card-options">
 
                         <a role="button" href="{{route('awb-history.create',$awb->id)}}"
-                           class="btn btn-secondary" style="background-color: #171f4e">
+                           class="btn btn-danger">
                             <i class="fa fa-history"></i> change status
                         </a>
                     </div>
@@ -85,37 +85,37 @@
                     <table class="table table-striped">
                         <tbody>
                         <tr class="fw-bold">
-                            <td colspan="2">receiver:</td>
+                            <td colspan="2">@lang('app.receiver'):</td>
                             <td colspan="2">{!!Arr::get($awb->awb_receiver_data,'name')!!}</td>
                         </tr>
                         <tr>
-                            <td>phone1:</td>
+                            <td>@lang('app.phone1'):</td>
                             <td>{!!Arr::get($awb->awb_receiver_data,'phone1')!!}</td>
-                            <td>phone2:</td>
+                            <td>@lang('app.phone2'):</td>
                             <td>{!!Arr::get($awb->awb_receiver_data,'phone2')!!}</td>
                         </tr>
 
                         <tr>
-                            <td>address:</td>
+                            <td>@lang('app.address'):</td>
                             <td colspan="3">{!!Arr::get($awb->awb_receiver_data,'address1')!!}</td>
                         </tr>
 
                         <tr>
-                            <td>address2:</td>
+                            <td>@lang('app.address2'):</td>
                             <td colspan="3">{!!Arr::get($awb->awb_receiver_data,'address2')!!}</td>
                         </tr>
 
                         <tr>
-                            <td>city:</td>
+                            <td>@lang('app.city'):</td>
                             <td>{{$awb->receiverCity?->title}}</td>
                             <td>area:</td>
                             <td>{{$awb->receiverArea?->title}}</td>
                         </tr>
 
                         <tr>
-                            <td>title:</td>
+                            <td>@lang('app.title'):</td>
                             <td>{!!Arr::get($awb->awb_receiver_data,'title')!!}</td>
-                            <td>receiving_company:</td>
+                            <td>@lang('app.receiving_company'):</td>
                             <td>{!!Arr::get($awb->awb_receiver_data,'receiving_company')!!}</td>
                         </tr>
 
@@ -149,7 +149,7 @@
                         <tr>
                             <td colspan="2">@lang('app.pod')</td>
                             <td colspan="2">
-                                <button class="btn btn-sm btn-info">show Attachments</button>
+                                <button class="btn btn-primary">show Attachments</button>
                             </td>
                         </tr>
                         {{--                       @endif--}}
@@ -171,28 +171,28 @@
                         <tbody>
                         <tr>
                             <td colspan="2">note1:</td>
-                            <td colspan="2">{{$awb->additionalInfo?->custome_field1}}</td>
+                            <td colspan="2">{{$awb->additionalInfo?->custom_field1}}</td>
                         </tr>
 
                         <tr>
                             <td colspan="2">note2:</td>
-                            <td colspan="2">{{$awb->additionalInfo?->custome_field2}}</td>
+                            <td colspan="2">{{$awb->additionalInfo?->custom_field2}}</td>
                         </tr>
 
 
                         <tr>
                             <td colspan="2">note3:</td>
-                            <td colspan="2">{{$awb->additionalInfo?->custome_field3}}</td>
+                            <td colspan="2">{{$awb->additionalInfo?->custom_field3}}</td>
                         </tr>
 
                         <tr>
                             <td colspan="2">note4:</td>
-                            <td colspan="2">{{$awb->additionalInfo?->custome_field4}}</td>
+                            <td colspan="2">{{$awb->additionalInfo?->custom_field4}}</td>
                         </tr>
 
                         <tr>
                             <td colspan="2">note5:</td>
-                            <td colspan="2">{{$awb->additionalInfo?->custome_field5}}</td>
+                            <td colspan="2">{{$awb->additionalInfo?->custom_field5}}</td>
                         </tr>
 
                         </tbody>

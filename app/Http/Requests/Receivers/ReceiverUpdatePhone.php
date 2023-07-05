@@ -24,7 +24,7 @@ class ReceiverUpdatePhone extends BaseRequest
     public function rules(): array
     {
         return [
-            'phone'=>'required|string',
+            'phone'=>'required|numeric',
         ];
     }
 

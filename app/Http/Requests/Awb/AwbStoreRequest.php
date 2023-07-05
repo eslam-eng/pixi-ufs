@@ -37,6 +37,7 @@ class AwbStoreRequest extends BaseRequest
             'custom_field1'=>'nullable|string',
             'custom_field2'=>'nullable|string',
             'custom_field3'=>'nullable|string',
+            'custom_field4'=>'nullable|string',
 
             'length'=>'sometimes|required|array',
             'length.*'=>'required',
@@ -53,7 +54,7 @@ class AwbStoreRequest extends BaseRequest
     public function prepareForValidation(): void
     {
         $this->merge([
-            'is_return'=>(bool)($this->is_reverse)??false ,
+            'is_return'=>(bool)($this->is_return)??false ,
             'user_id'=>auth()->id(),
         ]);
     }

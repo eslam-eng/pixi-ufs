@@ -22,12 +22,20 @@
                     <div class="form-group mb-0 mt-3 justify-content-end">
                         <div>
                             <a class="btn btn-primary" href="{{route('awbs.create')}}"><i class="fe fe-plus me-2"></i>@lang('app.new')</a>
-                            <a role="button" href="{{route('awb.import-form')}}" class="btn btn-success"><i class="fa fa-upload pe-2"></i>@lang('app.import')</a>
-                            <a class="btn btn-dark" data-bs-target="#changeAwbsStatus" data-bs-toggle="modal" href="">@lang('app.change_status')</a>
-                            <button class="btn btn-primary" data-bs-target="#print_awbs_modal" data-bs-toggle="modal"><i class="fa fa-print pe-2"></i>@lang('app.print')</button>
-                            @can('delete_shipment')
-                            <button data-url="{{route('awb.delete-multiple')}}" data-csrf="{{csrf_token()}}" class="btn btn-danger delete-selected-btn"><i class="fa fa-trash pe-2"></i>@lang('app.delete_selected')</button>
-                            @endcan
+                            
+                            <div class="btn-group ms-2 mt-2 mb-2">
+                                <div class="dropdown">
+                                    <button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-primary" data-bs-toggle="dropdown" id="dropdownMenuButton" type="button">@lang('app.actions') <i class="fas fa-caret-down ms-1"></i></button>
+                                    <div class="dropdown-menu tx-13" style="">
+                                        <a class="dropdown-item" href="{{route('awb.import-form')}}"><i class="fa fa-file-import pe-2"></i>@lang('app.import')</a>
+                                        <a class="dropdown-item" data-bs-target="#changeAwbsStatus" data-bs-toggle="modal" href=""><i class="fa fa-exchange-alt pe-2"></i>@lang('app.change_status')</a>
+                                        <button class="dropdown-item btn" data-bs-target="#print_awbs_modal" data-bs-toggle="modal"><i class="fa fa-print pe-2"></i>@lang('app.print')</button>
+                                        @can('delete_shipment')
+                                        <button data-url="{{route('awb.delete-multiple')}}" data-csrf="{{csrf_token()}}" class="dropdown-item btn delete-selected-btn"><i class="fa fa-trash pe-2"></i>@lang('app.delete_selected')</button>
+                                        @endcan
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

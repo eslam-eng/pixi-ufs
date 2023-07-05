@@ -91,4 +91,12 @@ class User extends Authenticatable
         return $this->belongsTo(Location::class,'area_id');
     }
 
+    public function getProfileImageAttribute()
+    {
+        return isset($this->attachments) ?
+             $this->attachments()->where('field_name', 'profile_image')->first()->path.'/'.$this->attachments()->where('field_name', 'profile_image')->first()->file_name
+        : 'assets/images/default-image.jpg';
+        
+    }
+
 }

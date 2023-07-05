@@ -179,20 +179,18 @@
                                             <div class="text-danger"> {{$message}}</div>
                                             @enderror
                                         </div>
+                                        <div class="col-md-3 col-lg-3">
+                                            <div class="mt-4">
+                                                <button type="submit" class="btn btn-primary"><i
+                                                        class="fa fa-save pe-2"></i>@lang('app.save')</button>
+                    
+                                                <a role="button" href="{{ URL::previous() }}" class="btn btn-primary"><i
+                                                        class="fa fa-backward pe-2"></i>@lang('app.back')</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-4">
-                    <div class="form-group mb-0 mt-3 justify-content-end">
-                        <div>
-                            <button type="submit" class="btn btn-primary"><i
-                                    class="fa fa-save pe-2"></i>@lang('app.save')</button>
-
-                            <a role="button" href="{{route('receivers.index')}}" class="btn btn-primary"><i
-                                    class="fa fa-backward pe-2"></i>@lang('app.back')</a>
                         </div>
                     </div>
                 </div>

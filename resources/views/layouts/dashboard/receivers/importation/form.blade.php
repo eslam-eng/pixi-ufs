@@ -54,7 +54,7 @@
                                <button type="submit" class="btn btn-primary"><i
                                        class="fa fa-send pe-2"></i>@lang('app.send')</button>
 
-                               <a role="button" href="{{route('awbs.index')}}" class="btn btn-primary"><i
+                               <a role="button" href="{{ URL::previous() }}" class="btn btn-primary"><i
                                        class="fa fa-backward pe-2"></i>@lang('app.back')</a>
                            </div>
                        </div>

@@ -21,8 +21,8 @@ class ReceiverUpdateAddress extends BaseRequest
     public function rules(): array
     {
         return [
-            'lat'=>'nullable|string',
-            'lng'=>'nullable|string',
+            'lat'=>'nullable|numeric',
+            'lng'=>'nullable|numeric',
             'address'=>'required|string',
             'map_url'=>'nullable|url',
             'city_id'=>'required|integer|exists:locations,id',

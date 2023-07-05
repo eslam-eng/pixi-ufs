@@ -8,17 +8,6 @@
 
     <!-- Row -->
     <div class="row">
-        <div class="container">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-        </div>
         <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
             <form action="{{route('awbs.store')}}" method="post">
                 @csrf
@@ -26,6 +15,15 @@
                     <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                         <div class="card">
                             <div class="card-body">
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                                 <div class="main-content-label mg-b-5">Sender Info</div>
                                 <div class="pd-30 pd-sm-20">
                                     <div class="row row-xs">
@@ -54,20 +52,20 @@
                                     <div class="row row-xs">
                                         <div class="col-md-6 col-lg-6 col-sm-12">
                                             <div class="form-group">
-                                                <label class="form-label">@lang('app.phone')</label>
+                                                <label class="main-content-label">@lang('app.phone')</label>
                                                 <p id="branch_phone" class="form-control"></p>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-lg-6 col-sm-12 mg-t-10 mg-md-t-0">
-                                            <label class="form-label">@lang('app.address')</label>
+                                            <label class="main-content-label">@lang('app.address')</label>
                                             <p id="branch_address" class="form-control"></p>
                                         </div>
                                         <div class="col-md-6 col-lg-6 col-sm-12 mg-t-10 mg-md-t-0">
-                                            <label class="form-label">@lang('app.city')</label>
+                                            <label class="main-content-label">@lang('app.city')</label>
                                             <p id="branch_city" class="form-control"></p>
                                         </div>
                                         <div class="col-md-6 col-lg-6 col-sm-12 mg-t-10 mg-md-t-0">
-                                            <label class="form-label">@lang('app.area')</label>
+                                            <label class="main-content-label">@lang('app.area')</label>
                                             <p id="branch_area" class="form-control"></p>
                                         </div>
                                     </div>
@@ -104,18 +102,17 @@
 
                                     <div class="row row-xs">
                                         <div class="col-md-3" id="collection">
-                                            <label class="form-label">@lang('app.collection')</label>
+                                            <label class="main-content-label">@lang('app.collection')</label>
                                             <input class="form-control" type="number" name="collection" value="{{ old('collection') }}">
                                             @error('collection')
                                             <div class="text-danger"> {{$message}}</div>
                                             @enderror
                                         </div>
                                         <div class="col-md-2 mt-5 ms-3">
-                                            <label class="ckbox">
-                                                <input type="checkbox" name="is_return">
-                                                <span
-                                                    class="font-weight-bold text-dark">@lang('app.awb_is_reverse')
-                                                </span>
+                                            <label class="custom-control custom-checkbox custom-control-lg"> <input
+                                                    type="checkbox" class="custom-control-input" name="is_return"
+                                                    value="1" checked> <span
+                                                    class="custom-control-label custom-control-label-lg  tx-20">@lang('app.awb_is_reverse')</span>
                                             </label>
                                         </div>
 
@@ -126,7 +123,7 @@
                                         </div>
 
                                         <div class="col-md-3">
-                                            <label class="form-label">@lang('app.pieces')</label>
+                                            <label class="main-content-label">@lang('app.pieces')</label>
                                             <input class="form-control" value="{{ old('pieces') ?? 1 }}" id="pieces" type="number" name="pieces"/>
                                             @error('pieces')
                                             <div class="text-danger"> {{$message}}</div>
@@ -134,7 +131,7 @@
                                         </div>
 
                                         <div class="col-md-3">
-                                            <label class="form-label">@lang('app.weight')</label>
+                                            <label class="main-content-label">@lang('app.weight')</label>
                                             <input class="form-control" value="{{ old('weight') ?? 1 }}" type="number" name="weight"/>
                                             @error('weight')
                                             <div class="text-danger"> {{$message}}</div>
@@ -155,28 +152,28 @@
                                 <div class="pd-30 pd-sm-20">
                                     <div class="row row-xs">
                                         <div class="col-md-3 col-lg-3">
-                                            <label class="form-label">@lang('app.custom_field1')</label>
+                                            <label class="main-content-label">@lang('app.custom_field1')</label>
                                             <input class="form-control" type="text" name="custom_field1" value="{{ old('custom_field1') }}">
                                             @error('custom_field1')
                                             <div class="text-danger"> {{$message}}</div>
                                             @enderror
                                         </div>
                                         <div class="col-md-3 col-lg-3">
-                                            <label class="form-label">@lang('app.custom_field2')</label>
+                                            <label class="main-content-label">@lang('app.custom_field2')</label>
                                             <input class="form-control" type="text" name="custom_field2" value="{{ old('custom_field2') }}"/>
                                             @error('custom_field2')
                                             <div class="text-danger"> {{$message}}</div>
                                             @enderror
                                         </div>
                                         <div class="col-md-3 col-lg-3">
-                                            <label class="form-label">@lang('app.custom_field3')</label>
+                                            <label class="main-content-label">@lang('app.custom_field3')</label>
                                             <input class="form-control" type="text" name="custom_field3" value="{{ old('custom_field3') }}"/>
                                             @error('custom_field3')
                                             <div class="text-danger"> {{$message}}</div>
                                             @enderror
                                         </div>
                                         <div class="col-md-3 col-lg-3">
-                                            <label class="form-label">@lang('app.custom_field4')</label>
+                                            <label class="main-content-label">@lang('app.custom_field4')</label>
                                             <input class="form-control" type="text" name="custom_field4" value="{{ old('custom_field4') }}"/>
                                             @error('custom_field4')
                                             <div class="text-danger"> {{$message}}</div>

@@ -17,16 +17,16 @@
                                 <div class="col-lg">
                                     <div class="main-content-label mg-b-5">@lang('app.receiver_name')</div>
                                     <input class="form-control" name="name" value="{{old('name')}}" placeholder="@lang('app.receiver_name')"
-                                        type="text" required>
+                                        type="text">
                                     @error('name')
-                                        <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
+                                        <div class="text-danger"> {{$message}} </div>
                                     @enderror
                                 </div>
 
                                 <div class="col-lg">
                                     <div class="main-content-label mg-b-5">@lang('app.phone1')</div>
                                     <input class="form-control" value="{{old('phone1')}}" name="phone1" placeholder="@lang('app.receiver_phone')"
-                                        type="text" required>
+                                        type="text">
                                     @error('phone1')
                                         <div class="text-danger"> {{$message}}</div>
                                     @enderror
@@ -111,7 +111,7 @@
                                 <div class="col-lg">
                                     <div class="main-content-label mg-b-5">@lang('app.address1')</div>
                                     <input class="form-control" name="address1" value="{{old('address1')}}"  placeholder="@lang('app.address')"
-                                           type="text" required>
+                                           type="text">
 
                                     @error('address1')
                                     <div class="text-danger"> {{$message}}</div>

@@ -27,7 +27,7 @@
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.name')</div>
                                 <input class="form-control" name="name" value="{{old('name') ?? $user->name}}" placeholder="@lang('app.name')"
-                                       type="text" required>
+                                       type="text">
                                 @error('name')
                                     <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
                                 @enderror
@@ -36,7 +36,7 @@
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.email')</div>
                                 <input class="form-control" value="{{old('email') ?? $user->email}}" name="email" placeholder="@lang('app.email')"
-                                       type="email" required>
+                                       type="email">
                                 @error('email')
                                     <div class="text-danger"> {{$message}}</div>
                                 @enderror
@@ -105,13 +105,13 @@
                             </div>
 
                             <div class="col-lg">
-                               @livewire('branch')
+                               @livewire('branch', ['branches_for_company_id'=>$user->company_id, 'selected_branch'=>$user->branch_id])
                                 @error('branch_id')
                                     <div class="text-danger"> {{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-lg">
-                               @livewire('department')
+                               @livewire('department', ['departments_for_company_id'=>$user->company_id])
                                 @error('department_id')
                                     <div class="text-danger"> {{$message}}</div>
                                 @enderror
@@ -128,7 +128,7 @@
                             </div>
                             <div class="col-lg mg-t-10 mg-lg-t-0">
                                 <div class="col-lg">
-                                    <livewire:location.areas/>
+                                    @livewire('location.areas', ['areas_for_city_id'=>$user->city_id, 'selected_area'=>$user->area_id])
                                     @error('area_id')
                                         <div class="text-danger"> {{$message}}</div>
                                     @enderror
@@ -205,7 +205,7 @@
                         <div class="card-footer mt-4">
                             <div class="form-group mb-0 mt-3 justify-content-end">
                                 <div>
-                                    <button type="submit" class="btn btn-success"><i
+                                    <button type="submit" class="btn btn-primary"><i
                                             class="fa fa-save pe-2"></i>@lang('app.save')</button>
 
                                     <a role="button" href="{{route('users.index')}}" class="btn btn-danger"><i

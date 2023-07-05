@@ -63,11 +63,6 @@
                                     @enderror
                                 </div>
 
-                            </div>
-
-                            <div class="row row-sm mb-4">
-
-
                                 <div class="col-lg">
                                     <div class="main-content-label mg-b-5">@lang('app.reference')</div>
                                     <input class="form-control" value="{{old('reference')}}" name="reference" placeholder="@lang('app.reference')"
@@ -78,6 +73,10 @@
                                     @enderror
                                 </div>
 
+                            </div>
+
+                            <div class="row row-sm mb-4">
+
                                 <div class="col-lg">
                                     <div class="main-content-label mg-b-5">@lang('app.title')</div>
                                     <input class="form-control" value="{{old('title')}}" name="title" placeholder="@lang('app.title')"
@@ -87,10 +86,7 @@
                                     <div class="text-danger"> {{$message}}</div>
                                     @enderror
                                 </div>
-                            </div>
 
-
-                            <div class="row row-sm mb-4">
                                 <div class="col-lg">
                                     <livewire:company/>
                                     @error('company_id')
@@ -182,7 +178,7 @@
                         <div class="card-footer mt-4">
                             <div class="form-group mb-0 mt-3 justify-content-end">
                                 <div>
-                                    <button type="submit" class="btn btn-success"><i
+                                    <button type="submit" class="btn btn-primary"><i
                                             class="fa fa-save pe-2"></i>@lang('app.submit')</button>
 
                                     <a role="button" href="{{route('receivers.index')}}" class="btn btn-danger"><i

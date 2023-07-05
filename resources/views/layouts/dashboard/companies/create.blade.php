@@ -22,22 +22,22 @@
                             <div class="card-body">
                                 <div class="row row-sm mb-4">
                                     <div class="col-lg">
-                                        <div class="main-content-label mg-b-5">@lang('app.name')</div>
+                                        <div class="main-content-label mg-b-5">@lang('app.name') *</div>
                                         <input class="form-control" name="name" value="{{old('name')}}"
                                                placeholder="@lang('app.name')"
-                                               type="text" required>
+                                               type="text">
                                         @error('name')
-                                        <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
+                                        <div class="text-danger"> {{$message}} </div>
                                         @enderror
                                     </div>
 
                                     <div class="col-lg">
-                                        <div class="main-content-label mg-b-5">@lang('app.email')</div>
+                                        <div class="main-content-label mg-b-5">@lang('app.email') *</div>
                                         <input class="form-control" name="email" value="{{old('email')}}"
                                                placeholder="@lang('app.email')"
-                                               type="email" required>
+                                               type="email">
                                         @error('email')
-                                        <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
+                                        <div class="text-danger"> {{$message}} </div>
                                         @enderror
                                     </div>
 
@@ -49,15 +49,15 @@
                                                placeholder="@lang('app.ceo')"
                                                type="text">
                                         @error('ceo')
-                                        <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
+                                        <div class="text-danger"> {{$message}} </div>
                                         @enderror
                                     </div>
 
                                     <div class="col-lg">
-                                        <div class="main-content-label mg-b-5">@lang('app.phone')</div>
+                                        <div class="main-content-label mg-b-5">@lang('app.phone') *</div>
                                         <input class="form-control" value="{{old('phone')}}" name="phone"
                                                placeholder="@lang('app.phone')"
-                                               type="text" required>
+                                               type="text">
                                         @error('phone')
                                         <div class="text-danger"> {{$message}}</div>
                                         @enderror
@@ -81,7 +81,7 @@
 
                                 <div class="row row-sm mb-4">
                                     <div class="col-lg mt-4">
-                                        <div class="main-content-label mg-b-5">@lang('app.num_custom_fields')</div>
+                                        <div class="main-content-label mg-b-5">@lang('app.num_custom_fields') *</div>
                                         <input class="form-control" value="{{old('num_custom_fields')}}"
                                                name="num_custom_fields" placeholder="@lang('app.num_custom_fields')"
                                                type="number">
@@ -121,7 +121,7 @@
                                         <div class="main-content-label mg-b-5">@lang('app.address')</div>
                                         <input class="form-control" name="address" value="{{old('address')}}"
                                                placeholder="@lang('app.address')"
-                                               type="text" required>
+                                               type="text">
 
                                         @error('address')
                                         <div class="text-danger"> {{$message}}</div>
@@ -187,7 +187,7 @@
                                                     <input class="form-control" name='branches_name[]' value="{{old('branches_name[]')}}" placeholder="@lang('app.name')"
                                                            type="text">
                                                     @error('branches_name[]')
-                                                    <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
+                                                    <div class="text-danger"> {{$message}} </div>
                                                     @enderror
                                                 </div>
 
@@ -315,7 +315,7 @@
                         <div class="card-body">
                             <div class="form-group mb-0 mt-3 justify-content-end">
                                 <div>
-                                    <button type="submit" class="btn btn-success"><i
+                                    <button type="submit" class="btn btn-primary"><i
                                             class="fa fa-save pe-2"></i>@lang('app.submit')</button>
 
                                     <a role="button" href="{{route('companies.index')}}" class="btn btn-danger"><i

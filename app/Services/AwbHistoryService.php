@@ -6,6 +6,7 @@ use App\Enums\AwbStatuses;
 use App\Enums\ImageTypeEnum;
 use App\Models\Awb;
 use App\Models\AwbHistory;
+use Exception;
 use Illuminate\Support\Arr;
 
 class AwbHistoryService extends BaseService
@@ -39,6 +40,8 @@ class AwbHistoryService extends BaseService
     public function changeStatus(Awb $awb, array $data = [])
     {
         $status = Arr::get($data, 'status');
+        if(!$awb->latestStatus->awb_status_id == AwbStatuses::DELIVERED->value || $status?->code == $awb->latestStatus->awb_status_id)
+            throw new Exception('not allowed');
         if (isset($status) && $status?->code == AwbStatuses::DELIVERED->value) {
             $pod_data = [
                 'actual_recipient' => Arr::get($data, 'actual_recipient'),

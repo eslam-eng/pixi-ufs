@@ -19,18 +19,18 @@
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.name')</div>
                                 <input class="form-control" name="name" value="{{ $company->name}}"
-                                       type="text" required>
+                                       type="text">
                                 @error('name')
-                                <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
+                                <div class="text-danger"> {{$message}} </div>
                                 @enderror
                             </div>
 
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.email')</div>
                                 <input class="form-control" name="email" value="{{$company->email}}"
-                                       type="email" required>
+                                       type="email">
                                 @error('email')
-                                <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
+                                <div class="text-danger"> {{$message}} </div>
                                 @enderror
                             </div>
 
@@ -39,14 +39,14 @@
                                 <input class="form-control" name="ceo" value="{{$company->ceo}}"
                                        type="text">
                                 @error('ceo')
-                                <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
+                                <div class="text-danger"> {{$message}} </div>
                                 @enderror
                             </div>
 
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.phone')</div>
                                 <input class="form-control" value="{{$company->phone}}" name="phone"
-                                       type="text" required>
+                                       type="text">
                                 @error('phone')
                                 <div class="text-danger"> {{$message}}</div>
                                 @enderror
@@ -135,7 +135,7 @@
                                 <div class="main-content-label mg-b-5">@lang('app.address')</div>
                                 <input class="form-control" name="address"
                                        value="{{$company->address}}"
-                                       type="text" required>
+                                       type="text">
 
                                 @error('address')
                                 <div class="text-danger"> {{$message}}</div>
@@ -167,7 +167,7 @@
                         <div class="card-footer mt-4">
                             <div class="form-group mb-0 mt-3 justify-content-end">
                                 <div>
-                                    <button type="submit" class="btn btn-success"><i
+                                    <button type="submit" class="btn btn-primary"><i
                                             class="fa fa-save pe-2"></i>@lang('app.submit')</button>
 
                                     <a role="button" href="{{route('companies.index')}}"

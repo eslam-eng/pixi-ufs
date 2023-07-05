@@ -135,7 +135,7 @@
                         <div class="card-footer mt-4">
                             <div class="form-group mb-0 mt-3 justify-content-end">
                                 <div>
-                                    <a role="button" href="{{route('users.index')}}" class="btn btn-danger"><i
+                                    <a role="button" href="{{route('users.index')}}" class="btn btn-primary"><i
                                             class="fa fa-backward pe-2"></i>@lang('app.back')</a>
                                 </div>
                             </div>

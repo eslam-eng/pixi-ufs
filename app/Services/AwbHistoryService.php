@@ -40,7 +40,8 @@ class AwbHistoryService extends BaseService
     public function changeStatus(Awb $awb, array $data = [])
     {
         $status = Arr::get($data, 'status');
-        if(!$awb->latestStatus->awb_status_id == AwbStatuses::DELIVERED->value || $status?->code == $awb->latestStatus->awb_status_id)
+        $checkStatus = $awb->history()->where('awb_status_id',$status?->id)->first();
+        if($checkStatus || !$awb->latestStatus->awb_status_id == AwbStatuses::DELIVERED->value || $awb->latestStatus->awb_status_id == AwbStatuses::CANCELED->value)
             throw new Exception('not allowed');
         if (isset($status) && $status?->code == AwbStatuses::DELIVERED->value) {
             $pod_data = [

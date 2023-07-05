@@ -24,20 +24,20 @@
                         @csrf
                         <div class="row row-sm mb-4">
                             <div class="col-lg">
-                                <livewire:company/>
+                                @livewire('company',['selected_company' => old('company_id')])
                                 @error('company_id')
                                 <div class="text-danger"> {{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-lg">
-                                @livewire('location.cities', ['field_name'=>'location_from'])
+                                @livewire('location.cities', ['field_name'=>'location_from','title' => 'location from','selected_city' => old('location_from')])
                                 @error('location_from')
                                     <div  class="text-danger"> {{$message}} </div>
                                 @enderror
                             </div>
 
                             <div class="col-lg">
-                                @livewire('location.cities', ['field_name'=>'location_to'])
+                                @livewire('location.cities', ['field_name'=>'location_to','title' => 'location to','selected_city' => old('location_to')])
                                 @error('location_to')
                                     <div  class="text-danger"> {{$message}} </div>
                                 @enderror

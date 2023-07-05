@@ -29,9 +29,9 @@
                                         <ul class="slide-menu">
                                             <li class="side-menu__label1"><a href="javascript:void(0);">Utilities</a></li>
                                             @can('create_shipment')
-                                                <li><a class="slide-item" href="{{route('awbs.create')}}">@lang('app.new_shipment')</a></li>
+                                                <li><a class="slide-item" data-is_active="{{request()->fullUrlIs(route('awbs.create'))}}" href="{{route('awbs.create')}}">@lang('app.new_shipment')</a></li>
                                             @endcan
-                                            <li><a class="slide-item" href="{{route('awbs.index')}}">@lang('app.prepare_shipment')</a></li>
+                                            <li><a class="slide-item" data-is_active="{{request()->fullUrlIs(route('awbs.index'))}}" href="{{route('awbs.index')}}">@lang('app.prepare_shipment')</a></li>
                                         </ul>
                                     </li>
                                 @endcan
@@ -45,9 +45,9 @@
                                             <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24"><path d="M10 3H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM9 9H5V5h4v4zm11-6h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zm-1 6h-4V5h4v4zm-9 4H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1zm-1 6H5v-4h4v4zm8-6c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4zm0 6c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2z"></path></svg><span class="side-menu__label" style="font-size: 11px">@lang('app.companies_receivers')</span><i class="angle fe fe-chevron-right"></i></a>
                                         <ul class="slide-menu">
                                             @can('view_receivers')
-                                                <li><a class="slide-item" href="{{route('receivers.index')}}">@lang('app.receivers')</a></li>
+                                                <li><a class="slide-item" data-is_active="{{request()->fullUrlIs(route('receivers.index'))}}" href="{{route('receivers.index')}}">@lang('app.receivers')</a></li>
                                             @endcan
-                                            <li><a class="slide-item" href="{{route('companies.index')}}">@lang('app.companies')</a></li>
+                                            <li><a class="slide-item" data-is_active="{{request()->fullUrlIs(route('companies.index'))}}" href="{{route('companies.index')}}">@lang('app.companies')</a></li>
                                         </ul>
                                     </li>
                                 @endcan
@@ -61,9 +61,9 @@
                                             </svg><span class="side-menu__label">@lang('app.price_table')</span><i class="angle fe fe-chevron-right"></i></a>
                                         <ul class="slide-menu">
                                             @can('create_price_tables')
-                                                <li><a class="slide-item" href="{{route('prices.create')}}">@lang('app.new_price_table')</a></li>
+                                                <li><a class="slide-item" data-is_active="{{request()->fullUrlIs(route('prices.create'))}}" href="{{route('prices.create')}}">@lang('app.new_price_table')</a></li>
                                             @endcan
-                                            <li><a class="slide-item" href="{{route('prices.index')}}">@lang('app.price_tables')</a></li>
+                                            <li><a class="slide-item" data-is_active="{{request()->fullUrlIs(route('prices.index'))}}" href="{{route('prices.index')}}">@lang('app.price_tables')</a></li>
                                         </ul>
                                     </li>
                                 @endcan
@@ -76,9 +76,9 @@
                                             <span class="side-menu__label">@lang('app.awb_status')</span><i class="angle fe fe-chevron-right"></i></a>
                                         <ul class="slide-menu">
                                             @can('create_shipment_status')
-                                                <li><a class="slide-item" href="{{route('awb-status.create')}}">@lang('app.new_awb_status')</a></li>
+                                                <li><a class="slide-item" data-is_active="{{request()->fullUrlIs(route('awb-status.create'))}}" href="{{route('awb-status.create')}}">@lang('app.new_awb_status')</a></li>
                                             @endcan
-                                            <li><a class="slide-item" href="{{route('awb-status.index')}}">@lang('app.all_status')</a></li>
+                                            <li><a class="slide-item" data-is_active="{{request()->fullUrlIs(route('awb-status.index'))}}" href="{{route('awb-status.index')}}">@lang('app.all_status')</a></li>
                                         </ul>
                                     </li>
                                 @endcan
@@ -88,7 +88,7 @@
                                         <i class="fa fa-file-import pe-3"></i>
                                         <span class="side-menu__label">@lang('app.imports_logs')</span><i class="angle fe fe-chevron-right"></i></a>
                                     <ul class="slide-menu">
-                                        <li><a class="slide-item" href="{{route('import-logs.index')}}">@lang('app.imports_logs')</a></li>
+                                        <li><a class="slide-item" data-is_active="{{request()->fullUrlIs(route('import-logs.index'))}}" href="{{route('import-logs.index')}}">@lang('app.imports_logs')</a></li>
                                     </ul>
                                 </li>
 
@@ -102,9 +102,9 @@
                                         <ul class="slide-menu">
                                             <li class="side-menu__label1"><a href="javascript:void(0);">Utilities</a></li>
                                             @can('create_users')
-                                                <li><a class="slide-item" href="{{route('users.create')}}">@lang('app.new_user')</a></li>
+                                                <li><a class="slide-item" data-is_active="{{request()->fullUrlIs(route('users.create'))}}" href="{{route('users.create')}}">@lang('app.new_user')</a></li>
                                             @endcan
-                                            <li><a class="slide-item" href="{{route('users.index')}}">@lang('app.users')</a></li>
+                                            <li><a class="slide-item" data-is_active="{{request()->fullUrlIs(route('users.index'))}}" href="{{route('users.index')}}">@lang('app.users')</a></li>
                                         </ul>
                                     </li>
                                 @endcan

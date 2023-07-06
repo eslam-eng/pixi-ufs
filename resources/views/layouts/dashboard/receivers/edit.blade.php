@@ -16,9 +16,10 @@
             </ul>
         @endif
         <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
+        <form action="{{route('receivers.update', $receiver->id)}}" method="post">
+
             <div class="card">
                 <div class="card-body">
-                    <form action="{{route('receivers.update', $receiver->id)}}" method="post">
                         @csrf
                         @method('put')
                         <div class="row row-sm mb-4">
@@ -71,10 +72,6 @@
                                 @enderror
                             </div>
 
-                        </div>
-
-                        <div class="row row-sm mb-4">
-
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.reference')</div>
                                 <input class="form-control" value="{{$receiver->reference}}" name="reference" placeholder="@lang('app.reference')"
@@ -85,6 +82,10 @@
                                 @enderror
                             </div>
 
+                        </div>
+
+                        <div class="row row-sm mb-4">
+
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.title')</div>
                                 <input class="form-control" value="{{$receiver->title}}" name="title" placeholder="@lang('app.title')"
@@ -94,10 +95,7 @@
                                 <div class="text-danger"> {{$message}}</div>
                                 @enderror
                             </div>
-                        </div>
 
-
-                        <div class="row row-sm mb-4">
                             <div class="col-lg">
                                 @livewire('company', ['selected_company'=> $receiver->company_id])
                                 @error('company_id')
@@ -113,85 +111,85 @@
                             </div>
                         </div>
 
-                        <div class="card card-success mt-4">
-                            <div class="card-header pb-2"><h5 class="card-title mb-0 pb-0">Address Info</h5></div>
-                            <div class="card-body text-success">
-                                <div class="row row-sm mb-4">
-                                    <div class="col-lg">
-                                        <div class="main-content-label mg-b-5">@lang('app.address1')</div>
-                                        <input class="form-control" name="address1" value="{{$receiver->address1}}"  placeholder="@lang('app.address')"
-                                               type="text">
-
-                                        @error('address1')
-                                        <div class="text-danger"> {{$message}}</div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="col-lg">
-                                        <div class="main-content-label mg-b-5">@lang('app.address2')</div>
-                                        <input class="form-control" name="address2" value="{{$receiver->address2}}"  placeholder="@lang('app.address')"
-                                               type="text">
-
-                                        @error('address2')
-                                        <div class="text-danger"> {{$message}}</div>
-                                        @enderror
-                                    </div>
-
-
-                                </div>
-
-                                <div class="row row-sm mb-4">
-                                    <div class="col-lg">
-                                        <div class="main-content-label mg-b-5">@lang('app.lat')</div>
-                                        <input class="form-control" value="{{$receiver->lat}}" name="lat" placeholder="@lang('app.lat')"
-                                               type="text">
-                                    </div>
-                                    <div class="col-lg">
-                                        <div class="main-content-label mg-b-5">@lang('app.lng')</div>
-                                        <input class="form-control" value="{{ $receiver->lng}}" name="lng" placeholder="@lang('app.lng')"
-                                               type="text">
-                                    </div>
-
-                                    <div class="col-lg">
-                                        <div class="main-content-label mg-b-5">@lang('app.map_url')</div>
-                                        <input class="form-control" value="{{$receiver->map_url}}" name="map_url" placeholder="@lang('app.map_url')"
-                                               type="text">
-                                    </div>
-                                </div>
-
-                                <div class="row row-sm mb-4">
-                                    <div class="col-lg">
-                                      @livewire("location.cities",['selected_city' => $receiver->city_id])
-                                        @error('city_id')
-                                        <div class="text-danger"> {{$message}}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="col-lg">
-                                        @livewire("location.areas",["areas_for_city_id" =>  $receiver->city_id,"selected_area" => $receiver->area_id])
-                                    </div>
-                                    @error('area_id')
-                                    <div class="text-danger"> {{$message}}</div>
-                                    @enderror
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card-footer mt-4">
-                            <div class="form-group mb-0 mt-3 justify-content-end">
-                                <div>
-                                    <button type="submit" class="btn btn-primary"><i
-                                            class="fa fa-save pe-2"></i>@lang('app.submit')</button>
-
-                                    <a role="button" href="{{ URL::previous() }}" class="btn btn-primary"><i
-                                            class="fa fa-backward pe-2"></i>@lang('app.back')</a>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                    
 
                 </div>
             </div>
+            <div class="card">
+                <div class="card-header pb-2"><h5 class="card-title mb-0 pb-0">Address Info</h5></div>
+                <div class="card-body text-success">
+                    <div class="row row-sm mb-4">
+                        <div class="col-lg">
+                            <div class="main-content-label mg-b-5">@lang('app.address1')</div>
+                            <input class="form-control" name="address1" value="{{$receiver->address1}}"  placeholder="@lang('app.address')"
+                                   type="text">
+
+                            @error('address1')
+                            <div class="text-danger"> {{$message}}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col-lg">
+                            <div class="main-content-label mg-b-5">@lang('app.address2')</div>
+                            <input class="form-control" name="address2" value="{{$receiver->address2}}"  placeholder="@lang('app.address')"
+                                   type="text">
+
+                            @error('address2')
+                            <div class="text-danger"> {{$message}}</div>
+                            @enderror
+                        </div>
+
+
+                    </div>
+
+                    <div class="row row-sm mb-4">
+                        <div class="col-lg">
+                            <div class="main-content-label mg-b-5">@lang('app.lat')</div>
+                            <input class="form-control" value="{{$receiver->lat}}" name="lat" placeholder="@lang('app.lat')"
+                                   type="text">
+                        </div>
+                        <div class="col-lg">
+                            <div class="main-content-label mg-b-5">@lang('app.lng')</div>
+                            <input class="form-control" value="{{ $receiver->lng}}" name="lng" placeholder="@lang('app.lng')"
+                                   type="text">
+                        </div>
+
+                        <div class="col-lg">
+                            <div class="main-content-label mg-b-5">@lang('app.map_url')</div>
+                            <input class="form-control" value="{{$receiver->map_url}}" name="map_url" placeholder="@lang('app.map_url')"
+                                   type="text">
+                        </div>
+                    </div>
+
+                    <div class="row row-sm mb-4">
+                        <div class="col-lg">
+                          @livewire("location.cities",['selected_city' => $receiver->city_id])
+                            @error('city_id')
+                            <div class="text-danger"> {{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="col-lg">
+                            @livewire("location.areas",["areas_for_city_id" =>  $receiver->city_id,"selected_area" => $receiver->area_id])
+                        </div>
+                        @error('area_id')
+                        <div class="text-danger"> {{$message}}</div>
+                        @enderror
+
+                    </div>
+                </div>
+                <div class="card-footer mt-4">
+                    <div class="form-group mb-0 mt-3 justify-content-end">
+                        <div>
+                            <button type="submit" class="btn btn-primary"><i
+                                    class="fa fa-save pe-2"></i>@lang('app.submit')</button>
+
+                            <a role="button" href="{{ URL::previous() }}" class="btn btn-primary"><i
+                                    class="fa fa-backward pe-2"></i>@lang('app.back')</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
         </div>
     </div>
 

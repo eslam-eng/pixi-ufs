@@ -289,6 +289,8 @@ return [
     'comment'=>'Comment',
     'awb_history'=>'Awb history',
     'select_status'=>'Select status',
+    'card_number'=>'Card number',
+    'images'=>'Images',
 
     //end awb history
 ];

@@ -34,6 +34,22 @@ class AwbHistoryController extends Controller
         }
     }
 
+    public function awbHistoryGallary(int $awbHistoryId)
+    {
+        try {
+            $withRelations = ['attachments'];
+            $model = $this->awbHistoryService->findById(id: $awbHistoryId, withRelations: $withRelations);
+            return view('layouts.dashboard.awb.history.awb-gallary', ['model' => $model]);
+        } catch (\Exception $exception) {
+            $toast = [
+                'type' => 'error',
+                'title' => 'Error',
+                'message' => $exception->getMessage()
+            ];
+            return to_route('awbs.index')->with('toast', $toast);
+        }
+    }
+
     public function store(int $awb_id , AwbChangeStatusRequest $request)
     {
         try {

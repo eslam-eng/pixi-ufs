@@ -75,6 +75,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
     Route::group(['prefix' => 'awb-history'], function () {
         Route::get('{awb_id}/create', [AwbHistoryController::class, 'create'])->name('awb-history.create');
         Route::post('{awb_id}/store', [AwbHistoryController::class, 'store'])->name('awb-history.store');
+        Route::get('{awbHistoryId}/gallary', [AwbHistoryController::class, 'awbHistoryGallary'])->name('awb-history.gallary');
     });
     Route::group(['prefix' => 'awb'], function () {
         Route::get('/imports', [AwbController::class, 'importForm'])->name('awb.import-form');

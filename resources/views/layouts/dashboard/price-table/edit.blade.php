@@ -50,7 +50,7 @@
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.basic_kg')</div>
                                 <input class="form-control" value="{{$priceTable->basic_kg}}" name="basic_kg"
-                                       placeholder="@lang('app.basic_kg')" type="number" required>
+                                       placeholder="@lang('app.basic_kg')" type="number">
 
                                 @error('basic_kg')
                                 <div class="text-danger"> {{$message}}</div>
@@ -60,7 +60,7 @@
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.additional_kg_price')</div>
                                 <input class="form-control" value="{{$priceTable->additional_kg_price }}" name="additional_kg_price"
-                                       placeholder="@lang('app.additional_kg_price')" type="number" required>
+                                       placeholder="@lang('app.additional_kg_price')" type="number">
 
                                 @error('additional_kg_price')
                                 <div class="text-danger"> {{$message}}</div>
@@ -92,10 +92,10 @@
                         <div class="card-footer mt-4">
                             <div class="form-group mb-0 mt-3 justify-content-end">
                                 <div>
-                                    <button type="submit" class="btn btn-success"><i
+                                    <button type="submit" class="btn btn-primary"><i
                                             class="fa fa-save pe-2"></i>@lang('app.submit')</button>
 
-                                    <a role="button" href="{{route('prices.index')}}" class="btn btn-danger"><i
+                                    <a role="button" href="{{ URL::previous() }}" class="btn btn-primary"><i
                                             class="fa fa-backward pe-2"></i>@lang('app.back')</a>
                                 </div>
                             </div>

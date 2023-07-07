@@ -17,16 +17,16 @@
                                 <div class="col-lg">
                                     <div class="main-content-label mg-b-5">@lang('app.receiver_name')</div>
                                     <input class="form-control" name="name" value="{{old('name')}}" placeholder="@lang('app.receiver_name')"
-                                        type="text" required>
+                                        type="text">
                                     @error('name')
-                                        <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
+                                        <div class="text-danger"> {{$message}} </div>
                                     @enderror
                                 </div>
 
                                 <div class="col-lg">
                                     <div class="main-content-label mg-b-5">@lang('app.phone1')</div>
                                     <input class="form-control" value="{{old('phone1')}}" name="phone1" placeholder="@lang('app.receiver_phone')"
-                                        type="text" required>
+                                        type="text">
                                     @error('phone1')
                                         <div class="text-danger"> {{$message}}</div>
                                     @enderror
@@ -63,11 +63,6 @@
                                     @enderror
                                 </div>
 
-                            </div>
-
-                            <div class="row row-sm mb-4">
-
-
                                 <div class="col-lg">
                                     <div class="main-content-label mg-b-5">@lang('app.reference')</div>
                                     <input class="form-control" value="{{old('reference')}}" name="reference" placeholder="@lang('app.reference')"
@@ -78,6 +73,10 @@
                                     @enderror
                                 </div>
 
+                            </div>
+
+                            <div class="row row-sm mb-4">
+
                                 <div class="col-lg">
                                     <div class="main-content-label mg-b-5">@lang('app.title')</div>
                                     <input class="form-control" value="{{old('title')}}" name="title" placeholder="@lang('app.title')"
@@ -87,10 +86,7 @@
                                     <div class="text-danger"> {{$message}}</div>
                                     @enderror
                                 </div>
-                            </div>
 
-
-                            <div class="row row-sm mb-4">
                                 <div class="col-lg">
                                     <livewire:company/>
                                     @error('company_id')
@@ -115,7 +111,7 @@
                                 <div class="col-lg">
                                     <div class="main-content-label mg-b-5">@lang('app.address1')</div>
                                     <input class="form-control" name="address1" value="{{old('address1')}}"  placeholder="@lang('app.address')"
-                                           type="text" required>
+                                           type="text">
 
                                     @error('address1')
                                     <div class="text-danger"> {{$message}}</div>
@@ -182,10 +178,10 @@
                         <div class="card-footer mt-4">
                             <div class="form-group mb-0 mt-3 justify-content-end">
                                 <div>
-                                    <button type="submit" class="btn btn-success"><i
+                                    <button type="submit" class="btn btn-primary"><i
                                             class="fa fa-save pe-2"></i>@lang('app.submit')</button>
 
-                                    <a role="button" href="{{route('receivers.index')}}" class="btn btn-danger"><i
+                                    <a role="button" href="{{ URL::previous() }}" class="btn btn-primary"><i
                                             class="fa fa-backward pe-2"></i>@lang('app.back')</a>
                                 </div>
                             </div>

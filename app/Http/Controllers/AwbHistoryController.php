@@ -53,7 +53,7 @@ class AwbHistoryController extends Controller
                 'title' => 'Error',
                 'message' => $exception->getMessage()
             ];
-            return to_route('awbs.index')->with('toast', $toast);
+            return back()->with('toast', $toast);
         }
     }
 }

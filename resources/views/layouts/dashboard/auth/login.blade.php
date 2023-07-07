@@ -20,7 +20,7 @@
                                 <div class="main-card-signin d-md-flex">
                                     <div class="wd-100p">
                                         <div class="d-flex mb-4"><a href="{{route('home')}}"><img
-                                                    src="{{asset('assets/img/logo.jpeg')}}"
+                                                    src="{{asset('assets/images/brand/logo.png')}}"
                                                     class="sign-favicon" alt="logo"></a></div>
                                         <div class="">
                                             <div class="main-signup-header">

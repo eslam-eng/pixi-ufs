@@ -28,3 +28,7 @@
         <!--- Internal Sweet-Alert css-->
         <link href="{{asset('assets/plugins/sweet-alert/sweetalert2.css')}}" rel="stylesheet">
         <link href="{{asset('assets/plugins/toastr/toastr.min.css')}}" rel="stylesheet">
+		
+		{{-- start custom css --}}
+		<link href="{{asset('assets/css/dashboard.css')}}" rel="stylesheet">
+		{{-- end cutom css --}}

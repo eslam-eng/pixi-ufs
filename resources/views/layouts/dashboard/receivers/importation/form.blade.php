@@ -51,10 +51,10 @@
                    <div class="card-footer">
                        <div class="form-group mb-0 mt-3 justify-content-end">
                            <div>
-                               <button type="submit" class="btn btn-success"><i
+                               <button type="submit" class="btn btn-primary"><i
                                        class="fa fa-send pe-2"></i>@lang('app.send')</button>
 
-                               <a role="button" href="{{route('awbs.index')}}" class="btn btn-danger"><i
+                               <a role="button" href="{{ URL::previous() }}" class="btn btn-primary"><i
                                        class="fa fa-backward pe-2"></i>@lang('app.back')</a>
                            </div>
                        </div>

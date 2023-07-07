@@ -222,12 +222,20 @@
                                     <p class="mb-2 font-weight-semibold text-dark tx-13">{{$history->status->name}} <span class="pd-12 text-danger"><strong>changed By({{$history->user->name}})</strong></span></p>
                                     <p class="text-muted mt-0 mb-0">{{$history->status->description}}</p>
                                     @isset($history->lat,$history->lng)
-                                        <a href="https://www.google.com/maps/@ {{$history->lat}},{{$history->lng}} ?entry=ttu" target="_blank"
-                                           class="tx-12 text-dark text-end">
-                                            <p class="mb-1 font-weight-semibold text-dark tx-13 pull-right"><i
-                                                    class="fa fa-map-marker fa-2x"></i> map</p>
-                                        </a>
+                                        <div><span
+                                            class="text-dark float-end">
+                                            <a href="https://www.google.com/maps/search/?api=1&query={{$history->lat}},{{$history->lng}}" target="_blank"
+                                                class="tx-12 text-dark text-end">
+                                                 <p class="mb-1 font-weight-semibold text-danger tx-13 pull-right"><i
+                                                         class="fa fa-map-marker-alt fa-2x"></i></p>
+                                             </a></span>
+                                    </div>
+                                        
                                     @endisset
+                                    <p class="text-muted mt-0 mt-1 mb-1">
+                                        <button class="btn btn-primary btn-sm">@lang('app.images')</button>
+                                    </p>
+                                    
 
                                 </li>
                             @endforeach

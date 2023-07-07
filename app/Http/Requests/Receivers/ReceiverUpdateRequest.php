@@ -38,8 +38,8 @@ class ReceiverUpdateRequest extends BaseRequest
             'notes' => 'nullable|string',
             'address1' => 'required|string',
             'address2' => 'nullable|string',
-            'lat' => 'string|nullable',
-            'lng' => 'string|nullable',
+            'lat' => 'nullable|numeric',
+            'lng' => 'nullable|numeric',
             'map_url' => 'string|nullable',
         ];
     }

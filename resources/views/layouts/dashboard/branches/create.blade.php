@@ -34,7 +34,7 @@
                                         <div class="col-lg">
                                             <div class="main-content-label mg-b-5">@lang('app.name')</div>
                                             <input class="form-control" name='name' value="{{old('name')}}" placeholder="@lang('app.name')"
-                                                type="text" required>
+                                                type="text">
                                             @error('name')
                                                 <div class="text-danger"> {{$message}}</div>
                                             @enderror
@@ -43,7 +43,7 @@
                                         <div class="col-lg">
                                             <div class="main-content-label mg-b-5">@lang('app.phone')</div>
                                             <input class="form-control" value="{{old('phone')}}" name="phone" placeholder="@lang('app.phone')"
-                                                type="text" required>
+                                                type="text">
                                             @error('phone')
                                                 <div class="text-danger"> {{$message}}</div>
                                             @enderror
@@ -67,7 +67,7 @@
                                         <div class="col-lg">
                                             <div class="main-content-label mg-b-5">@lang('app.address')</div>
                                             <input class="form-control" name="address" value="{{old('address')}}"  placeholder="@lang('app.address')"
-                                                type="text" required>
+                                                type="text">
 
                                             @error('address')
                                             <div class="text-danger"> {{$message}}</div>
@@ -98,7 +98,7 @@
                         <div class="mt-4">
                             <div class="form-group mb-0 mt-3 justify-content-end">
                                 <div>
-                                    <button type="submit" class="btn btn-rounded btn-success"><i
+                                    <button type="submit" class="btn btn-primary"><i
                                             class="fa fa-save pe-2"></i>@lang('app.submit')</button>
                                 </div>
                             </div>

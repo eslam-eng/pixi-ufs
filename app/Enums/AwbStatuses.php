@@ -15,6 +15,7 @@ enum AwbStatuses: int
 
     case CALLING_RECEIVER = 9 ;
     case DELIVERED = 10;
+    case CANCELED = 11;
 
 
 }

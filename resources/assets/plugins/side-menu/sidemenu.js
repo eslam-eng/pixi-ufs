@@ -101,23 +101,20 @@ $(document).on('click', '.horizontal-content', function () {
 // ______________Active Class
 var position = window.location.pathname.split('/');
 $(".app-sidebar li a").each(function () {
-	var $this = $(this);
-	var pageUrl = $this.attr("href").split("/");
-
-	if (pageUrl) {
-        if (position[position.length - 1] == pageUrl[pageUrl.length - 1]) {
-            $(this).addClass("active");
-			$(this).parent().addClass("is-expanded");
-			$(this).parent().parent().prev().addClass("active");
-			$(this).parent().parent().addClass("open");
-			$(this).parent().parent().prev().addClass("is-expanded");
-			$(this).parent().parent().parent().addClass("is-expanded");
-			$(this).parent().parent().parent().parent().addClass("open");
-			$(this).parent().parent().parent().parent().prev().addClass("active");
-			$(this).parent().parent().parent().parent().parent().addClass("is-expanded");
-			return false;
-		}
-	}
+    var $this = $(this);
+    var is_active = $this.data("is_active");
+    if (is_active) {
+        $(this).addClass("active");
+        $(this).parent().addClass("is-expanded");
+        $(this).parent().parent().prev().addClass("active");
+        $(this).parent().parent().addClass("open");
+        $(this).parent().parent().prev().addClass("is-expanded");
+        $(this).parent().parent().parent().addClass("is-expanded");
+        $(this).parent().parent().parent().parent().addClass("open");
+        $(this).parent().parent().parent().parent().prev().addClass("active");
+        $(this).parent().parent().parent().parent().parent().addClass("is-expanded");
+        return false;
+    }
 });
 if ($('.slide-item').hasClass('active')) {
 	$('.app-sidebar').animate({

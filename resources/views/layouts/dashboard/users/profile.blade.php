@@ -183,7 +183,7 @@
                                         </div>
                                         <div class="form-group ">
                                             <div>
-                                                <button type="submit" class="btn btn-success"><i
+                                                <button type="submit" class="btn btn-primary"><i
                                                         class="fa fa-save pe-2"></i>@lang('app.save')</button>
                                             </div>
                                         </div>

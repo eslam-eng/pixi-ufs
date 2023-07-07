@@ -24,8 +24,8 @@ class AwbChangeStatusRequest extends BaseRequest
     {
         return [
             'awb_status_id' => 'required|exists:awb_statuses,id',
-            'lat' => 'nullable|numeric',
-            'lng' => 'nullable|numeric',
+            'lat' => 'nullable|string',
+            'lng' => 'nullable|string',
             'comment' => 'nullable|string',
 
             'actual_recipient' => ['nullable', Rule::requiredIf(function () {

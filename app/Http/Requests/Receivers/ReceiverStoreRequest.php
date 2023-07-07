@@ -36,8 +36,8 @@ class ReceiverStoreRequest extends BaseRequest
             'notes' => 'nullable|string',
             'address1' => 'required|string',
             'address2' => 'nullable|string',
-            'lat' => 'nullable|numeric',
-            'lng' => 'nullable|numeric',
+            'lat' => 'nullable|string',
+            'lng' => 'nullable|string',
             'map_url' => 'string|nullable',
         ];
     }

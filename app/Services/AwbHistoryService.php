@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Enums\AwbStatuses;
 use App\Enums\ImageTypeEnum;
+use App\Exceptions\GeneralException;
 use App\Models\Awb;
 use App\Models\AwbHistory;
 use Exception;
@@ -37,12 +38,14 @@ class AwbHistoryService extends BaseService
     }
 
 
-    public function changeStatus(Awb $awb, array $data = [])
+    /**
+     * @throws Exception
+     */
+    public function changeStatus(Awb $awb, array $data = [], bool $expects_json = false)
     {
         $status = Arr::get($data, 'status');
-        $checkStatus = $awb->history()->where('awb_status_id',$status?->id)->first();
-        if($checkStatus || !$awb->latestStatus->awb_status_id == AwbStatuses::DELIVERED->value || $awb->latestStatus->awb_status_id == AwbStatuses::CANCELED->value)
-            throw new Exception('not allowed');
+        if ($expects_json && $awb->latestStatus->awb_status_id == AwbStatuses::DELIVERED->value)
+            throw new GeneralException('the awb status is delivered and status cannot be changed');
         if (isset($status) && $status?->code == AwbStatuses::DELIVERED->value) {
             $pod_data = [
                 'actual_recipient' => Arr::get($data, 'actual_recipient'),

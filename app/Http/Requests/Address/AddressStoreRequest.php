@@ -23,8 +23,8 @@ class AddressStoreRequest extends BaseRequest
         return [
             'addressable_type'=>'required|integer',
             'addressable_id'=>'required|integer',
-            'lat'=>'nullable|numeric',
-            'lng'=>'nullable|numeric',
+            'lat'=>'nullable|string',
+            'lng'=>'nullable|string',
             'address'=>'required|string',
             'map_url'=>'nullable|url',
             'city_id'=>'required|integer|exists:locations,id',

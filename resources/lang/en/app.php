@@ -291,6 +291,7 @@ return [
     'select_status'=>'Select status',
     'card_number'=>'Card number',
     'images'=>'Images',
+    'no_images'=>'No Images',
 
     //end awb history
 ];

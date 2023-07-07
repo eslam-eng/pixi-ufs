@@ -235,7 +235,11 @@
                                         
                                     @endisset
                                     <p class="text-muted mt-0 mt-1 mb-1">
-                                        <a class="btn btn-primary btn-sm" href="{{ route('awb-history.gallary', $history->id) }}">@lang('app.images')</a>
+                                        @if($history->attachments()->count())
+                                        <a class="btn btn-primary btn-sm" href="{{ route('awb-history.gallary', $history->id) }}"><i class="fa fa-images"></i> @lang('app.images')</a>
+                                        @else
+                                        <div class="btn btn-danger btn-sm disabled">@lang('app.no_images')</div>
+                                        @endif
                                     </p>
                                     
 

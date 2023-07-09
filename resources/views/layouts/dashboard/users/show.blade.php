@@ -97,7 +97,7 @@
                                     <label class="custom-control custom-checkbox custom-control-lg"> <input
                                         type="checkbox" class="custom-control-input" name="status"
                                         {{ $user->status ? "checked":"" }} @disabled(true)> <span
-                                        class="custom-control-label custom-control-label-lg  tx-20">@lang('app.status')</span>
+                                        class="custom-control-label custom-control-label-md  tx-17">@lang('app.status')</span>
                                     </label>
                                 </div>
                             </div>
@@ -119,7 +119,7 @@
                                                             <label class="custom-control custom-checkbox custom-control-lg"> <input
                                                                 type="checkbox" class="custom-control-input" name="status"
                                                                 {{ $user->can($item->name) ? "checked":""}} @disabled(true)> <span
-                                                                class="custom-control-label custom-control-label-lg  tx-20">@lang('app.'.$item->name)</span>
+                                                                class="custom-control-label custom-control-label-md  tx-17">@lang('app.'.$item->name)</span>
                                                             </label>
                                                         </div>
                                                     </div>

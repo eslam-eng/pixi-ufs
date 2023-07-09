@@ -95,7 +95,7 @@
                                         <label class="custom-control custom-checkbox custom-control-lg"> <input
                                                 type="checkbox" class="custom-control-input" name="show_dashboard"
                                                 value="0"> <span
-                                                class="custom-control-label custom-control-label-lg  tx-20">@lang('app.show_dashboard')</span>
+                                                class="custom-control-label custom-control-label-md  tx-17">@lang('app.show_dashboard')</span>
                                         </label>
 
                                         @error('show_dashboard')
@@ -107,7 +107,7 @@
                                         <label class="custom-control custom-checkbox custom-control-lg"> <input
                                                 type="checkbox" class="custom-control-input" name="status"
                                                 value="1" checked> <span
-                                                class="custom-control-label custom-control-label-lg  tx-20">@lang('app.status')</span>
+                                                class="custom-control-label custom-control-label-md  tx-17">@lang('app.status')</span>
                                         </label>
                                         @error('status')
                                         <div class="text-danger"> {{$message}}</div>
@@ -219,7 +219,7 @@
                                                 <div class="col-lg mt-4">
                                                     <label class="custom-control custom-checkbox custom-control-lg"> <input
                                                             type="checkbox" class="custom-control-input" value="1" checked name="branches_status[]"> <span
-                                                            class="custom-control-label custom-control-label-lg  tx-20">@lang('app.status')</span>
+                                                            class="custom-control-label custom-control-label-md  tx-17">@lang('app.status')</span>
                                                     </label>
 
                                                     @error('branches_status[]')

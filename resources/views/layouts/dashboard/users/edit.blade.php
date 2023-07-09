@@ -160,7 +160,7 @@
                                 <label class="custom-control custom-checkbox custom-control-lg"> <input
                                         type="checkbox" class="custom-control-input" name="status"
                                         value="1" {{ $user->status ? "checked":"" }}> <span
-                                        class="custom-control-label custom-control-label-lg  tx-20">@lang('app.status')</span>
+                                        class="custom-control-label custom-control-label-md  tx-17">@lang('app.status')</span>
                                 </label>
                                 @error('status')
                                 <div class="text-danger"> {{$message}}</div>
@@ -186,7 +186,7 @@
                                                                 <input
                                                                     type="checkbox" class="custom-control-input" name="permissions[]"
                                                                     value="{{$item}}"  {{ $user->can($item) ? "checked":""}}>
-                                                                <span class="custom-control-label custom-control-label-lg  tx-20">@lang('app.'.$item)</span>
+                                                                <span class="custom-control-label custom-control-label-md  tx-17">@lang('app.'.$item)</span>
                                                             </label>
                                                         </div>
 

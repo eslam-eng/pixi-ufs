@@ -48,7 +48,7 @@ class AwbService extends BaseService
 
     public function queryGet(array $filters = [], array $withRelations = []): Builder
     {
-        $awbs = $this->model->query()->courier()->with($withRelations)->orderBy('id', 'desc');
+        $awbs = $this->model->courier()->with($withRelations)->orderBy('id', 'desc');
         return $awbs->filter(new AwbFilters($filters));
     }
 
@@ -81,6 +81,7 @@ class AwbService extends BaseService
 
         $awbDTO->receiver_city_id = $receiver->city->id;
         $awbDTO->receiver_area_id = $receiver->area->id;
+        $awbDTO->receiver_id = $receiver->id;
 
         $awbDTO->zone_price = $priceTable->price;
         //check on weight if there is additional kg price or not
@@ -166,6 +167,7 @@ class AwbService extends BaseService
     private function getReceiverDataForAwb(Receiver|Model $receiver): array
     {
         return [
+                'id' => $receiver->id,
                 'city' => $receiver->city->title,
                 'area' => $receiver->area->title,
                 'address1' => $receiver->address1,

@@ -8,7 +8,7 @@
 
     <!-- Row -->
     <div class="row">
-       
+
         <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
             <div class="card">
                 <div class="card-body">
@@ -55,7 +55,7 @@
                         </div>
 
                         <div class="row row-sm mb-4">
-                            
+
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.profile_image')</div>
                                 <input class="form-control" value="{{old('profile_image')}}" name="profile_image"
@@ -65,7 +65,7 @@
                                 <div class="text-danger"> {{$message}}</div>
                                 @enderror
                             </div>
-                            
+
                             <div class="col-lg">
                                 <div class="main-content-label mg-b-5">@lang('app.password') *</div>
                                 <input class="form-control" value="{{old('password')}}" name="password" placeholder="@lang('app.password')"
@@ -122,7 +122,7 @@
                                 <div class="text-danger"> {{$message}}</div>
                                 @enderror
                             </div>
-                            
+
                             <div class="col-lg">
                                 <div class="col-lg">
                                     @livewire('location.cities', ['selected_city'=>old('city_id')])
@@ -166,7 +166,7 @@
                             <label class="custom-control custom-checkbox custom-control-lg"> <input
                                     type="checkbox" class="custom-control-input" name="status"
                                     value="1" checked> <span
-                                    class="custom-control-label custom-control-label-lg  tx-20">@lang('app.status')</span>
+                                    class="custom-control-label custom-control-label-md  tx-17">@lang('app.status')</span>
                             </label>
                             @error('status')
                             <div class="text-danger"> {{$message}}</div>
@@ -190,7 +190,7 @@
                                                             <label class="custom-control custom-checkbox custom-control-lg"> <input
                                                                     type="checkbox" class="custom-control-input" name="permissions[]"
                                                                     value="{{$item}}"> <span
-                                                                    class="custom-control-label custom-control-label-lg  tx-20">@lang('app.'.$item)</span>
+                                                                    class="custom-control-label custom-control-label-md  tx-17">@lang('app.'.$item)</span>
                                                             </label>
                                                         </div>
                                                     </div>

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\AwbStatuses;
+use App\Enums\PaymentTypesEnum;
 use App\Enums\UsersType;
 use App\Observers\AwbObserver;
 use App\Traits\EscapeUnicodeJson;
@@ -98,6 +99,11 @@ class Awb extends Model
         return Str::limit(Arr::get($this->awb_receiver_data, 'address1'), 90);
     }
 
+    public function getPaymentTypeTextAttribute(): string
+    {
+        return PaymentTypesEnum::from($this->payment_type)->name;
+    }
+
 
     public function scopeCourier(Builder $builder, $auth_user = null): Builder
     {
@@ -105,7 +111,7 @@ class Awb extends Model
             $auth_user = auth()->user();
         if ($auth_user->type != UsersType::COURIER->value)
             return $builder;
-        return $builder->whereIn('area_id', $auth_user->area_id)->whereHas('latestStatus', fn($query) => $query->where('awb_status_id', AwbStatuses::CREATE_SHIPMENT()));
+        return $builder->where('receiver_area_id', $auth_user->area_id);
 
     }
 

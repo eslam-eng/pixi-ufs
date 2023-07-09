@@ -64,4 +64,9 @@ class AwbStatusService extends BaseService
         $awbStatus->delete();
         return true;
     }
+
+    public function findByCode(int $code): Model|Builder|null
+    {
+        return $this->getQuery()->where('code',$code)->first();
+    }
 }

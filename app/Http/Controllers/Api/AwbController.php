@@ -7,13 +7,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Awb\AwbChangeStatusRequest;
 use App\Http\Resources\Awb\AwbDetailsResource;
 use App\Http\Resources\Awb\AwbResource;
+use App\Models\AwbStatus;
 use App\Services\AwbService;
+use App\Services\AwbStatusService;
 use Exception;
 use Illuminate\Http\Request;
 
 class AwbController extends Controller
 {
-    public function __construct(private AwbService $awbService)
+    public function __construct(private AwbService $awbService, protected AwbStatusService $awbStatusService)
     {
     }
 
@@ -21,7 +23,10 @@ class AwbController extends Controller
     {
         try {
             $filters = $request->all();
-            $filters['status'] = $request->get('status',AwbStatuses::CREATE_SHIPMENT());
+            if ($request->get('status') !== null)
+                $filters['status_id'] = $request->get('status');
+            else
+                $filters['status_id'] = $this->awbStatusService->findByCode(code: AwbStatuses::CREATE_SHIPMENT->value)?->id;
             $withRelations = ['receiverCity', 'receiverArea'];
             $awbs = $this->awbService->listing($filters, $withRelations, $request->perPage ?? 5);
             return AwbResource::collection($awbs);
@@ -33,7 +38,14 @@ class AwbController extends Controller
     public function awbDetails($id)
     {
         try {
-            $withRelations = ['company:id,name','latestStatus.status','latestStatus.attachments','receiverCity','receiverArea'];
+            $withRelations = [
+                'company:id,name',
+                'latestStatus.status',
+                'latestStatus.attachments',
+                'receiverCity',
+                'receiverArea',
+                'additionalInfo'
+            ];
             $awb = $this->awbService->findById(id: $id, withRelations: $withRelations);
             return apiResponse(data: new AwbDetailsResource($awb), message: trans('app.success_operation'));
         } catch (Exception $e) {

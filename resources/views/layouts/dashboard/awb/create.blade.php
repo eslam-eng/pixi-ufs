@@ -112,7 +112,7 @@
                                             <label class="custom-control custom-checkbox custom-control-lg"> <input
                                                     type="checkbox" class="custom-control-input" name="is_return"
                                                     value="1" checked> <span
-                                                    class="custom-control-label custom-control-label-lg  tx-20">@lang('app.awb_is_reverse')</span>
+                                                    class="custom-control-label custom-control-label-md  tx-17">@lang('app.awb_is_reverse')</span>
                                             </label>
                                         </div>
 
@@ -183,7 +183,7 @@
                                             <div class="mt-4">
                                                 <button type="submit" class="btn btn-primary"><i
                                                         class="fa fa-save pe-2"></i>@lang('app.save')</button>
-                    
+
                                                 <a role="button" href="{{ URL::previous() }}" class="btn btn-primary"><i
                                                         class="fa fa-backward pe-2"></i>@lang('app.back')</a>
                                             </div>

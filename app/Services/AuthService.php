@@ -29,6 +29,7 @@ class AuthService extends BaseService
 
         $identifierField = is_numeric($identifier) ? 'phone' : 'email';
         $credential = [$identifierField => $identifier, 'password' => $password , 'status'=>ActivationStatus::ACTIVE()];
+       logger()->info($credential);
         if (!auth()->attempt($credential))
              throw new NotFoundException(__('app.login_failed'));
         return $this->model->with('attachments')->where($identifierField, $identifier)->first();

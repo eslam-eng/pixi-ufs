@@ -146,13 +146,6 @@
                             <td colspan="2">card</td>
                             <td colspan="2">{{$awb->card_number}}</td>
                         </tr>
-                        <tr>
-                            <td colspan="2">@lang('app.pod')</td>
-                            <td colspan="2">
-                                <button class="btn btn-primary">show Attachments</button>
-                            </td>
-                        </tr>
-                        {{--                       @endif--}}
 
                         </tbody>
                     </table>
@@ -232,7 +225,7 @@
                                                 </a>
                                             </span>
                                     </div>
-                                        
+
                                     @endisset
                                     <p class="text-muted mt-0 mt-1 mb-1">
                                         @if($history->attachments()->count())
@@ -241,7 +234,7 @@
                                         <div class="btn btn-danger btn-sm disabled">@lang('app.no_images')</div>
                                         @endif
                                     </p>
-                                    
+
 
                                 </li>
                             @endforeach

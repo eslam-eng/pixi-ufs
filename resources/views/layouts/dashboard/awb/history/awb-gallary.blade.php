@@ -5,7 +5,7 @@
 
 @section('content')
 
-    <!-- container --> 
+    <!-- container -->
     <div class="main-container container-fluid">
         <!-- breadcrumb -->
         <div class="breadcrumb-header justify-content-between">
@@ -21,8 +21,8 @@
         </div>
         <!-- /breadcrumb -->
         <div class="masonry row">
-            
-            @if($model->attachments()->count())
+
+            @if($model->attachments->isNotEmpty())
                 @foreach($model->attachments as $attachment)
                     <div class="col-xl-3 col-lg-4 col-sm-6">
                         <div class="brick">
@@ -33,9 +33,9 @@
                     </div>
                 @endforeach
             @endif
-            
+
         </div>
     </div>
-    <!-- Container closed --> 
+    <!-- Container closed -->
 
 @endsection

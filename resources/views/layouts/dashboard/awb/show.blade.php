@@ -227,13 +227,17 @@
                                     </div>
 
                                     @endisset
-                                    <p class="text-muted mt-0 mt-1 mb-1">
-                                        @if($history->attachments()->count())
-                                        <a class="btn btn-primary btn-sm" href="{{ route('awb-history.gallary', $history->id) }}"><i class="fa fa-images"></i> @lang('app.images')</a>
-                                        @else
-                                        <div class="btn btn-danger btn-sm disabled">@lang('app.no_images')</div>
-                                        @endif
-                                    </p>
+                                    @can('view_shipment_status_images')
+                                        <p class="text-muted mt-0 mt-1 mb-1">
+                                            
+                                            @if($history->attachments()->count())
+                                            <a class="btn btn-primary btn-sm" href="{{ route('awb-history.gallary', $history->id) }}"><i class="fa fa-images"></i> @lang('app.images')</a>
+                                            @else
+                                            <div class="btn btn-danger btn-sm disabled">@lang('app.no_images')</div>
+                                            @endif
+                                        </p>
+                                    @endcan
+                                    
 
 
                                 </li>

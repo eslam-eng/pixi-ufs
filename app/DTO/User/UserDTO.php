@@ -50,7 +50,7 @@ class UserDTO extends BaseDTO
         return new self(
             name: $request->name,
             email: $request->email,
-            password: $request->password,
+            password: bcrypt($request->password),
             phone: $request->phone,
             type: $request->type,
             status: isset($request->status),
@@ -100,7 +100,7 @@ class UserDTO extends BaseDTO
         return [
             'name' => $this->name,
             'email' => $this->email,
-            'password' => bcrypt($this->password),
+            'password' => $this->password,
             'phone' => $this->phone,
             'type' => $this->type,
             'status' => $this->status,

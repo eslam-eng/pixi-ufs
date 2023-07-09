@@ -292,6 +292,7 @@ return [
     'card_number'=>'Card number',
     'images'=>'Images',
     'no_images'=>'No Images',
+    'view_shipment_status_images'=>'view shipment status images',
 
     //end awb history
 ];

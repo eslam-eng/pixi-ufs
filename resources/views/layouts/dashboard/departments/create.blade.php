@@ -25,7 +25,7 @@
                                         <div class="col-lg">
                                             <div class="main-content-label mg-b-5">@lang('app.name')</div>
                                             <input class="form-control" name='name' value="{{old('name')}}" placeholder="@lang('app.name')"
-                                                type="text" required>
+                                                type="text">
                                                 @error('name')
                                                     <div class="text-danger"> {{$message}}</div>
                                                 @enderror
@@ -39,7 +39,7 @@
                         <div class="mt-4">
                             <div class="form-group mb-0 mt-3 justify-content-end">
                                 <div>
-                                    <button type="submit" class="btn btn-success"><i
+                                    <button type="submit" class="btn btn-primary"><i
                                             class="fa fa-save pe-2"></i>@lang('app.submit')</button>
                                 </div>
                             </div>

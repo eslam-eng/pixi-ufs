@@ -31,7 +31,7 @@
                         <div class="mt-4">
                             <div class="form-group mb-0 mt-3 justify-content-end">
                                 <div>
-                                    <a href="{{ URL::previous() }}" class="btn btn-success"><i
+                                    <a href="{{ URL::previous() }}" class="btn btn-primary"><i
                                             class="fa fa-save pe-2"></i>@lang('app.back')</a>
                                 </div>
                             </div>

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Exceptions\NotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Departments\DepartmentStoreRequest;
-use App\Http\Requests\departments\DepartmentUpdateRequest;
+use App\Http\Requests\Departments\DepartmentUpdateRequest;
 use App\Http\Resources\DepartmentResource;
 use App\Services\DepartmentService;
 use Exception;

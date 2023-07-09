@@ -1,0 +1,10 @@
+.main-content-label
+{
+    text-transform: none;
+}
+
+.main-content-label, .custom-control-label
+{
+    font-size: 16px !important;
+    font-weight: normal;
+}

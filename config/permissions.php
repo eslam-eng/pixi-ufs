@@ -90,6 +90,7 @@ return [
                 'edit_shipment_status',
                 'delete_shipment_status',
                 'view_shipment_status',
+                'view_shipment_status_images',
             ],
             //end shipment_status permissions
 

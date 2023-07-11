@@ -146,13 +146,6 @@
                             <td colspan="2">card</td>
                             <td colspan="2">{{$awb->card_number}}</td>
                         </tr>
-                        <tr>
-                            <td colspan="2">@lang('app.pod')</td>
-                            <td colspan="2">
-                                <button class="btn btn-primary">show Attachments</button>
-                            </td>
-                        </tr>
-                        {{--                       @endif--}}
 
                         </tbody>
                     </table>
@@ -222,20 +215,30 @@
                                     <p class="mb-2 font-weight-semibold text-dark tx-13">{{$history->status->name}} <span class="pd-12 text-danger"><strong>changed By({{$history->user->name}})</strong></span></p>
                                     <p class="text-muted mt-0 mb-0">{{$history->status->description}}</p>
                                     @isset($history->lat,$history->lng)
-                                        <div><span
-                                            class="text-dark float-end">
-                                            <a href="https://www.google.com/maps/search/?api=1&query={{$history->lat}},{{$history->lng}}" target="_blank"
-                                                class="tx-12 text-dark text-end">
-                                                 <p class="mb-1 font-weight-semibold text-danger tx-13 pull-right"><i
-                                                         class="fa fa-map-marker-alt fa-2x"></i></p>
-                                             </a></span>
+                                        <div>
+                                            <span
+                                                class="text-dark float-end">
+                                                <a href="https://www.google.com/maps/search/?api=1&query={{$history->lat}},{{$history->lng}}" target="_blank"
+                                                    class="tx-12 text-dark text-end">
+                                                    <p class="mb-1 font-weight-semibold text-danger tx-13 pull-right"><i
+                                                            class="fa fa-map-marker-alt fa-2x"></i></p>
+                                                </a>
+                                            </span>
                                     </div>
-                                        
+
                                     @endisset
-                                    <p class="text-muted mt-0 mt-1 mb-1">
-                                        <button class="btn btn-primary btn-sm">@lang('app.images')</button>
-                                    </p>
+                                    @can('view_shipment_status_images')
+                                        <p class="text-muted mt-0 mt-1 mb-1">
+                                            
+                                            @if($history->attachments()->count())
+                                            <a class="btn btn-primary btn-sm" href="{{ route('awb-history.gallary', $history->id) }}"><i class="fa fa-images"></i> @lang('app.images')</a>
+                                            @else
+                                            <div class="btn btn-danger btn-sm disabled">@lang('app.no_images')</div>
+                                            @endif
+                                        </p>
+                                    @endcan
                                     
+
 
                                 </li>
                             @endforeach

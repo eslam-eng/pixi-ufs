@@ -63,12 +63,12 @@ class User extends Authenticatable
 
     public function branch(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Company::class,'branch_id');
+        return $this->belongsTo(Branch::class,'branch_id');
     }
 
     public function department(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Company::class,'department_id');
+        return $this->belongsTo(Department::class,'department_id');
     }
     public function getShowDashboardAttribute(): bool
     {

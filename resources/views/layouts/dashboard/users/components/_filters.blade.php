@@ -37,11 +37,7 @@
                                                 <livewire:branch/>
                                             </div>
                                         </div>
-                                        <div class="col-lg mg-t-10 mg-lg-t-0">
-                                            <div class="col-lg">
-                                                <livewire:department/>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
 
                                     <div class="row row-sm mb-4">

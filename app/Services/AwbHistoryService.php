@@ -44,8 +44,8 @@ class AwbHistoryService extends BaseService
     public function changeStatus(Awb $awb, array $data = [], bool $expects_json = false)
     {
         $status = Arr::get($data, 'status');
-        if ($expects_json && $awb->latestStatus->awb_status_id == AwbStatuses::DELIVERED->value)
-            throw new GeneralException('the awb status is delivered and status cannot be changed');
+        if ($awb->latestStatus->status->code == AwbStatuses::DELIVERED->value)
+            throw new GeneralException('app.the_awb_status_is_delivered_and_status_cannot_be_changed');
         if (isset($status) && $status?->code == AwbStatuses::DELIVERED->value) {
             $pod_data = [
                 'actual_recipient' => Arr::get($data, 'actual_recipient'),

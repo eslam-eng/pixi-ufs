@@ -228,6 +228,7 @@ return [
     'edit_price'=>'Edit price',
     'prices_page_title'=>'Prices',
     'price_created_successfully'=>'Price created successfully',
+    'first_download_template'=>'first download template',
     
     //end price tables
     
@@ -250,6 +251,7 @@ return [
     //start departments
     'departments_page_title'=>'Departments',
     'edit_department'=>'Edit department',
+    'add_department'=>'Add department',
     
     //end departments
     
@@ -293,6 +295,7 @@ return [
     'images'=>'Images',
     'no_images'=>'No Images',
     'view_shipment_status_images'=>'view shipment status images',
+    'the_awb_status_is_delivered_and_status_cannot_be_changed'=>'the awb status is delivered and status cannot be changed',
 
     //end awb history
 ];

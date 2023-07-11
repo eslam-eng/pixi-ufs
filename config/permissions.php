@@ -22,10 +22,10 @@ return [
             ],
 
             //start settings permissions
-            'settings'=>[
-                'view_settings',
-                'edit_general_settings',
-            ],
+            // 'settings'=>[
+            //     'view_settings',
+            //     'edit_general_settings',
+            // ],
             //end settings permissions
 
 

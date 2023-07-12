@@ -3,7 +3,7 @@
 					<aside class="app-sidebar">
 						<div class="main-sidebar-header active">
 							<a class="header-logo active" href="{{url('/')}}">
-								<img src="{{asset('assets/images/brand/logo.png')}}" class="main-logo  desktop-logo" alt="logo">
+								<img style="max-height: 40px !important" src="{{asset('assets/images/brand/logo.png')}}" class="main-logo desktop-logo" alt="logo">
 							</a>
 						</div>
 						<div class="main-sidemenu">

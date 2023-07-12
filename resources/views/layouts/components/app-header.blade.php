@@ -4,7 +4,7 @@
 						<div class="main-header-left ">
 							<div class="responsive-logo">
 								<a href="{{url('/')}}" class="header-logo">
-									<img src="{{asset('assets/images/brand/logo.png')}}" class="mobile-logo wd-25p" alt="logo">
+									<img style="max-height: 40px !important" src="{{asset('assets/images/brand/logo.png')}}" class="mobile-logo wd-25p" alt="logo">
 									<img src="{{asset('assets/img/brand/logo-white.png')}}" class="mobile-logo dark-logo-1" alt="logo">
 								</a>
 							</div>

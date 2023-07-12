@@ -238,7 +238,12 @@ return [
     'company_name'=>'Company name',
     'edit_company'=>'Edit company',
     'companies_page_title'=>'Companies',
-    
+   'branch_name_is_required'=>'branch name is required',
+   'branch_phone_is_required'=>'branch phone is required',
+   'branch_address_is_required'=>'branch address is required',
+   'branch_city_is_required'=>'branch city is required',
+   'branch_area_is_required'=>'branch area is required',
+   'department_name_is_required'=>'department name is required',
     //end companies
     
     //start branches

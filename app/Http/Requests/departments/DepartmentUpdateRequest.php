@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Departments;
+namespace App\Http\Requests\departments;
 
 use App\DTO\Department\DepartmentDTO;
 use App\Http\Requests\BaseRequest;

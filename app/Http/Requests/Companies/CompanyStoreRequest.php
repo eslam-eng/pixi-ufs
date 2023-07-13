@@ -38,19 +38,31 @@ class CompanyStoreRequest extends BaseRequest
             'address' => 'required|string',
 
             'branches_name'=> 'nullable|array',
-            'branches_name.*'=> 'nullable|string',
+            'branches_name.*'=> 'required|string',
             'branches_phone'=> 'nullable|array',
-            'branches_phone.*'=> 'nullable|string',
+            'branches_phone.*'=> 'required|string',
             'branches_address'=> 'nullable|array',
-            'branches_address.*'=> 'nullable|string',
+            'branches_address.*'=> 'required|string',
             'branches_status'=> 'nullable|array',
             'branches_status.*'=> 'nullable|boolean',
             'branches_city_id'=> 'nullable|array',
-            'branches_city_id.*'=> 'nullable|string',
+            'branches_city_id.*'=> 'required|string',
             'branches_area_id'=> 'nullable|array',
-            'branches_area_id.*'=> 'nullable|string',
+            'branches_area_id.*'=> 'required|string',
             'departments_name'=> 'nullable|array',
-            'departments_name.*'=> 'nullable|string',
+            'departments_name.*'=> 'required|string',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'branches_name.*'=> trans('app.branch_name_is_required'),
+            'branches_phone.*'=> trans('app.branch_phone_is_required'),
+            'branches_address.*'=> trans('app.branch_address_is_required'),
+            'branches_city_id.*'=> trans('app.branch_city_is_required'),
+            'branches_area_id.*'=> trans('app.branch_area_is_required'),
+            'departments_name.*'=> trans('app.department_name_is_required'),
         ];
     }
 

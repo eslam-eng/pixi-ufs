@@ -24,7 +24,7 @@ class BranchStoreRequest extends BaseRequest
     {
         return [
             'name' => 'required|string',
-            'phone' => 'required|string|unique:branches,phone',
+            'phone' => 'required|numeric|unique:branches,phone',
             'company_id' => 'required|integer|exists:companies,id',
             'city_id' => 'required|integer|exists:locations,id',
             'area_id' => 'required|integer|exists:locations,id',

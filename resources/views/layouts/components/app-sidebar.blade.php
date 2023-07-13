@@ -3,7 +3,7 @@
 					<aside class="app-sidebar">
 						<div class="main-sidebar-header active">
 							<a class="header-logo active" href="{{url('/')}}">
-								<img src="{{asset('assets/images/brand/logo.png')}}" class="main-logo  desktop-logo" alt="logo">
+								<img style="max-height: 40px !important" src="{{asset('assets/images/brand/logo.png')}}" class="main-logo desktop-logo" alt="logo">
 							</a>
 						</div>
 						<div class="main-sidemenu">
@@ -42,7 +42,8 @@
 
                                     <li class="slide">
                                         <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24"><path d="M10 3H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM9 9H5V5h4v4zm11-6h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zm-1 6h-4V5h4v4zm-9 4H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1zm-1 6H5v-4h4v4zm8-6c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4zm0 6c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2z"></path></svg><span class="side-menu__label" style="font-size: 11px">@lang('app.companies_receivers')</span><i class="angle fe fe-chevron-right"></i></a>
+                                            <i class="fa fa-building pe-3"></i>
+                                            <span class="side-menu__label">@lang('app.companies_receivers')</span><i class="angle fe fe-chevron-right"></i></a>
                                         <ul class="slide-menu">
                                             @can('view_receivers')
                                                 <li><a class="slide-item" data-is_active="{{request()->fullUrlIs(route('receivers.index'))}}" href="{{route('receivers.index')}}">@lang('app.receivers')</a></li>
@@ -56,9 +57,8 @@
                                 @can('view_price_tables')
                                     <li class="slide">
                                         <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24">
-                                                <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/> <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"/>
-                                            </svg><span class="side-menu__label">@lang('app.price_table')</span><i class="angle fe fe-chevron-right"></i></a>
+                                            <i class="fa fa-money-bill-alt pe-3"></i>
+                                            <span class="side-menu__label">@lang('app.price_table')</span><i class="angle fe fe-chevron-right"></i></a>
                                         <ul class="slide-menu">
                                             @can('create_price_tables')
                                                 <li><a class="slide-item" data-is_active="{{request()->fullUrlIs(route('prices.create'))}}" href="{{route('prices.create')}}">@lang('app.new_price_table')</a></li>
@@ -72,7 +72,7 @@
                                 @can('view_shipment_status')
                                     <li class="slide">
                                         <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
-                                            <i class="fa fa-exchange-alt pe-4"></i>
+                                            <i class="fa fa-exchange-alt pe-3"></i>
                                             <span class="side-menu__label">@lang('app.awb_status')</span><i class="angle fe fe-chevron-right"></i></a>
                                         <ul class="slide-menu">
                                             @can('create_shipment_status')
@@ -97,7 +97,7 @@
                                 @can('view_users')
                                     <li class="slide">
                                         <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
-                                            <i class="fa fa-users pe-4"></i>
+                                            <i class="fa fa-users pe-3"></i>
                                             <span class="side-menu__label">@lang('app.users')</span><i class="angle fe fe-chevron-right"></i></a>
                                         <ul class="slide-menu">
                                             <li class="side-menu__label1"><a href="javascript:void(0);">Utilities</a></li>

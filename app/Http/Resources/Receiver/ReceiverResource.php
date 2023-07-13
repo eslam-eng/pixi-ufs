@@ -25,7 +25,9 @@ class ReceiverResource extends JsonResource
             'area_name' => $this->defaultAddress->area_name,
             'reference' => $this->reference,
             'title' => $this->title,
-            'address' => $this->address_name
+            'address' => $this->address_name,
+            'lat' => $this->lat,
+            'lng' => $this->lng,
         ];
     }
 }

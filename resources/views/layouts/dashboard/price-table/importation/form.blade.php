@@ -29,10 +29,16 @@
                         </div>
                         <div class="card-body">
                             <livewire:company/>
+                            @error('company_id')
+                            <div class="text-danger"> {{$message}}</div>
+                            @enderror
                             <hr>
                             <div>
                                 <label for="formFileLg" class="form-label">File</label>
                                 <input name="file" class="form-control form-control-lg" type="file">
+                                @error('file')
+                                <div class="text-danger"> {{$message}}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>

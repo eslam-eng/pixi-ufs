@@ -228,6 +228,7 @@ return [
     'edit_price'=>'Edit price',
     'prices_page_title'=>'Prices',
     'price_created_successfully'=>'Price created successfully',
+    'first_download_template'=>'first download template',
     
     //end price tables
     
@@ -237,7 +238,12 @@ return [
     'company_name'=>'Company name',
     'edit_company'=>'Edit company',
     'companies_page_title'=>'Companies',
-    
+   'branch_name_is_required'=>'branch name is required',
+   'branch_phone_is_required'=>'branch phone is required',
+   'branch_address_is_required'=>'branch address is required',
+   'branch_city_is_required'=>'branch city is required',
+   'branch_area_is_required'=>'branch area is required',
+   'department_name_is_required'=>'department name is required',
     //end companies
     
     //start branches
@@ -250,6 +256,7 @@ return [
     //start departments
     'departments_page_title'=>'Departments',
     'edit_department'=>'Edit department',
+    'add_department'=>'Add department',
     
     //end departments
     
@@ -293,6 +300,7 @@ return [
     'images'=>'Images',
     'no_images'=>'No Images',
     'view_shipment_status_images'=>'view shipment status images',
+    'the_awb_status_is_delivered_and_status_cannot_be_changed'=>'the awb status is delivered and status cannot be changed',
 
     //end awb history
 ];

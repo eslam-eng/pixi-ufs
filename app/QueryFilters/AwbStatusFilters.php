@@ -18,6 +18,11 @@ class AwbStatusFilters extends QueryFilter
         return $this->builder->where('id', $term);
     }
 
+    public function except_code($term)
+    {
+        return $this->builder->whereNotIn('code',$term);
+    }
+
     public function code($term)
     {
         return $this->builder->where('code',$term);

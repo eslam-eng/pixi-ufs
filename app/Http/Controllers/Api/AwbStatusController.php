@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Enums\AwbStatusCategory;
+use App\Enums\AwbStatuses;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Awb\AwbStatusResource;
 use App\Models\AwbStatus;
@@ -25,6 +26,8 @@ class AwbStatusController extends Controller
             $filter = [];
             if (isset($request->type)){
                 $filter['type'] = $request->type;
+                if($filter['type'] == AwbStatusCategory::AWB->value)
+                    $filter['except_code'] = [AwbStatuses::DELIVERED->value, AwbStatuses::CANCELED->value];
             }
             $statues = $this->awbStatusService->AwbStatusQueryBuilder(filters: $filter)->get();
             return AwbStatusResource::collection($statues);

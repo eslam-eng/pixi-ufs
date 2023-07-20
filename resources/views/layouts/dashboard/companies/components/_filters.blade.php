@@ -32,6 +32,7 @@
                                     <div class="col-lg mb-4">
                                         <div class="main-content-label mg-b-5">@lang('app.show_dashboard')</div>
                                         <select class="form-control" name="show_dashboard">
+                                            <option value="" selected>...</option>
                                             <option value="1">{{ trans('app.yes') }}</option>
                                             <option value="0">{{ trans('app.no') }}</option>
                                         </select>
@@ -39,6 +40,7 @@
                                     <div class="col-lg">
                                         <div class="main-content-label mg-b-5">@lang('app.status')</div>
                                         <select class="form-control" name="status">
+                                            <option value="" selected>...</option>
                                             <option value="1">{{ trans('app.yes') }}</option>
                                             <option value="0">{{ trans('app.no') }}</option>
                                         </select>

@@ -52,7 +52,7 @@ return [
     'new_shipment' => 'New Shipment',
     'prepare_shipment' => 'Prepare Shipment',
     'awb' => 'AWBS',
-    'companies_receivers' => 'Companies&Receivers',
+    'companies_receivers' => 'Companies & Receivers',
     'receivers' => 'Receivers',
     'new' => 'New',
     'search' => 'Search',
@@ -271,6 +271,7 @@ return [
     'send'=>'send',
     'receivers_created_successfully'=>'Receivers created successfully',
     'receiver'=>'Receiver',
+    'something_went_wrong'=>'Something went wrong',
     
     //end receivers
     

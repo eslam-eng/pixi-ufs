@@ -184,7 +184,7 @@ class ReceiverController extends Controller
             $toast = [
                 'type' => 'error',
                 'title' => 'error',
-                'message' => $exception->getMessage()
+                'message' => trans('app.something_went_wrong')
             ];
             return back()->with('toast',$toast);
         }

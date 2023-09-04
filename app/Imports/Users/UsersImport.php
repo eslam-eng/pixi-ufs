@@ -53,7 +53,6 @@ class UsersImport implements
 
     public function array(array $array)
     {
-        dd($array);
         foreach ($array as $row) {
             $permissions = explode(',',Arr::get($row,'permissions'));
             $insertedData= [

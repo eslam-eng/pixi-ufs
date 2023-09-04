@@ -1,22 +1,25 @@
 <?php
 
-namespace App\Imports\UsersImport;
+namespace App\Imports\Users;
 
 use App\Enums\ImportStatusEnum;
+use App\Imports\Receivers\sheets\ReceiversImportSheet;
 use App\Models\ImportLog;
 use App\Models\User;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Arr;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\RegistersEventListeners;
-use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
 use Maatwebsite\Excel\Concerns\SkipsFailures;
 use Maatwebsite\Excel\Concerns\SkipsOnError;
 use Maatwebsite\Excel\Concerns\SkipsOnFailure;
 use Maatwebsite\Excel\Concerns\ToArray;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithLimit;
+use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Events\AfterImport;
 use Maatwebsite\Excel\Events\AfterSheet;
@@ -25,54 +28,49 @@ use Maatwebsite\Excel\Events\ImportFailed;
 
 class UsersImport implements
     ToArray,
-    WithValidation,
-    WithHeadingRow,
+    WithEvents,
     SkipsOnError,
     SkipsOnFailure,
-    SkipsEmptyRows,
-    WithEvents,
-    WithLimit
+    WithLimit,
+    WithValidation,
+    WithHeadingRow
 {
-
 
     use Importable, SkipsErrors, SkipsFailures, RegistersEventListeners;
 
+    public $importObject;
     protected $totalRows = 0;
     protected $successCount = 0;
-    protected $successRate = 0;
     protected $total_failures = 0;
 
-    public $importObject;
-
-    public function __construct(public int $import_type, public int $creator_id)
+    public function __construct(
+        public $creator,
+        public $importation_type
+    )
     {
     }
 
+
     public function array(array $array)
     {
+        dd($array);
         foreach ($array as $row) {
-            $permissions = explode(',',$row['permissions']);
-            $insertedData =[
-                'name' => Arr::get($row, 'pharmacy_code'),
-                'email' => Arr::get($row, 'email'),
-                'password' => Arr::get($row, 'password'),
-
+            $permissions = explode(',',Arr::get($row,'permissions'));
+            $insertedData= [
+                'name'=>Arr::get($row, 'name'),
+                'email'=>Arr::get($row, 'email'),
+                'phone'=>Arr::get($row, 'phone'),
+                'password'=>bcrypt(Arr::get($row, 'password')),
+                'company_id'=>Arr::get($row, 'company_id'),
+                'branch_id'=>Arr::get($row, 'branch_id'),
+                'department_id'=>Arr::get($row, 'department_id'),
+                'type'=>Arr::get($row, 'type'),
+                'city_id'=>Arr::get($row, 'city_id'),
+                'area_id'=>Arr::get($row, 'area_id'),
             ];
             $user = User::query()->create($insertedData);
             $user->givePermissionTo($permissions);
         }
-    }
-
-    public function rules(): array
-    {
-        return [
-            '*.name' => 'required',
-            '*.email' => 'required|string|distinct',
-            '*.password' => 'required|string|distinct',
-            '*.password' => 'required|string|distinct',
-            '*.password' => 'required|string|distinct',
-            '*.password' => 'required|string|distinct',
-        ];
     }
 
     public function registerEvents(): array
@@ -138,5 +136,22 @@ class UsersImport implements
     {
         //limit in case of infinite
         return 10000;
+    }
+
+    public function rules(): array
+    {
+        return [
+            '*.name'=>'required|string',
+            '*.email'=>'required|email',
+            '*.phone'=>'required|string',
+            '*.password'=>'required|string',
+            '*.company_id'=>'required|integer|exists:companies,id',
+            '*.branch_id'=>'required|integer|exists:branches,id',
+            '*.department_id'=>'required|integer|exists:departments,id',
+            '*.type'=>'required|integer|in:1,2,3,4',
+            '*.city_id'=>'required|integer',
+            '*.area_id'=>'required|integer',
+            '*.permissions'=>'required|string',
+        ];
     }
 }

@@ -3,14 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\UsersDatatable;
+use App\Enums\ImportTypeEnum;
 use App\Enums\UsersType;
 use App\Exceptions\NotFoundException;
+use App\Http\Requests\FileUploadRequest;
 use App\Http\Requests\Users\UserStoreRequest;
 use App\Http\Requests\Users\UserUpdateProfileRequest;
 use App\Http\Requests\Users\UserUpdateRequest;
+use App\Imports\Users\UsersImport;
 use App\Services\UserService;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
 
 class UsersController extends Controller
@@ -200,4 +204,49 @@ class UsersController extends Controller
             return apiResponse(message: trans('lang.something_went_wrong'), code: 422);
         }
     }
+
+
+    public function importForm()
+    {
+        return view('layouts.dashboard.users.importation.form');
+    }
+
+    /**
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+     */
+    public function downloadUsersTemplate()
+    {
+        $file_path = public_path('/ExcelTemplate/Users/UsersExcelTemplate.xlsx');
+        return response()->download($file_path);
+    }
+
+    public function import(FileUploadRequest $request)
+    {
+        try {
+            DB::beginTransaction();
+            $file = $request->file('file');
+            $user = getAuthUser();
+            $importation_type = ImportTypeEnum::USERS->value;
+            $importObject = new UsersImport( creator: $user,importation_type: $importation_type);
+            $importObject->import($file);
+            DB::commit();
+            $toast = [
+                'type' => 'success',
+                'title' => 'success',
+                'message' => trans('app.import_success_message')
+            ];
+            return to_route('import-logs.index')->with('toast',$toast);
+        }catch (Exception $exception)
+        {
+            DB::rollBack();
+            $toast = [
+                'type' => 'error',
+                'title' => 'error',
+                'message' => $exception->getMessage()
+            ];
+            return back()->with('toast',$toast);
+        }
+    }
+
 }

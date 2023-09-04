@@ -50,6 +50,10 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
     Route::resource('branches', BranchController::class);
     Route::resource('departments', DepartmentController::class);
     Route::resource('users', UsersController::class);
+    Route::get('users-download-template/form', [UsersController::class, 'importForm'])->name('users-download-template.form');
+    Route::get('users-download-template', [UsersController::class, 'downloadUsersTemplate'])->name('users-download-template');
+    Route::post('users-import', [UsersController::class, 'import'])->name('users-import');
+
     Route::put('profile/{id}', [UsersController::class, 'updateProfile'])->name('profile.update');
     Route::get('profile', function(){
         return view('layouts.dashboard.users.profile');

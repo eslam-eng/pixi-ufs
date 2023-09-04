@@ -16,11 +16,11 @@ class Company extends Component
     {
         $user = getAuthUser();
         switch ($user->type) {
-            case UsersType::SUPERADMIN() :
+            case UsersType::SUPERADMIN->value :
                 $this->companies = app()->make(CompanyService::class)->getCompaniesForSelectDropDown();
                 break;
-            case UsersType::EMPLOYEE():
-            case UsersType::ADMIN() :
+            case UsersType::EMPLOYEE->value:
+            case UsersType::ADMIN->value :
                 $this->companies = app()->make(CompanyService::class)->getCompaniesForSelectDropDown(['id' => $user->company_id]);
                 $this->selected_company = $user->company_id;
                 break;

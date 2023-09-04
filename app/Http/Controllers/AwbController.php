@@ -48,7 +48,8 @@ class AwbController extends Controller
 
     public function create()
     {
-        return view('layouts.dashboard.awb.create');
+        $authUser = getAuthUser();
+        return view('layouts.dashboard.awb.create',['authUser'=>$authUser]);
     }
 
     public function show(int $id)

@@ -12,6 +12,10 @@ class CompaniesFilter extends QueryFilter
         parent::__construct($params);
     }
 
+    public function id($term)
+    {
+        return $this->builder->where('id',$term);
+    }
     public function status($term)
     {
         return $this->builder->where('status',$term);

@@ -126,12 +126,12 @@ class UsersController extends Controller
     public function edit($id)
     {
         try {
-            $permissions = [];
+//            $permissions = [];
             $user = $this->userService->findById(id: $id);
-            if ($user->type == UsersType::SUPERADMIN->value)
+//            if ($user->type == UsersType::SUPERADMIN->value)
                 $permissions = config('permissions.super_admin');
-            if ($user->type == UsersType::ADMIN->value)
-                $permissions = config('permissions.company');
+//            if ($user->type == UsersType::ADMIN->value)
+//                $permissions = config('permissions.company');
             return view('layouts.dashboard.users.edit', compact('user', 'permissions'));
         } catch (Exception $e) {
             return redirect()->back();

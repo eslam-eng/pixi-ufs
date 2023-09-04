@@ -28,7 +28,11 @@
                                 <div class="pd-30 pd-sm-20">
                                     <div class="row row-xs">
                                         <div class="col-md-4 col-lg-4 col-sm-12">
-                                            <livewire:company/>
+                                            @if($authUser->type == \App\Enums\UsersType::SUPERADMIN->value)
+                                                @livewire('company')
+                                            @elseif($authUser->type == \App\Enums\UsersType::ADMIN->value || $authUser->type == \App\Enums\UsersType::EMPLOYEE->value)
+                                                @livewire('company',['selected_company'=>$authUser->company_id])
+                                            @endif
                                             @error('company_id')
                                             <div class="text-danger"> {{$message}}</div>
                                             @enderror

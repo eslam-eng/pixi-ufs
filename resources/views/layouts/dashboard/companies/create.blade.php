@@ -184,18 +184,18 @@
                                             <div class="row row-sm mb-4">
                                                 <div class="col-lg">
                                                     <div class="main-content-label mg-b-5">@lang('app.name')</div>
-                                                    <input class="form-control" name='branches_name[]' value="{{old('branches_name[]')}}" placeholder="@lang('app.name')"
+                                                    <input class="form-control" name='branches_name[]' value="{{old('branches_name.0')}}" placeholder="@lang('app.name')"
                                                            type="text">
-                                                    @error('branches_name[]')
+                                                    @error('branches_name.*')
                                                     <div class="text-danger"> {{$message}} </div>
                                                     @enderror
                                                 </div>
 
                                                 <div class="col-lg">
                                                     <div class="main-content-label mg-b-5">@lang('app.phone')</div>
-                                                    <input class="form-control" value="{{old('branches_phone[]')}}" name="branches_phone[]" placeholder="@lang('app.phone')"
+                                                    <input class="form-control" value="{{old('branches_phone.0')}}" name="branches_phone[]" placeholder="@lang('app.phone')"
                                                            type="text">
-                                                    @error('branches_phone[]')
+                                                    @error('branches_phone.*')
                                                     <div class="text-danger"> {{$message}}</div>
                                                     @enderror
                                                 </div>
@@ -205,10 +205,10 @@
 
                                                 <div class="col-lg">
                                                     <div class="main-content-label mg-b-5">@lang('app.address')</div>
-                                                    <input class="form-control" name="branches_address[]" value="{{old('branches_address[]')}}"  placeholder="@lang('app.address')"
+                                                    <input class="form-control" name="branches_address[]" value="{{old('branches_address.0')}}"  placeholder="@lang('app.address')"
                                                            type="text">
 
-                                                    @error('branches_address[]')
+                                                    @error('branches_address.*')
                                                     <div class="text-danger"> {{$message}}</div>
                                                     @enderror
                                                 </div>
@@ -222,7 +222,7 @@
                                                             class="custom-control-label custom-control-label-md  tx-17">@lang('app.status')</span>
                                                     </label>
 
-                                                    @error('branches_status[]')
+                                                    @error('branches_status.*')
                                                     <div class="text-danger"> {{$message}}</div>
                                                     @enderror
                                                 </div>
@@ -282,10 +282,10 @@
                                             <div class="row row-sm mb-4">
                                                 <div class="col-lg">
                                                     <div class="main-content-label mg-b-5">@lang('app.name')</div>
-                                                    <input class="form-control" name="departments_name[]" value="{{old('departments_name[]')}}" placeholder="@lang('app.name')"
+                                                    <input class="form-control" name="departments_name[]" value="{{old('departments_name.0')}}" placeholder="@lang('app.name')"
                                                            type="text">
-                                                    @error('departments_name[]')
-                                                    <div id="validationServer03Feedback" class="invalid-feedback"> {{$message}} </div>
+                                                    @error('departments_name.*')
+                                                    <div class="text-danger"> {{$message}} </div>
                                                     @enderror
                                                 </div>
                                             </div>

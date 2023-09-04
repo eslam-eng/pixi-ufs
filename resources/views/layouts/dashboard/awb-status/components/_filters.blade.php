@@ -15,7 +15,7 @@
                             <form class="datatables_parameters">
                                 <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
                                     <div class="row row-sm mb-4">
-                                        <div class="col-lg">
+                                        <div class="col-lg mb-4">
                                             <div class="main-content-label mg-b-5">@lang('app.stepper')</div>
                                             <select class="form-control" name="stepper">
                                                 <option value="" selected>choose..</option>

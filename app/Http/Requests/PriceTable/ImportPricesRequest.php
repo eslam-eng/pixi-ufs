@@ -21,7 +21,7 @@ class ImportPricesRequest extends BaseRequest
     {
         return [
             'company_id' => 'required',
-            'file' => 'file|mimes:xls,xlsx',
+            'file' => 'required|file|mimes:xls,xlsx',
         ];
     }
 }

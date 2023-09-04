@@ -24,7 +24,7 @@ class UserStoreRequest extends BaseRequest
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:6|confirmed',
-            'phone' => 'required|string|unique:users,phone',
+            'phone' => 'required|numeric|unique:users,phone',
             'profile_image' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg',
             'status' => 'nullable|boolean',
             'type' => 'required|integer',

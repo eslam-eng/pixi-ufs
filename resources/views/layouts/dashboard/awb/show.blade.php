@@ -214,6 +214,7 @@
 
                                     <p class="mb-2 font-weight-semibold text-dark tx-13">{{$history->status->name}} <span class="pd-12 text-danger"><strong>changed By({{$history->user->name}})</strong></span></p>
                                     <p class="text-muted mt-0 mb-0">{{$history->status->description}}</p>
+                                    <p class="text-muted mt-0 mb-0 "><i class=" fa fa-comment text-primary"></i> {{$history->comment}}</p>
                                     @isset($history->lat,$history->lng)
                                         <div>
                                             <span

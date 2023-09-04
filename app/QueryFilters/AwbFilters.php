@@ -26,7 +26,7 @@ class AwbFilters extends QueryFilter
 
     public function keyword($term)
     {
-        return $this->builder->where('code', 'LIKE', "%{$term}%")->orWhere('receiver_reference', 'LIKE', "%{$term}%");
+        return $this->builder->where('code', 'LIKE', "%{$term}%")->orWhere('receiver_reference', 'LIKE', "%{$term}%")->orWhere('receiver_data', 'LIKE', "%{$term}%");
     }
 
     public function status_id($term)

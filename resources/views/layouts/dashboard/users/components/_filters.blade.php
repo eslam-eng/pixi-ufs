@@ -16,36 +16,24 @@
                                 <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
                                     <div class="row row-sm">
                                         <div class="col-lg">
-                                            <div class="col-lg">
-                                                <livewire:location.cities/>
-                                            </div>
+                                            <livewire:location.cities/>
                                         </div>
-                                        <div class="col-lg mg-t-10 mg-lg-t-0">
-                                            <div class="col-lg">
-                                                <livewire:location.areas/>
-                                            </div>
+                                        <div class="col-lg">
+                                            <livewire:location.areas/>
                                         </div>
                                     </div>
                                     <div class="row row-sm">
-                                        <div class="col-lg mg-t-10 mg-lg-t-0">
-                                            <div class="col-lg">
-                                                <livewire:company/>
-                                            </div>
+                                        <div class="col-lg">
+                                            <livewire:company/>
                                         </div>
-                                        <div class="col-lg mg-t-10 mg-lg-t-0">
-                                            <div class="col-lg">
-                                                <livewire:branch/>
-                                            </div>
+                                        <div class="col-lg">
+                                            <livewire:branch/>
                                         </div>
-                                        <div class="col-lg mg-t-10 mg-lg-t-0">
-                                            <div class="col-lg">
-                                                <livewire:department/>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
 
                                     <div class="row row-sm mb-4">
-                                        <div class="col-lg">
+                                        <div class="col-lg mb-4">
                                             <div class="main-content-label mg-b-5">@lang('app.status')</div>
                                             <select class="form-control" name="status">
                                                 <option value="1">{{ trans('app.yes') }}</option>

@@ -3,7 +3,7 @@
 @section('content')
 
     {{--    breadcrumb --}}
-    @include('layouts.components.breadcrumb',['title' => trans('branches_page_title'),'first_list_item' => trans('app.branches'),'last_list_item' => trans('app.add_branch')])
+    @include('layouts.components.breadcrumb',['title' => trans('app.departments_page_title'),'first_list_item' => trans('app.departments'),'last_list_item' => trans('app.add_department')])
     {{--    end breadcrumb --}}
 
     <!-- Row -->
@@ -19,7 +19,7 @@
                                 type="hidden">
                             <div class="items branches-items">
                                 <div class="item mt-4">
-                                    <h4>@lang('app.branch_data')</h4>
+                                    <h4>@lang('app.department_data')</h4>
                                     <hr>
                                     <div class="row row-sm mb-4">
                                         <div class="col-lg">

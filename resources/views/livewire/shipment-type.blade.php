@@ -1,5 +1,5 @@
 <div>
-    <label class="form-label">@lang('app.shipment_type')</label>
+    <label class="main-content-label">@lang('app.shipment_type')</label>
     <select class="form-select form-control"
             id="shipment_type_id" name="{{$field_name}}"
             aria-label="Select shipment type">

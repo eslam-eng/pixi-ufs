@@ -25,7 +25,7 @@
 
                                 <div class="col-lg">
                                     <div class="main-content-label mg-b-5">@lang('app.phone1')</div>
-                                    <input class="form-control" value="{{old('phone1')}}" name="phone1" placeholder="@lang('app.receiver_phone')"
+                                    <input class="form-control" value="{{old('phone1')}}" name="phone1" placeholder="@lang('app.phone1')"
                                         type="text">
                                     @error('phone1')
                                         <div class="text-danger"> {{$message}}</div>
@@ -34,7 +34,7 @@
 
                                 <div class="col-lg">
                                     <div class="main-content-label mg-b-5">@lang('app.phone2')</div>
-                                    <input class="form-control" value="{{old('phone2')}}" name="phone2" placeholder="@lang('app.receiver_phone')"
+                                    <input class="form-control" value="{{old('phone2')}}" name="phone2" placeholder="@lang('app.phone2')"
                                         type="text">
                                     @error('phone2')
                                     <div class="text-danger"> {{$message}}</div>
@@ -88,15 +88,15 @@
                                 </div>
 
                                 <div class="col-lg">
-                                    <livewire:company/>
+                                    @livewire('company', ['selected_company' => old('company_id')])
                                     @error('company_id')
                                     <div class="text-danger"> {{$message}}</div>
                                     @enderror
                                 </div>
 
                                 <div class="col-lg">
-                                <livewire:branch/>
-                                    @error('branch')
+                                    @livewire('branch', ['branches_for_company_id' => old('company_id')])
+                                    @error('branch_id')
                                         <div class="text-danger"> {{$message}}</div>
                                     @enderror
                                 </div>

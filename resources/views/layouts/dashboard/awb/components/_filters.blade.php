@@ -15,27 +15,23 @@
                             <form class="datatables_parameters">
                                 <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12"> <!--div-->
                                     <div class="row row-sm">
-                                        <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6">
+                                        <div class="col-lg">
                                            <x-receivers-select2-search/>
                                         </div>
-                                        <div class="col-lg">
+                                        <div class="col-lg mb-4">
                                             <div class="main-content-label mg-b-5">@lang('app.code')</div>
                                             <input class="form-control" value="{{old('code')}}" name="code" placeholder="@lang('app.code')"
                                                    type="text">
                                         </div>
-
-
-                                        <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6">
-                                           <livewire:company/>
+                                    </div>
+                                    <div class="row row-sm">
+                                        <div class="col-lg">
+                                        <livewire:company/>
                                         </div>
 
 
-                                        <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6">
-                                           <livewire:branch/>
-                                        </div>
-
-                                        <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6">
-                                            <livewire:department/>
+                                        <div class="col-lg">
+                                        <livewire:branch/>
                                         </div>
 
                                     </div>

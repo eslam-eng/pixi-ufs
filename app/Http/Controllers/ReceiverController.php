@@ -181,11 +181,10 @@ class ReceiverController extends Controller
         }catch (Exception $exception)
         {
             DB::rollBack();
-            dd($exception);
             $toast = [
                 'type' => 'error',
                 'title' => 'error',
-                'message' => trans('app.something_went_wrong')
+                'message' => $exception->getMessage()
             ];
             return back()->with('toast',$toast);
         }

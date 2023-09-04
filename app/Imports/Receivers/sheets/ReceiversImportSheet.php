@@ -56,23 +56,23 @@ class ReceiversImportSheet implements ToArray,
                 'reference' => $row['reference'],
                 'title' => $row['title']
             ];
-            $updated_columns = [
-                'name',
-                'phone1',
-                'phone2',
-                'receiving_company',
-                'company_id',
-                'branch_id',
-                'address1',
-                'address2',
-                'city_id',
-                'area_id',
-                'lat',
-                'lng',
-                'reference',
-                'title'
-            ];
         }
+        $updated_columns = [
+            'name',
+            'phone1',
+            'phone2',
+            'receiving_company',
+            'company_id',
+            'branch_id',
+            'address1',
+            'address2',
+            'city_id',
+            'area_id',
+            'lat',
+            'lng',
+            'reference',
+            'title'
+        ];
         Receiver::query()->upsert($receiversData, ['reference', 'company_id'], $updated_columns);
     }
 
